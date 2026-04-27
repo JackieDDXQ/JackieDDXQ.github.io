@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="运营商权益管理体系项目详情，设计千万级用户的权益运营中台">
+    <meta name="keywords" content="产品经理,运营商,权益管理,中台,千万级用户,灵霄,万象,云仓">
+    <meta name="author" content="Jackie Hou">
+    <title>运营商权益管理体系</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>Jackie Hou</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="experience.html">Experience</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    <!-- 项目详情头部 -->
+    <section class="project-detail-header">
+        <div class="container">
+            <h2>运营商权益管理体系</h2>
+            <p>设计千万级用户的权益运营中台</p>
+        </div>
+    </section>
+
+    <!-- 项目详情 -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=operator%20rights%20management%20platform%20dashboard&image_size=landscape_4_3" alt="运营商权益管理体系" loading="lazy">
+                </div>
+                
+                <div class="project-section">
+                    <h3>项目背景</h3>
+                    <p>为运营商设计的权益运营中台，旨在支撑千万级用户的复杂业务流转。该中台以灵霄、万象、云仓三大核心系统协同运作，构建了从商品供给、权益配置、渠道推广到订单履约的完整闭环，实现了业务的高效协同与精细化运营。</p>
+                </div>
+                
+                <div class="project-section">
+                    <h3>系统总体架构与定位</h3>
+                    <p>整个中台由三个职责分明的系统构成，各司其职，高效协同：</p>
+                    <ul>
+                        <li><strong>万象系统（Omni）</strong>：作为权益管理与核销中枢，负责将云仓的商品包装成权益（如腾讯视频月卡），进行权益的创建、配置、库存管理及面向最终用户的发放/核销，是运营商权益业务落地的核心网关。</li>
+                        <li><strong>灵霄系统（Cel）</strong>：作为渠道推广与套餐办理平台，负责管理各省运营商套餐（策划），对接信息流广告渠道，提供套餐办理接口，并处理从广告曝光到用户办理的整个推广业务流程。</li>
+                        <li><strong>云仓系统（Depot）</strong>：作为商品供应链中枢，汇聚并管理来自各大供应商（如腾讯、爱奇艺等）的商品/服务资源池，为万象提供商品来源。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section">
+                    <h3>核心功能</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>万象系统</h4>
+                            <ul>
+                                <li>权益库存管理：从云仓同步商品，形成可发放的“权益库存”</li>
+                                <li>权益精细配置：将商品包装成具体权益，定义配置编码、权益类型等参数</li>
+                                <li>核销任务管理：支持创建实时生成任务和历史订单任务</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4>灵霄系统</h4>
+                            <ul>
+                                <li>策划管理：管理运营商提供的套餐信息</li>
+                                <li>渠道与推广管理：定义信息流渠道，配置不同渠道可推广的策划套餐</li>
+                                <li>办理流程：提供标准的短信下发、验证码验证、套餐办理接口</li>
+                                <li>限办策略：支持设定办理量、时间等限制</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4>云仓系统</h4>
+                            <ul>
+                                <li>商品库管理：聚合来自各个供应商的标准化商品</li>
+                                <li>商品与规格关联：商品可关联具体供应商，定义规格</li>
+                                <li>供应的稳定性：负责与供应商的接口对接与库存同步</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-section">
+                    <h3>核心业务流程</h3>
+                    <p>一次典型闭环流程如下：</p>
+                    <ol>
+                        <li><strong>广告投放</strong>：信息流渠道（如头条）在灵霄配置的推广规则下，向目标用户投放联合会员套餐广告。</li>
+                        <li><strong>用户办理</strong>：用户点击广告填写信息，渠道调用灵霄接口办理套餐，灵霄向运营商提交并获取办理结果。</li>
+                        <li><strong>权益触发</strong>：运营商侧确认套餐办理成功后，主动调用万象系统，触发对应权益（如腾讯视频月卡）的发放任务。</li>
+                        <li><strong>权益下发</strong>：万象系统根据配置的规则，调用云仓系统获取具体的权益卡券，并将其发放至用户手机号，完成服务交付。</li>
+                    </ol>
+                </div>
+                
+                <div class="project-section">
+                    <h3>产品经理能力与成长</h3>
+                    <ul>
+                        <li><strong>项目启动与战略定位</strong>：通过系统性业务访谈与竞品分析，抽象出三大系统的架构定位，为后续的独立演进与横向复用奠定基础。</li>
+                        <li><strong>复杂需求的拆解与分析</strong>：将复杂约束拆解为架构可用性、业务兼容层和财务风控三个可执行的系统模块，并通过优先级进行迭代排期。</li>
+                        <li><strong>跨系统协作与架构设计</strong>：主导设计了基于分布式事务补偿与统一事件中心的异步同步机制，确保三大系统数据一致。</li>
+                        <li><strong>跨部门合作与团队协调</strong>：作为产品的第一责任人，组织技术与业务对齐会，与技术、运营、财务等部门紧密合作。</li>
+                        <li><strong>风险控制与应急预案</strong>：预见了核心业务风险点并制定了设计级的防护方案，如数据孤岛、状态不同步、资金风险等。</li>
+                        <li><strong>产品成功标准与评估</strong>：定义了关键成功指标（KSI），包括系统可用性、业务处理效率、财务准确率及横向复用能力。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section">
+                    <h3>项目成果</h3>
+                    <p>通过这一整套基于灵霄、万象、云仓三系统的中台设计及落地，构建了一个具备高可用、强协同、可扩展的千万级用户权益运营平台，为运营商的精细化会员运营和业务快速横向拓展（如B2B2C商城）奠定了坚实的技术与业务基础。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Jackie Hou. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

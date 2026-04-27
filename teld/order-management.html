@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 订购管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+           .sidebar {
+            width: 180px;
+            background-color: #fff;
+            color: #333;
+            border-right: 1px solid #e0e0e0;
+        }
+        .logo {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+        .menu {
+            list-style: none;
+        }
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .menu-item:hover {
+            background-color: #f5f7fa;
+        }
+        .menu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .submenu {
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .submenu.show {
+            display: block;
+        }
+        .submenu-item {
+            padding: 10px 20px 10px 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .submenu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .submenu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: white;
+            padding: 0 20px;
+            height: 64px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .breadcrumb {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #1890ff;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-actions span {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .header-actions span:hover {
+            background-color: #f0f0f0;
+        }
+        .content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .search-form {
+            background-color: white;
+            padding: 24px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+        }
+        .form-group input,
+        .form-group select {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 180px;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-primary {
+            background-color: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+        .btn-primary:hover {
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #666;
+            border-color: #d9d9d9;
+        }
+        .btn-secondary:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .btn-success {
+            background-color: #52c41a;
+            color: white;
+            border-color: #52c41a;
+        }
+        .btn-success:hover {
+            background-color: #73d13d;
+            border-color: #73d13d;
+        }
+        .btn-danger {
+            background-color: #ff4d4f;
+            color: white;
+            border-color: #ff4d4f;
+        }
+        .btn-danger:hover {
+            background-color: #ff7875;
+            border-color: #ff7875;
+        }
+        .table-container {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        th {
+            background-color: #fafafa;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status-tag {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .status-online {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .status-offline {
+            background-color: #fff2f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+        .status-ordered {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        .actions .btn {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 16px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .pagination-info {
+            font-size: 14px;
+            color: #666;
+            margin-right: 16px;
+        }
+        .pagination-btn {
+            padding: 6px 12px;
+            border: 1px solid #d9d9d9;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .pagination-btn:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .pagination-btn.active {
+            background-color: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #d9d9d9;
+            color: #d9d9d9;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20system%20logo%20with%20blue%20and%20green%20colors&image_size=square" alt="管理后台">
+                <span>管理后台</span>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active">
+                    示例-充电品牌
+                    <ul class="submenu show">
+                        <li class="submenu-item">权益管理</li>
+                        <li class="submenu-item active">订购管理</li>
+                        <li class="submenu-item">订单管理</li>
+                        <li class="submenu-item">站点管理</li>
+                        <li class="submenu-item">用户管理</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="breadcrumb">
+                    首页 / 示例-充电品牌 / 订购管理
+                </div>
+                <div class="header-actions">
+                    <span>🔍</span>
+                    <span>📝</span>
+                    <span>🔔</span>
+                    <span>👤</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">订购管理</div>
+                </div>
+                <div class="search-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>订单编号</label>
+                            <input type="text" placeholder="请输入订单编号">
+                        </div>
+                        <div class="form-group">
+                            <label>手机号</label>
+                            <input type="text" placeholder="请输入手机号">
+                        </div>
+                        <div class="form-group">
+                            <label>权益名称</label>
+                            <input type="text" placeholder="请输入权益名称">
+                        </div>
+                        <div class="form-group">
+                            <label>权益编码</label>
+                            <input type="text" placeholder="请输入权益编码">
+                        </div>
+                        <div class="form-group">
+                            <label>订购状态</label>
+                            <select>
+                                <option>请选择订购状态</option>
+                                <option>已订购</option>
+                                <option>已取消</option>
+                                <option>已过期</option>
+                                <option>未处理</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>下单时间</label>
+                            <input type="text" placeholder="开始日期时间">
+                            <span>→</span>
+                            <input type="text" placeholder="结束日期时间">
+                        </div>
+                        <div class="form-group">
+                            <label>到期时间</label>
+                            <input type="text" placeholder="开始日期时间">
+                            <span>→</span>
+                            <input type="text" placeholder="结束日期时间">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success">导出订购</button>
+                        <button class="btn btn-primary">搜索</button>
+                        <button class="btn btn-secondary">重置</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>订单ID</th>
+                                <th>手机号</th>
+                                <th>权益名称</th>
+                                <th>权益编码</th>
+                                <th>状态</th>
+                                <th>下单时间</th>
+                                <th>到期时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2037354074599178240</td>
+                                <td>13800000101</td>
+                                <td>特来电满20元减10元充电权益</td>
+                                <td>TEL-2026-001</td>
+                                <td><span class="status-tag status-offline">已取消</span></td>
+                                <td>2026-03-27 10:20:38</td>
+                                <td>2026-03-27 10:20:57</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>203735207471808256</td>
+                                <td>13800000101</td>
+                                <td>特来电满20元减10元充电权益</td>
+                                <td>TEL-2026-001</td>
+                                <td><span class="status-tag status-offline">已取消</span></td>
+                                <td>2026-03-27 10:12:42</td>
+                                <td>2026-03-27 10:13:04</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2037351922674634352</td>
+                                <td>13800000101</td>
+                                <td>特来电95折电费折扣卡</td>
+                                <td>TEL-2026-002</td>
+                                <td><span class="status-tag status-ordered">已订购</span></td>
+                                <td>2026-03-27 10:10:05</td>
+                                <td>2026-04-27 23:59:59</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2037351732694319104</td>
+                                <td>13800000101</td>
+                                <td>特来电高能续航券包</td>
+                                <td>TEL-2026-003</td>
+                                <td><span class="status-tag status-ordered">已订购</span></td>
+                                <td>2026-03-27 10:11:20</td>
+                                <td>2026-04-27 23:59:59</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>203342917600268736</td>
+                                <td>13800000101</td>
+                                <td>特来电95折电费折扣卡</td>
+                                <td>TEL-2026-002</td>
+                                <td><span class="status-tag status-ordered">已订购</span></td>
+                                <td>2026-03-18 14:24:16</td>
+                                <td>2026-04-18 23:59:59</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2029848997250494464</td>
+                                <td>13800000101</td>
+                                <td>特来电满30元减20元充电权益</td>
+                                <td>TEL-2026-004</td>
+                                <td><span class="status-tag status-ordered">已订购</span></td>
+                                <td>2026-03-18 16:58:16</td>
+                                <td>2026-04-18 23:59:59</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>202194742249660416</td>
+                                <td>13800000101</td>
+                                <td>特来电满20元减10元充电权益</td>
+                                <td>TEL-2026-001</td>
+                                <td><span class="status-tag status-offline">已到期</span></td>
+                                <td>2026-02-12 22:01:22</td>
+                                <td>2026-03-12 23:59:59</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021946962940417728</td>
+                                <td>13800000101</td>
+                                <td>特来电满20元减10元充电权益</td>
+                                <td>TEL-2026-001</td>
+                                <td><span class="status-tag status-offline">已取消</span></td>
+                                <td>2026-02-12 21:57:12</td>
+                                <td>2026-02-12 21:58:00</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>202178717019617280</td>
+                                <td>13800000101</td>
+                                <td>特来电95折服务费折扣卡</td>
+                                <td>TEL-2026-005</td>
+                                <td><span class="status-tag status-offline">已取消</span></td>
+                                <td>2026-02-12 11:23:21</td>
+                                <td>2026-02-12 11:25:58</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021786825599866440</td>
+                                <td>13800000101</td>
+                                <td>特来电满10元减5元充电权益</td>
+                                <td>TEL-2026-006</td>
+                                <td><span class="status-tag status-offline">已取消</span></td>
+                                <td>2026-02-12 11:21:57</td>
+                                <td>2026-02-12 11:22:22</td>
+                                <td class="actions">
+                                    <button class="btn btn-secondary" onclick="window.location.href='order-detail.html'">详情</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <span class="pagination-info">从第 0 项开始,共 26 项 10/页</span>
+                    <button class="pagination-btn" disabled>←</button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">→</button>
+                </div>
+            </div>
+            <div class="footer">
+                Copyright © 2024 管理后台 All rights reserved.
+            </div>
+        </div>
+    </div>
+    <script>
+        // 菜单展开/折叠功能
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const submenu = this.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('show');
+                }
+            });
+        });
+        
+        // 菜单点击事件处理
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有菜单项的active类
+                document.querySelectorAll('.menu-item, .submenu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+                // 添加当前菜单项的active类
+                this.classList.add('active');
+                this.closest('.menu-item').classList.add('active');
+                
+                // 处理页面跳转
+                const menuText = this.textContent.trim();
+                if (menuText === '权益管理') {
+                    window.location.href = 'jincke-teld-rights.html';
+                } else if (menuText === '订购管理') {
+                    window.location.href = 'order-management.html';
+                } else if (menuText === '订单管理') {
+                    window.location.href = 'order-management-charging.html';
+                } else if (menuText === '站点管理') {
+                    window.location.href = 'station-management.html';
+                } else if (menuText === '用户管理') {
+                    window.location.href = 'user-management.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

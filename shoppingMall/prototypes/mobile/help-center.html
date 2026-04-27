@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            padding: 20px;
+            background-color: #1890ff;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 20px;
+            margin-bottom: 80px;
+        }
+        
+        .help-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .contact-info {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-label {
+            font-size: 14px;
+            color: #666;
+            width: 80px;
+        }
+        
+        .contact-value {
+            font-size: 16px;
+            color: #333;
+            flex: 1;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-top: 1px solid #e8e8e8;
+            padding: 15px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .nav-item.active {
+            color: #1890ff;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="back-btn" onclick="window.location.href='profile.html'">
+                <span>←</span>
+            </div>
+            <div class="header-title">帮助中心</div>
+        </div>
+        
+        <div class="content">
+            <!-- 联系我们 -->
+            <div class="help-section">
+                <div class="section-title">联系我们</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">客服电话</div>
+                        <div class="contact-value">400-808-0000</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">工作时间</div>
+                        <div class="contact-value">周一至周日 9：00-21：00</div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- 常见问题 -->
+            <div class="help-section">
+                <div class="section-title">常见问题</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">如何领取权益？</div>
+                        <div class="contact-value">在个人中心点击"已订购"，选择对应套餐的权益进行领取。</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">权益有效期多久？</div>
+                        <div class="contact-value">不同权益的有效期不同，请查看权益详情页面。</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="nav-tabs">
+                <div class="nav-item" onclick="window.location.href='index.html'">
+                    <span>首页</span>
+                </div>
+                <div class="nav-item active">
+                    <span>个人中心</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="命题协同平台项目详情，构建教育行业首个智能命题协作系统">
+    <meta name="keywords" content="产品经理,命题协同平台,教育行业,智能筛选,三方协作,激励共创">
+    <meta name="author" content="Jackie Hou">
+    <title>命题协同平台</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>Jackie Hou</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="experience.html">Experience</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    <!-- 项目详情头部 -->
+    <section class="project-detail-header">
+        <div class="container">
+            <h2>命题协同平台</h2>
+            <p>构建教育行业首个智能命题协作系统</p>
+        </div>
+    </section>
+
+    <!-- 项目详情 -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=education%20exam%20question%20collaboration%20platform&image_size=landscape_4_3" alt="命题协同平台" loading="lazy">
+                </div>
+                
+                <div class="project-section">
+                    <h3>项目背景</h3>
+                    <p>本项目主导并交付了教育行业首个集“智能筛选、三方协作、激励共创”于一体的竞赛题库命题平台。作为产品负责人，我基于过往成熟的“三方协作”方法论与金融级系统架构，从0到1完成了产品定义、生态模式设计、核心系统开发与持续运营，旨在解决行业内高质量竞赛题目供给不足、命题流程松散、专家资源动难以规模化组织的核心痛点，构建了一个能自我运转、多方共赢的题目生产与变现生态系统。</p>
+                </div>
+                
+                <div class="project-section">
+                    <h3>解决方案</h3>
+                    <h4>1. 三方角色重构与协作模式定义</h4>
+                    <ul>
+                        <li><strong>命题贡献者（简称：创作者）</strong>：覆盖资深教师、竞赛选手等。他们贡献题目，是内容的生产源头。</li>
+                        <li><strong>平台运营与审核方（简称：平台）</strong>：我方负责构建系统、制定规则、组织审核、结算激励，并承担质量控制兜底责任。</li>
+                        <li><strong>内容使用者/采购方（简称：合作方）</strong>：即教育机构、题库平台等。他们提出命题需求、参与终审、采购优质题目并支付费用。</li>
+                    </ul>
+                    <p>该模式清晰界定了三方权责：创作者产出内容，平台组织流程与保障质量，合作方定义标准并最终买单，形成一个可持续的商业闭环。</p>
+                </div>
+                
+                <div class="project-section">
+                    <h3>核心业务流程</h3>
+                    <p>我们设计了清晰的命题生命周期，确保每个环节都可追踪、可激励：</p>
+                    
+                    <h4>第一步：选题与领号（启动作业）</h4>
+                    <p>用户选择科目后，系统自动分配一个唯一、不可修改的题目编号（如 M-20241011-1001-001）。这借鉴了“会员状态机”与“资金流水号”的思想，为每一道题建立贯穿始终的“数字身份证”，是后续所有流程、结算、追溯的基石。</p>
+                    
+                    <h4>第二步：提交与多轮审核（协同作战）</h4>
+                    <p>我们建立了一套严密的“三审”状态机流程：创作者提交 → 平台内部初审（快速筛选规范性）→ 合作方专业复审（校验专业性与准确性）→ 合作方终审（最终质量把控）。每个状态（待审核、初审中、驳回修改、复审中、终审中、已通过）都严格定义并系统锁定。复用之前“资金对账”的严谨性，确保题目状态流转、审核意见、修改历史的每一步都清晰可查，实现“流程即数据”。</p>
+                    
+                    <h4>第三步：激励与分润（价值变现）</h4>
+                    <p>题目终审通过后，系统自动触发奖励结算。我们设计了一套树状三级分润模型：</p>
+                    <ul>
+                        <li><strong>三级用户（探索者）</strong>：获得基础命题奖金。</li>
+                        <li><strong>二级用户（领航者）</strong>：获得自身命题奖金 + 其邀请的三级用户命题分润。</li>
+                        <li><strong>一级用户（开拓者）</strong>：获得自身命题奖金 + 其团队（下属所有二级、三级用户）命题分润。</li>
+                    </ul>
+                    <p>奖励金额根据题目提交瞬间绑定的用户层级关系和当时的奖励策略进行“快照”锁定并计算，借鉴了金融交易中“交易快照”的逻辑，确保分润公平、无争议。</p>
+                </div>
+                
+                <div class="project-section">
+                    <h3>关键架构</h3>
+                    <p>复用成熟能力，实现高效迁移与平稳落地：</p>
+                    
+                    <h4>1. 复用“会员状态机”业务流程</h4>
+                    <p>将“和包”充电场景的“开通-找桩-充电-支付”状态链路，成功改造为命题场景的“注册-领号-上传-审核-结算”全生命周期管理。利用“线程织布”思想，将用户、题目、审核、资金等多个对象的状态变化编织成一张可监控、可干预的业务网。</p>
+                    
+                    <h4>2. 复用“金融级”财务结算与对账模块</h4>
+                    <p>将“三方支付商城”中成熟的订单、结算、对账体系直接复用。命题的“奖励发放”本质上是一笔内部支付订单。我们沿用了相同的订单号生成规则、账户余额体系、提现申请流程以及财务对账字段（将“商品名称”替换为“题目编号”），使得复杂的多层级分润结算变得异常清晰、准确。</p>
+                    
+                    <h4>3. 复用“前台-中台-数据看板”三层架构</h4>
+                    <ul>
+                        <li><strong>用户端（前台H5/PC）</strong>：继承商城简洁体验，提供命题、我的题目、团队管理、收益中心四大功能模块。</li>
+                        <li><strong>运营后台（中台）</strong>：复用电商后台的灵活配置能力，构建了集题目管理（含三审流程）、三级用户体系管理、动态奖励策略配置、提现审核于一体的强大运营工具箱。</li>
+                        <li><strong>数据看板</strong>：交易数据看板被转化为题库运营看板，核心指标从“交易额、订单量”变为“题目生产总量、审核通过率、各层级用户收益分布、热门命题科目”，为精细化运营提供决策支持。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section">
+                    <h3>深度挑战与个人突破</h3>
+                    <h4>挑战核心</h4>
+                    <p>“用户邀请关系一经绑定不可更改”的规则（用于确保分润链稳定）与“用户主动升级、平台手动调整关系”的业务需求之间产生了根本性矛盾。</p>
+                    
+                    <h4>破局方案</h4>
+                    <p>我提出并推动了 “关系快照+补偿结算” 的混合解决方案：</p>
+                    <ol>
+                        <li><strong>历史业务遵循“快照”原则</strong>：所有已发生结算的题目，其分润基于当时的“关系快照”，绝不回滚，保证已结算利益的确定性。</li>
+                        <li><strong>未来业务启用新关系</strong>：当用户关系变更后，新提交的题目将基于新的关系链进行结算。</li>
+                        <li><strong>设计“关系变更影响分析”工具</strong>：在后台调整用户关系时，系统自动模拟并展示此次变更将影响的未来潜在结算，让运营人员做出知情决策。</li>
+                    </ol>
+                    
+                    <h4>能力成长</h4>
+                    <p>这一过程让我深刻体会到，最复杂的产品设计往往不是功能叠加，而是在多重约束条件下寻找最优解。它锻炼了我处理强规则业务与灵活运营诉求之间张力的能力，以及设计“向前兼容”数据模型和流程的系统思维。</p>
+                </div>
+                
+                <div class="project-section">
+                    <h3>项目成果与沉淀</h3>
+                    <h4>业务价值</h4>
+                    <p>成功吸引了首批高质量创作者入驻，形成了活跃的命题社群，题目平均审核通过率超过初期预设目标，验证了激励模式的有效性。</p>
+                    
+                    <h4>个人沉淀</h4>
+                    <p>我完整跑通了 “复杂规则设计 -> 多角色系统构建 -> 激励生态运营” 的又一全链路。更重要的是，我将“三方支付”领域的成熟经验体系化地复用于一个全新行业，证明了底层产品方法论（状态机、分润模型、数据一致性）的跨领域通用价值。这为后续孵化更多“协同共创”型产品奠定了坚实的信心与方法论基础。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Jackie Hou. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

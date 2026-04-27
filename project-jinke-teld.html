@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="金科-特来电项目详情，构建高频出行的聚合服务与创新权益生态">
+    <meta name="keywords" content="产品经理,金科,特来电,电动汽车,充电服务,会员权益,移动出行">
+    <meta name="author" content="Jackie Hou">
+    <title>金科-特来电项目</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>Jackie Hou</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="experience.html">Experience</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    <!-- 项目详情头部 -->
+    <section class="project-detail-header">
+        <div class="container">
+            <h2>中移金科和包APP出行权益生态</h2>
+            <p>构建高频出行的聚合服务与创新权益生态</p>
+        </div>
+    </section>
+
+    <!-- 项目详情 -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-content-wrapper">
+                <!-- 左侧目录栏 -->
+                <div class="sidebar">
+                    <div class="sidebar-title">目录</div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#project-background">项目背景</a></li>
+                        <li><a href="#key-partners">关键合作方</a></li>
+                        <li><a href="#business-process">业务流程与用户旅程</a></li>
+                        <li><a href="#rights-management">充电权益管理体系</a></li>
+                        <li><a href="#admin-functions">管理后台功能模块</a></li>
+                        <li><a href="#architecture-thinking">产品架构思考与能力成长</a></li>
+                        <li><a href="#project-results">项目成果与核心价值</a></li>
+                        <li><a href="#project-prototypes">项目原型</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 右侧内容 -->
+                <div class="project-content">
+                <div class="project-image">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=electric%20vehicle%20charging%20service%20app&image_size=landscape_4_3" alt="金科-特来电项目" loading="lazy">
+                </div>
+                
+                <div class="project-section" id="project-background">
+                    <h3>项目背景</h3>
+                    <p>本项目旨在依托中国移动和包App的海量用户生态，与行业领先的充电服务商特来电新能源深度合作，构建一站式电动汽车充电服务与创新的移动出行会员权益体系。</p>
+                </div>
+                
+                <div class="project-section" id="key-partners">
+                    <h3>关键合作方</h3>
+                    <ul>
+                        <li><strong>中国移动和包（金科）</strong>：作为用户平台入口与核心支付渠道，在出行板块内提供“车生活-充电”服务入口，并开放用户账户体系（支持余额、AI豆等支付方式）。其核心诉求是丰富App高频服务场景，提升用户活跃度与支付工具使用黏性。合作模式为平台技术服务费（6%）。</li>
+                        <li><strong>特来电新能源</strong>：作为充电服务与基础设施的供给方，是中国规模最大的充电桩品牌（行业第一），全国投建充电终端近百万个，覆盖超过350个城市、60,000+站点，注册用户超过4200万。其核心诉求是借助和包流量低成本拓展订单与市场覆盖率。</li>
+                        <li><strong>北京觉观科技</strong>：作为行业能力提供商与会员权益运营方，承担核心的“连接器”角色。职责包括：1）技术对接与系统集成；2）设计并运营“移动特来电出行会员”产品；3）管理会员套餐、权益发放与核销。在商业闭环中，通过向用户提供增值服务（如优惠购券）获得收入。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section" id="business-process">
+                    <h3>业务流程与用户旅程</h3>
+                    <p>项目实现了从服务开通到充电结算的全链路闭环，具体业务流程分为四个阶段：</p>
+                    
+                    <h4>阶段一：服务开通与账户绑定</h4>
+                    <p>用户首次进入和包App内充电服务时，完成免登录账户绑定（和包账户）与会员身份同步。</p>
+                    
+                    <h4>阶段二：筛选→详情→导航（充电前操作）</h4>
+                    <ol>
+                        <li><strong>入口与筛选</strong>：用户路径：和包App→出行→车生活→充电。页面支持按“特来电”品牌筛选，并按距离、空闲桩数、价格排序。列表页明确标示特来电品牌、会员价/原价、空闲桩数等信息。</li>
+                        <li><strong>场站详情查看</strong>：点击目标场站进入详情页，展示充电站名称、运营时间、地址、时段电价（电费+服务费）、快/慢充空闲数、停车规则及具体终端列表（桩号、功率、状态），并提供“导航”与“扫码充电”按钮。</li>
+                        <li><strong>导航到场站</strong>：点击“导航”按钮，可唤起第三方导航App（如高德、百度）进行路线规划。</li>
+                    </ol>
+                    
+                    <h4>阶段三：扫码启动与充电监控</h4>
+                    <ol>
+                        <li><strong>插枪与扫码</strong>：用户连接车辆后，点击和包“扫码充电”扫描特来电桩码。系统会进行桩状态实时校验，并根据不同情况给出明确提示。</li>
+                        <li><strong>充电启动</strong>：用户点击“启动充电”，界面展示“充电启动中...”，启动成功后自动跳转至充电监控页。</li>
+                        <li><strong>实时监控</strong>：监控页动态展示：已充电量（kWh）、累计费用（元，含权益抵扣后）、充电时长（分钟）、实时充电功率（kW）。用户可进行“暂停”或“终止”操作。</li>
+                        <li><strong>充电终止</strong>：支持三种终止场景：用户手动点击“终止”、车辆充满自动终止、设备故障中断，均有相应的确认或提示流程。</li>
+                    </ol>
+                    
+                    <h4>阶段四：支付结算与对账</h4>
+                    <p>充电结束后，系统生成最终订单。订单支付时，系统自动计算并叠加适用的会员折扣、折扣购券、满减券等全部优惠规则，用户完成支付后闭环。后台自动完成金科、觉观、特来电三方之间的对账与分润结算。</p>
+                </div>
+                
+                <div class="project-section" id="rights-management">
+                    <h3>充电权益管理体系</h3>
+                    <p>为构建差异化用户粘性，项目采用了创新的 “会员状态制”权益体系，该体系以“权益包”为核心进行管理。用户办理“移动特来电出行会员”后，即可获得一个包含多种子权益的权益包，并可在会员有效期内重复行权。</p>
+                    
+                    <h4>主权益包（权益包）</h4>
+                    <ul>
+                        <li>作为整体售卖和管理的单元，为下属所有子权益提供统一的标识、生效时间（自然日/办理日起算）和上架/下架状态控制。</li>
+                        <li>主权益包下架后，已发放给用户的子权益仍可正常使用至其自身有效期结束。</li>
+                    </ul>
+                    
+                    <h4>子权益类型与规则</h4>
+                    <p>在同一个主权益包下，可灵活配置两类子权益：</p>
+                    <ul>
+                        <li><strong>折扣卡（比例抵扣）</strong>
+                            <ul>
+                                <li>每张权益包同抵扣范围最多配置1张，支持1位小数精确配置（如95代表95折，92.5代表92.5折）。</li>
+                                <li>抵扣范围可选：仅电费、仅服务费、整单抵扣。规则上，“仅电费”与“仅服务费”折扣卡可共存，但二者均不可与“整单折扣卡”同时配置。</li>
+                                <li>上限规则：可独立设置 “单笔订单”、“单日累计”、“单月累计” 抵扣金额上限。多维度上限同时生效时，取最小值作为最终可抵扣额。</li>
+                            </ul>
+                        </li>
+                        <li><strong>抵扣券（固定金额满减）</strong>
+                            <ul>
+                                <li>每张权益包内可配置多张，每张规则独立。本质为满减券，需设置“满X元减Y元”规则。</li>
+                                <li>抵扣范围同样可选：仅电费、仅服务费、整单抵扣。</li>
+                                <li>发放与使用限制：可独立配置“单权益发放数量”（用户可获得几张）、“每单使用上限”（单笔订单最多用几张）及“单权益每单使用上限”（针对该特定券）。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h4>订单结算核销顺序</h4>
+                    <p>在充电订单支付时，系统严格按照 “先折扣卡（比例抵扣），后抵扣券（满减）” 的顺序进行优惠核销，确保优惠计算的准确性与公平性。</p>
+                </div>
+                
+                <div class="project-section" id="admin-functions">
+                    <h3>管理后台功能模块</h3>
+                    <p>为支撑前端复杂的业务运营，项目构建了功能完备的后台管理系统，主要分为四大模块：</p>
+                    <ul>
+                        <li><strong>权益管理</strong>：核心运营模块，用于创建、编辑、上架/下架“充电权益”主权益包，并配置其包含的折扣卡与抵扣券子权益。</li>
+                        <li><strong>订购管理</strong>：管理用户办理的会员权益订单，支持按订单ID、用户手机号、权益名称等多维度搜索。</li>
+                        <li><strong>订单管理</strong>：管理具体的充电消费订单与超时占用费订单，支持查看完整的费用明细。</li>
+                        <li><strong>站点管理</strong>：管理特来电接入的所有充电站点信息，支持按充电站ID、名称、站点状态等多条件组合筛选。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section" id="architecture-thinking">
+                    <h3>产品架构思考与能力成长</h3>
+                    <ul>
+                        <li><strong>产品需求定义与拆解</strong>：面对“构建一站式充电与会员权益服务体系”的宏观需求，将其系统性地拆解为四个核心模块：用户服务端、商户运营端、权益管理后台以及财务结算系统。</li>
+                        <li><strong>多利益方协调与决策</strong>：协调金科、特来电的需求，通过绘制业务现状、合规底线与理想模型三张流程图进行对比，最终促成了以业务实质为基准的方案。</li>
+                        <li><strong>复杂系统的架构思考</strong>：设计“会员状态制”和“权益包”体系时，提出了将主权益包作为“容器”，子权益作为“内容物”的核心架构，使开通动作从1+N次变为1次，后台配置支持热更新。</li>
+                        <li><strong>金融级流程把控</strong>：针对资金沉淀风险，设计了“账户锁→预记账→最终结算”的三步校验机制，确保每一笔争议订单都可通过后台的“费用核算”功能追溯全链路的原始数据、计算规则与分润结果。</li>
+                        <li><strong>个人成长路径</strong>：从“完成领导交办的功能点”到“主导一个生态级的产品”，学会了用“商业模式画布”去推演每个产品决策对金科、特来电、用户三方的影响，在持续的多方博弈中形成最优解。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section" id="project-results">
+                    <h3>项目成果与核心价值</h3>
+                    <ul>
+                        <li><strong>模式验证</strong>：项目成功验证了 "平台+服务商+基础设施方"的三方协作商业模式 及 "会员状态制"权益体系 的可行性，跑通了涉及支付、结算、对账的完整金融级业务流程。</li>
+                        <li><strong>能力沉淀</strong>：作为产品负责人，通过本项目系统性锤炼了驾驭复杂商业生态与多边协作、跨C/B/后台系统的全链路设计与交付、金融级业务流程与资金合规把控三大核心能力。</li>
+                    </ul>
+                </div>
+                
+                <div class="project-section" id="project-prototypes">
+                    <h3>项目原型</h3>
+                    <h4>管理后台原型</h4>
+                    <ul>
+                        <li><a href="teld/jincke-teld-rights.html" target="_blank">示例-充电品牌权益</a>
+                            <ul>
+                                <li><a href="teld/create-charging-rights.html" target="_blank">创建充电权益</a></li>
+                                <li><a href="teld/edit-charging-rights.html" target="_blank">编辑充电权益</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="teld/order-management.html" target="_blank">订单管理</a>
+                            <ul>
+                                <li><a href="teld/order-detail.html" target="_blank">订单详情</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="teld/order-management-charging.html" target="_blank">充电订单管理</a>
+                            <ul>
+                                <li><a href="teld/order-detail-charging.html" target="_blank">充电订单详情</a></li>
+                                <li><a href="teld/order-detail-occupation.html" target="_blank">占用费订单详情</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="teld/station-management.html" target="_blank">电站管理</a>
+                            <ul>
+                                <li><a href="teld/station-detail.html" target="_blank">电站详情</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="teld/user-management.html" target="_blank">用户管理</a></li>
+                    </ul>
+                    
+                    <h4>用户端原型</h4>
+                    <ul>
+                        <li><a href="https://modao.cc/proto/design/pb2mmn57l8ovm355l" target="_blank">用户端原型链接</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Jackie Hou. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

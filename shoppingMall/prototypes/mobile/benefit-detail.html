@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权益领取详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            padding: 20px;
+            background-color: #1890ff;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .header-right {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-btn, .more-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        
+        .user-info {
+            padding: 15px 20px;
+            background-color: #1890ff;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        
+        .user-detail {
+            flex: 1;
+        }
+        
+        .user-phone {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .order-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .order-number {
+            color: #fff;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .package-info {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .package-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .package-period {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .package-order-time {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .package-description {
+            font-size: 14px;
+            color: #8c8c8c;
+            line-height: 1.4;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e8e8e8;
+        }
+        
+        .benefit-list {
+            margin-bottom: 80px;
+        }
+        
+        .benefit-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        
+        .benefit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .benefit-status {
+            font-size: 14px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+        }
+        
+        .status-pending {
+            background-color: #fff2e8;
+            color: #fa8c16;
+        }
+        
+        .status-available {
+            background-color: #f6ffed;
+            color: #52c41a;
+        }
+        
+        .status-used {
+            background-color: #f5f5f5;
+            color: #8c8c8c;
+        }
+        
+        .benefit-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .expire-time {
+            flex: 1;
+        }
+        
+        .benefit-action {
+            text-align: right;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: #1890ff;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #40a9ff;
+        }
+        
+        .btn-success {
+            background-color: #52c41a;
+            color: #fff;
+        }
+        
+        .btn-success:hover {
+            background-color: #73d13d;
+        }
+        
+        .btn-disabled {
+            background-color: #d9d9d9;
+            color: #999;
+            cursor: not-allowed;
+        }
+        
+        .btn-text {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            color: #1890ff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-top: 1px solid #e8e8e8;
+            padding: 10px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .nav-item.active {
+            color: #1890ff;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-btn" onclick="window.location.href='index.html'">
+                <span>←</span>
+            </div>
+            <div class="header-title">领取详情</div>
+            <div class="header-right">
+            </div>
+        </div>
+        
+
+        
+        <div class="content">
+            <div class="package-info">
+                <div class="package-name">黄金会员</div>
+
+                <div class="package-period">有效期至：2026-02-08</div>
+                <div class="package-order-time">订购日期：2025-12-08</div>
+
+                <div class="package-description">权益介绍</div>
+            </div>
+            
+            <div class="benefit-list">
+                <!-- 权益项1 -->
+                <div class="benefit-item">
+                    <div class="benefit-header">
+                        <div class="benefit-title">黄金会员</div>
+                        <div class="benefit-status status-pending">待领取</div>
+                    </div>
+
+                    <div class="benefit-meta">
+                        <div class="expire-time">下发日期：2026-01-01</div>
+                        <div class="benefit-action">
+                            <button class="btn btn-primary" onclick="window.location.href='benefit-item-detail.html?benefitId=1'">立即领取</button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                <!-- 权益项3 -->
+                <div class="benefit-item" onclick="window.location.href='benefit-item-detail-3.html'">
+                    <div class="benefit-header">
+                        <div class="benefit-title">黄金会员</div>
+                        <div class="benefit-status status-used">已领取</div>
+                    </div>
+
+                    <div class="benefit-meta">
+                        <div class="expire-time">下发日期：2025-12-01</div>
+                        <div class="benefit-action">
+                            <button class="btn-text" onclick="window.location.href='benefit-item-detail-3.html'">查看详情</button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="nav-tabs">
+                <div class="nav-item" onclick="window.location.href='index.html'">
+                    <span>首页</span>
+                </div>
+                <div class="nav-item active">
+                    <span>个人中心</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 模拟根据URL参数获取权益ID
+        function getBenefitId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('benefitId');
+        }
+    </script>
+</body>
+</html>
