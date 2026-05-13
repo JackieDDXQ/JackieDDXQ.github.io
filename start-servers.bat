@@ -19,11 +19,21 @@ start cmd /k "cd d:\Project\cel\frontend && npm run dev -- --port 3003 --host"
 timeout /t 3 /nobreak >nul
 
 echo.
+echo ==============================================
 echo 所有服务器已启动！
-echo PMOdyssey: http://localhost:8080
-echo 万象系统: http://localhost:3001
-echo 云仓系统: http://localhost:3002
-echo 灵霄系统: http://localhost:3003
-echo.
+echo ==============================================
+echo 本机访问（同一台电脑）：
+echo   PMOdyssey:      http://localhost:8080
+echo   云仓系统:       http://localhost:3002
+echo   万象系统:       http://localhost:3001
+echo   灵霄系统:       http://localhost:3003
+echo ==============================================
+echo 局域网访问（手机/其他电脑）：
+echo   请确保设备连接到同一网络
+echo   PMOdyssey:      http://192.168.70.175:8080
+echo   云仓系统:       http://192.168.70.175:3002
+echo   万象系统:       http://192.168.70.175:3001
+echo   灵霄系统:       http://192.168.70.175:3003
+echo ==============================================
 echo 按任意键退出...
 pause
