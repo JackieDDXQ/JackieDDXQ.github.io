@@ -1245,6 +1245,28 @@ section h2 {
     line-height: 1.5;
 }
 
+.project-section .prototype-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: none !important;
+}
+
+.project-section .prototype-link:hover {
+    background-color: #0056b3;
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 112, 243, 0.3);
+    border-bottom: none !important;
+}
+
 /* 联系页面样式 */
 .contact {
     padding: 150px 0 100px;
