@@ -91,6 +91,7 @@ import { ref, onMounted, watch, nextTick } from 'vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import * as echarts from 'echarts'
 import { dashboardApi } from '../api'
+import { mockOverview, mockSettlementAmount, mockPromotionCost, mockOrderOverview, mockSalesRank, mockPromotionRank } from '../api/mock'
 
 const icons = { 
   ShoppingCart: ElementPlusIconsVue.ShoppingCart, 
@@ -142,26 +143,38 @@ const initCharts = () => {
 }
 
 const loadData = async () => {
-  const [overviewRes, settlementRes, costRes, orderRes, salesRes, promotionRes] = await Promise.all([
-    dashboardApi.overview(),
-    dashboardApi.settlementAmount(),
-    dashboardApi.promotionCost(),
-    dashboardApi.orderOverview(),
-    dashboardApi.salesRank(),
-    dashboardApi.promotionRank()
-  ])
+  try {
+    const [overviewRes, settlementRes, costRes, orderRes, salesRes, promotionRes] = await Promise.all([
+      dashboardApi.overview(),
+      dashboardApi.settlementAmount(),
+      dashboardApi.promotionCost(),
+      dashboardApi.orderOverview(),
+      dashboardApi.salesRank(),
+      dashboardApi.promotionRank()
+    ])
 
-  overview.value = overviewRes.data
+    overview.value = overviewRes.data
 
-  if (activeTab.value === 'settlement') {
-    updateSettlementChart(settlementRes.data)
-  } else {
-    updateSettlementChart(costRes.data, true)
+    if (activeTab.value === 'settlement') {
+      updateSettlementChart(settlementRes.data)
+    } else {
+      updateSettlementChart(costRes.data, true)
+    }
+
+    updateOrderChart(orderRes.data)
+    updateSalesChart(salesRes.data)
+    updatePromotionChart(promotionRes.data)
+  } catch (error) {
+    overview.value = mockOverview
+    if (activeTab.value === 'settlement') {
+      updateSettlementChart(mockSettlementAmount)
+    } else {
+      updateSettlementChart(mockPromotionCost, true)
+    }
+    updateOrderChart(mockOrderOverview)
+    updateSalesChart(mockSalesRank)
+    updatePromotionChart(mockPromotionRank)
   }
-
-  updateOrderChart(orderRes.data)
-  updateSalesChart(salesRes.data)
-  updatePromotionChart(promotionRes.data)
 }
 
 const updateSettlementChart = (data, isCost = false) => {
@@ -332,12 +345,20 @@ const updatePromotionChart = (data) => {
 }
 
 watch(activeTab, async (val) => {
-  if (val === 'settlement') {
-    const res = await dashboardApi.settlementAmount()
-    updateSettlementChart(res.data)
-  } else {
-    const res = await dashboardApi.promotionCost()
-    updateSettlementChart(res.data, true)
+  try {
+    if (val === 'settlement') {
+      const res = await dashboardApi.settlementAmount()
+      updateSettlementChart(res.data)
+    } else {
+      const res = await dashboardApi.promotionCost()
+      updateSettlementChart(res.data, true)
+    }
+  } catch (error) {
+    if (val === 'settlement') {
+      updateSettlementChart(mockSettlementAmount)
+    } else {
+      updateSettlementChart(mockPromotionCost, true)
+    }
   }
 })
 
