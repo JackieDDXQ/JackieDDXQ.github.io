@@ -1,6 +1,6 @@
 import { ConfigProvider, theme } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Supplier from './pages/Supplier'
@@ -28,7 +28,7 @@ function App() {
         },
       }}
     >
-      <BrowserRouter basename="/projects/depot/dist">
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -46,7 +46,7 @@ function App() {
             <Route path="export" element={<Export />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ConfigProvider>
   )
 }
