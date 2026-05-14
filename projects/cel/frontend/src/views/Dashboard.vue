@@ -96,8 +96,8 @@ import { mockOverview, mockSettlementAmount, mockPromotionCost, mockOrderOvervie
 const icons = { 
   ShoppingCart: ElementPlusIconsVue.ShoppingCart, 
   Wallet: ElementPlusIconsVue.Wallet, 
-  Dollar: ElementPlusIconsVue.Wallet, 
-  Globe: ElementPlusIconsVue.ShoppingCart 
+  Dollar: ElementPlusIconsVue.Money, 
+  Globe: ElementPlusIconsVue.Briefcase 
 }
 
 const overview = ref({
