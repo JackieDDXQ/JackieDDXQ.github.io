@@ -154,7 +154,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/projects/cel/frontend/dist'),
   routes
 })
 
