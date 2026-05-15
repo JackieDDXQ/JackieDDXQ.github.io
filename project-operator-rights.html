@@ -42,17 +42,32 @@
     <!-- 项目详情 -->
     <section class="project-detail">
         <div class="container">
-            <div class="project-content">
+            <div class="project-content-wrapper">
+                <!-- 左侧目录栏 -->
+                <div class="sidebar">
+                    <div class="sidebar-title">目录</div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#project-background">项目背景</a></li>
+                        <li><a href="#architecture">系统总体架构与定位</a></li>
+                        <li><a href="#core-functions">核心功能</a></li>
+                        <li><a href="#business-process">核心业务流程</a></li>
+                        <li><a href="#product-growth">产品经理能力与成长</a></li>
+                        <li><a href="#project-results">项目成果</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 右侧内容 -->
+                <div class="project-content">
                 <div class="project-image">
                     <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=operator%20rights%20management%20platform%20dashboard&image_size=landscape_4_3" alt="运营商权益管理体系" loading="lazy">
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="project-background">
                     <h3>项目背景</h3>
                     <p>为运营商设计的权益运营中台，旨在支撑千万级用户的复杂业务流转。该中台以灵霄、万象、云仓三大核心系统协同运作，构建了从商品供给、权益配置、渠道推广到订单履约的完整闭环，实现了业务的高效协同与精细化运营。</p>
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="architecture">
                     <h3>系统总体架构与定位</h3>
                     <p>整个中台由三个职责分明的系统构成，各司其职，高效协同：</p>
                     <ul>
@@ -62,7 +77,7 @@
                     </ul>
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="core-functions">
                     <h3>核心功能</h3>
                     <div class="feature-grid">
                         <div class="feature-card">
@@ -107,7 +122,7 @@
                     </ol>
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="product-growth">
                     <h3>产品经理能力与成长</h3>
                     <ul>
                         <li><strong>项目启动与战略定位</strong>：通过系统性业务访谈与竞品分析，抽象出三大系统的架构定位，为后续的独立演进与横向复用奠定基础。</li>
@@ -119,9 +134,10 @@
                     </ul>
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="project-results">
                     <h3>项目成果</h3>
                     <p>通过这一整套基于灵霄、万象、云仓三系统的中台设计及落地，构建了一个具备高可用、强协同、可扩展的千万级用户权益运营平台，为运营商的精细化会员运营和业务快速横向拓展（如B2B2C商城）奠定了坚实的技术与业务基础。</p>
+                </div>
                 </div>
             </div>
         </div>
