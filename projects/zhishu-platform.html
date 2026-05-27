@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命题智能协同平台(知枢) | Jackie Hou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .project-page {
+            padding-top: 6rem;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        @media (min-width: 640px) {
+            .project-page {
+                max-width: 90%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .project-page {
+                max-width: 85%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .project-page {
+                max-width: 1024px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .project-page {
+                max-width: 1100px;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .project-page {
+                max-width: 1200px;
+            }
+        }
+
+        .project-header {
+            margin-bottom: 4rem;
+        }
+
+        .project-meta {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-category-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-brown);
+        }
+
+        .project-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--paper-bg-light);
+            border: 1px solid var(--border-ink);
+        }
+
+        .project-title-large {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--ink-black);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-subtitle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-subtitle {
+            font-size: 1rem;
+            color: var(--ink-gray);
+            margin: 0;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .project-section {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--divider-ink);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-brown);
+        }
+
+        .section-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ink-light);
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            margin-left: auto;
+        }
+
+        .project-section p {
+            font-size: 0.9375rem;
+            color: var(--ink-gray);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .challenge-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-item,
+        .solution-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-number,
+        .solution-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-text,
+        .solution-text {
+            font-size: 0.875rem;
+            color: var(--ink-gray);
+            line-height: 1.7;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .result-card {
+            background-color: var(--paper-bg-light);
+            padding: 2rem;
+            border: 1px solid var(--border-ink);
+        }
+
+        .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .prototype-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider-ink);
+        }
+
+        .prototype-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent-brown);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-ink);
+            transition: all 0.3s ease;
+        }
+
+        .prototype-link:hover {
+            border-color: var(--accent-brown);
+            background-color: var(--paper-bg-light);
+        }
+
+        .next-project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--divider-ink);
+            margin-top: 2rem;
+        }
+
+        .next-project-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-light);
+        }
+
+        .next-project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .next-project-link:hover {
+            color: var(--accent-brown);
+        }
+
+        .prev-project {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .prev-project:hover {
+            color: var(--accent-brown);
+        }
+
+        @media (max-width: 768px) {
+            .project-title-large {
+                font-size: 2rem;
+            }
+
+            .challenge-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .next-project {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <span class="nav-item" onclick="window.location.href='../index.html'">Jackie's Portfolio</span>
+            <div class="navbar-right">
+                <span class="nav-item">About</span>
+                <span class="nav-item">Experience</span>
+                <span class="nav-item active">Projects</span>
+                <span class="nav-item">Contact</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content project-page">
+        <div class="project-header">
+            <div class="project-meta">
+                <div class="project-category-wrapper">
+                    <span class="project-category">CASE 04</span>
+                    <span class="project-badge">2024</span>
+                    <span class="project-badge">05 - 09</span>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">全栈产品</span>
+                    <span class="project-tag">18000+ 题目沉淀</span>
+                </div>
+            </div>
+            <h1 class="project-title-large">命题智能协同平台(知枢)</h1>
+            <div class="project-subtitle-wrapper">
+                <p class="project-subtitle">连接高校师生、行业专家与AI企业</p>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <span class="section-label">CONTEXT</span>
+                <span class="section-title">背景</span>
+            </div>
+            <p>构建命题智能协同平台，连接高校师生、行业专家与AI企业，打造"创作-审核-激励"闭环，沉淀高质量AI训练数据。</p>
+        </div>
+
+        <div class="project-section">
+            <div class="challenge-solution-grid">
+                <div>
+                    <div class="section-header" style="justify-content: flex-start;">
+                        <span class="section-number">02</span>
+                        <span class="section-label">CHALLENGE</span>
+                        <span class="section-title">挑战</span>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">01</span>
+                        <p class="challenge-text">高质量数据获取成本高，标注难度大</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">02</span>
+                        <p class="challenge-text">专家资源分散，协作效率低</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">03</span>
+                        <p class="challenge-text">数据质量难以把控，缺乏标准化流程</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-header" style="justify-content: flex-start;">
+                        <span class="section-number">03</span>
+                        <span class="section-label">SOLUTION</span>
+                        <span class="section-title">解法</span>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">01</span>
+                        <p class="solution-text">设计众包命题平台，整合高校与行业专家资源</p>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">02</span>
+                        <p class="solution-text">建立等级激励体系，激发参与者积极性</p>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">03</span>
+                        <p class="solution-text">构建多轮审核机制，确保数据质量</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <span class="section-label">RESULTS</span>
+                <span class="section-title">成果</span>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-value">18000+</span>
+                    <span class="result-label">优质题目沉淀</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-value">500+</span>
+                    <span class="result-label">活跃专家</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-value">95%</span>
+                    <span class="result-label">审核通过率</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-section">
+            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
+            <a href="../projects/cel/frontend/dist/index.html" target="_blank" class="prototype-link">
+                <i style="font-size: 1rem;">🔗</i>
+                <span>查看交互原型</span>
+            </a>
+        </div>
+
+        <div class="next-project">
+            <a href="chuxing-equity.html" class="prev-project">
+                <i style="font-size: 0.875rem;">←</i>
+                <span>中移金科和包APP出行权益生态</span>
+            </a>
+            <span class="next-project-label">返回首页</span>
+            <a href="../index.html" class="next-project-link">
+                <span>查看更多项目</span>
+                <i style="font-size: 0.875rem;">→</i>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
+            <p class="footer-credit">Designed & Developed by Jackie Hou</p>
+        </div>
+    </footer>
+
+    <script>
+        document.body.style.opacity = '1';
+    </script>
+</body>
+</html>

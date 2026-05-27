@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运营商权益全链路管理系统 | Jackie Hou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .project-page {
+            padding-top: 6rem;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        @media (min-width: 640px) {
+            .project-page {
+                max-width: 90%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .project-page {
+                max-width: 85%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .project-page {
+                max-width: 1024px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .project-page {
+                max-width: 1100px;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .project-page {
+                max-width: 1200px;
+            }
+        }
+
+        .project-header {
+            margin-bottom: 4rem;
+        }
+
+        .project-meta {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-category-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-brown);
+        }
+
+        .project-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--paper-bg-light);
+            border: 1px solid var(--border-ink);
+        }
+
+        .project-title-large {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--ink-black);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-subtitle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-subtitle {
+            font-size: 1rem;
+            color: var(--ink-gray);
+            margin: 0;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .project-section {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--divider-ink);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-brown);
+        }
+
+        .section-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ink-light);
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            margin-left: auto;
+        }
+
+        .project-section p {
+            font-size: 0.9375rem;
+            color: var(--ink-gray);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .challenge-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-item,
+        .solution-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-number,
+        .solution-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-text,
+        .solution-text {
+            font-size: 0.875rem;
+            color: var(--ink-gray);
+            line-height: 1.7;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .result-card {
+            background-color: var(--paper-bg-light);
+            padding: 2rem;
+            border: 1px solid var(--border-ink);
+        }
+
+        .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .prototype-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider-ink);
+        }
+
+        .prototype-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent-brown);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-ink);
+            transition: all 0.3s ease;
+        }
+
+        .prototype-link:hover {
+            border-color: var(--accent-brown);
+            background-color: var(--paper-bg-light);
+        }
+
+        .next-project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--divider-ink);
+            margin-top: 2rem;
+        }
+
+        .next-project-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-light);
+        }
+
+        .next-project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: normal;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .next-project-link:hover {
+            color: var(--accent-brown);
+        }
+
+        @media (max-width: 768px) {
+            .project-title-large {
+                font-size: 2rem;
+            }
+
+            .challenge-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .next-project {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <span class="nav-item" onclick="window.location.href='../index.html'">Jackie's Portfolio</span>
+            <div class="navbar-right">
+                <span class="nav-item">About</span>
+                <span class="nav-item">Experience</span>
+                <span class="nav-item active">Projects</span>
+                <span class="nav-item">Contact</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content project-page">
+        <div class="project-header">
+            <div class="project-meta">
+                <div class="project-category-wrapper">
+                    <span class="project-category">CASE 01</span>
+                    <span class="project-badge">2025</span>
+                    <span class="project-badge">至今</span>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">平台产品</span>
+                    <span class="project-tag">主导架构</span>
+                </div>
+            </div>
+            <h1 class="project-title-large">运营商权益全链路管理系统</h1>
+            <div class="project-subtitle-wrapper">
+                <p class="project-subtitle">云仓 + 万象 + 灵霄 产品架构</p>
+                <span class="project-tag">支撑 10+ 运营商二级单位</span>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <span class="section-label">CONTEXT</span>
+                <span class="section-title">背景</span>
+            </div>
+            <p>为运营商集团搭建端到端的权益分发与履约平台，覆盖千万级用户场景，整合茶饮、音视频、生活服务等头部品牌资源。</p>
+        </div>
+
+        <div class="project-section">
+            <div class="challenge-solution-grid">
+                <div>
+                    <div class="section-header" style="justify-content: flex-start;">
+                        <span class="section-number">02</span>
+                        <span class="section-label">CHALLENGE</span>
+                        <span class="section-title">挑战</span>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">01</span>
+                        <p class="challenge-text">10+ 二级单位业务规则碎片化，难以统一梳理</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">02</span>
+                        <p class="challenge-text">权益品类多样、结算口径复杂，资金风险高</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="challenge-number">03</span>
+                        <p class="challenge-text">对接上下游系统复杂，交付节奏不可控</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-header" style="justify-content: flex-start;">
+                        <span class="section-number">03</span>
+                        <span class="section-label">SOLUTION</span>
+                        <span class="section-title">解法</span>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">01</span>
+                        <p class="solution-text">抽象"云仓+万象+灵霄"三层架构，分离库存、商品与履约能力</p>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">02</span>
+                        <p class="solution-text">建立金融级流程与对账机制，全链路可观测</p>
+                    </div>
+                    <div class="solution-item">
+                        <span class="solution-number">03</span>
+                        <p class="solution-text">推出配置化接入规范，新单位接入周期从月级缩至周级</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <span class="section-label">RESULTS</span>
+                <span class="section-title">成果</span>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-value">10+</span>
+                    <span class="result-label">接入单位</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-value">1000万+</span>
+                    <span class="result-label">覆盖用户</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-value">-70%</span>
+                    <span class="result-label">接入周期</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-section">
+            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <a href="../projects/depot/dist/index.html" target="_blank" class="prototype-link">
+                    <i style="font-size: 1rem;">🔗</i>
+                    <span>云仓系统</span>
+                </a>
+                <a href="../projects/omni/dist/index.html" target="_blank" class="prototype-link">
+                    <i style="font-size: 1rem;">🔗</i>
+                    <span>万象系统</span>
+                </a>
+                <a href="../projects/cel/frontend/dist/index.html" target="_blank" class="prototype-link">
+                    <i style="font-size: 1rem;">🔗</i>
+                    <span>灵霄系统</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="next-project">
+            <span class="next-project-label">下一个项目</span>
+            <a href="multi-tenant-mall.html" class="next-project-link">
+                <span>多租户会员订阅商城</span>
+                <i style="font-size: 0.875rem;">→</i>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
+            <p class="footer-credit">Designed & Developed by Jackie Hou</p>
+        </div>
+    </footer>
+
+    <script>
+        document.body.style.opacity = '1';
+    </script>
+</body>
+</html>
