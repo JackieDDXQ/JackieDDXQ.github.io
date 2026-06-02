@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Space Grotesk', 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.7;
   color: var(--ink-black);
   background-color: var(--paper-bg);
@@ -570,4 +570,191 @@ body {
   .nav-item {
     font-size: 0.5625rem;
   }
+}
+
+.about-section,
+.capability-section,
+.education-section {
+  padding: 3rem 0;
+}
+
+.about-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ink-gray);
+  margin-bottom: 1.5rem;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.capability-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border-ink);
+  background-color: var(--paper-bg-light);
+}
+
+.capability-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink-black);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--divider-ink);
+}
+
+.capability-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.capability-list li {
+  font-size: 0.9375rem;
+  color: var(--ink-gray);
+  padding: 0.5rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.capability-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-brown);
+}
+
+.education-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.education-item {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+}
+
+.education-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--accent-brown);
+  padding-top: 0.25rem;
+}
+
+.education-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink-black);
+  margin: 0 0 0.5rem 0;
+}
+
+.education-detail {
+  font-size: 0.9375rem;
+  color: var(--ink-gray);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .capability-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .education-date {
+    padding-top: 0;
+  }
+}
+
+.experience-section {
+  padding: 3rem 0;
+}
+
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 2rem;
+}
+
+.experience-date {
+  font-size: 0.875rem;
+  color: var(--accent-brown);
+  padding-top: 0.25rem;
+}
+
+.experience-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink-black);
+  margin: 0 0 0.5rem 0;
+}
+
+.experience-company {
+  font-size: 0.9375rem;
+  color: var(--accent-brown);
+  margin: 0 0 1rem 0;
+}
+
+.experience-description {
+  font-size: 0.9375rem;
+  color: var(--ink-gray);
+  line-height: 1.7;
+}
+
+.experience-description p {
+  margin-bottom: 1rem;
+}
+
+.experience-description h4 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-black);
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.experience-description ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.experience-description li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .experience-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .experience-date {
+    padding-top: 0;
+  }
+}
+
+.projects-page-section,
+.contact-page-section {
+  padding: 3rem 0;
 }

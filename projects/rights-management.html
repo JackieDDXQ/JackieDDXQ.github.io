@@ -6,7 +6,7 @@
     <title>运营商权益全链路管理系统 | Jackie Hou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <style>
         .project-page {
@@ -214,8 +214,6 @@
 
         .prototype-section {
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--divider-ink);
         }
 
         .prototype-link {
@@ -293,12 +291,12 @@
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <span class="nav-item" onclick="window.location.href='../index.html'">Jackie's Portfolio</span>
+            <a href="../index.html" class="nav-item">Jackie's Portfolio</a>
             <div class="navbar-right">
-                <span class="nav-item">About</span>
-                <span class="nav-item">Experience</span>
-                <span class="nav-item active">Projects</span>
-                <span class="nav-item">Contact</span>
+                <a href="../about.html" class="nav-item">About</a>
+                <a href="../experience.html" class="nav-item">Experience</a>
+                <a href="../projects.html" class="nav-item active">Projects</a>
+                <a href="../contact.html" class="nav-item">Contact</a>
             </div>
         </div>
     </nav>
@@ -308,18 +306,13 @@
             <div class="project-meta">
                 <div class="project-category-wrapper">
                     <span class="project-category">CASE 01</span>
-                    <span class="project-badge">2025</span>
-                    <span class="project-badge">至今</span>
-                </div>
-                <div class="project-tags">
-                    <span class="project-tag">平台产品</span>
-                    <span class="project-tag">主导架构</span>
+                    <span class="project-badge">2025.01 至今</span>
                 </div>
             </div>
             <h1 class="project-title-large">运营商权益全链路管理系统</h1>
             <div class="project-subtitle-wrapper">
                 <p class="project-subtitle">云仓 + 万象 + 灵霄 产品架构</p>
-                <span class="project-tag">支撑 10+ 运营商二级单位</span>
+                <span class="project-tag">支撑 10+ 运营商省级单位及专业公司</span>
             </div>
         </div>
 
@@ -341,15 +334,12 @@
                         <span class="section-title">挑战</span>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">01</span>
-                        <p class="challenge-text">10+ 二级单位业务规则碎片化，难以统一梳理</p>
+                        <p class="challenge-text">10+ 省级单位及专业公司业务规则碎片化，难以统一梳理</p>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">02</span>
                         <p class="challenge-text">权益品类多样、结算口径复杂，资金风险高</p>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">03</span>
                         <p class="challenge-text">对接上下游系统复杂，交付节奏不可控</p>
                     </div>
                 </div>
@@ -360,15 +350,12 @@
                         <span class="section-title">解法</span>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">01</span>
                         <p class="solution-text">抽象"云仓+万象+灵霄"三层架构，分离库存、商品与履约能力</p>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">02</span>
                         <p class="solution-text">建立金融级流程与对账机制，全链路可观测</p>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">03</span>
                         <p class="solution-text">推出配置化接入规范，新单位接入周期从月级缩至周级</p>
                     </div>
                 </div>
@@ -387,8 +374,8 @@
                     <span class="result-label">接入单位</span>
                 </div>
                 <div class="result-card">
-                    <span class="result-value">1000万+</span>
-                    <span class="result-label">覆盖用户</span>
+                    <span class="result-value">100万+</span>
+                    <span class="result-label">年度覆盖用户</span>
                 </div>
                 <div class="result-card">
                     <span class="result-value">-70%</span>
@@ -400,16 +387,16 @@
         <div class="prototype-section">
             <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                <a href="../projects/depot/dist/index.html" target="_blank" class="prototype-link">
-                    <i style="font-size: 1rem;">🔗</i>
+                <a href="depot/dist/index.html" target="_blank" class="prototype-link">
+                    <span>→</span>
                     <span>云仓系统</span>
                 </a>
-                <a href="../projects/omni/dist/index.html" target="_blank" class="prototype-link">
-                    <i style="font-size: 1rem;">🔗</i>
+                <a href="omni/dist/index.html" target="_blank" class="prototype-link">
+                    <span>→</span>
                     <span>万象系统</span>
                 </a>
-                <a href="../projects/cel/frontend/dist/index.html" target="_blank" class="prototype-link">
-                    <i style="font-size: 1rem;">🔗</i>
+                <a href="cel/frontend/dist/index.html" target="_blank" class="prototype-link">
+                    <span>→</span>
                     <span>灵霄系统</span>
                 </a>
             </div>

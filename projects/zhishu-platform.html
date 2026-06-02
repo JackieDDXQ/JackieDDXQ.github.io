@@ -6,7 +6,7 @@
     <title>命题智能协同平台(知枢) | Jackie Hou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <style>
         .project-page {
@@ -205,6 +205,13 @@
             margin-bottom: 0.5rem;
         }
 
+        .result-value.text {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+        }
+
         .result-label {
             font-size: 0.75rem;
             color: var(--ink-light);
@@ -214,8 +221,6 @@
 
         .prototype-section {
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--divider-ink);
         }
 
         .prototype-link {
@@ -310,12 +315,12 @@
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <span class="nav-item" onclick="window.location.href='../index.html'">Jackie's Portfolio</span>
+            <a href="../index.html" class="nav-item">Jackie's Portfolio</a>
             <div class="navbar-right">
-                <span class="nav-item">About</span>
-                <span class="nav-item">Experience</span>
-                <span class="nav-item active">Projects</span>
-                <span class="nav-item">Contact</span>
+                <a href="../about.html" class="nav-item">About</a>
+                <a href="../experience.html" class="nav-item">Experience</a>
+                <a href="../projects.html" class="nav-item active">Projects</a>
+                <a href="../contact.html" class="nav-item">Contact</a>
             </div>
         </div>
     </nav>
@@ -325,12 +330,7 @@
             <div class="project-meta">
                 <div class="project-category-wrapper">
                     <span class="project-category">CASE 04</span>
-                    <span class="project-badge">2024</span>
-                    <span class="project-badge">05 - 09</span>
-                </div>
-                <div class="project-tags">
-                    <span class="project-tag">全栈产品</span>
-                    <span class="project-tag">18000+ 题目沉淀</span>
+                    <span class="project-badge">2024.05 - 09</span>
                 </div>
             </div>
             <h1 class="project-title-large">命题智能协同平台(知枢)</h1>
@@ -357,15 +357,12 @@
                         <span class="section-title">挑战</span>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">01</span>
                         <p class="challenge-text">高质量数据获取成本高，标注难度大</p>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">02</span>
                         <p class="challenge-text">专家资源分散，协作效率低</p>
                     </div>
                     <div class="challenge-item">
-                        <span class="challenge-number">03</span>
                         <p class="challenge-text">数据质量难以把控，缺乏标准化流程</p>
                     </div>
                 </div>
@@ -376,15 +373,12 @@
                         <span class="section-title">解法</span>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">01</span>
                         <p class="solution-text">设计众包命题平台，整合高校与行业专家资源</p>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">02</span>
                         <p class="solution-text">建立等级激励体系，激发参与者积极性</p>
                     </div>
                     <div class="solution-item">
-                        <span class="solution-number">03</span>
                         <p class="solution-text">构建多轮审核机制，确保数据质量</p>
                     </div>
                 </div>
@@ -407,17 +401,21 @@
                     <span class="result-label">活跃专家</span>
                 </div>
                 <div class="result-card">
-                    <span class="result-value">95%</span>
-                    <span class="result-label">审核通过率</span>
+                    <span class="result-value text">可控可量化</span>
+                    <span class="result-label">审核周期及通过率</span>
                 </div>
             </div>
         </div>
 
         <div class="prototype-section">
             <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <a href="../projects/cel/frontend/dist/index.html" target="_blank" class="prototype-link">
-                <i style="font-size: 1rem;">🔗</i>
-                <span>查看交互原型</span>
+            <a href="https://wp.senins.cn/olylab-h5/login" target="_blank" class="prototype-link">
+                <span>→</span>
+                <span>用户端链接</span>
+            </a>
+            <a href="https://modao.cc/proto/kKWWOsNEsur3d4v3l8yRP4/sharing?view_mode=read_only&screen=rbpUmOOCyR19YUNpA" target="_blank" class="prototype-link">
+                <span>→</span>
+                <span>管理后台原型</span>
             </a>
         </div>
 
@@ -426,9 +424,9 @@
                 <i style="font-size: 0.875rem;">←</i>
                 <span>中移金科和包APP出行权益生态</span>
             </a>
-            <span class="next-project-label">返回首页</span>
-            <a href="../index.html" class="next-project-link">
-                <span>查看更多项目</span>
+            <span class="next-project-label">下一个项目</span>
+            <a href="physical-mall.html" class="next-project-link">
+                <span>实物商城产品</span>
                 <i style="font-size: 0.875rem;">→</i>
             </a>
         </div>
