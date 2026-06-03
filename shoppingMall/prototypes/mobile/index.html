@@ -3,263 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>觉观商城 - 首页</title>
+    <title>觉观商城 - 会员中心</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #E8593C;
+            --primary-light: #F5925E;
+            --primary-dark: #D64525;
+            --header-gradient: linear-gradient(145deg, #D64525 0%, #E8593C 45%, #F5925E 100%);
+            --bg: #FFF6F2;
+            --surface: #FFFFFF;
+            --badge-bg: rgba(232,89,60,0.1);
+            --badge-color: #E8593C;
+            --accent: #C94080;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            min-height: 100vh;
-        }
-        
-        .header {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif; background: var(--bg); color: #1A1A1A; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 400px; margin: 0 auto; min-height: 100vh; background: var(--bg); padding-bottom: 88px; }
+
+        /* Header bar */
+        .hdr {
+            display: flex; align-items: center; justify-content: space-between;
             padding: 20px;
-            background-color: #1890ff;
-            color: #fff;
-            text-align: center;
+            background: #fff;
         }
-        
-        .header h1 {
-            font-size: 20px;
-            font-weight: 500;
+        .hdr-brand { display: flex; align-items: center; gap: 8px; }
+        .hdr-logo { width: 26px; height: 26px; border-radius: 7px; background: var(--header-gradient); display: flex; align-items: center; justify-content: center; }
+        .hdr-logo svg { width: 14px; height: 14px; }
+        .hdr-name { font-size: 18px; font-weight: 600; }
+        .hdr-actions { display: flex; gap: 6px; }
+        .hdr-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; }
+        .hdr-btn svg { width: 16px; height: 16px; }
+
+        /* Page title */
+        .page-title-area { padding: 16px 20px 24px; }
+        .page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+        .page-subtitle { font-size: 13px; color: #999; margin-top: 4px; font-weight: 500; }
+
+        /* Section header */
+        .sec-hd {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 20px; margin-bottom: 14px;
         }
-        
-        .content {
-            padding: 20px;
+        .sec-title {
+            font-size: 18px; font-weight: 800; letter-spacing: -0.025em;
+            display: flex; align-items: center;
         }
-        
-        .section {
-            margin-bottom: 30px;
+        .sec-title-bar { width: 3px; height: 16px; border-radius: 2px; background: var(--header-gradient); margin-right: 9px; }
+        .sec-sub { font-size: 12px; color: #999; font-weight: 500; text-decoration: none; }
+
+        /* Package grid - 2x2 */
+        .pkg-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 12px; padding: 0 20px; margin-bottom: 24px;
         }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .pkg-tile {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 16px 14px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.04);
+            cursor: pointer; transition: transform 0.2s;
+            text-decoration: none; color: inherit;
+            display: flex; flex-direction: column;
+            position: relative;
+            border: 2px solid transparent;
+            overflow: hidden;
         }
-        
-        .section-title a {
-            font-size: 14px;
-            color: #1890ff;
-            text-decoration: none;
+        .pkg-tile::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.06;
         }
-        
-        .package-card {
-            background-color: #fafafa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        .pkg-tile.gold::before { background: linear-gradient(135deg, #F7D794, #E8B86D); }
+        .pkg-tile.platinum::before { background: linear-gradient(135deg, #B8C9DB, #8BA4BC); }
+        .pkg-tile.diamond::before { background: linear-gradient(135deg, #C4B5D6, #9B88BF); }
+        .pkg-tile.yearly::before { background: linear-gradient(135deg, #F9C4A8, #E88A6D); }
+        .pkg-tile:active { transform: scale(0.97); }
+        .pkg-tile.current { border-color: var(--primary); box-shadow: 0 4px 18px rgba(232,89,60,0.12); }
+
+        .pkg-tile-badge {
+            position: absolute; top: 10px; right: 10px;
+            font-size: 9px; font-weight: 700;
+            padding: 2px 7px; border-radius: 5px;
+            z-index: 2;
+        }
+        .pkg-tile-badge.current { background: var(--primary); color: #fff; }
+        .pkg-tile-badge.hot { background: var(--badge-bg); color: var(--primary); }
+
+        .pkg-tile-decoration {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+        .pkg-tile-decoration.gold { background: linear-gradient(135deg, #F7D794, #E8B86D); }
+        .pkg-tile-decoration.platinum { background: linear-gradient(135deg, #B8C9DB, #8BA4BC); }
+        .pkg-tile-decoration.diamond { background: linear-gradient(135deg, #C4B5D6, #9B88BF); }
+        .pkg-tile-decoration.yearly { background: linear-gradient(135deg, #F9C4A8, #E88A6D); }
+
+        .pkg-tile-name { font-size: 15px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 2px; }
+        .pkg-tile-perks { font-size: 10px; color: #aaa; margin-bottom: 12px; line-height: 1.4; }
+        .pkg-tile-price { font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.03em; }
+        .pkg-tile-price.current-color { color: var(--primary); }
+        .pkg-tile-unit { font-size: 10px; font-weight: 500; color: #aaa; }
+
+        .pkg-tile-cta {
+            margin-top: 12px;
+            padding: 8px 0;
+            border: none; border-radius: 10px;
+            font-size: 12px; font-weight: 600;
+            cursor: pointer; letter-spacing: 0.02em;
+            width: 100%; text-align: center;
+        }
+        .cta-solid { background: var(--primary); color: #fff; }
+        .cta-outline { background: none; border: 1.5px solid var(--primary); color: var(--primary); }
+        .cta-ghost { background: var(--badge-bg); color: var(--primary); }
+
+        /* Member summary card */
+        .member-summary {
+            margin: 0 20px 20px;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .member-summary-hd {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 12px;
+        }
+        .ms-avatar {
+            width: 36px; height: 36px; border-radius: 11px;
+            background: var(--header-gradient);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; position: relative;
+        }
+        .ms-avatar svg { width: 18px; height: 18px; }
+        .ms-avatar .live-dot {
+            position: absolute; bottom: -1px; right: -1px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #4CAF50; border: 2px solid var(--surface);
+        }
+        .ms-info { flex: 1; }
+        .ms-tier { font-size: 14px; font-weight: 700; margin-bottom: 1px; }
+        .ms-expire { font-size: 10px; color: #aaa; }
+        .ms-action {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 12px; color: var(--primary); font-weight: 600;
             cursor: pointer;
         }
-        
-        .package-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-        
-        .package-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .package-name {
-            font-size: 16px;
-            font-weight: 500;
-        }
-        
-        .package-status {
-            font-size: 12px;
-            padding: 3px 8px;
-            border-radius: 10px;
-            background-color: #e6f7ff;
-            color: #1890ff;
-        }
-        
-        .package-info {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .package-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .package-price {
-            font-size: 18px;
-            font-weight: 500;
-            color: #ff4d4f;
-        }
-        
-        .package-price span {
-            font-size: 12px;
-            color: #999;
-            text-decoration: line-through;
-            margin-left: 5px;
-        }
-        
-        .btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background-color: #1890ff;
-            color: #fff;
-        }
-        
-        .btn-primary:hover {
-            background-color: #40a9ff;
-        }
-        
-        .btn-success {
-            background-color: #52c41a;
-            color: #fff;
-        }
-        
-        .btn-success:hover {
-            background-color: #73d13d;
-        }
-        
-        .btn-disabled {
-            background-color: #d9d9d9;
-            color: #999;
-            cursor: not-allowed;
-        }
-        
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            border-top: 1px solid #e8e8e8;
-            padding: 10px 20px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .nav-tabs {
-            display: flex;
-            justify-content: space-around;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .nav-item.active {
-            color: #1890ff;
-        }
-        
-        .nav-item span {
-            font-size: 12px;
-            margin-top: 5px;
-        }
+        .ms-action svg { width: 14px; height: 14px; }
+        .ms-stats { display: flex; gap: 0; background: var(--bg); border-radius: 10px; overflow: hidden; }
+        .ms-stat { flex: 1; text-align: center; padding: 10px 6px; position: relative; }
+        .ms-stat + .ms-stat::before { content:''; position: absolute; left:0; top:25%; height:50%; width:1px; background: rgba(0,0,0,0.06); }
+        .ms-stat-num { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; }
+        .ms-stat-num.hl { color: var(--primary); }
+        .ms-stat-label { font-size: 9px; color: #aaa; font-weight: 500; margin-top: 1px; }
+
+        /* TabBar */
+        .tabbar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:400px; background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-top:1px solid rgba(0,0,0,0.04); display:flex; justify-content:space-around; padding:8px 0 22px; z-index:100; }
+        .tab-item { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; text-decoration:none; padding:4px 20px; }
+        .tab-item svg { width:24px; height:24px; }
+        .tab-label { font-size:10px; font-weight:500; }
+        .tab-item.active svg { color:var(--primary); }
+        .tab-item.active .tab-label { color:var(--primary); font-weight:600; }
+        .tab-item:not(.active) svg { color:#BBB; }
+        .tab-item:not(.active) .tab-label { color:#BBB; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>会员商城</h1>
-        </div>
-        
-        <div class="content">
-            <!-- 我的订购 -->
-            <div class="section">
-                <div class="section-title">
-                    <span>我的订购</span>
-                </div>
-                
-                <div class="package-card" onclick="window.location.href='benefit-detail.html'">
-                    <div class="package-header">
-                        <div class="package-name">示例会员</div>
-                        <div class="package-status">已生效</div>
-                    </div>
-                    <div class="package-info">有效期至：2026-XX-XX</div>
-                    <div class="package-actions">
-                        <div class="package-price">¥XX.X/月</div>
-                        <button class="btn btn-success">领取权益</button>
-                    </div>
-                </div>
+        <div class="hdr">
+            <div class="hdr-brand">
+                <div class="hdr-logo"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.7l-4.9 2.5.9-5.5-4-3.9 5.5-.8z"/></svg></div>
+                <div class="hdr-name">会员商城</div>
             </div>
-            
-            <!-- 更多商品 -->
-            <div class="section">
-                <div class="section-title">
-                    <span>更多商品</span>
-                </div>
-                
-                <div class="package-card" onclick="window.location.href='package-detail.html'">
-                    <div class="package-header">
-                        <div class="package-name">示例会员1</div>
-                    </div>
-                    <div class="package-info">享受多项专属权益，定期更新</div>
-                    <div class="package-actions">
-                        <div class="package-price">¥XX.X/月 <span>¥XX.X</span></div>
-                        <button class="btn btn-primary">立即订购</button>
-                    </div>
-                </div>
-                
-                <div class="package-card" onclick="window.location.href='package-detail.html'">
-                    <div class="package-header">
-                        <div class="package-name">示例会员2</div>
-                    </div>
-                    <div class="package-info">享受多项专属权益，定期更新</div>
-                    <div class="package-actions">
-                        <div class="package-price">¥XX.X/月 <span>¥XX.X</span></div>
-                        <button class="btn btn-primary">立即订购</button>
-                    </div>
-                </div>
-                
-                <div class="package-card" onclick="window.location.href='package-detail.html'">
-                    <div class="package-header">
-                        <div class="package-name">示例会员3</div>
-                    </div>
-                    <div class="package-info">享受多项专属权益，定期更新</div>
-                    <div class="package-actions">
-                        <div class="package-price">¥XX.X/月 <span>¥XX.X</span></div>
-                        <button class="btn btn-primary">立即订购</button>
-                    </div>
-                </div>
+            <div class="hdr-actions">
+                <div class="hdr-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+                <div class="hdr-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
             </div>
         </div>
-        
-        <div class="footer">
-            <div class="nav-tabs">
-                <div class="nav-item active">
-                    <span>首页</span>
+
+        <div class="page-title-area">
+            <div class="page-title">尊贵用户，你好</div>
+            <div class="page-subtitle">解锁专属权益，购物更省心</div>
+        </div>
+
+        <div class="member-summary">
+            <div class="member-summary-hd">
+                <div class="ms-avatar">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.5"><path d="M10 3l2.5 5 5.5.8-4 3.9.9 5.5L10 15.7l-4.9 2.5.9-5.5-4-3.9 5.5-.8z"/></svg>
+                    <div class="live-dot"></div>
                 </div>
-                <div class="nav-item" onclick="window.location.href='profile.html'">
-                    <span>个人中心</span>
+                <div class="ms-info">
+                    <div class="ms-tier">黄金会员</div>
+                    <div class="ms-expire">有效期至 2026-02-08</div>
+                </div>
+                <div class="ms-action" onclick="event.stopPropagation(); window.location.href='benefit-detail.html'">
+                    <span>查看权益</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
             </div>
+            <div class="ms-stats">
+                <div class="ms-stat"><div class="ms-stat-num">10+</div><div class="ms-stat-label">专属权益</div></div>
+                <div class="ms-stat"><div class="ms-stat-num">3</div><div class="ms-stat-label">待领取</div></div>
+                <div class="ms-stat"><div class="ms-stat-num hl">¥60</div><div class="ms-stat-label">累计节省</div></div>
+            </div>
+        </div>
+
+        <div class="sec-hd">
+            <div class="sec-title"><div class="sec-title-bar"></div>会员套餐</div>
+            <a class="sec-sub" href="package-detail.html">查看全部</a>
+        </div>
+
+        <div class="pkg-grid">
+            <div class="pkg-tile current gold" onclick="window.location.href='package-detail.html'">
+                <div class="pkg-tile-decoration gold"></div>
+                <div class="pkg-tile-badge current">当前</div>
+                <div class="pkg-tile-name">黄金会员</div>
+                <div class="pkg-tile-perks">10+权益 · 折扣 · 包邮</div>
+                <div><span class="pkg-tile-price">¥19.9</span><span class="pkg-tile-unit">/月</span></div>
+                <button class="pkg-tile-cta cta-ghost" onclick="window.location.href='benefit-detail.html'">管理订阅</button>
+            </div>
+
+            <div class="pkg-tile platinum" onclick="window.location.href='package-detail.html'">
+                <div class="pkg-tile-decoration platinum"></div>
+                <div class="pkg-tile-badge hot">推荐</div>
+                <div class="pkg-tile-name">铂金会员</div>
+                <div class="pkg-tile-perks">20+权益 · 试用 · 积分加倍</div>
+                <div><span class="pkg-tile-price">¥29.9</span><span class="pkg-tile-unit">/月</span></div>
+                <button class="pkg-tile-cta cta-solid">了解详情</button>
+            </div>
+
+            <div class="pkg-tile diamond" onclick="window.location.href='package-detail.html'">
+                <div class="pkg-tile-decoration diamond"></div>
+                <div class="pkg-tile-name">钻石会员</div>
+                <div class="pkg-tile-perks">30+权益 · 专属顾问 · 生日礼</div>
+                <div><span class="pkg-tile-price">¥39.9</span><span class="pkg-tile-unit">/月</span></div>
+                <button class="pkg-tile-cta cta-solid">了解详情</button>
+            </div>
+
+            <div class="pkg-tile yearly" onclick="window.location.href='package-detail.html'">
+                <div class="pkg-tile-decoration yearly"></div>
+                <div class="pkg-tile-name">年度套餐</div>
+                <div class="pkg-tile-perks">全年权益 · 省¥100+</div>
+                <div><span class="pkg-tile-price">¥199</span><span class="pkg-tile-unit">/年</span></div>
+                <button class="pkg-tile-cta cta-outline">了解详情</button>
+            </div>
+        </div>
+
+        <div class="tabbar">
+            <div class="tab-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z"/><path d="M9 21v-7h6v7"/></svg><span class="tab-label">首页</span></div>
+            <div class="tab-item" onclick="window.location.href='orders.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18"/></svg><span class="tab-label">订单</span></div>
+            <div class="tab-item" onclick="window.location.href='profile.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4.5"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span class="tab-label">我的</span></div>
         </div>
     </div>
 </body>

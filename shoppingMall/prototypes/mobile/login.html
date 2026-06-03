@@ -11,33 +11,58 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-color: #E8593C;
+            --primary-light: #F5925E;
+            --primary-dark: #D64525;
+            --header-gradient: linear-gradient(145deg, #D64525 0%, #E8593C 45%, #F5925E 100%);
+            --bg-color: #FFF6F2;
+            --surface: #FFFFFF;
+            --badge-bg: rgba(232,89,60,0.1);
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            background: linear-gradient(180deg, var(--bg-color) 0%, #fff 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
         }
         
         .container {
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            min-height: 100vh;
+            padding-top: 60px;
         }
         
         .logo {
             text-align: center;
-            margin-bottom: 40px;
-            padding-top: 60px;
+            margin-bottom: 50px;
         }
         
         .logo h1 {
-            font-size: 24px;
-            color: #1890ff;
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
         
         .login-form {
-            margin-bottom: 30px;
+            background-color: #fff;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
         
         .form-group {
@@ -48,47 +73,88 @@
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
         
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #d9d9d9;
-            border-radius: 4px;
+            padding: 14px 16px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
             font-size: 16px;
+            transition: all 0.2s ease;
+            background-color: #fff;
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: #1890ff;
-            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(232,89,60,0.15);
+        }
+        
+        .form-group input::placeholder {
+            color: var(--text-light);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .get-code-btn {
+            margin-top: 25px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #F8B4C0 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(233, 93, 122, 0.3);
+        }
+        
+        .get-code-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(233, 93, 122, 0.4);
         }
         
         .login-btn {
             width: 100%;
-            padding: 14px;
-            background-color: #1890ff;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(233, 93, 122, 0.3);
         }
         
         .login-btn:hover {
-            background-color: #40a9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 93, 122, 0.4);
         }
         
         .third-party-login {
             text-align: center;
+            margin-top: 40px;
         }
         
         .third-party-login h3 {
             font-size: 14px;
-            color: #999;
-            margin-bottom: 20px;
+            color: var(--text-light);
+            margin-bottom: 25px;
             position: relative;
         }
         
@@ -99,7 +165,7 @@
             top: 50%;
             width: 30%;
             height: 1px;
-            background-color: #d9d9d9;
+            background: linear-gradient(90deg, transparent, var(--secondary-color));
         }
         
         .third-party-login h3::before {
@@ -108,6 +174,7 @@
         
         .third-party-login h3::after {
             right: 0;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
         }
         
         .login-icons {
@@ -117,24 +184,43 @@
         }
         
         .login-icon {
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .login-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
         .alipay {
-            background-color: #1677ff;
+            background: linear-gradient(135deg, #1677ff 0%, #40a9ff 100%);
             color: #fff;
         }
         
         .wechat {
-            background-color: #07c160;
+            background: linear-gradient(135deg, #07c160 0%, #73d13d 100%);
             color: #fff;
+        }
+        
+        .agreement {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .agreement a {
+            color: var(--primary-color);
+            text-decoration: none;
         }
     </style>
 </head>
@@ -142,6 +228,7 @@
     <div class="container">
         <div class="logo">
             <h1>觉观商城</h1>
+            <div class="logo-subtitle">会员尊享，品质生活</div>
         </div>
         
         <div class="login-form">
@@ -150,12 +237,12 @@
                 <input type="tel" id="phone" placeholder="请输入手机号">
             </div>
             
-            <div class="form-group" style="display: flex; gap: 10px;">
-                <div style="flex: 1;">
+            <div class="form-row">
+                <div class="form-group">
                     <label for="verificationCode">验证码</label>
                     <input type="text" id="verificationCode" placeholder="请输入验证码">
                 </div>
-                <button style="margin-top: 25px; padding: 0 15px; background-color: #1890ff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">获取验证码</button>
+                <button class="get-code-btn">获取验证码</button>
             </div>
             
             <button class="login-btn" onclick="window.location.href='index.html'">登录</button>
@@ -171,6 +258,10 @@
                     <span>微</span>
                 </div>
             </div>
+        </div>
+        
+        <div class="agreement">
+            登录即表示同意 <a href="#">《用户协议》</a> 和 <a href="#">《隐私政策》</a>
         </div>
     </div>
 </body>

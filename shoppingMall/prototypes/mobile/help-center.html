@@ -11,173 +11,327 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-color: #E8593C;
+            --bg-color: #FFF6F2;
+            --surface: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
         }
         
         .container {
             max-width: 400px;
             margin: 0 auto;
-            background-color: #fff;
-            min-height: 100vh;
+            background: var(--bg-color);
+            padding-bottom: 88px;
         }
         
         .header {
             padding: 20px;
-            background-color: #1890ff;
-            color: #fff;
+            background: #fff;
             display: flex;
             align-items: center;
-            position: relative;
+            border-bottom: 1px solid #f0f0f0;
         }
         
         .back-btn {
-            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            margin-right: 20px;
+            margin-right: 10px;
         }
+        .back-btn svg { width: 16px; height: 16px; color: #666; }
         
         .header-title {
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 600;
+            color: #333;
         }
         
         .content {
             padding: 20px;
-            margin-bottom: 80px;
         }
         
         .help-section {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         
         .section-title {
             font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #333;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            margin-right: 10px;
         }
         
         .contact-info {
-            background-color: #fafafa;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            padding: 12px 0;
+        }
+        
+        .contact-item:first-child {
+            padding-top: 0;
         }
         
         .contact-item:last-child {
-            margin-bottom: 0;
+            padding-bottom: 0;
         }
         
-        .contact-label {
-            font-size: 14px;
-            color: #666;
-            width: 80px;
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(232,89,60,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
         }
+        .contact-icon svg { width: 18px; height: 18px; color: var(--primary-color); }
         
-        .contact-value {
-            font-size: 16px;
-            color: #333;
+        .contact-content {
             flex: 1;
         }
         
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            border-top: 1px solid #e8e8e8;
-            padding: 15px 20px;
-            max-width: 400px;
-            margin: 0 auto;
+        .contact-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 2px;
         }
         
-        .nav-tabs {
-            display: flex;
-            justify-content: space-around;
+        .contact-value {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
         }
         
-        .nav-item {
+        .faq-list {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            gap: 12px;
+        }
+        
+        .faq-item {
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px;
             cursor: pointer;
-            color: #666;
+            transition: all 0.2s ease;
         }
         
-        .nav-item.active {
-            color: #1890ff;
+        .faq-item:hover {
+            background: #fafafa;
         }
         
-        .nav-item span {
-            font-size: 12px;
-            margin-top: 5px;
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
         }
+        
+        .faq-question-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .faq-arrow {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .faq-arrow svg {
+            width: 14px;
+            height: 14px;
+            color: var(--text-light);
+        }
+        
+        .faq-item.expanded .faq-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px dashed #f0f0f0;
+            display: none;
+        }
+        
+        .faq-item.expanded .faq-answer {
+            display: block;
+        }
+        
+        .tabbar { 
+            position:fixed; 
+            bottom:0; 
+            left:50%; 
+            transform:translateX(-50%); 
+            width:100%; 
+            max-width:400px; 
+            background:rgba(255,255,255,0.95); 
+            backdrop-filter:blur(12px); 
+            -webkit-backdrop-filter:blur(12px); 
+            border-top:1px solid rgba(0,0,0,0.04); 
+            display:flex; 
+            justify-content:space-around; 
+            padding:8px 0 22px; 
+            z-index:100; 
+        }
+        .tab-item { 
+            display:flex; 
+            flex-direction:column; 
+            align-items:center; 
+            gap:3px; 
+            cursor:pointer; 
+            text-decoration:none; 
+            padding:4px 20px; 
+        }
+        .tab-item svg { width:24px; height:24px; }
+        .tab-label { font-size:10px; font-weight:500; }
+        .tab-item.active svg { color:var(--primary-color); }
+        .tab-item.active .tab-label { color:var(--primary-color); font-weight:600; }
+        .tab-item:not(.active) svg { color:#BBB; }
+        .tab-item:not(.active) .tab-label { color:#BBB; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
         <div class="header">
             <div class="back-btn" onclick="window.location.href='profile.html'">
-                <span>←</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 19l-7-7 7-7"></path>
+                </svg>
             </div>
             <div class="header-title">帮助中心</div>
         </div>
         
         <div class="content">
-            <!-- 联系我们 -->
             <div class="help-section">
                 <div class="section-title">联系我们</div>
                 <div class="contact-info">
                     <div class="contact-item">
-                        <div class="contact-label">客服电话</div>
-                        <div class="contact-value">400-808-0000</div>
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-content">
+                            <div class="contact-label">客服电话</div>
+                            <div class="contact-value">400-808-2835</div>
+                        </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-label">工作时间</div>
-                        <div class="contact-value">周一至周日 9：00-21：00</div>
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="contact-content">
+                            <div class="contact-label">工作时间</div>
+                            <div class="contact-value">周一至周日 9:00-21:00</div>
+                        </div>
                     </div>
-
                 </div>
             </div>
             
-            <!-- 常见问题 -->
             <div class="help-section">
                 <div class="section-title">常见问题</div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-label">如何领取权益？</div>
-                        <div class="contact-value">在个人中心点击"已订购"，选择对应套餐的权益进行领取。</div>
+                <div class="faq-list">
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span class="faq-question-text">如何领取权益？</span>
+                            <div class="faq-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            在个人中心点击"我的订购"，选择对应套餐的权益进行领取即可。
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-label">权益有效期多久？</div>
-                        <div class="contact-value">不同权益的有效期不同，请查看权益详情页面。</div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span class="faq-question-text">权益有效期多久？</span>
+                            <div class="faq-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            不同权益的有效期不同，请查看权益详情页面中的有效期信息。
+                        </div>
                     </div>
-
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span class="faq-question-text">如何取消自动续费？</span>
+                            <div class="faq-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            在"我的订购"页面点击"取消订购"按钮，取消后会员权益在当前周期结束后停止。
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="footer">
-            <div class="nav-tabs">
-                <div class="nav-item" onclick="window.location.href='index.html'">
-                    <span>首页</span>
-                </div>
-                <div class="nav-item active">
-                    <span>个人中心</span>
-                </div>
-            </div>
+        <div class="tabbar">
+            <div class="tab-item" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z"/><path d="M9 21v-7h6v7"/></svg><span class="tab-label">首页</span></div>
+            <div class="tab-item" onclick="window.location.href='orders.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18"/></svg><span class="tab-label">订单</span></div>
+            <div class="tab-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4.5"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span class="tab-label">我的</span></div>
         </div>
     </div>
+    
+    <script>
+        function toggleFaq(el) {
+            el.classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>

@@ -11,10 +11,23 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary-color: #E8593C;
+            --primary-light: #F5925E;
+            --primary-dark: #D64525;
+            --header-gradient: linear-gradient(145deg, #D64525 0%, #E8593C 45%, #F5925E 100%);
+            --bg-color: #FFF6F2;
+            --surface: #FFFFFF;
+            --badge-bg: rgba(232,89,60,0.1);
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
         }
         
         .container {
@@ -26,219 +39,160 @@
         
         .header {
             padding: 20px;
-            background-color: #1890ff;
+            background: var(--header-gradient);
             color: #fff;
             display: flex;
             align-items: center;
-            position: relative;
+            border-radius: 0 0 20px 20px;
         }
         
         .back-btn {
-            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            margin-right: 20px;
+            margin-right: 10px;
         }
+        .back-btn svg { width: 16px; height: 16px; color: #666; }
         
         .header-title {
             font-size: 18px;
-            font-weight: 500;
-        }
-        
-        .header-right {
-            position: absolute;
-            right: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .share-btn, .more-btn {
-            font-size: 20px;
-            cursor: pointer;
-            margin-left: 15px;
-        }
-        
-        .user-info {
-            padding: 15px 20px;
-            background-color: #1890ff;
-            color: #fff;
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-right: 15px;
-        }
-        
-        .user-detail {
-            flex: 1;
-        }
-        
-        .user-phone {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .order-info {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .order-number {
-            color: #fff;
+            font-weight: 600;
         }
         
         .content {
-            padding: 20px;
-            margin-bottom: 80px;
+            padding: 25px 20px;
+            padding-bottom: 100px;
         }
         
         .benefit-header {
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 25px;
         }
         
         .benefit-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background-color: #1890ff;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 15px;
+            font-size: 44px;
+            margin: 0 auto 18px;
             color: #fff;
+            box-shadow: 0 8px 20px rgba(233, 93, 122, 0.35);
         }
         
         .benefit-title {
-            font-size: 20px;
-            font-weight: 500;
+            font-size: 22px;
+            font-weight: 600;
             margin-bottom: 10px;
+            color: var(--text-primary);
         }
         
         .benefit-subtitle {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
         }
         
-        .benefit-status {
-            display: inline-block;
-            font-size: 14px;
-            padding: 6px 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
         
-        .status-pending {
-            background-color: #fff2e8;
-            color: #fa8c16;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: #fff;
+            box-shadow: 0 5px 16px rgba(233, 93, 122, 0.35);
         }
         
-        .status-available {
-            background-color: #f6ffed;
-            color: #52c41a;
-        }
-        
-        .status-used {
-            background-color: #f5f5f5;
-            color: #8c8c8c;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(233, 93, 122, 0.45);
         }
         
         .benefit-detail-card {
-            background-color: #fafafa;
-            border-radius: 8px;
-            padding: 15px;
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(233, 93, 122, 0.08);
+            border: 1px solid var(--secondary-color);
         }
         
         .card-title {
             font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 10px;
-            color: #333;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            margin-right: 8px;
         }
         
         .benefit-description {
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 15px;
         }
         
         .benefit-meta {
             font-size: 13px;
-            color: #999;
+            color: var(--text-light);
             margin-bottom: 8px;
         }
         
         .benefit-value {
-            font-size: 16px;
-            font-weight: 500;
-            color: #fa8c16;
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
         }
         
         .use-instructions {
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .instruction-item {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 8px;
-            padding-left: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            padding-left: 20px;
             position: relative;
+            line-height: 1.5;
         }
         
         .instruction-item:before {
-            content: "•";
+            content: '';
             position: absolute;
             left: 0;
-            color: #1890ff;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-        
-        .btn-primary {
-            background-color: #1890ff;
-            color: #fff;
-        }
-        
-        .btn-primary:hover {
-            background-color: #40a9ff;
-        }
-        
-        .btn-success {
-            background-color: #52c41a;
-            color: #fff;
-        }
-        
-        .btn-success:hover {
-            background-color: #73d13d;
-        }
-        
-        .btn-disabled {
-            background-color: #d9d9d9;
-            color: #999;
-            cursor: not-allowed;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
         }
         
         .footer {
@@ -247,10 +201,11 @@
             left: 0;
             right: 0;
             background-color: #fff;
-            border-top: 1px solid #e8e8e8;
-            padding: 15px 20px;
+            border-top: 1px solid var(--secondary-color);
+            padding: 12px 20px;
             max-width: 400px;
             margin: 0 auto;
+            box-shadow: 0 -2px 10px rgba(233, 93, 122, 0.05);
         }
         
         .nav-tabs {
@@ -263,16 +218,24 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            color: #666;
+            color: var(--text-secondary);
+            padding: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
         
         .nav-item.active {
-            color: #1890ff;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
         }
         
         .nav-item span {
             font-size: 12px;
-            margin-top: 5px;
+            margin-top: 4px;
+        }
+        
+        .nav-icon {
+            font-size: 18px;
         }
     </style>
 </head>
@@ -280,91 +243,68 @@
     <div class="container">
         <div class="header">
             <div class="back-btn" onclick="window.location.href='benefit-detail.html'">
-                <span>←</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 19l-7-7 7-7"></path>
+                </svg>
             </div>
             <div class="header-title">权益详情</div>
-            <div class="header-right">
-            </div>
         </div>
         
-
-        
         <div class="content">
-            <!-- 权益头部信息 -->
             <div class="benefit-header">
                 <div class="benefit-icon">🍔</div>
                 <div class="benefit-title">麦当劳优惠券</div>
                 <div class="benefit-subtitle">满50减20优惠券</div>
             </div>
             
-            <!-- 操作按钮 -->
-            <div class="action-button-container">
-                <button class="btn btn-primary" onclick="claimBenefit()">立即领取</button>
-            </div>
+            <button class="btn btn-primary" onclick="claimBenefit()">立即领取</button>
             
-            <!-- 权益详细信息 -->
             <div class="benefit-detail-card">
                 <div class="card-title">权益详情</div>
                 <div class="benefit-value">价值：¥20</div>
                 <div class="benefit-description">
                     凭此券在全国麦当劳门店消费满50元可立减20元，适用于堂食、外带和外送服务。
                 </div>
-                <div class="benefit-meta">有效期：2025-12-31</div>
+                <div class="benefit-meta">有效期：2026-12-31</div>
                 <div class="benefit-meta">适用范围：全国麦当劳门店</div>
                 <div class="benefit-meta">使用次数：1次</div>
             </div>
             
-            <!-- 使用说明 -->
             <div class="benefit-detail-card">
                 <div class="card-title">使用说明</div>
                 <div class="use-instructions">
-                    <div class="instruction-item">1. 领取后优惠券将存入您的账户</div>
-                    <div class="instruction-item">2. 消费时出示优惠券二维码即可使用</div>
-                    <div class="instruction-item">3. 每笔订单限用一张优惠券</div>
-                    <div class="instruction-item">4. 不可与其他优惠活动叠加使用</div>
-                    <div class="instruction-item">5. 过期未使用的优惠券将自动失效</div>
+                    <div class="instruction-item">领取后优惠券将存入您的账户</div>
+                    <div class="instruction-item">消费时出示优惠券二维码即可使用</div>
+                    <div class="instruction-item">每笔订单限用一张优惠券</div>
+                    <div class="instruction-item">不可与其他优惠活动叠加使用</div>
+                    <div class="instruction-item">过期未使用的优惠券将自动失效</div>
                 </div>
             </div>
-            
-
         </div>
         
         <div class="footer">
             <div class="nav-tabs">
                 <div class="nav-item" onclick="window.location.href='index.html'">
+                    <span class="nav-icon">🏠</span>
                     <span>首页</span>
                 </div>
+                <div class="nav-item" onclick="window.location.href='orders.html'">
+                    <span class="nav-icon">📋</span>
+                    <span>订单</span>
+                </div>
                 <div class="nav-item active">
-                    <span>个人中心</span>
+                    <span class="nav-icon">👤</span>
+                    <span>我的</span>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        // 模拟根据URL参数获取权益ID并加载不同权益内容
-        function loadBenefitDetail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const benefitId = urlParams.get('benefitId');
-            
-            // 根据权益ID加载不同内容（模拟）
-            // 在实际应用中，这里会根据benefitId从服务器获取数据
-            console.log('加载权益ID:', benefitId);
-        }
-        
-        // 模拟领取权益
         function claimBenefit() {
-            // 模拟领取操作
             alert('领取成功！优惠券已存入您的账户');
-            
-            // 领取后可以跳回权益列表页
-            // window.location.href = 'benefit-detail.html';
+            window.location.href = 'benefit-detail.html';
         }
-        
-        // 页面加载时执行
-        window.onload = function() {
-            loadBenefitDetail();
-        };
     </script>
 </body>
 </html>
