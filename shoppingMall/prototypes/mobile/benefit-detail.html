@@ -220,6 +220,25 @@
             font-size: 12px;
         }
         
+        .btn-cancel-subscription {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-cancel-subscription:hover {
+            background: #f8f8f8;
+            color: #666;
+            border-color: #ccc;
+        }
+        
         .tabbar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:400px; background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-top:1px solid rgba(0,0,0,0.04); display:flex; justify-content:space-around; padding:8px 0 22px; z-index:100; }
         .tab-item { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; text-decoration:none; padding:4px 20px; }
         .tab-item svg { width:24px; height:24px; }
@@ -258,6 +277,7 @@
                     <div class="pi-stat"><div class="pi-stat-num">3</div><div class="pi-stat-label">待领取</div></div>
                     <div class="pi-stat"><div class="pi-stat-num hl">¥60</div><div class="pi-stat-label">累计节省</div></div>
                 </div>
+                <button class="btn-cancel-subscription" onclick="confirmCancel()">退订会员</button>
             </div>
             
             <div class="benefit-list">
@@ -308,5 +328,14 @@
             <div class="tab-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4.5"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span class="tab-label">我的</span></div>
         </div>
     </div>
+    
+    <script>
+        function confirmCancel() {
+            if (confirm('确定要取消会员订阅吗？取消后，会员权益将在当前周期结束后停止。')) {
+                alert('退订成功！您的会员权益将在当前周期结束后停止。');
+                window.location.href = 'orders.html';
+            }
+        }
+    </script>
 </body>
 </html>

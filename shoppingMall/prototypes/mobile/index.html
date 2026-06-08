@@ -116,15 +116,20 @@
 
         .pkg-tile-cta {
             margin-top: 12px;
-            padding: 8px 0;
-            border: none; border-radius: 10px;
-            font-size: 12px; font-weight: 600;
-            cursor: pointer; letter-spacing: 0.02em;
-            width: 100%; text-align: center;
+            padding: 9px 0;
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.02em;
+            width: 100%;
+            text-align: center;
+            transition: all 0.2s ease;
         }
-        .cta-solid { background: var(--primary); color: #fff; }
-        .cta-outline { background: none; border: 1.5px solid var(--primary); color: var(--primary); }
-        .cta-ghost { background: var(--badge-bg); color: var(--primary); }
+        .cta-solid { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .cta-outline { background: #fff; border-color: var(--primary); color: var(--primary); }
+        .cta-ghost { background: var(--badge-bg); border-color: transparent; color: var(--primary); }
 
         /* Member summary card */
         .member-summary {
@@ -254,7 +259,7 @@
                 <div class="pkg-tile-name">年度套餐</div>
                 <div class="pkg-tile-perks">全年权益 · 省¥100+</div>
                 <div><span class="pkg-tile-price">¥199</span><span class="pkg-tile-unit">/年</span></div>
-                <button class="pkg-tile-cta cta-outline">了解详情</button>
+                <button class="pkg-tile-cta cta-solid">了解详情</button>
             </div>
         </div>
 

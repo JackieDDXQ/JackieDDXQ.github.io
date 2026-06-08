@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵霄系统 - 渠道推广与套餐办理平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink-black: #1a1a1a;
+            --ink-gray: #555555;
+            --ink-light: #999999;
+            --accent-brown: #8B4513;
+            --paper-bg-light: #fafafa;
+            --border-ink: #e5e5e5;
+            --divider-ink: #f0f0f0;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #ffffff;
+            color: var(--ink-black);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--divider-ink);
+        }
+        
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            color: var(--ink-gray);
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--accent-brown);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-ink);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            border-color: var(--accent-brown);
+            background-color: var(--paper-bg-light);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background-color: var(--paper-bg-light);
+            padding: 1.5rem;
+            border: 1px solid var(--border-ink);
+        }
+        
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-black);
+            margin: 0 0 1rem 0;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-card li {
+            font-size: 0.875rem;
+            color: var(--ink-gray);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--divider-ink);
+        }
+        
+        .feature-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .mock-dashboard {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-ink);
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dashboard-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-black);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1rem;
+            border: 1px solid var(--border-ink);
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink-black);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .channel-card {
+            background-color: white;
+            padding: 1.5rem;
+            border: 1px solid var(--border-ink);
+        }
+        
+        .channel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .channel-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--ink-black);
+        }
+        
+        .channel-status {
+            font-size: 0.625rem;
+            padding: 0.25rem 0.5rem;
+            background-color: #dcfce7;
+            color: #166534;
+            border-radius: 2px;
+        }
+        
+        .channel-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .channel-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--ink-black);
+            font-weight: 600;
+        }
+        
+        .channel-stat-label {
+            color: var(--ink-light);
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider-ink);
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--ink-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>灵霄系统</h1>
+            <p>渠道推广与套餐办理平台 - 管理运营商套餐与信息流推广</p>
+            <div class="nav-links">
+                <a href="../../rights-management.html">← 返回项目详情</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">核心功能模块</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>策划管理</h3>
+                    <ul>
+                        <li>管理运营商套餐信息</li>
+                        <li>套餐定价与权益配置</li>
+                        <li>有效期管理</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>渠道与推广管理</h3>
+                    <ul>
+                        <li>定义信息流渠道</li>
+                        <li>配置渠道可推广套餐</li>
+                        <li>推广效果追踪</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>办理流程</h3>
+                    <ul>
+                        <li>短信下发接口</li>
+                        <li>验证码验证</li>
+                        <li>套餐办理接口</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">系统界面预览</h2>
+            <div class="mock-dashboard">
+                <div class="dashboard-header">
+                    <span class="dashboard-title">渠道推广概览</span>
+                    <span style="font-size: 0.75rem; color: var(--ink-light);">今日数据更新中...</span>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">渠道数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">234</div>
+                        <div class="stat-label">策划套餐</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5.8万</div>
+                        <div class="stat-label">今日曝光</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">1,234</div>
+                        <div class="stat-label">今日办理</div>
+                    </div>
+                </div>
+                
+                <div class="channel-grid">
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <span class="channel-name">今日头条</span>
+                            <span class="channel-status">运行中</span>
+                        </div>
+                        <div class="channel-stats">
+                            <div>
+                                <div class="channel-stat-value">2.3万</div>
+                                <div class="channel-stat-label">曝光</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">456</div>
+                                <div class="channel-stat-label">办理</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">2.0%</div>
+                                <div class="channel-stat-label">转化率</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <span class="channel-name">抖音</span>
+                            <span class="channel-status">运行中</span>
+                        </div>
+                        <div class="channel-stats">
+                            <div>
+                                <div class="channel-stat-value">1.8万</div>
+                                <div class="channel-stat-label">曝光</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">389</div>
+                                <div class="channel-stat-label">办理</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">2.2%</div>
+                                <div class="channel-stat-label">转化率</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <span class="channel-name">微信朋友圈</span>
+                            <span class="channel-status">运行中</span>
+                        </div>
+                        <div class="channel-stats">
+                            <div>
+                                <div class="channel-stat-value">1.2万</div>
+                                <div class="channel-stat-label">曝光</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">267</div>
+                                <div class="channel-stat-label">办理</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">2.2%</div>
+                                <div class="channel-stat-label">转化率</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="channel-card">
+                        <div class="channel-header">
+                            <span class="channel-name">快手</span>
+                            <span class="channel-status">维护中</span>
+                        </div>
+                        <div class="channel-stats">
+                            <div>
+                                <div class="channel-stat-value">0</div>
+                                <div class="channel-stat-label">曝光</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">0</div>
+                                <div class="channel-stat-label">办理</div>
+                            </div>
+                            <div>
+                                <div class="channel-stat-value">-</div>
+                                <div class="channel-stat-label">转化率</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>灵霄系统原型展示 | Jackie Hou Portfolio</p>
+        </div>
+    </div>
+</body>
+</html>
