@@ -1,0 +1,13 @@
+{
+  "name": "pm-odyssey",
+  "version": "1.0.0",
+  "description": "Jackie Hou's Product Manager Portfolio",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "deploy": "gh-pages -d .",
+    "build": "echo 'No build required for static site'"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
