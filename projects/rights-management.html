@@ -386,24 +386,92 @@
 
         <div class="prototype-section">
             <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                <a href="emall/index.html" target="_blank" class="prototype-link">
-                    <span>→</span>
-                    <span>万象系统 - 实物商城</span>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+                <a href="depot/index.html" target="_blank" class="system-button" id="depot-btn">
+                    <div class="system-icon" style="background: linear-gradient(135deg, #8B4513 0%, #a0522d 100%);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; font-weight: 600;">SKU</span>
+                    </div>
+                    <span class="system-label">云仓系统</span>
                 </a>
-                <a href="emall/order-manage.html" target="_blank" class="prototype-link">
-                    <span>→</span>
-                    <span>订单管理</span>
+                <a href="omni/index.html" target="_blank" class="system-button" id="omni-btn">
+                    <div class="system-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; font-weight: 600;">STK</span>
+                    </div>
+                    <span class="system-label">万象系统</span>
                 </a>
-                <a href="emall/product-detail.html" target="_blank" class="prototype-link">
-                    <span>→</span>
-                    <span>商品详情</span>
-                </a>
-                <a href="emall/create-product.html" target="_blank" class="prototype-link">
-                    <span>→</span>
-                    <span>新建商品</span>
+                <a href="cel/index.html" target="_blank" class="system-button" id="cel-btn">
+                    <div class="system-icon" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; font-weight: 600;">PLAN</span>
+                    </div>
+                    <span class="system-label">灵霄系统</span>
                 </a>
             </div>
+            <style>
+                .system-button {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 1.5rem 2rem;
+                    background-color: white;
+                    border: 1px solid #e5e5e5;
+                    border-radius: 12px;
+                    text-decoration: none;
+                    color: #1a1a1a;
+                    transition: all 0.3s ease;
+                    min-width: 140px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                }
+                
+                .system-button:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15);
+                    border-color: #8B4513;
+                }
+                
+                .system-button:focus {
+                    outline: none;
+                    border-color: #8B4513;
+                    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+                }
+                
+                .system-button:active {
+                    transform: translateY(-2px);
+                }
+                
+                .system-icon {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    transition: transform 0.3s ease;
+                }
+                
+                .system-button:hover .system-icon {
+                    transform: scale(1.1);
+                }
+                
+                .system-label {
+                    font-size: 0.9375rem;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                }
+                
+                @media (max-width: 768px) {
+                    .system-button {
+                        min-width: 120px;
+                        padding: 1.25rem 1.5rem;
+                    }
+                    
+                    .system-icon {
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                }
+            </style>
         </div>
 
         <div class="next-project">
