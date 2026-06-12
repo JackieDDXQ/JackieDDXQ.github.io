@@ -285,6 +285,14 @@
                 gap: 1rem;
                 text-align: center;
             }
+            
+            .project-section div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .project-section div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -365,6 +373,98 @@
         <div class="project-section">
             <div class="section-header">
                 <span class="section-number">04</span>
+                <span class="section-label">ARCHITECTURE</span>
+                <span class="section-title">系统总体架构与定位</span>
+            </div>
+            <p>整个中台由三个职责分明的系统构成，各司其职，高效协同：</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">云仓系统（Depot）</h4>
+                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为商品供应链中枢，汇聚并管理来自各大供应商的商品/服务资源池，为万象提供商品来源。</p>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">万象系统（Omni）</h4>
+                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为权益管理与核销中枢，负责将云仓的商品包装成权益，进行权益的创建、配置、库存管理及面向最终用户的发放/核销，是运营商权益业务落地的核心网关。</p>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">灵霄系统（Cel）</h4>
+                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为渠道推广与套餐办理平台，负责管理各省运营商套餐，对接信息流广告渠道，提供套餐办理接口，并处理从广告曝光到用户办理的整个推广业务流程。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <span class="section-label">FUNCTIONS</span>
+                <span class="section-title">核心功能</span>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">云仓系统</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
+                        <li style="margin-bottom: 0.5rem;">• 商品库管理：聚合来自各个供应商的标准化商品</li>
+                        <li style="margin-bottom: 0.5rem;">• 商品与规格关联：商品可关联具体供应商，定义规格</li>
+                        <li>• 供应的稳定性：负责与供应商的接口对接与库存同步</li>
+                    </ul>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">万象系统</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
+                        <li style="margin-bottom: 0.5rem;">• 权益库存管理：从云仓同步商品，形成可发放的"权益库存"</li>
+                        <li style="margin-bottom: 0.5rem;">• 权益精细配置：将商品包装成具体权益，定义配置编码、权益类型等参数</li>
+                        <li>• 核销任务管理：支持创建实时生成任务和历史订单任务</li>
+                    </ul>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">灵霄系统</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
+                        <li style="margin-bottom: 0.5rem;">• 策划管理：管理全部的套餐信息</li>
+                        <li style="margin-bottom: 0.5rem;">• 渠道与推广管理：定义信息流渠道，配置不同渠道可推广的策划套餐</li>
+                        <li style="margin-bottom: 0.5rem;">• 办理流程：提供标准的短信下发、验证码验证、套餐办理接口</li>
+                        <li>• 限办策略：支持设定办理量、时间等限制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <span class="section-label">PROCESS</span>
+                <span class="section-title">核心业务流程</span>
+            </div>
+            <p>一次典型闭环流程如下：</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">01</span>
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">广告投放</h4>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">信息流渠道（如头条）在灵霄配置的推广规则下，向目标用户投放联合会员套餐广告。</p>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">02</span>
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">用户办理</h4>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">用户点击广告填写信息，渠道调用灵霄接口办理套餐。</p>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">03</span>
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">权益触发</h4>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">运营商侧确认套餐办理成功后，主动调用万象系统，触发对应权益的发放任务。</p>
+                </div>
+                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">04</span>
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">权益下发</h4>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">万象系统根据配置的规则，调用云仓系统获取具体的权益卡券，并将其发放至用户手机号，完成服务交付。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="section-header">
+                <span class="section-number">07</span>
                 <span class="section-label">RESULTS</span>
                 <span class="section-title">成果</span>
             </div>
