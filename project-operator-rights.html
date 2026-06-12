@@ -70,11 +70,20 @@
                 <div class="project-section" id="architecture">
                     <h3>系统总体架构与定位</h3>
                     <p>整个中台由三个职责分明的系统构成，各司其职，高效协同：</p>
-                    <ul>
-                        <li><strong>云仓系统（Depot）</strong>：作为商品供应链中枢，汇聚并管理来自各大供应商（如腾讯、爱奇艺等）的商品/服务资源池，为万象提供商品来源。</li>
-                        <li><strong>万象系统（Omni）</strong>：作为权益管理与核销中枢，负责将云仓的商品包装成权益（如腾讯视频月卡），进行权益的创建、配置、库存管理及面向最终用户的发放/核销，是运营商权益业务落地的核心网关。</li>
-                        <li><strong>灵霄系统（Cel）</strong>：作为渠道推广与套餐办理平台，负责管理各省运营商套餐（策划），对接信息流广告渠道，提供套餐办理接口，并处理从广告曝光到用户办理的整个推广业务流程。</li>
-                    </ul>
+                    <div class="system-grid">
+                        <div class="system-card">
+                            <h4>云仓系统（Depot）</h4>
+                            <p>作为商品供应链中枢，汇聚并管理来自各大供应商的商品/服务资源池，为万象提供商品来源。</p>
+                        </div>
+                        <div class="system-card">
+                            <h4>万象系统（Omni）</h4>
+                            <p>作为权益管理与核销中枢，负责将云仓的商品包装成权益，进行权益的创建、配置、库存管理及面向最终用户的发放/核销，是运营商权益业务落地的核心网关。</p>
+                        </div>
+                        <div class="system-card">
+                            <h4>灵霄系统（Cel）</h4>
+                            <p>作为渠道推广与套餐办理平台，负责管理各省运营商套餐，对接信息流广告渠道，提供套餐办理接口，并处理从广告曝光到用户办理的整个推广业务流程。</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="project-section" id="core-functions">
@@ -101,7 +110,7 @@
                         <div class="feature-card">
                             <h4>灵霄系统</h4>
                             <ul>
-                                <li>策划管理：管理运营商提供的套餐信息</li>
+                                <li>策划管理：管理全部的套餐信息</li>
                                 <li>渠道与推广管理：定义信息流渠道，配置不同渠道可推广的策划套餐</li>
                                 <li>办理流程：提供标准的短信下发、验证码验证、套餐办理接口</li>
                                 <li>限办策略：支持设定办理量、时间等限制</li>
@@ -111,15 +120,31 @@
                     </div>
                 </div>
                 
-                <div class="project-section">
+                <div class="project-section" id="business-process">
                     <h3>核心业务流程</h3>
                     <p>一次典型闭环流程如下：</p>
-                    <ol>
-                        <li><strong>广告投放</strong>：信息流渠道（如头条）在灵霄配置的推广规则下，向目标用户投放联合会员套餐广告。</li>
-                        <li><strong>用户办理</strong>：用户点击广告填写信息，渠道调用灵霄接口办理套餐，灵霄向运营商提交并获取办理结果。</li>
-                        <li><strong>权益触发</strong>：运营商侧确认套餐办理成功后，主动调用万象系统，触发对应权益（如腾讯视频月卡）的发放任务。</li>
-                        <li><strong>权益下发</strong>：万象系统根据配置的规则，调用云仓系统获取具体的权益卡券，并将其发放至用户手机号，完成服务交付。</li>
-                    </ol>
+                    <div class="process-flow">
+                        <div class="process-step">
+                            <span class="step-number">01</span>
+                            <h4>广告投放</h4>
+                            <p>信息流渠道（如头条）在灵霄配置的推广规则下，向目标用户投放联合会员套餐广告。</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">02</span>
+                            <h4>用户办理</h4>
+                            <p>用户点击广告填写信息，渠道调用灵霄接口办理套餐。</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">03</span>
+                            <h4>权益触发</h4>
+                            <p>运营商侧确认套餐办理成功后，主动调用万象系统，触发对应权益（如腾讯视频月卡）的发放任务。</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">04</span>
+                            <h4>权益下发</h4>
+                            <p>万象系统根据配置的规则，调用云仓系统获取具体的权益卡券，并将其发放至用户手机号，完成服务交付。</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="project-section" id="product-growth">
