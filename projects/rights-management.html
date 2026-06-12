@@ -373,66 +373,97 @@
         <div class="project-section">
             <div class="section-header">
                 <span class="section-number">04</span>
-                <span class="section-label">ARCHITECTURE</span>
-                <span class="section-title">系统总体架构与定位</span>
+                <span class="section-label">SYSTEM ARCHITECTURE</span>
+                <span class="section-title">系统架构与核心功能</span>
             </div>
-            <p>整个中台由三个职责分明的系统构成，各司其职，高效协同：</p>
+            <p>整个中台由三个职责分明、高效协同的系统构成，形成完整的权益运营闭环：</p>
             
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">云仓系统（Depot）</h4>
-                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为商品供应链中枢，汇聚并管理来自各大供应商的商品/服务资源池，为万象提供商品来源。</p>
+                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: all 0.3s ease; cursor: default;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--accent-brown); padding: 0.375rem 0.75rem; background-color: var(--paper-bg); border: 1px solid var(--border-ink);">DEPOT</span>
+                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">云仓系统</h4>
+                    </div>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为商品供应链中枢，汇聚并管理来自各大供应商的商品/服务资源池，为万象提供商品来源。</p>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            商品库管理：聚合标准化商品
+                        </li>
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            商品与规格关联：定义供应商与规格
+                        </li>
+                        <li style="padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            供应稳定性：接口对接与库存同步
+                        </li>
+                    </ul>
                 </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">万象系统（Omni）</h4>
-                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为权益管理与核销中枢，负责将云仓的商品包装成权益，进行权益的创建、配置、库存管理及面向最终用户的发放/核销，是运营商权益业务落地的核心网关。</p>
+                
+                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: all 0.3s ease; cursor: default;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--accent-brown); padding: 0.375rem 0.75rem; background-color: var(--paper-bg); border: 1px solid var(--border-ink);">OMNI</span>
+                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">万象系统</h4>
+                    </div>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为权益管理与核销中枢，负责将云仓商品包装成权益，进行配置、库存管理及发放核销，是权益业务落地的核心网关。</p>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            权益库存管理：从云仓同步形成权益库存
+                        </li>
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            权益精细配置：定义编码、类型等参数
+                        </li>
+                        <li style="padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            核销任务管理：支持实时与历史订单任务
+                        </li>
+                    </ul>
                 </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">灵霄系统（Cel）</h4>
-                    <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.6;">作为渠道推广与套餐办理平台，负责管理各省运营商套餐，对接信息流广告渠道，提供套餐办理接口，并处理从广告曝光到用户办理的整个推广业务流程。</p>
+                
+                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: all 0.3s ease; cursor: default;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--accent-brown); padding: 0.375rem 0.75rem; background-color: var(--paper-bg); border: 1px solid var(--border-ink);">CEL</span>
+                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">灵霄系统</h4>
+                    </div>
+                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为渠道推广与套餐办理平台，管理运营商套餐，对接信息流渠道，提供办理接口，处理推广业务流程。</p>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
+                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            策划管理：管理全部套餐信息
+                        </li>
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            渠道推广：配置渠道可推广套餐
+                        </li>
+                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            办理流程：短信下发、验证码验证
+                        </li>
+                        <li style="padding-left: 1rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
+                            限办策略：设定办理量与时间限制
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            
+            <div style="margin-top: 3rem; padding: 1.5rem; background-color: var(--paper-bg); border-left: 3px solid var(--accent-brown);">
+                <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; margin: 0;">
+                    <strong style="color: var(--ink-black);">系统协作关系：</strong>
+                    云仓系统作为供应链基础层，为万象系统提供商品来源；万象系统作为权益中枢，将商品转化为可发放的权益；灵霄系统作为推广前端，触达用户并触发权益发放流程。三者形成"商品供给 → 权益配置 → 用户触达"的完整价值链。
+                </p>
             </div>
         </div>
 
         <div class="project-section">
             <div class="section-header">
                 <span class="section-number">05</span>
-                <span class="section-label">FUNCTIONS</span>
-                <span class="section-title">核心功能</span>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">云仓系统</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
-                        <li style="margin-bottom: 0.5rem;">• 商品库管理：聚合来自各个供应商的标准化商品</li>
-                        <li style="margin-bottom: 0.5rem;">• 商品与规格关联：商品可关联具体供应商，定义规格</li>
-                        <li>• 供应的稳定性：负责与供应商的接口对接与库存同步</li>
-                    </ul>
-                </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">万象系统</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
-                        <li style="margin-bottom: 0.5rem;">• 权益库存管理：从云仓同步商品，形成可发放的"权益库存"</li>
-                        <li style="margin-bottom: 0.5rem;">• 权益精细配置：将商品包装成具体权益，定义配置编码、权益类型等参数</li>
-                        <li>• 核销任务管理：支持创建实时生成任务和历史订单任务</li>
-                    </ul>
-                </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink);">
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1rem;">灵霄系统</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">
-                        <li style="margin-bottom: 0.5rem;">• 策划管理：管理全部的套餐信息</li>
-                        <li style="margin-bottom: 0.5rem;">• 渠道与推广管理：定义信息流渠道，配置不同渠道可推广的策划套餐</li>
-                        <li style="margin-bottom: 0.5rem;">• 办理流程：提供标准的短信下发、验证码验证、套餐办理接口</li>
-                        <li>• 限办策略：支持设定办理量、时间等限制</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-section">
-            <div class="section-header">
-                <span class="section-number">06</span>
                 <span class="section-label">PROCESS</span>
                 <span class="section-title">核心业务流程</span>
             </div>
@@ -464,7 +495,7 @@
 
         <div class="project-section">
             <div class="section-header">
-                <span class="section-number">07</span>
+                <span class="section-number">06</span>
                 <span class="section-label">RESULTS</span>
                 <span class="section-title">成果</span>
             </div>
