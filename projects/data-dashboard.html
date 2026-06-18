@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>权益运营中台 - 数据看板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F4F5F9;--surface:#FFFFFF;--surface-alt:#F8FAFC;
+  --border:#E5E7EE;--border-light:#F0F1F5;
+  --text-1:#101828;--text-2:#4A5568;--text-3:#94A3B8;--text-4:#CBD5E1;
+  --blue:#2563EB;--blue-bg:#EFF6FF;--blue-light:#93C5FD;
+  --green:#059669;--green-bg:#ECFDF5;--green-light:#6EE7B7;
+  --red:#DC2626;--red-bg:#FEF2F2;--red-light:#FCA5A5;
+  --amber:#D97706;--amber-bg:#FFFBEB;--amber-light:#FCD34D;
+  --indigo:#6366F1;--indigo-bg:#EEF2FF;
+  --teal:#0D9488;--violet:#7C3AED;--violet-bg:#F5F3FF;
+  --shadow-s:0 1px 2px rgba(0,0,0,.04);
+  --shadow-m:0 2px 8px rgba(0,0,0,.05);
+  --r:10px;--r-sm:6px;
+  --sans:'Figtree',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  --display:'Syne','Figtree',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',monospace;
+}
+html{font-size:14px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--bg);color:var(--text-1);line-height:1.5;min-height:100vh}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--text-4);border-radius:3px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes growBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growBarV{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes drawLine{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
+
+.dashboard{max-width:1440px;margin:0 auto;padding:0 32px 48px}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px;position:sticky;top:0;background:var(--bg);z-index:50}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo{width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:14px;color:#fff;background:linear-gradient(135deg,#2563EB,#7C3AED);letter-spacing:-.5px}
+.header-title{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.3px}
+.header-sub{font-size:12px;color:var(--text-3);margin-top:1px}
+.back-link{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:500;color:var(--text-2);background:var(--surface);border:1px solid var(--border);text-decoration:none;transition:all .15s}
+.back-link:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* CHART CONTROLS (inside panel) */
+.chart-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 2px}
+.chart-controls-left{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-2)}
+.chart-controls-left svg{width:14px;height:14px;color:var(--text-3);cursor:pointer;transition:color .15s;flex-shrink:0}
+.chart-controls-left svg:hover{color:var(--blue)}
+.chart-date{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--r-sm);font-size:12px;color:var(--text-2);cursor:pointer;transition:all .15s}
+.chart-date:hover{border-color:var(--blue);background:var(--blue-bg)}
+.chart-date input[type="date"],.chart-date input[type="month"]{border:none;background:none;font-family:var(--mono);font-size:11px;color:var(--text-2);outline:none;width:82px;cursor:pointer;padding:0;appearance:none}
+.chart-date input[type="date"]::-webkit-calendar-picker-indicator{display:none}
+.chart-date input[type="month"]::-webkit-calendar-picker-indicator{display:none}
+.chart-date input[type="date"]:focus,.chart-date input[type="month"]:focus{color:var(--blue)}
+.chart-date .sep{color:var(--text-4);font-size:11px}
+.chart-controls-right{display:flex;align-items:center;gap:8px}
+.chart-btn{padding:4px 14px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .15s;border:1px solid var(--blue);line-height:1.6}
+.chart-btn-query{background:var(--surface);color:var(--blue)}
+.chart-btn-query:hover{background:var(--blue);color:#fff}
+.chart-btn-reset{background:var(--surface);color:var(--blue);border-color:var(--blue)}
+.chart-btn-reset:hover{background:var(--blue-bg)}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;transition:box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+.kpi-card:hover{box-shadow:var(--shadow-m);border-color:var(--text-4)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.kpi-card:nth-child(1)::before{background:var(--blue)}
+.kpi-card:nth-child(2)::before{background:var(--red-light)}
+.kpi-card:nth-child(3)::before{background:var(--amber)}
+.kpi-card:nth-child(4)::before{background:var(--green)}
+.kpi-card:nth-child(5)::before{background:var(--indigo)}
+.kpi-label{font-size:12px;font-weight:500;color:var(--text-3);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.kpi-source{font-size:10px;font-weight:600;padding:1px 6px;border-radius:8px;letter-spacing:.3px}
+.kpi-value{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.1;letter-spacing:-.5px;margin-bottom:8px}
+.kpi-value .unit{font-size:16px;font-weight:600;color:var(--text-3);margin-left:2px}
+.kpi-footer{display:flex;align-items:center;justify-content:space-between}
+.kpi-trend{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;font-family:var(--mono)}
+.kpi-trend.up{color:var(--green)}.kpi-trend.down-bad{color:var(--red)}.kpi-trend.down-good{color:var(--green)}.kpi-trend.up-bad{color:var(--red)}.kpi-trend.neutral{color:var(--text-3)}
+.kpi-trend svg{width:12px;height:12px}
+.kpi-period{font-size:11px;color:var(--text-4)}
+.sparkline-container{height:28px;margin-top:10px}
+.sparkline-container svg{width:100%;height:100%}
+
+/* GRID */
+.section-row{display:grid;gap:16px;margin-bottom:24px}
+.section-row.two-col{grid-template-columns:3fr 2fr}
+.section-row.two-col-eq{grid-template-columns:1fr 1fr}
+.section-row.three-col{grid-template-columns:1fr 1fr 1fr}
+
+/* PANEL */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:box-shadow .25s}
+.panel:hover{box-shadow:var(--shadow-s)}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.panel-title{font-weight:600;font-size:14px;color:var(--text-1);display:flex;align-items:center;gap:8px}
+.panel-title .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.panel-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;font-family:var(--mono)}
+.panel-tabs{display:flex;gap:2px;background:var(--bg);border-radius:var(--r-sm);padding:2px}
+.panel-tab{padding:4px 12px;font-size:11px;font-weight:500;color:var(--text-3);cursor:pointer;border:none;background:none;font-family:var(--sans);border-radius:4px;transition:all .15s}
+.panel-tab.active{background:var(--surface);color:var(--text-1);box-shadow:var(--shadow-s)}
+
+/* CHART */
+.chart-area{width:100%;position:relative}
+.chart-area svg{width:100%;overflow:visible}
+
+/* TABLE */
+.ch-table{width:100%}
+.ch-row{display:grid;grid-template-columns:1fr 70px 70px 70px 90px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-light);font-size:13px}
+.ch-row:last-child{border-bottom:none}
+.ch-row.head{font-weight:600;color:var(--text-3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.ch-name{display:flex;align-items:center;gap:8px;font-weight:500}
+.ch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ch-cell{font-family:var(--mono);font-size:12px;color:var(--text-2);text-align:right}
+.ch-cell.positive{color:var(--green)}.ch-cell.negative{color:var(--red)}
+.roi-bar{height:6px;border-radius:3px;transform-origin:left;animation:growBar .8s cubic-bezier(.4,0,.2,1) both}
+
+.inv-table{width:100%;border-collapse:collapse}
+.inv-table th{font-size:11px;font-weight:600;color:var(--text-3);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
+.inv-table th:not(:first-child){text-align:right}
+.inv-table td{padding:10px;font-size:13px;border-bottom:1px solid var(--border-light)}
+.inv-table td:not(:first-child){text-align:right;font-family:var(--mono);font-size:12px;color:var(--text-2)}
+.inv-table tr:last-child td{border-bottom:none}
+.inv-table tr:hover{background:var(--surface-alt)}
+.inv-product{display:flex;align-items:center;gap:8px;font-weight:500}
+.inv-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.inv-dot.safe{background:var(--green)}.inv-dot.warn{background:var(--amber)}.inv-dot.danger{background:var(--red);animation:pulse 2s ease-in-out infinite}
+.inv-status{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.inv-status.safe{background:var(--green-bg);color:var(--green)}.inv-status.warn{background:var(--amber-bg);color:var(--amber)}.inv-status.danger{background:var(--red-bg);color:var(--red)}
+
+/* RETENTION */
+.retention-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.retention-chart-area{grid-column:1/-1;border-top:1px solid var(--border-light);padding-top:18px;margin-top:4px}
+.heatmap table{width:100%;border-collapse:collapse;min-width:320px}
+.heatmap th{font-size:10px;font-weight:600;color:var(--text-3);padding:6px 4px;text-align:center;letter-spacing:.3px}
+.heatmap th:first-child{text-align:left;width:70px}
+.heatmap td{padding:6px 4px;text-align:center;font-family:var(--mono);font-size:11px;font-weight:500;border-radius:3px}
+.heatmap td:first-child{text-align:left;font-family:var(--sans);font-weight:500;font-size:12px;color:var(--text-2)}
+.prod-retention{display:flex;flex-direction:column;gap:8px}
+.prod-ret-item{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:var(--r-sm);border:1px solid var(--border-light);transition:background .15s}
+.prod-ret-item:hover{background:var(--surface-alt)}
+.prod-ret-name{font-size:12.5px;font-weight:500;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prod-ret-bar-wrap{width:100px;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;flex-shrink:0}
+.prod-ret-bar{height:100%;border-radius:3px;transition:width .6s ease-out}
+.prod-ret-val{font-family:var(--mono);font-size:13px;font-weight:600;min-width:44px;text-align:right}
+.prod-ret-trend{font-family:var(--mono);font-size:10px;min-width:40px;text-align:right}
+
+/* ALERT */
+.alert-feed{display:flex;flex-direction:column;gap:10px}
+.alert-item{display:flex;gap:10px;padding:10px 12px;border-radius:var(--r-sm);border:1px solid var(--border-light);transition:background .15s}
+.alert-item:hover{background:var(--surface-alt)}
+.alert-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.alert-icon svg{width:14px;height:14px}
+.alert-icon.critical{background:var(--red-bg);color:var(--red)}
+.alert-icon.warning{background:var(--amber-bg);color:var(--amber)}
+.alert-icon.info{background:var(--blue-bg);color:var(--blue)}
+.alert-icon.success{background:var(--green-bg);color:var(--green)}
+.alert-content{flex:1;min-width:0}
+.alert-title{font-size:12.5px;font-weight:500;color:var(--text-1);line-height:1.3;margin-bottom:2px}
+.alert-meta{font-size:11px;color:var(--text-4);display:flex;align-items:center;gap:8px}
+.alert-meta .source{font-weight:500;color:var(--text-3)}
+
+/* TOOLTIP */
+.tooltip{position:absolute;background:var(--text-1);color:#fff;padding:8px 12px;border-radius:var(--r-sm);font-size:12px;pointer-events:none;z-index:100;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;transition:opacity .15s}
+.tooltip.show{opacity:1}
+.tooltip .tt-label{color:rgba(255,255,255,.6);font-size:11px;margin-bottom:2px}
+.tooltip .tt-value{font-family:var(--mono);font-weight:600}
+
+/* SECTION LABEL */
+.section-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;padding-left:2px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-light)}
+
+/* BUBBLE CHART */
+.matrix-chart{width:100%;min-height:340px;position:relative}
+.matrix-chart svg text{user-select:none}
+.matrix-chart svg{transition:opacity .2s ease;will-change:opacity}
+
+/* DETAIL CARD */
+.detail-card{
+  position:fixed;z-index:200;pointer-events:none;opacity:0;
+  transition:opacity .15s ease,transform .15s ease;transform:translateY(4px);
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 18px;min-width:240px;
+  box-shadow:0 8px 24px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.06);
+}
+.detail-card.show{opacity:1;transform:translateY(0)}
+.detail-card-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border-light)}
+.detail-card-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.detail-card-name{font-weight:600;font-size:14px;color:var(--text-1)}
+.detail-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.detail-card-item .dc-label{font-size:11px;color:var(--text-3);margin-bottom:2px}
+.detail-card-item .dc-value{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text-1)}
+.detail-card-item .dc-value.green{color:var(--green)}
+.detail-card-item .dc-value.red{color:var(--red)}
+.detail-card-footer{margin-top:10px;padding-top:8px;border-top:1px solid var(--border-light);display:flex;align-items:center;gap:6px}
+.detail-card-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:8px;letter-spacing:.2px}
+
+@media(max-width:1200px){
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .section-row.two-col,.section-row.three-col,.section-row.two-col-eq{grid-template-columns:1fr}
+  .section-row{grid-template-columns:1fr !important}
+  .retention-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .dashboard{padding:0 16px 32px}
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .chart-controls{flex-wrap:wrap;gap:8px}
+  .kpi-value{font-size:24px}
+  .matrix-chart svg{min-height:280px}
+}
+.delay-1{animation-delay:.05s}.delay-2{animation-delay:.1s}.delay-3{animation-delay:.15s}
+.delay-4{animation-delay:.2s}.delay-5{animation-delay:.25s}.delay-6{animation-delay:.3s}
+.delay-7{animation-delay:.35s}.delay-8{animation-delay:.4s}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">JG</div>
+      <div>
+        <div class="header-title">权益运营中台</div>
+        <div class="header-sub">数据看板 · Data Dashboard</div>
+      </div>
+    </div>
+    <a href="./rights-management.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><polyline points="15 18 9 12 15 6"/></svg>
+      返回项目页
+    </a>
+  </header>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <!-- SECTION: INVENTORY + ALERTS -->
+  <div class="section-label">运营监控</div>
+  <div class="section-row two-col-eq">
+    <div class="panel fade-up delay-3">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>库存健康监控</div>
+        <div class="panel-badge" style="background:var(--red-bg);color:var(--red)">2 预警</div>
+      </div>
+      <div id="inventoryTable"></div>
+    </div>
+    <div class="panel fade-up delay-4">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--red)"></span>系统告警</div>
+        <div class="panel-badge" style="background:var(--red-bg);color:var(--red)">6 条</div>
+      </div>
+      <div class="alert-feed" id="alertFeed"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: ORDER TRENDS + COST STRUCTURE -->
+  <div class="section-label">业务概览</div>
+  <div class="section-row two-col-eq">
+    <div class="panel fade-up delay-4">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>灵霄 · 推广订单量</div>
+        <div style="font-size:11px;color:var(--text-4)">推广订单量决定推广成本</div>
+      </div>
+      <div class="chart-controls">
+        <div class="chart-controls-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="chart-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="15 18 9 12 15 6"/></svg>
+            <input type="month" value="2025-07">
+            <span class="sep">至</span>
+            <input type="month" value="2026-06">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="chart-controls-right">
+          <button class="chart-btn chart-btn-reset">重置</button>
+          <button class="chart-btn chart-btn-query">查询</button>
+        </div>
+      </div>
+      <div class="chart-area" id="orderTrendChart" style="height:256px"></div>
+    </div>
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--indigo)"></span>万象 · 结算订单量</div>
+        <div style="font-size:11px;color:var(--text-4)">结算订单量决定甲方结算收入</div>
+      </div>
+      <div class="chart-controls">
+        <div class="chart-controls-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="chart-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="15 18 9 12 15 6"/></svg>
+            <input type="month" value="2025-07">
+            <span class="sep">至</span>
+            <input type="month" value="2026-06">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="chart-controls-right">
+          <button class="chart-btn chart-btn-reset">重置</button>
+          <button class="chart-btn chart-btn-query">查询</button>
+        </div>
+      </div>
+      <div class="chart-area" id="omniOrderChart" style="height:256px"></div>
+    </div>
+  </div>
+  <div class="section-row two-col-eq">
+    <div class="panel fade-up delay-6">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>云仓 · 核销订单量</div>
+        <div style="font-size:11px;color:var(--text-4)">核销订单量决定供应商采购成本</div>
+      </div>
+      <div class="chart-controls">
+        <div class="chart-controls-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="chart-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="15 18 9 12 15 6"/></svg>
+            <input type="date" value="2026-06-01">
+            <span class="sep">至</span>
+            <input type="date" value="2026-06-18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="chart-controls-right">
+          <button class="chart-btn chart-btn-reset">重置</button>
+          <button class="chart-btn chart-btn-query">查询</button>
+        </div>
+      </div>
+      <div class="chart-area" id="depotOrderChart" style="height:256px"></div>
+    </div>
+    <div class="panel fade-up delay-7">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--green)"></span>收入与成本结构</div>
+        <div class="panel-badge" style="background:var(--green-bg);color:var(--green)">毛利率 27.9%</div>
+      </div>
+      <div class="chart-area" id="costChart" style="height:240px"></div>
+      <div style="display:flex;gap:12px;margin-top:12px;justify-content:center;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-3)"><span style="width:10px;height:10px;background:var(--blue);border-radius:2px;display:inline-block"></span>结算收入</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-3)"><span style="width:10px;height:10px;background:var(--red-light);border-radius:2px;display:inline-block"></span>推广成本</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-3)"><span style="width:10px;height:10px;background:var(--amber-light);border-radius:2px;display:inline-block"></span>供应商成本</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-3)"><span style="width:10px;height:10px;background:var(--green);border-radius:2px;display:inline-block"></span>毛利</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: RETENTION + SUB DURATION -->
+  <div class="section-label">核心指标 · 留存与在订时长</div>
+  <div class="section-row" style="grid-template-columns:1fr 1.4fr">
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>队列留存趋势 M1 / M3 / M6 / M12</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="panel-badge" style="background:var(--green-bg);color:var(--green)">按季度队列</div>
+          <div style="font-size:11px;color:var(--text-4)">观察留存质量是否持续改善</div>
+        </div>
+      </div>
+      <div class="heatmap" id="m1m12Heatmap"></div>
+    </div>
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>留存曲线</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="panel-badge" style="background:var(--blue-bg);color:var(--blue)">M1–M12 月度留存率</div>
+        </div>
+      </div>
+      <div class="matrix-chart" id="retentionCurveChart"></div>
+    </div>
+  </div>
+  <div class="section-row" style="grid-template-columns:1fr">
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--violet)"></span>用户平均在订时长</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="panel-badge" style="background:var(--indigo-bg);color:var(--indigo)">基于灵霄会员数据</div>
+          <div style="font-size:11px;color:var(--text-4)">unsubscribe_at - subscribe_at · 所有订购用户均值</div>
+        </div>
+      </div>
+      <div class="retention-grid">
+        <div class="heatmap" id="retentionHeatmap"></div>
+        <div class="prod-retention" id="prodRetention"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: UNIT EFFICIENCY MATRIX -->
+  <div class="section-label">效率矩阵</div>
+  <div class="section-row" style="grid-template-columns:1fr">
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--violet)"></span>二级单位效率矩阵</div>
+        <div style="font-size:11px;color:var(--text-4)">横轴: 推广订单量 · 纵轴: 平均在订时长 · 气泡大小: 结算收入</div>
+      </div>
+      <div class="matrix-chart" id="unitMatrixChart" style="height:340px"></div>
+    </div>
+  </div>
+  <div class="section-row" style="grid-template-columns:1fr">
+    <div class="panel fade-up delay-6">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--indigo)"></span>渠道效率矩阵</div>
+        <div style="font-size:11px;color:var(--text-4)">横轴: 推广订单量 · 纵轴: 平均在订时长 · 气泡大小: ROI</div>
+      </div>
+      <div class="matrix-chart" id="channelMatrixChart" style="height:340px"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: SUPPLIER -->
+  <div class="section-row" style="grid-template-columns:1fr">
+    <div class="panel fade-up delay-6">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>供应商供货表现</div>
+      </div>
+      <div id="supplierTable"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tooltip" id="tooltip"><div class="tt-label"></div><div class="tt-value"></div></div>
+<div class="detail-card" id="detailCard"></div>
+
+<script>
+// === DATA ===
+const months = ['7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月','6月'];
+const monthDates = ['2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06'];
+
+// 灵霄: 推广订单 (决定推广花多少钱)
+const celOrders = [31200,35800,39400,41200,43600,47200,42100,33500,47800,50600,53800,58200];
+// 万象: 结算订单 (决定甲方给我们结算多少钱)
+const omniOrders = [28340,32100,35200,36800,38900,42100,37500,29800,42800,45200,48100,51820];
+// 云仓: 核销订单 (决定我们和供应商采购多少钱)
+const depotOrders = [27500,31200,34100,35600,37800,40900,36400,28900,41500,43800,46700,50400];
+
+// 云仓: 核销订单按日数据 (2026年6月1日-18日)
+const depotDailyDates = Array.from({length: 18}, (_, i) => `6/${i + 1}`);
+const depotDailyOrders = [1680, 1720, 1850, 1920, 1780, 1650, 1890, 2010, 1950, 1820, 1760, 1880, 1920, 2050, 1980, 1850, 1720, 1680];
+
+// 财务数据 (万元)
+const revenue = [255,289,317,331,350,379,338,268,385,407,433,466]; // 万象结算收入
+const promoCost = [78,89,98,103,109,118,105,84,119,126,134,144]; // 灵霄推广成本
+const supplierCost = [120,137,151,158,167,181,162,128,184,191,201,210]; // 云仓供应商成本
+const grossProfit = revenue.map((r,i) => r - promoCost[i] - supplierCost[i]);
+const activeUsers = [82.4,85.6,89.2,91.8,94.5,98.2,95.8,92.1,99.8,103.5,108.2,113.4]; // 千
+
+// 根据日期范围筛选月度数据
+function filterDataByMonthRange(startDate, endDate, dataArray) {
+  const startIdx = monthDates.indexOf(startDate);
+  const endIdx = monthDates.indexOf(endDate);
+  if (startIdx === -1 || endIdx === -1 || startIdx > endIdx) {
+    return { data: dataArray, labels: months };
+  }
+  return {
+    data: dataArray.slice(startIdx, endIdx + 1),
+    labels: months.slice(startIdx, endIdx + 1),
+    indices: Array.from({length: endIdx - startIdx + 1}, (_, i) => startIdx + i)
+  };
+}
+
+// 渠道
+const channels = [
+  {name:'渠道A · 某科技',orders:12840,cost:168200,rev:389000,roi:2.31,color:'#2563EB',avgDuration:16.2,activeUsers:2.1},
+  {name:'渠道B · 讯达',orders:10320,cost:132100,rev:285000,roi:2.16,color:'#7C3AED',avgDuration:15.4,activeUsers:1.7},
+  {name:'渠道C · 万联',orders:11250,cost:157500,rev:312000,roi:1.98,color:'#0D9488',avgDuration:13.8,activeUsers:1.9},
+  {name:'渠道D · 中益',orders:8630,cost:129400,rev:221000,roi:1.71,color:'#D97706',avgDuration:12.5,activeUsers:1.4},
+  {name:'渠道E · 恒通',orders:5480,cost:82200,rev:118000,roi:1.44,color:'#059669',avgDuration:17.1,activeUsers:0.9},
+  {name:'渠道F · 新途',orders:3300,cost:72400,rev:59200,roi:0.82,color:'#DC2626',avgDuration:9.8,activeUsers:0.6},
+];
+
+// 库存
+const inventory = [
+  {name:'爱奇艺月卡',stock:152400,consume:2340,days:65,status:'safe'},
+  {name:'腾讯视频月卡',stock:128000,consume:2180,days:59,status:'safe'},
+  {name:'优酷视频月卡',stock:85600,consume:1920,days:45,status:'safe'},
+  {name:'网易云音乐月卡',stock:28400,consume:1850,days:15,status:'warn'},
+  {name:'芒果TV月卡',stock:4200,consume:2010,days:2,status:'danger'},
+  {name:'咪咕视频月卡',stock:6200,consume:1540,days:4,status:'danger'},
+  {name:'饿了么月卡',stock:45800,consume:1680,days:27,status:'safe'},
+];
+
+// 供应商
+const suppliers = [
+  {name:'供应商A · 数权科技',rate:98.2,orders:34200,share:28.5,cost:59.8,trend:'up'},
+  {name:'供应商B · 云联数字',rate:96.8,orders:28500,share:23.7,cost:49.7,trend:'up'},
+  {name:'供应商C · 中供网络',rate:95.1,orders:22800,share:19.0,cost:39.9,trend:'neutral'},
+  {name:'供应商D · 华数传媒',rate:93.4,orders:18600,share:15.5,cost:32.5,trend:'down'},
+  {name:'供应商E · 数媒通',rate:97.5,orders:16000,share:13.3,cost:28.1,trend:'up'},
+];
+
+// 告警
+const alerts = [
+  {type:'critical',title:'芒果TV月卡库存预计2天内耗尽',time:'10 分钟前',source:'万象'},
+  {type:'critical',title:'咪咕视频月卡库存预计4天内耗尽',time:'28 分钟前',source:'万象'},
+  {type:'warning',title:'供应商D供货成功率降至93.4%，接近告警线',time:'1 小时前',source:'云仓'},
+  {type:'warning',title:'网易云音乐月卡库存仅余15天',time:'2 小时前',source:'万象'},
+  {type:'info',title:'渠道F的ROI低于1.0，建议评估合作方案',time:'3 小时前',source:'灵霄'},
+  {type:'success',title:'本月订单量突破50,000笔，创历史新高',time:'5 小时前',source:'灵霄'},
+];
+
+// 二级单位效率矩阵数据
+const operatorUnits = [
+  {name:'广东移动',orders:15200,avgDuration:16.8,revenue:142,promoCost:42,suppCost:68,activeUsers:3.8,color:'#2563EB'},
+  {name:'浙江移动',orders:11800,avgDuration:17.2,revenue:108,promoCost:31,suppCost:50,activeUsers:2.9,color:'#059669'},
+  {name:'江苏移动',orders:10500,avgDuration:14.5,revenue:95,promoCost:28,suppCost:46,activeUsers:2.6,color:'#7C3AED'},
+  {name:'四川移动',orders:8200,avgDuration:15.9,revenue:72,promoCost:21,suppCost:34,activeUsers:1.9,color:'#0D9488'},
+  {name:'山东移动',orders:7600,avgDuration:11.8,revenue:68,promoCost:24,suppCost:35,activeUsers:2.1,color:'#DC2626'},
+  {name:'河南移动',orders:6100,avgDuration:13.4,revenue:55,promoCost:17,suppCost:27,activeUsers:1.5,color:'#D97706'},
+  {name:'湖北移动',orders:5300,avgDuration:15.1,revenue:48,promoCost:14,suppCost:23,activeUsers:1.3,color:'#6366F1'},
+  {name:'辽宁移动',orders:4200,avgDuration:10.2,revenue:38,promoCost:13,suppCost:19,activeUsers:1.2,color:'#DC2626'},
+  {name:'福建移动',orders:3800,avgDuration:18.5,revenue:35,promoCost:9,suppCost:16,activeUsers:0.9,color:'#059669'},
+  {name:'湖南移动',orders:5800,avgDuration:12.6,revenue:52,promoCost:16,suppCost:26,activeUsers:1.6,color:'#F59E0B'},
+];
+
+// 用户平均在订时长 (按产品, 所有订购用户均值)
+const avgSubDuration = [
+  {name:'优酷+饿了么组合',months:18.2,users:3800,launchDate:'2024-03',color:'#059669'},
+  {name:'爱奇艺月卡',months:16.5,users:12400,launchDate:'2023-09',color:'#2563EB'},
+  {name:'饿了么月卡',months:15.8,users:7200,launchDate:'2024-01',color:'#0D9488'},
+  {name:'腾讯视频月卡',months:14.9,users:10800,launchDate:'2023-11',color:'#7C3AED'},
+  {name:'网易云音乐月卡',months:14.2,users:6500,launchDate:'2024-05',color:'#D97706'},
+  {name:'优酷视频月卡',months:13.5,users:8200,launchDate:'2024-02',color:'#6366F1'},
+  {name:'芒果TV月卡',months:11.2,users:5100,launchDate:'2024-08',color:'#F59E0B'},
+  {name:'咪咕视频月卡',months:9.6,users:4300,launchDate:'2025-01',color:'#DC2626'},
+];
+
+// 留存数据 (按季度队列 M1/M3/M6/M12)
+const cohortRetention = [
+  {name:'2025 Q1',m1:90.2,m3:83.5,m6:75.8,m12:67.2,cohorts:8200},
+  {name:'2025 Q2',m1:91.5,m3:85.0,m6:77.5,m12:69.0,cohorts:9100},
+  {name:'2025 Q3',m1:92.3,m3:86.2,m6:79.2,m12:71.5,cohorts:10400},
+  {name:'2025 Q4',m1:93.1,m3:87.8,m6:81.0,m12:73.2,cohorts:11200},
+  {name:'2026 Q1',m1:93.8,m3:88.5,m6:null,m12:null,cohorts:12500},
+];
+
+// === UTILITIES ===
+const tooltip = document.getElementById('tooltip');
+function showTooltip(e,label,value){const t=tooltip;t.querySelector('.tt-label').textContent=label;t.querySelector('.tt-value').textContent=value;t.classList.add('show');t.style.left=(e.clientX-t.offsetWidth/2)+'px';t.style.top=(e.clientY-t.offsetHeight-12)+'px'}
+function hideTooltip(){tooltip.classList.remove('show')}
+
+// === KPI CARDS ===
+function renderKPIs(){
+  const kpis = [
+    {label:'本月结算收入',source:'万象',sourceBg:'var(--blue-bg)',sourceColor:'var(--blue)',value:'466',unit:'万',trend:'+7.6%',dir:'up',period:'环比上月',spark:revenue.slice(-6)},
+    {label:'本月推广成本',source:'灵霄',sourceBg:'var(--red-bg)',sourceColor:'var(--red)',value:'144',unit:'万',trend:'+7.5%',dir:'up-bad',period:'环比上月',spark:promoCost.slice(-6)},
+    {label:'供应商采购成本',source:'云仓',sourceBg:'var(--amber-bg)',sourceColor:'var(--amber)',value:'210',unit:'万',trend:'+4.5%',dir:'up-bad',period:'环比上月',spark:supplierCost.slice(-6)},
+    {label:'本月毛利',value:'112',unit:'万',trend:'+12.1%',dir:'up',period:'环比上月',spark:grossProfit.slice(-6)},
+    {label:'在订用户数',value:'11.34',unit:'万',trend:'+4.8%',dir:'up',period:'环比上月',spark:activeUsers.slice(-6)},
+  ];
+  const row = document.getElementById('kpiRow');
+  row.innerHTML = '';
+  kpis.forEach((k,i) => {
+    const card = document.createElement('div');
+    card.className = `kpi-card fade-up delay-${i+1}`;
+    const sparkSvg = createSparkline(k.spark, 80, 28, i);
+    const arrowUp = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 8 6 3 11 8"/></svg>';
+    const arrowDown = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 6 9 11 4"/></svg>';
+    const arrow = (k.dir.includes('up')) ? arrowUp : arrowDown;
+    const sourceTag = k.source ? `<span class="kpi-source" style="background:${k.sourceBg};color:${k.sourceColor}">${k.source}</span>` : '';
+    card.innerHTML = `
+      <div class="kpi-label">${k.label}${sourceTag}</div>
+      <div class="kpi-value">${k.value}<span class="unit">${k.unit}</span></div>
+      <div class="kpi-footer">
+        <span class="kpi-trend ${k.dir}">${arrow}${k.trend}</span>
+        <span class="kpi-period">${k.period}</span>
+      </div>
+      <div class="sparkline-container">${sparkSvg}</div>
+    `;
+    row.appendChild(card);
+  });
+}
+
+function createSparkline(data,w,h,idx){
+  const colors = ['#2563EB','#DC2626','#D97706','#059669','#6366F1'];
+  const c = colors[idx%colors.length];
+  const min=Math.min(...data),max=Math.max(...data),range=max-min||1;
+  const pts=data.map((v,i)=>[i/(data.length-1)*w,h-((v-min)/range)*(h-4)-2]);
+  let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=1;i<pts.length;i++){const[x0,y0]=pts[i-1],[x1,y1]=pts[i];const cx=(x0+x1)/2;d+=` C${cx},${y0} ${cx},${y1} ${x1},${y1}`}
+  const areaD=d+` L${w},${h} L0,${h} Z`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><defs><linearGradient id="sg${idx}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c}" stop-opacity=".15"/><stop offset="100%" stop-color="${c}" stop-opacity="0"/></linearGradient></defs><path d="${areaD}" fill="url(#sg${idx})"/><path d="${d}" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round"/><circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="2.5" fill="${c}"/></svg>`;
+}
+
+// === COMBO CHART: Bars (left Y) + MoM Growth Line (right Y) ===
+function renderComboChart(cfg){
+  const container=document.getElementById(cfg.chartId);
+  const W=container.offsetWidth, H=256;
+  const pad={top:20,right:52,bottom:48,left:50};
+  const cw=W-pad.left-pad.right, ch=H-pad.top-pad.bottom-8;
+  const data=cfg.data;
+  const labels = cfg.labels || months;
+  const dataLen = data.length;
+  const maxV=Math.max(...data)*1.18;
+
+  // MoM growth
+  const mom=data.map((v,i)=>i===0?null:((v-data[i-1])/data[i-1])*100);
+  const validMom=mom.filter(v=>v!==null);
+  const momMin=Math.min(...validMom), momMax=Math.max(...validMom);
+  const momRange=Math.max(Math.abs(momMin),Math.abs(momMax),20);
+  const momLo=-momRange*1.3, momHi=momRange*1.3;
+
+  // Scales
+  const yL=v=>pad.top+ch-(v/maxV)*ch;
+  const yR=v=>pad.top+ch-((v-momLo)/(momHi-momLo))*ch;
+  const xPos=i=>pad.left+(i+0.5)/dataLen*cw;
+
+  // Left Y grid
+  let grid='';
+  for(let i=0;i<=4;i++){
+    const y=pad.top+(ch/4)*i;
+    const v=Math.round(maxV-(maxV/4)*i);
+    grid+=`<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="var(--border-light)" stroke-dasharray="3,3"/>`;
+    grid+=`<text x="${pad.left-8}" y="${y+4}" text-anchor="end" fill="var(--text-4)" font-size="10" font-family="var(--mono)">${(v/1000).toFixed(0)}k</text>`;
+  }
+  // Right Y labels
+  for(let i=0;i<=4;i++){
+    const y=pad.top+(ch/4)*i;
+    const v=momHi-(momHi-momLo)/4*i;
+    grid+=`<text x="${W-pad.right+8}" y="${y+4}" text-anchor="start" fill="var(--text-4)" font-size="9" font-family="var(--mono)">${v>=0?'+':''}${v.toFixed(0)}%</text>`;
+  }
+  // Zero line for growth
+  const zeroY=yR(0);
+  if(zeroY>pad.top&&zeroY<pad.top+ch){
+    grid+=`<line x1="${pad.left}" y1="${zeroY}" x2="${W-pad.right}" y2="${zeroY}" stroke="var(--text-4)" stroke-width=".5" stroke-dasharray="4,3" opacity=".4"/>`;
+  }
+
+  // Bars
+  const barW=Math.min(cw/dataLen*0.5,26);
+  let bars='';
+  data.forEach((v,i)=>{
+    const x=xPos(i)-barW/2;
+    const h=(v/maxV)*ch;
+    const y=pad.top+ch-h;
+    const isLast=i===data.length-1;
+    bars+=`<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="3" fill="${cfg.barColor}" opacity="${isLast?'1':'.5'}" style="transform-origin:${x+barW/2}px ${pad.top+ch}px;animation:growBarV .5s ease-out ${i*0.04}s both"/>`;
+  });
+
+  // Growth line + dots
+  let linePath='', dots='';
+  const linePoints=[];
+  mom.forEach((v,i)=>{
+    if(v===null)return;
+    const x=xPos(i), y=yR(v);
+    linePoints.push({x,y,v,i});
+    if(linePoints.length===1) linePath=`M${x},${y}`;
+    else{const prev=linePoints[linePoints.length-2];const cx=(prev.x+x)/2;linePath+=` C${cx},${prev.y} ${cx},${y} ${x},${y}`;}
+  });
+  linePoints.forEach(p=>{
+    const dotColor=p.v>=0?cfg.lineColor:'#DC2626';
+    dots+=`<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="${dotColor}" stroke-width="2"/>`;
+  });
+
+  // X labels
+  let xLabels='';
+  labels.forEach((m,i)=>{const x=xPos(i);xLabels+=`<text x="${x}" y="${H-22}" text-anchor="middle" fill="var(--text-3)" font-size="10">${m}</text>`});
+
+  // Legend
+  const legendY=H-4;
+  const lx=pad.left+cw/2;
+  let legend=`<rect x="${lx-72}" y="${legendY-8}" width="8" height="8" rx="1.5" fill="${cfg.barColor}" opacity=".7"/>`;
+  legend+=`<text x="${lx-60}" y="${legendY}" fill="var(--text-3)" font-size="10">${cfg.barLabel}</text>`;
+  legend+=`<line x1="${lx+10}" y1="${legendY-4}" x2="${lx+24}" y2="${legendY-4}" stroke="${cfg.lineColor}" stroke-width="2"/>`;
+  legend+=`<circle cx="${lx+17}" cy="${legendY-4}" r="2.5" fill="#fff" stroke="${cfg.lineColor}" stroke-width="1.5"/>`;
+  legend+=`<text x="${lx+30}" y="${legendY}" fill="var(--text-3)" font-size="10">${cfg.lineLabel}</text>`;
+
+  // Hover columns + hidden data labels + guide line
+  let hoverCols='', dataLabels='', guideLine='';
+  data.forEach((v,i)=>{
+    const x=xPos(i);
+    const colX=x-cw/dataLen/2;
+    const barTop=pad.top+ch-(v/maxV)*ch;
+    const momLabel=i>0?((mom[i]>=0?'+':'')+mom[i].toFixed(1)+'%'):'';
+    const momPt=linePoints.find(p=>p.i===i);
+    // Guide line (hidden by default)
+    guideLine+=`<line class="guide-line gl-${cfg.chartId}-${i}" x1="${x}" y1="${pad.top}" x2="${x}" y2="${pad.top+ch}" stroke="var(--text-3)" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>`;
+    // Bar value label
+    dataLabels+=`<text class="data-lbl dl-${cfg.chartId}-${i}" x="${x}" y="${barTop-8}" text-anchor="middle" fill="var(--text-1)" font-size="11" font-weight="600" font-family="var(--mono)" opacity="0">${(v/1000).toFixed(1)}k</text>`;
+    // MoM label near line dot
+    if(momPt){
+      const myOff=momPt.v>=0?-12:14;
+      dataLabels+=`<text class="data-lbl dl-${cfg.chartId}-${i}-mom" x="${momPt.x}" y="${momPt.y+myOff}" text-anchor="middle" fill="${momPt.v>=0?cfg.lineColor:'#DC2626'}" font-size="10" font-weight="600" font-family="var(--mono)" opacity="0">${momLabel}</text>`;
+    }
+    hoverCols+=`<rect x="${colX}" y="${pad.top}" width="${cw/dataLen}" height="${ch}" fill="transparent" style="cursor:crosshair" class="combo-hover" data-chart="${cfg.chartId}" data-idx="${i}"/>`;
+  });
+
+  container.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+    ${grid}${bars}${guideLine}
+    <path d="${linePath}" fill="none" stroke="${cfg.lineColor}" stroke-width="2" stroke-linecap="round"/>
+    ${dots}${dataLabels}${xLabels}${legend}${hoverCols}
+  </svg>`;
+
+  // Hover interaction — show/hide labels & guide line
+  container.querySelectorAll('.combo-hover').forEach(el=>{
+    const i=+el.dataset.idx;
+    const cid=cfg.chartId;
+    el.addEventListener('mouseenter',e=>{
+      const gl=container.querySelector(`.gl-${cid}-${i}`);
+      const dl=container.querySelector(`.dl-${cid}-${i}`);
+      const dlMom=container.querySelector(`.dl-${cid}-${i}-mom`);
+      if(gl)gl.setAttribute('opacity','0.5');
+      if(dl)dl.setAttribute('opacity','1');
+      if(dlMom)dlMom.setAttribute('opacity','1');
+      const momStr=i>0?((mom[i]>=0?'+':'')+mom[i].toFixed(1)+'%'):'—';
+      showTooltip(e,labels[i],`${cfg.tipPrefix}${data[i].toLocaleString()} 笔 · 环比 ${momStr}`);
+    });
+    el.addEventListener('mousemove',e=>{
+      const momStr=i>0?((mom[i]>=0?'+':'')+mom[i].toFixed(1)+'%'):'—';
+      showTooltip(e,labels[i],`${cfg.tipPrefix}${data[i].toLocaleString()} 笔 · 环比 ${momStr}`);
+    });
+    el.addEventListener('mouseleave',()=>{
+      const gl=container.querySelector(`.gl-${cid}-${i}`);
+      const dl=container.querySelector(`.dl-${cid}-${i}`);
+      const dlMom=container.querySelector(`.dl-${cid}-${i}-mom`);
+      if(gl)gl.setAttribute('opacity','0');
+      if(dl)dl.setAttribute('opacity','0');
+      if(dlMom)dlMom.setAttribute('opacity','0');
+      hideTooltip();
+    });
+  });
+}
+
+// Thin wrappers - 支持筛选数据
+function renderOrderTrend(filteredData, filteredLabels){
+  renderComboChart({
+    chartId:'orderTrendChart',
+    data: filteredData || celOrders,
+    labels: filteredLabels || months,
+    barColor:'var(--blue)',
+    lineColor:'#059669',
+    barLabel:'订单量',
+    lineLabel:'月环比',
+    tipPrefix:'推广订单 '
+  });
+}
+function renderOmniOrders(filteredData, filteredLabels){
+  renderComboChart({
+    chartId:'omniOrderChart',
+    data: filteredData || omniOrders,
+    labels: filteredLabels || months,
+    barColor:'var(--indigo)',
+    lineColor:'#059669',
+    barLabel:'订单量',
+    lineLabel:'月环比',
+    tipPrefix:'结算订单 '
+  });
+}
+function renderDepotOrders(){
+  // 按日数据渲染
+  const container = document.getElementById('depotOrderChart');
+  const W = container.offsetWidth, H = 256;
+  const pad = {top: 20, right: 20, bottom: 40, left: 50};
+  const cw = W - pad.left - pad.right, ch = H - pad.top - pad.bottom;
+  const data = depotDailyOrders;
+  const dates = depotDailyDates;
+  const maxV = Math.max(...data) * 1.15;
+
+  let grid = '';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (ch / 4) * i;
+    const v = Math.round(maxV - (maxV / 4) * i);
+    grid += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="var(--border-light)" stroke-dasharray="3,3"/>`;
+    grid += `<text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" fill="var(--text-4)" font-size="10" font-family="var(--mono)">${v}</text>`;
+  }
+
+  const barW = Math.min(cw / data.length * 0.6, 20);
+  let bars = '', xLabels = '', hoverCols = '', guideLines = '', dataLabels = '';
+  
+  data.forEach((v, i) => {
+    const x = pad.left + (i + 0.5) / data.length * cw - barW / 2;
+    const h = (v / maxV) * ch;
+    const y = pad.top + ch - h;
+    bars += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="2" fill="var(--amber)" opacity=".7" style="transform-origin:${x + barW / 2}px ${pad.top + ch}px;animation:growBarV .4s ease-out ${i * 0.02}s both"/>`;
+    
+    const cx = pad.left + (i + 0.5) / data.length * cw;
+    // 每隔几天显示一个标签
+    if (i % 3 === 0 || i === data.length - 1) {
+      xLabels += `<text x="${cx}" y="${H - 10}" text-anchor="middle" fill="var(--text-3)" font-size="9">${dates[i]}</text>`;
+    }
+    
+    guideLines += `<line class="daily-gl dgl-${i}" x1="${cx}" y1="${pad.top}" x2="${cx}" y2="${pad.top + ch}" stroke="var(--text-3)" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>`;
+    dataLabels += `<text class="daily-lbl dlbl-${i}" x="${cx}" y="${y - 6}" text-anchor="middle" fill="var(--text-1)" font-size="10" font-weight="600" font-family="var(--mono)" opacity="0">${v}</text>`;
+    hoverCols += `<rect x="${cx - cw / data.length / 2}" y="${pad.top}" width="${cw / data.length}" height="${ch}" fill="transparent" style="cursor:crosshair" class="daily-hover" data-idx="${i}"/>`;
+  });
+
+  container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}${guideLines}${dataLabels}${xLabels}${hoverCols}</svg>`;
+
+  // Hover交互
+  container.querySelectorAll('.daily-hover').forEach(el => {
+    const i = +el.dataset.idx;
+    el.addEventListener('mouseenter', e => {
+      const gl = container.querySelector(`.dgl-${i}`);
+      const dl = container.querySelector(`.dlbl-${i}`);
+      if (gl) gl.setAttribute('opacity', '0.5');
+      if (dl) dl.setAttribute('opacity', '1');
+      showTooltip(e, dates[i], `核销订单 ${data[i].toLocaleString()} 笔`);
+    });
+    el.addEventListener('mousemove', e => {
+      showTooltip(e, dates[i], `核销订单 ${data[i].toLocaleString()} 笔`);
+    });
+    el.addEventListener('mouseleave', () => {
+      const gl = container.querySelector(`.dgl-${i}`);
+      const dl = container.querySelector(`.dlbl-${i}`);
+      if (gl) gl.setAttribute('opacity', '0');
+      if (dl) dl.setAttribute('opacity', '0');
+      hideTooltip();
+    });
+  });
+}
+
+// === COST STRUCTURE (Stacked bars) ===
+function renderCostChart(filteredRevenue, filteredPromoCost, filteredSupplierCost, filteredGrossProfit, filteredLabels){
+  const container = document.getElementById('costChart');
+  const W=container.offsetWidth, H=240;
+  const pad={top:20,right:15,bottom:30,left:50};
+  const cw=W-pad.left-pad.right, ch=H-pad.top-pad.bottom;
+
+  // 使用筛选后的数据或默认数据
+  const revData = filteredRevenue || revenue;
+  const promoData = filteredPromoCost || promoCost;
+  const suppData = filteredSupplierCost || supplierCost;
+  const profitData = filteredGrossProfit || grossProfit;
+  const labels = filteredLabels || months;
+  const dataLen = revData.length;
+
+  const maxV=Math.max(...revData)*1.15;
+
+  let grid='';
+  for(let i=0;i<=4;i++){
+    const y=pad.top+(ch/4)*i;
+    const v=Math.round(maxV-(maxV/4)*i);
+    grid+=`<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="var(--border-light)" stroke-dasharray="3,3"/>`;
+    grid+=`<text x="${pad.left-8}" y="${y+4}" text-anchor="end" fill="var(--text-4)" font-size="10" font-family="var(--mono)">${v}</text>`;
+  }
+
+  const barW=Math.min(cw/dataLen*0.55,32);
+  const xPos=i=>pad.left+(i+0.5)/dataLen*cw;
+  let bars='', guideLines='', dataLabels='';
+  for(let i=0;i<dataLen;i++){
+    const cx=xPos(i);
+    const x=cx-barW/2;
+    const total=revData[i];
+    const promoH=(promoData[i]/maxV)*ch;
+    const suppH=(suppData[i]/maxV)*ch;
+    const profitH=(profitData[i]/maxV)*ch;
+    const totalH=(total/maxV)*ch;
+    let y=pad.top+ch;
+    // Supplier cost (bottom)
+    y-=suppH;
+    const suppY=y;
+    bars+=`<rect x="${x}" y="${y}" width="${barW}" height="${suppH}" rx="0" fill="#FCD34D" opacity=".7" style="transform-origin:${cx}px ${pad.top+ch}px;animation:growBarV .5s ease-out ${i*0.03}s both"/>`;
+    // Promo cost (middle)
+    y-=promoH;
+    const promoY=y;
+    bars+=`<rect x="${x}" y="${y}" width="${barW}" height="${promoH}" rx="0" fill="#FCA5A5" opacity=".7"/>`;
+    // Gross profit (top)
+    y-=profitH;
+    const profitY=y;
+    bars+=`<rect x="${x}" y="${y}" width="${barW}" height="${profitH}" rx="3" fill="#059669" opacity=".6"/>`;
+    // Guide line (hidden)
+    guideLines+=`<line class="cost-gl cgl-${i}" x1="${cx}" y1="${pad.top}" x2="${cx}" y2="${pad.top+ch}" stroke="var(--text-3)" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>`;
+    // Data labels (hidden) — total on top, segment values inside if tall enough
+    dataLabels+=`<text class="cost-lbl clbl-${i}" x="${cx}" y="${profitY-6}" text-anchor="middle" fill="var(--text-1)" font-size="10" font-weight="700" font-family="var(--mono)" opacity="0">¥${revData[i]}</text>`;
+    if(profitH>14) dataLabels+=`<text class="cost-lbl clbl-${i}" x="${cx}" y="${profitY+profitH/2+4}" text-anchor="middle" fill="#fff" font-size="9" font-weight="600" font-family="var(--mono)" opacity="0">${profitData[i]}</text>`;
+    if(promoH>14) dataLabels+=`<text class="cost-lbl clbl-${i}" x="${cx}" y="${promoY+promoH/2+4}" text-anchor="middle" fill="var(--text-1)" font-size="9" font-weight="500" font-family="var(--mono)" opacity="0">${promoData[i]}</text>`;
+    if(suppH>14) dataLabels+=`<text class="cost-lbl clbl-${i}" x="${cx}" y="${suppY+suppH/2+4}" text-anchor="middle" fill="var(--text-1)" font-size="9" font-weight="500" font-family="var(--mono)" opacity="0">${suppData[i]}</text>`;
+    // Hover target
+    bars+=`<rect x="${x-2}" y="${pad.top+ch-totalH}" width="${barW+4}" height="${totalH}" fill="transparent" style="cursor:pointer" class="cost-hover" data-idx="${i}"/>`;
+  }
+
+  let xLabels='';
+  labels.forEach((m,i)=>{const x=xPos(i);xLabels+=`<text x="${x}" y="${H-6}" text-anchor="middle" fill="var(--text-3)" font-size="11">${m}</text>`});
+
+  container.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}${guideLines}${dataLabels}${xLabels}</svg>`;
+
+  container.querySelectorAll('.cost-hover').forEach(el=>{
+    const i=+el.dataset.idx;
+    el.addEventListener('mouseenter',e=>{
+      container.querySelectorAll(`.cgl-${i}`).forEach(g=>g.setAttribute('opacity','0.5'));
+      container.querySelectorAll(`.clbl-${i}`).forEach(l=>l.setAttribute('opacity','1'));
+      showTooltip(e,labels[i],`收入 ¥${revData[i]}万 · 推广 ¥${promoData[i]}万 · 采购 ¥${suppData[i]}万 · 毛利 ¥${profitData[i]}万`);
+    });
+    el.addEventListener('mousemove',e=>{
+      showTooltip(e,labels[i],`收入 ¥${revData[i]}万 · 推广 ¥${promoData[i]}万 · 采购 ¥${suppData[i]}万 · 毛利 ¥${profitData[i]}万`);
+    });
+    el.addEventListener('mouseleave',()=>{
+      container.querySelectorAll(`.cgl-${i}`).forEach(g=>g.setAttribute('opacity','0'));
+      container.querySelectorAll(`.clbl-${i}`).forEach(l=>l.setAttribute('opacity','0'));
+      hideTooltip();
+    });
+  });
+}
+
+// === CHANNEL TABLE ===
+function renderChannelTable(){
+  const container=document.getElementById('channelTable');
+  let html=`<div class="ch-row head"><span>渠道</span><span style="text-align:right">订单量</span><span style="text-align:right">成本</span><span style="text-align:right">收入</span><span style="text-align:right">ROI</span></div>`;
+  const maxRoi=Math.max(...channels.map(c=>c.roi));
+  channels.forEach((c,i)=>{
+    const roiW=(c.roi/maxRoi)*100;
+    const roiClass=c.roi>=1?'positive':'negative';
+    html+=`<div class="ch-row" style="animation:fadeUp .4s ease-out ${i*0.06+0.2}s both">
+      <div class="ch-name"><span class="ch-dot" style="background:${c.color}"></span>${c.name}</div>
+      <div class="ch-cell">${c.orders.toLocaleString()}</div>
+      <div class="ch-cell">¥${(c.cost/10000).toFixed(1)}万</div>
+      <div class="ch-cell">¥${(c.rev/10000).toFixed(1)}万</div>
+      <div class="ch-cell"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><div style="flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;max-width:60px"><div class="roi-bar" style="width:${roiW}%;height:100%;background:${c.color};animation-delay:${i*0.08+0.3}s"></div></div><span class="${roiClass}" style="font-weight:600;min-width:32px">${c.roi.toFixed(2)}</span></div></div>
+    </div>`;
+  });
+  container.innerHTML=html;
+}
+
+// === INVENTORY TABLE ===
+function renderInventoryTable(){
+  const container=document.getElementById('inventoryTable');
+  let html=`<table class="inv-table"><thead><tr><th>权益商品</th><th>库存余量</th><th>日均消耗</th><th>预计耗尽</th><th>状态</th></tr></thead><tbody>`;
+  inventory.forEach((item,i)=>{
+    const daysLabel=item.days<3?`<span style="color:var(--red);font-weight:600">${item.days} 天</span>`:item.days<7?`<span style="color:var(--amber);font-weight:600">${item.days} 天</span>`:`${item.days} 天`;
+    const statusLabel=item.status==='danger'?'紧急':item.status==='warn'?'关注':'正常';
+    html+=`<tr style="animation:fadeUp .4s ease-out ${i*0.05+0.2}s both">
+      <td><div class="inv-product"><span class="inv-dot ${item.status}"></span>${item.name}</div></td>
+      <td>${item.stock.toLocaleString()}</td><td>${item.consume.toLocaleString()}</td><td>${daysLabel}</td>
+      <td><span class="inv-status ${item.status}">${statusLabel}</span></td></tr>`;
+  });
+  html+='</tbody></table>';
+  container.innerHTML=html;
+}
+
+// === COHORT RETENTION HEATMAP (M1/M3/M6/M12) ===
+function renderRetentionHeatmap(){
+  const container=document.getElementById('m1m12Heatmap');
+  const intervals=['m1','m3','m6','m12'];
+  const labels=['M1','M3','M6','M12'];
+  const thresholds={m1:{good:93,mid:91},m3:{good:87,mid:84},m6:{good:80,mid:76},m12:{good:72,mid:68}};
+  function heatColor(val,intv){if(val===null)return'transparent';const t=thresholds[intv];if(val>=t.good)return'rgba(5,150,105,.2)';if(val>=t.mid)return'rgba(217,119,6,.12)';return'rgba(220,38,38,.15)';}
+  function textColor(val,intv){if(val===null)return'var(--text-4)';const t=thresholds[intv];if(val>=t.good)return'var(--green)';if(val>=t.mid)return'var(--amber)';return'var(--red)';}
+  let html='<table><thead><tr><th style="width:90px">队列</th>';
+  labels.forEach(l=>html+=`<th style="width:65px">${l}</th>`);
+  html+='<th style="width:65px">衰减</th><th style="width:70px">样本</th></tr></thead><tbody>';
+  cohortRetention.forEach(p=>{
+    const decay=(p.m1!==null&&p.m12!==null)?(p.m1-p.m12).toFixed(1):null;
+    html+=`<tr><td style="font-weight:600;white-space:nowrap;color:var(--text-1)">${p.name}</td>`;
+    intervals.forEach(intv=>{
+      const v=p[intv];
+      if(v===null){html+=`<td style="color:var(--text-4)">—</td>`;}
+      else{html+=`<td style="background:${heatColor(v,intv)};color:${textColor(v,intv)}">${v.toFixed(1)}%</td>`;}
+    });
+    if(decay!==null){html+=`<td style="font-weight:600;color:var(--text-2)">-${decay}pp</td>`;}
+    else{html+=`<td style="color:var(--text-4)">—</td>`;}
+    html+=`<td style="color:var(--text-3)">${(p.cohorts/1000).toFixed(1)}k</td></tr>`;
+  });
+  html+='</tbody></table>';
+  container.innerHTML=html;
+}
+
+// === RETENTION CURVE (multi-line chart) ===
+const retentionMonthly=[
+  {name:'优酷+饿了么组合',color:'#059669',data:[94.2,91.6,90.1,86.3,85.1,84.5,83.2,81.6,80.0,78.2,77.4,76.8]},
+  {name:'饿了么月卡',color:'#2563EB',data:[93.1,90.8,88.5,84.2,83.0,82.3,81.0,79.5,77.8,76.2,74.9,74.1]},
+  {name:'爱奇艺月卡',color:'#7C3AED',data:[92.3,90.0,87.5,83.0,81.4,80.2,78.9,77.2,75.6,73.6,72.4,71.8]},
+  {name:'腾讯视频月卡',color:'#D97706',data:[91.8,89.2,86.2,81.5,79.8,79.1,77.5,75.8,74.0,72.4,71.2,70.5]},
+  {name:'咪咕视频月卡',color:'#DC2626',data:[88.5,85.5,81.8,76.0,74.2,73.2,71.5,69.5,67.5,65.5,64.1,63.4]},
+];
+function renderRetentionCurve(){
+  const container=document.getElementById('retentionCurveChart');
+  const W=container.clientWidth||640, H=340;
+  const pad={top:24,right:24,bottom:56,left:46};
+  const cw=W-pad.left-pad.right, ch=H-pad.top-pad.bottom;
+  const months=['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  const yMin=60, yMax=100;
+  const xScale=i=>pad.left+(i/(months.length-1))*cw;
+  const yScale=v=>pad.top+ch-(((v-yMin)/(yMax-yMin))*ch);
+
+  let svg=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--mono,monospace)">`;
+  // Y gridlines & labels
+  for(let v=yMin;v<=yMax;v+=10){
+    const y=yScale(v);
+    svg+=`<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="var(--border-light,#e5e7eb)" stroke-width="1" stroke-dasharray="${v===yMin?'0':'4,3'}"/>`;
+    svg+=`<text x="${pad.left-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--text-4,#9ca3af)">${v}%</text>`;
+  }
+  // X labels
+  months.forEach((m,i)=>{
+    svg+=`<text x="${xScale(i)}" y="${H-pad.bottom+20}" text-anchor="middle" font-size="10" fill="var(--text-4,#9ca3af)">${m}</text>`;
+  });
+
+  // Lines + hover points
+  retentionMonthly.forEach((series,si)=>{
+    // path
+    const pts=series.data.map((v,i)=>`${xScale(i)},${yScale(v)}`);
+    svg+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>`;
+    // dots (hidden by default, shown on hover)
+    series.data.forEach((v,i)=>{
+      svg+=`<circle class="rc-dot rc-dot-${si}" cx="${xScale(i)}" cy="${yScale(v)}" r="3.5" fill="${series.color}" stroke="#fff" stroke-width="1.5" opacity="0" style="transition:opacity .15s"/>`;
+    });
+  });
+
+  // Invisible hover zones per x position
+  months.forEach((m,i)=>{
+    const x=xScale(i);
+    svg+=`<rect class="rc-hover-zone" x="${x-cw/(months.length*2)}" y="${pad.top}" width="${cw/months.length}" height="${ch}" fill="transparent" data-idx="${i}"/>`;
+    // guide line (hidden)
+    svg+=`<line class="rc-guide rc-guide-${i}" x1="${x}" y1="${pad.top}" x2="${x}" y2="${H-pad.bottom}" stroke="var(--text-3,#d1d5db)" stroke-width="1" stroke-dasharray="3,3" opacity="0" style="transition:opacity .15s"/>`;
+    // value labels (hidden)
+    retentionMonthly.forEach((series,si)=>{
+      const v=series.data[i];
+      svg+=`<text class="rc-val rc-val-${i}" x="${x}" y="${yScale(v)-10}" text-anchor="middle" font-size="10" font-weight="600" fill="${series.color}" opacity="0" style="transition:opacity .15s">${v.toFixed(1)}%</text>`;
+    });
+  });
+
+  svg+=`</svg>`;
+
+  // Legend
+  let legend='<div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px">';
+  retentionMonthly.forEach(s=>{
+    legend+=`<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-3)"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:${s.color}"></span>${s.name}</div>`;
+  });
+  legend+='</div>';
+
+  container.innerHTML=svg+legend;
+
+  // Hover interactions
+  const svgEl=container.querySelector('svg');
+  const zones=container.querySelectorAll('.rc-hover-zone');
+  zones.forEach(zone=>{
+    const idx=+zone.dataset.idx;
+    zone.addEventListener('mouseenter',()=>{
+      // show guide
+      const guide=container.querySelector(`.rc-guide-${idx}`);
+      if(guide)guide.setAttribute('opacity','1');
+      // show dots for all series at this idx
+      retentionMonthly.forEach((_,si)=>{
+        const dots=container.querySelectorAll(`.rc-dot-${si}`);
+        if(dots[idx])dots[idx].setAttribute('opacity','1');
+      });
+      // show value labels
+      container.querySelectorAll(`.rc-val-${idx}`).forEach(el=>el.setAttribute('opacity','1'));
+    });
+    zone.addEventListener('mouseleave',()=>{
+      const guide=container.querySelector(`.rc-guide-${idx}`);
+      if(guide)guide.setAttribute('opacity','0');
+      retentionMonthly.forEach((_,si)=>{
+        const dots=container.querySelectorAll(`.rc-dot-${si}`);
+        if(dots[idx])dots[idx].setAttribute('opacity','0');
+      });
+      container.querySelectorAll(`.rc-val-${idx}`).forEach(el=>el.setAttribute('opacity','0'));
+    });
+  });
+}
+
+// === SUBSCRIPTION DURATION (horizontal bars) ===
+function renderSubDuration(){
+  const container=document.getElementById('retentionHeatmap');
+  const now=new Date(2026,5,18);
+
+  // 按 在订时长/上线月数 比例排序
+  const sorted=[...avgSubDuration].map(d=>{
+    const parts=d.launchDate.split('-');
+    const launch=new Date(+parts[0],+parts[1]-1,1);
+    const onlineMonths=Math.round((now-launch)/(1000*60*60*24*30.44));
+    return {...d,onlineMonths,ratio:d.months/onlineMonths};
+  }).sort((a,b)=>b.ratio-a.ratio);
+
+  const maxRatio=Math.max(...sorted.map(d=>d.ratio));
+
+  let html=`<div style="display:flex;flex-direction:column;gap:6px">`;
+  sorted.forEach((d,i)=>{
+    const barW=(d.ratio/maxRatio)*100;
+    const barColor=d.ratio>=0.6?'var(--green)':d.ratio>=0.4?'var(--blue)':d.ratio>=0.25?'var(--amber)':'var(--red)';
+    html+=`<div class="prod-ret-item" style="animation:fadeUp .4s ease-out ${i*0.04+0.1}s both;padding:10px 12px">
+      <div class="prod-ret-name" style="min-width:110px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${d.color};margin-right:8px;vertical-align:middle"></span>${d.name}</div>
+      <div style="font-size:11px;color:var(--text-3);min-width:62px;text-align:center;white-space:nowrap">${d.launchDate} <span style="font-family:var(--mono);font-size:10px;color:var(--text-4)">(${d.onlineMonths}月)</span></div>
+      <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--text-1);min-width:52px;text-align:center">${d.months}<span style="font-size:11px;font-weight:400;color:var(--text-3);margin-left:2px">月</span></div>
+      <div style="flex:1;display:flex;align-items:center;gap:10px">
+        <div style="flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden">
+          <div style="width:${barW}%;height:100%;background:${barColor};border-radius:4px;transition:width .6s ease-out"></div>
+        </div>
+        <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:${barColor};min-width:52px;text-align:right">${(d.ratio*100).toFixed(0)}%</span>
+      </div>
+      <div style="font-size:11px;color:var(--text-4);min-width:45px;text-align:right">${(d.users/1000).toFixed(1)}k人</div>
+    </div>`;
+  });
+  html+=`</div>`;
+  const maxR=sorted[0], minR=sorted[sorted.length-1];
+  const avgMonths=(sorted.reduce((a,d)=>a+d.months,0)/sorted.length).toFixed(1);
+  const maxMonths=Math.max(...sorted.map(d=>d.months));
+  const minMonths=Math.min(...sorted.map(d=>d.months));
+  html+=`<div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-light);font-size:12px;color:var(--text-3)">
+    <span>最高 <strong style="color:var(--green);font-family:var(--mono)">${maxR.name} ${(maxR.ratio*100).toFixed(0)}%</strong></span>
+    <span>最低 <strong style="color:var(--red);font-family:var(--mono)">${minR.name} ${(minR.ratio*100).toFixed(0)}%</strong></span>
+    <span>均值 <strong style="color:var(--blue);font-family:var(--mono)">${(sorted.reduce((a,d)=>a+d.ratio,0)/sorted.length*100).toFixed(0)}%</strong></span>
+    <span>在订时长 <strong style="color:var(--text-1);font-family:var(--mono)">均值${avgMonths}月</strong> <span style="color:var(--text-4)">${maxMonths}月 / ${minMonths}月</span></span>
+  </div>`;
+  container.innerHTML=html;
+}
+
+// === SUB DURATION SUMMARY ===
+function renderSubDurationSummary(){
+  const container=document.getElementById('prodRetention');
+  const totalUsers=avgSubDuration.reduce((a,d)=>a+d.users,0);
+
+  let html=`<div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:14px">时长分布</div>`;
+  const buckets=[{label:'≥16月',min:16,color:'var(--green)'},{label:'12-15月',min:12,max:16,color:'var(--blue)'},{label:'10-11月',min:10,max:12,color:'var(--amber)'},{label:'<10月',min:0,max:10,color:'var(--red)'}];
+  buckets.forEach(b=>{
+    const count=avgSubDuration.filter(d=>d.months>=b.min&&(b.max?d.months<b.max:true)).length;
+    const users=avgSubDuration.filter(d=>d.months>=b.min&&(b.max?d.months<b.max:true)).reduce((a,d)=>a+d.users,0);
+    const pctVal=((users/totalUsers)*100).toFixed(0);
+    html+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:11px;color:var(--text-3);min-width:50px">${b.label}</span>
+      <div style="flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden">
+        <div style="width:${pctVal}%;height:100%;background:${b.color};border-radius:3px"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--text-2);min-width:55px;text-align:right">${count}品/${pctVal}%</span>
+    </div>`;
+  });
+  container.innerHTML=html;
+}
+
+// === ALERT FEED ===
+function renderAlertFeed(){
+  const container=document.getElementById('alertFeed');
+  const icons={
+    critical:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    warning:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+    success:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  };
+  let html='';
+  alerts.forEach((a,i)=>{
+    html+=`<div class="alert-item" style="animation:fadeUp .4s ease-out ${i*0.06+0.15}s both">
+      <div class="alert-icon ${a.type}">${icons[a.type]}</div>
+      <div class="alert-content"><div class="alert-title">${a.title}</div>
+      <div class="alert-meta"><span class="source">${a.source}</span><span>${a.time}</span></div></div></div>`;
+  });
+  container.innerHTML=html;
+}
+
+// === SUPPLIER TABLE ===
+function renderSupplierTable(){
+  const container=document.getElementById('supplierTable');
+  let html=`<table class="inv-table"><thead><tr><th>供应商</th><th>供货成功率</th><th>核销订单</th><th>采购成本</th><th>份额占比</th><th>趋势</th></tr></thead><tbody>`;
+  suppliers.forEach((s,i)=>{
+    const rateColor=s.rate>=97?'var(--green)':s.rate>=95?'var(--amber)':'var(--red)';
+    const trendIcon=s.trend==='up'?'<svg viewBox="0 0 12 12" width="14" height="14" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="1 8 6 3 11 8"/></svg>':s.trend==='down'?'<svg viewBox="0 0 12 12" width="14" height="14" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="1 4 6 9 11 4"/></svg>':'<svg viewBox="0 0 12 12" width="14" height="14" fill="none" stroke="var(--text-4)" stroke-width="2"><line x1="1" y1="6" x2="11" y2="6"/></svg>';
+    html+=`<tr style="animation:fadeUp .4s ease-out ${i*0.05+0.2}s both">
+      <td><div class="inv-product">${s.name}</div></td>
+      <td><span style="color:${rateColor};font-weight:600">${s.rate}%</span></td>
+      <td>${s.orders.toLocaleString()}</td>
+      <td>¥${s.cost}万</td>
+      <td><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><div style="width:50px;height:5px;background:var(--bg);border-radius:3px;overflow:hidden"><div style="width:${s.share*2}%;height:100%;background:var(--teal);border-radius:3px"></div></div>${s.share}%</div></td>
+      <td style="text-align:center">${trendIcon}</td></tr>`;
+  });
+  html+='</tbody></table>';
+  container.innerHTML=html;
+}
+
+// === PANEL TAB SWITCHING ===
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('panel-tab')){
+    e.target.parentElement.querySelectorAll('.panel-tab').forEach(t=>t.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+});
+
+// === GENERIC BUBBLE MATRIX ===
+function renderBubbleMatrix(cfg){
+  const container=document.getElementById(cfg.chartId);
+  const data=cfg.data;
+  const W=container.offsetWidth, H=340;
+  const pad={top:25,right:30,bottom:50,left:55};
+  const cw=W-pad.left-pad.right, ch=H-pad.top-pad.bottom;
+
+  const xVals=data.map(d=>d[cfg.xField]);
+  const yVals=data.map(d=>d[cfg.yField]);
+  const sVals=data.map(d=>d[cfg.sizeField]);
+
+  const minX=Math.min(...xVals)*0.85, maxX=Math.max(...xVals)*1.1;
+  const minY=Math.min(...yVals)-1.5, maxY=Math.max(...yVals)+1;
+  const maxS=Math.max(...sVals);
+
+  const medX=[...xVals].sort((a,b)=>a-b)[Math.floor(xVals.length/2)];
+  const medY=[...yVals].sort((a,b)=>a-b)[Math.floor(yVals.length/2)];
+
+  const xScale=v=>pad.left+((v-minX)/(maxX-minX))*cw;
+  const yScale=v=>pad.top+ch-((v-minY)/(maxY-minY))*ch;
+  const rScale=v=>Math.max(8,Math.sqrt(v/maxS)*28);
+
+  // Grid
+  let grid='';
+  for(let i=0;i<=4;i++){
+    const y=pad.top+(ch/4)*i;
+    const vRaw=maxY-((maxY-minY)/4)*i;
+    const v=cfg.yFormat?cfg.yFormat(vRaw):vRaw.toFixed(1);
+    grid+=`<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="var(--border-light)" stroke-dasharray="3,3"/>`;
+    grid+=`<text x="${pad.left-8}" y="${y+4}" text-anchor="end" fill="var(--text-4)" font-size="10" font-family="var(--mono)">${v}</text>`;
+  }
+  for(let i=0;i<=4;i++){
+    const x=pad.left+(cw/4)*i;
+    const v=Math.round(minX+((maxX-minX)/4)*i);
+    grid+=`<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${pad.top+ch}" stroke="var(--border-light)" stroke-dasharray="3,3"/>`;
+    grid+=`<text x="${x}" y="${H-pad.bottom+22}" text-anchor="middle" fill="var(--text-4)" font-size="10" font-family="var(--mono)">${v>=1000?(v/1000).toFixed(0)+'k':v}</text>`;
+  }
+
+  const mx=xScale(medX), my=yScale(medY);
+  let crosshairs=`<line x1="${mx}" y1="${pad.top}" x2="${mx}" y2="${pad.top+ch}" stroke="var(--text-4)" stroke-width="1" stroke-dasharray="6,4" opacity=".5"/>`;
+  crosshairs+=`<line x1="${pad.left}" y1="${my}" x2="${W-pad.right}" y2="${my}" stroke="var(--text-4)" stroke-width="1" stroke-dasharray="6,4" opacity=".5"/>`;
+
+  const qLabels=`
+    <text x="${pad.left+8}" y="${pad.top+14}" fill="var(--green)" font-size="10" font-weight="600" opacity=".6">潜力型</text>
+    <text x="${W-pad.right-8}" y="${pad.top+14}" text-anchor="end" fill="var(--blue)" font-size="10" font-weight="600" opacity=".6">优质型</text>
+    <text x="${pad.left+8}" y="${pad.top+ch-6}" fill="var(--red)" font-size="10" font-weight="600" opacity=".6">低效型</text>
+    <text x="${W-pad.right-8}" y="${pad.top+ch-6}" text-anchor="end" fill="var(--amber)" font-size="10" font-weight="600" opacity=".6">规模型(关注时长)</text>
+  `;
+  const axisLabels=`
+    <text x="${pad.left+cw/2}" y="${H-6}" text-anchor="middle" fill="var(--text-3)" font-size="11">${cfg.xLabel}</text>
+    <text x="14" y="${pad.top+ch/2}" text-anchor="middle" fill="var(--text-3)" font-size="11" transform="rotate(-90,14,${pad.top+ch/2})">${cfg.yLabel}</text>
+  `;
+
+  const sorted=[...data].sort((a,b)=>b[cfg.sizeField]-a[cfg.sizeField]);
+  let bubbles='';
+  sorted.forEach((d,i)=>{
+    const cx=xScale(d[cfg.xField]), cy=yScale(d[cfg.yField]), r=rScale(d[cfg.sizeField]);
+    const label=cfg.labelFn?cfg.labelFn(d):d.name;
+    bubbles+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${d.color}" opacity=".2" stroke="${d.color}" stroke-width="1.5" class="bubble-hover" data-idx="${data.indexOf(d)}" style="cursor:pointer;transition:opacity .2s"/>`;
+    bubbles+=`<text x="${cx}" y="${cy-r-5}" text-anchor="middle" fill="${d.color}" font-size="10" font-weight="600" pointer-events="none">${label}</text>`;
+  });
+
+  container.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="max-height:${H}px">
+    ${grid}${crosshairs}${qLabels}${axisLabels}${bubbles}
+  </svg>`;
+
+  // Detail card hover
+  const card=document.getElementById('detailCard');
+  function getQuadrant(d){
+    const highX=d[cfg.xField]>=medX, highY=d[cfg.yField]>=medY;
+    if(highX&&highY) return {label:'优质型',bg:'var(--blue-bg)',color:'var(--blue)'};
+    if(!highX&&highY) return {label:'潜力型',bg:'var(--green-bg)',color:'var(--green)'};
+    if(highX&&!highY) return {label:'规模型 · 关注时长',bg:'var(--amber-bg)',color:'var(--amber)'};
+    return {label:'低效型',bg:'var(--red-bg)',color:'var(--red)'};
+  }
+  container.querySelectorAll('.bubble-hover').forEach(el=>{
+    const idx=+el.dataset.idx;
+    const d=data[idx];
+    const q=getQuadrant(d);
+    const origR=parseFloat(el.getAttribute('r'));
+    el.addEventListener('mouseenter',e=>{
+      el.setAttribute('opacity','0.45');
+      el.setAttribute('r',origR*1.15);
+      hideTooltip();
+      card.innerHTML=cfg.cardFn(d,q);
+      card.classList.add('show');
+    });
+    el.addEventListener('mousemove',e=>{
+      let left=e.clientX+16, top=e.clientY-20;
+      if(left+260>window.innerWidth) left=e.clientX-270;
+      if(top+280>window.innerHeight) top=e.clientY-280;
+      if(top<0) top=10;
+      card.style.left=left+'px';card.style.top=top+'px';
+    });
+    el.addEventListener('mouseleave',e=>{
+      el.setAttribute('opacity','0.2');
+      el.setAttribute('r',origR);
+      card.classList.remove('show');
+    });
+    el.addEventListener('mouseenter',e=>{
+      let left=e.clientX+16, top=e.clientY-20;
+      if(left+260>window.innerWidth) left=e.clientX-270;
+      card.style.left=left+'px';card.style.top=top+'px';
+    },{once:false});
+  });
+}
+
+// === UNIT MATRIX CONFIG ===
+function renderUnitMatrix(){
+  renderBubbleMatrix({
+    chartId:'unitMatrixChart',
+    data:operatorUnits, xField:'orders', yField:'avgDuration', sizeField:'revenue',
+    xLabel:'推广订单量 (笔/月)', yLabel:'平均在订时长 (月)',
+    yFormat:v=>v.toFixed(0)+'月',
+    labelFn:d=>d.name.replace('移动',''),
+    cardFn:(d,q)=>{
+      const profit=d.revenue-d.promoCost-d.suppCost;
+      const margin=((profit/d.revenue)*100).toFixed(1);
+      const mc=margin>=25?'green':margin>=15?'':'red';
+      const rc=d.avgDuration>=15?'green':d.avgDuration>=12?'':'red';
+      return `<div class="detail-card-header"><span class="detail-card-dot" style="background:${d.color}"></span><span class="detail-card-name">${d.name}</span></div>
+        <div class="detail-card-grid">
+          <div class="detail-card-item"><div class="dc-label">推广订单量</div><div class="dc-value">${d.orders.toLocaleString()}</div></div>
+          <div class="detail-card-item"><div class="dc-label">平均在订时长</div><div class="dc-value ${rc}">${d.avgDuration}月</div></div>
+          <div class="detail-card-item"><div class="dc-label">结算收入</div><div class="dc-value">¥${d.revenue}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">推广成本</div><div class="dc-value">¥${d.promoCost}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">供应商成本</div><div class="dc-value">¥${d.suppCost}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">毛利</div><div class="dc-value ${mc}">¥${profit}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">在订用户</div><div class="dc-value">${d.activeUsers}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">毛利率</div><div class="dc-value ${mc}">${margin}%</div></div>
+        </div>
+        <div class="detail-card-footer"><span class="detail-card-tag" style="background:${q.bg};color:${q.color}">${q.label}</span></div>`;
+    }
+  });
+}
+
+// === CHANNEL MATRIX CONFIG ===
+function renderChannelMatrix(){
+  renderBubbleMatrix({
+    chartId:'channelMatrixChart',
+    data:channels, xField:'orders', yField:'avgDuration', sizeField:'roi',
+    xLabel:'推广订单量 (笔)', yLabel:'平均在订时长 (月)',
+    yFormat:v=>v.toFixed(0)+'月',
+    labelFn:d=>d.name.split(' · ')[0],
+    cardFn:(d,q)=>{
+      const revW=(d.rev/10000).toFixed(1);
+      const costW=(d.cost/10000).toFixed(1);
+      const roiClass=d.roi>=1.5?'green':d.roi>=1?'':'red';
+      const rc=d.avgDuration>=15?'green':d.avgDuration>=12?'':'red';
+      return `<div class="detail-card-header"><span class="detail-card-dot" style="background:${d.color}"></span><span class="detail-card-name">${d.name}</span></div>
+        <div class="detail-card-grid">
+          <div class="detail-card-item"><div class="dc-label">推广订单量</div><div class="dc-value">${d.orders.toLocaleString()}</div></div>
+          <div class="detail-card-item"><div class="dc-label">平均在订时长</div><div class="dc-value ${rc}">${d.avgDuration}月</div></div>
+          <div class="detail-card-item"><div class="dc-label">结算收入</div><div class="dc-value">¥${revW}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">推广成本</div><div class="dc-value">¥${costW}万</div></div>
+          <div class="detail-card-item"><div class="dc-label">ROI</div><div class="dc-value ${roiClass}">${d.roi.toFixed(2)}</div></div>
+          <div class="detail-card-item"><div class="dc-label">在订用户</div><div class="dc-value">${d.activeUsers}万</div></div>
+        </div>
+        <div class="detail-card-footer"><span class="detail-card-tag" style="background:${q.bg};color:${q.color}">${q.label}</span></div>`;
+    }
+  });
+}
+
+// === INIT ===
+function init(){
+  renderKPIs();
+  renderOrderTrend();
+  renderOmniOrders();
+  renderDepotOrders();
+  renderCostChart();
+  renderRetentionHeatmap();
+  renderRetentionCurve();
+  renderUnitMatrix();
+  renderChannelMatrix();
+  renderSubDuration();
+  renderSubDurationSummary();
+  renderInventoryTable();
+  renderAlertFeed();
+  renderSupplierTable();
+  setupDateFilters();
+}
+window.addEventListener('load',init);
+
+// === DATE FILTER SETUP ===
+function setupDateFilters(){
+  // 灵霄推广订单量 - 日期筛选器
+  const celChart = document.querySelector('#orderTrendChart');
+  if(celChart){
+    const celPanel = celChart.closest('.panel');
+    const celDateInputs = celPanel.querySelectorAll('input[type="month"]');
+    const celQueryBtn = celPanel.querySelector('.chart-btn-query');
+    const celResetBtn = celPanel.querySelector('.chart-btn-reset');
+
+    if(celQueryBtn){
+      celQueryBtn.addEventListener('click', () => {
+        const startMonth = celDateInputs[0].value;
+        const endMonth = celDateInputs[1].value;
+        if(startMonth && endMonth){
+          const filtered = filterDataByMonthRange(startMonth, endMonth, celOrders);
+          renderOrderTrend(filtered.data, filtered.labels);
+        }
+      });
+    }
+    if(celResetBtn){
+      celResetBtn.addEventListener('click', () => {
+        celDateInputs[0].value = '2025-07';
+        celDateInputs[1].value = '2026-06';
+        renderOrderTrend();
+      });
+    }
+  }
+
+  // 万象结算订单量 - 日期筛选器
+  const omniChart = document.querySelector('#omniOrderChart');
+  if(omniChart){
+    const omniPanel = omniChart.closest('.panel');
+    const omniDateInputs = omniPanel.querySelectorAll('input[type="month"]');
+    const omniQueryBtn = omniPanel.querySelector('.chart-btn-query');
+    const omniResetBtn = omniPanel.querySelector('.chart-btn-reset');
+
+    if(omniQueryBtn){
+      omniQueryBtn.addEventListener('click', () => {
+        const startMonth = omniDateInputs[0].value;
+        const endMonth = omniDateInputs[1].value;
+        if(startMonth && endMonth){
+          const filtered = filterDataByMonthRange(startMonth, endMonth, omniOrders);
+          renderOmniOrders(filtered.data, filtered.labels);
+        }
+      });
+    }
+    if(omniResetBtn){
+      omniResetBtn.addEventListener('click', () => {
+        omniDateInputs[0].value = '2025-07';
+        omniDateInputs[1].value = '2026-06';
+        renderOmniOrders();
+      });
+    }
+
+    // 收入与成本结构 - 使用万象的日期筛选器同步
+    // 当万象日期变化时，同步更新成本图表
+    if(omniQueryBtn){
+      omniQueryBtn.addEventListener('click', () => {
+        const startMonth = omniDateInputs[0].value;
+        const endMonth = omniDateInputs[1].value;
+        if(startMonth && endMonth){
+          const filteredRev = filterDataByMonthRange(startMonth, endMonth, revenue);
+          const filteredPromo = filterDataByMonthRange(startMonth, endMonth, promoCost);
+          const filteredSupp = filterDataByMonthRange(startMonth, endMonth, supplierCost);
+          const filteredProfit = filterDataByMonthRange(startMonth, endMonth, grossProfit);
+          renderCostChart(filteredRev.data, filteredPromo.data, filteredSupp.data, filteredProfit.data, filteredRev.labels);
+        }
+      });
+    }
+    if(omniResetBtn){
+      omniResetBtn.addEventListener('click', () => {
+        renderCostChart();
+      });
+    }
+  }
+}
+
+// ResizeObserver + debounce for smooth matrix re-render
+let _resizeTimer=null;
+function smoothResizeMatrix(){
+  const charts=['unitMatrixChart','channelMatrixChart'];
+  charts.forEach(id=>{const el=document.getElementById(id);if(el&&el.querySelector('svg'))el.querySelector('svg').style.opacity='0';});
+  clearTimeout(_resizeTimer);
+  _resizeTimer=setTimeout(()=>{
+    renderUnitMatrix();
+    renderChannelMatrix();
+    charts.forEach(id=>{const el=document.getElementById(id);if(el&&el.querySelector('svg'))el.querySelector('svg').style.opacity='1';});
+  },120);
+}
+if(window.ResizeObserver){
+  const ro=new ResizeObserver(smoothResizeMatrix);
+  window.addEventListener('load',()=>{
+    ['unitMatrixChart','channelMatrixChart'].forEach(id=>{const el=document.getElementById(id);if(el)ro.observe(el);});
+  });
+}
+let _chartTimer=null;
+window.addEventListener('resize',()=>{
+  clearTimeout(_chartTimer);
+  _chartTimer=setTimeout(()=>{renderOrderTrend();renderOmniOrders();renderDepotOrders();renderCostChart();renderRetentionCurve()},100);
+  smoothResizeMatrix();
+});
+</script>
+</body>
+</html>
