@@ -218,7 +218,185 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text-1);line-heigh
 .delay-1{animation-delay:.05s}.delay-2{animation-delay:.1s}.delay-3{animation-delay:.15s}
 .delay-4{animation-delay:.2s}.delay-5{animation-delay:.25s}.delay-6{animation-delay:.3s}
 .delay-7{animation-delay:.35s}.delay-8{animation-delay:.4s}
-</style>
+
+/* === AI HOMEPAGE COMPONENTS === */
+
+/* System Tabs */
+.sys-tabs{display:flex;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;gap:2px}
+.sys-tab{padding:5px 16px;border-radius:4px;font-size:12px;font-weight:500;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--text-3);font-family:var(--sans)}
+.sys-tab.active{background:var(--surface);color:var(--text-1);box-shadow:var(--shadow-s)}
+.sys-tab:hover:not(.active){color:var(--text-2)}
+
+/* Search */
+.ai-search-wrap{position:relative;flex:1;max-width:420px}
+.ai-search-input{width:100%;padding:8px 14px 8px 36px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;background:var(--surface-alt);outline:none;font-family:var(--sans);color:var(--text-1);transition:all .2s}
+.ai-search-input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.ai-search-input::placeholder{color:var(--text-4)}
+.ai-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3)}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--text-1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0}
+
+/* Insight Cards */
+.insight-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.insight-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.insight-card:hover{border-color:var(--text-4);box-shadow:var(--shadow-m);transform:translateY(-1px)}
+.insight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.insight-card.critical::before{background:var(--red)}
+.insight-card.warning::before{background:var(--amber)}
+.insight-card.success::before{background:var(--green)}
+.insight-card.info::before{background:var(--blue)}
+.insight-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.insight-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.insight-card.critical .insight-label{color:var(--red)}
+.insight-card.warning .insight-label{color:var(--amber)}
+.insight-card.success .insight-label{color:var(--green)}
+.insight-card.info .insight-label{color:var(--blue)}
+.status-dot{width:6px;height:6px;border-radius:50%}
+.insight-card.critical .status-dot{background:var(--red)}
+.insight-card.warning .status-dot{background:var(--amber);animation:pulse 2s ease-in-out infinite}
+.insight-card.success .status-dot{background:var(--green)}
+.insight-card.info .status-dot{background:var(--blue)}
+.insight-body{font-size:12.5px;color:var(--text-2);line-height:1.65;margin-bottom:14px}
+.insight-action{font-size:12px;font-weight:500;color:var(--blue);background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:4px}
+.insight-action:hover{gap:6px}
+
+/* Briefing + Quick Actions Grid */
+.ai-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-bottom:24px}
+
+/* Briefing */
+.briefing-summary{padding:14px 16px;border-radius:var(--r-sm);margin-bottom:16px;font-size:13px;line-height:1.75;color:var(--text-2)}
+.briefing-summary strong{color:var(--text-1);font-weight:600}
+.section-title{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border-light)}
+.highlight-list{list-style:none;margin-bottom:16px}
+.highlight-item{font-size:12.5px;color:var(--text-2);padding:5px 0;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.highlight-bullet{width:4px;height:4px;border-radius:50%;background:var(--blue);margin-top:8px;flex-shrink:0}
+.todo-list{list-style:none;margin-bottom:4px}
+.todo-item{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:12.5px;color:var(--text-2);cursor:pointer;transition:color .15s}
+.todo-item:hover{color:var(--text-1)}
+.checkbox{width:15px;height:15px;border:1.5px solid var(--border);border-radius:3px;flex-shrink:0;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.checkbox:hover{border-color:var(--blue)}
+.panel-actions{display:flex;gap:8px;padding-top:16px;border-top:1px solid var(--border-light)}
+.btn{padding:6px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:500;border:none;cursor:pointer;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:5px}
+.btn-primary{background:var(--text-1);color:#fff}
+.btn-primary:hover{background:#292524}
+.btn-secondary{background:var(--surface-alt);color:var(--text-2);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--border-light)}
+
+/* Quick Actions */
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.action-btn{padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);font-size:12.5px;font-weight:500;color:var(--text-1);cursor:pointer;text-align:left;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:8px}
+.action-btn:hover{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.action-btn svg{color:var(--text-3);flex-shrink:0;transition:color .2s}
+.action-btn:hover svg{color:var(--blue)}
+.ai-suggest{padding:14px;border-radius:var(--r-sm);margin-bottom:16px;background:var(--blue-bg);border:1px solid rgba(37,99,235,.15)}
+.ai-suggest-label{font-size:11px;font-weight:600;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.ai-suggest-text{font-size:12px;color:var(--text-2);line-height:1.65;margin-bottom:8px}
+.ai-suggest-link{font-size:12px;font-weight:500;color:var(--blue);text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.ai-suggest-link:hover{text-decoration:underline}
+.recent-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;font-size:12.5px;cursor:pointer;border-bottom:1px solid var(--border-light);transition:color .15s}
+.recent-item:last-child{border-bottom:none}
+.recent-item:hover{color:var(--blue)}
+.recent-time{font-size:11px;color:var(--text-3);font-family:var(--mono)}
+
+/* Chat Panel */
+.chat-area{padding:20px}
+.chat-placeholder{text-align:center;padding:36px 0;cursor:pointer;border-radius:var(--r-sm);transition:all .2s}
+.chat-placeholder:hover{background:var(--surface-alt)}
+.chat-placeholder-icon{color:var(--text-3);margin-bottom:10px}
+.chat-placeholder-text{font-size:13px;color:var(--text-2);margin-bottom:4px}
+.chat-placeholder-hint{font-size:12px;color:var(--text-3)}
+.chat-placeholder-hint code{font-family:var(--mono);font-size:11px;background:var(--surface-alt);padding:2px 6px;border-radius:3px;color:var(--text-2)}
+.msg{margin-bottom:16px}
+.msg-user{display:flex;justify-content:flex-end}
+.msg-user-bubble{background:var(--text-1);color:#fff;padding:9px 16px;border-radius:14px 14px 4px 14px;font-size:13px;max-width:480px;line-height:1.6}
+.msg-ai-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.msg-ai-avatar{width:22px;height:22px;border-radius:5px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700;letter-spacing:.5px}
+.msg-ai-name{font-size:11px;color:var(--text-3);font-weight:500}
+.msg-ai-bubble{background:var(--surface-alt);border:1px solid var(--border);border-radius:14px 14px 14px 4px;padding:16px;font-size:13px;color:var(--text-1);line-height:1.7}
+.msg-chart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;margin:12px 0}
+.msg-chart-title{font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:12px}
+.chat-bars{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:110px}
+.chat-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.chat-bar-value{font-size:11px;font-weight:600;color:var(--text-1);font-family:var(--mono)}
+.chat-bar{width:100%;border-radius:4px 4px 0 0;transition:height .6s cubic-bezier(.4,0,.2,1);min-height:4px}
+.chat-bar-label{font-size:11px;color:var(--text-3);white-space:nowrap}
+.msg-suggestions{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.msg-suggestions span{font-size:11px;color:var(--text-3);line-height:28px;margin-right:2px}
+.suggestion-chip{font-size:11.5px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);cursor:pointer;font-family:var(--sans);transition:all .2s}
+.suggestion-chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.chat-input-row{display:flex;gap:8px;padding:0 20px 20px}
+.chat-input{flex:1;padding:9px 14px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:12.5px;background:var(--surface-alt);outline:none;font-family:var(--sans);color:var(--text-1);transition:all .2s}
+.chat-input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.chat-input::placeholder{color:var(--text-3)}
+.btn-send{padding:9px 22px;border-radius:var(--r-sm);background:var(--text-1);color:#fff;font-size:12.5px;font-weight:500;border:none;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-send:hover{background:#292524}
+
+/* === REPORT DRAWER === */
+.report-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.35);z-index:100;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.report-overlay.open{opacity:1;pointer-events:auto}
+.report-drawer{position:fixed;top:0;right:0;bottom:0;width:680px;max-width:92vw;background:var(--surface);z-index:101;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+.report-drawer.open{transform:translateX(0)}
+.report-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);flex-shrink:0}
+.report-drawer-header h2{font-size:16px;font-weight:700;color:var(--text-1);margin:0}
+.report-drawer-header .report-date{font-size:12px;color:var(--text-3);font-family:var(--mono);margin-left:12px}
+.report-close-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-3);transition:all .15s}
+.report-close-btn:hover{background:var(--surface-alt);color:var(--text-1)}
+.report-drawer-body{flex:1;overflow-y:auto;padding:24px}
+.report-section{margin-bottom:28px}
+.report-section:last-child{margin-bottom:0}
+.report-section-title{font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
+.report-section-title .rpt-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* Timeline */
+.report-timeline{position:relative;padding-left:20px}
+.report-timeline::before{content:'';position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:var(--border)}
+.timeline-item{position:relative;padding:8px 0 8px 16px;font-size:12.5px;color:var(--text-2);line-height:1.6}
+.timeline-item::before{content:'';position:absolute;left:-18px;top:14px;width:10px;height:10px;border-radius:50%;border:2px solid var(--blue);background:var(--surface)}
+.timeline-item.alert::before{border-color:var(--red)}
+.timeline-item.warn::before{border-color:var(--amber)}
+.timeline-item.ok::before{border-color:var(--green)}
+.timeline-time{font-family:var(--mono);font-size:11px;color:var(--text-3);margin-right:8px}
+
+/* Target comparison bars */
+.target-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:12.5px}
+.target-label{width:80px;color:var(--text-2);flex-shrink:0;text-align:right}
+.target-bar-bg{flex:1;height:18px;background:var(--border-light);border-radius:4px;overflow:hidden;position:relative}
+.target-bar-fill{height:100%;border-radius:4px;transition:width .6s ease-out}
+.target-marker{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--text-1)}
+.target-val{width:80px;font-family:var(--mono);font-size:12px;color:var(--text-1);font-weight:600}
+.target-pct{width:48px;font-family:var(--mono);font-size:11px;color:var(--text-3);text-align:right}
+
+/* Product detail table */
+.rpt-table{width:100%;border-collapse:collapse;font-size:12px}
+.rpt-table th{text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+.rpt-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);color:var(--text-2)}
+.rpt-table tr:hover td{background:var(--surface-alt)}
+.rpt-table .mono{font-family:var(--mono);font-weight:600;color:var(--text-1)}
+.rpt-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:8px}
+.rpt-badge.up{background:var(--green-bg);color:var(--green)}
+.rpt-badge.down{background:var(--red-bg);color:var(--red)}
+.rpt-badge.flat{background:var(--surface-alt);color:var(--text-3)}
+
+/* Operation log */
+.op-log-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-light);font-size:12.5px}
+.op-log-item:last-child{border-bottom:none}
+.op-log-time{font-family:var(--mono);font-size:11px;color:var(--text-3);min-width:44px;flex-shrink:0;padding-top:1px}
+.op-log-content{color:var(--text-2);line-height:1.5}
+.op-log-content strong{color:var(--text-1);font-weight:600}
+
+/* AI suggestion block in report */
+.report-ai-suggest{background:var(--blue-bg);border:1px solid rgba(37,99,235,.12);border-radius:var(--r-sm);padding:14px 16px}
+.report-ai-suggest-title{font-size:11px;font-weight:600;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.report-ai-suggest-item{font-size:12.5px;color:var(--text-2);line-height:1.6;padding:4px 0;display:flex;align-items:flex-start;gap:8px}
+.report-ai-suggest-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);margin-top:7px;flex-shrink:0}
+
+@media(max-width:1200px){
+  .insight-row{grid-template-columns:1fr 1fr}
+  .ai-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .insight-row{grid-template-columns:1fr}
+}</style>
 </head>
 <body>
 <div class="dashboard">
@@ -240,6 +418,118 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text-1);line-heigh
 
   <!-- KPI CARDS -->
   <div class="kpi-row" id="kpiRow"></div>
+
+  <!-- AI INSIGHT CARDS -->
+  <div class="insight-row">
+    <div class="insight-card critical fade-up delay-1">
+      <div class="insight-header"><span class="insight-label">发放异常</span><div class="status-dot"></div></div>
+      <div class="insight-body">"腾讯视频月卡"发放失败率升至8.3%，疑似供应商接口不稳定</div>
+      <button class="insight-action">AI 分析 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="insight-card warning fade-up delay-2">
+      <div class="insight-header"><span class="insight-label">库存倒计时</span><div class="status-dot"></div></div>
+      <div class="insight-body">5个权益库存预计3天内耗尽，其中2个已关联活跃推广</div>
+      <button class="insight-action">查看列表 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="insight-card success fade-up delay-3">
+      <div class="insight-header"><span class="insight-label">配置建议</span><div class="status-dot"></div></div>
+      <div class="insight-body">"RCQZFBHB10"可考虑开启穿插调用，当前供应商库存分布不均</div>
+      <button class="insight-action">查看配置 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="insight-card info fade-up delay-4">
+      <div class="insight-header"><span class="insight-label">链路断裂</span><div class="status-dot"></div></div>
+      <div class="insight-body">2个权益配置关联的库存项对应的商品已下架，发放将失败</div>
+      <button class="insight-action">修复链路 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+  </div>
+
+  <!-- AI BRIEFING + QUICK ACTIONS -->
+  <div class="ai-grid">
+    <div class="panel fade-up delay-4">
+      <div class="panel-header">
+        <div class="panel-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 运营简报</div>
+        <div class="panel-meta">2026-06-22</div>
+      </div>
+      <div class="panel-body">
+        <div class="briefing-summary" style="background:var(--blue-bg)">今日发放权益 <strong>4,120</strong> 份，发放成功率 <strong>96.2%</strong>。当前活跃权益配置 <strong>28</strong> 个，总库存余量 <strong>52,800</strong> 份。</div>
+        <div class="section-title">重点关注</div>
+        <ul class="highlight-list">
+          <li class="highlight-item"><div class="highlight-bullet"></div>"腾讯视频月卡"发放失败率偏高，需关注供应商接口状态</li>
+          <li class="highlight-item"><div class="highlight-bullet"></div>5个权益库存预计3天内耗尽，其中2个关联活跃推广</li>
+          <li class="highlight-item"><div class="highlight-bullet"></div>跨系统库存同步正常，云仓-万象数据一致性99.7%</li>
+        </ul>
+        <div class="section-title">待处理事项</div>
+        <ul class="todo-list">
+          <li class="todo-item"><div class="checkbox"></div><span>2个权益配置存在链路断裂</span></li>
+          <li class="todo-item"><div class="checkbox"></div><span>3个短信模板即将过期</span></li>
+          <li class="todo-item"><div class="checkbox"></div><span>1个N选M配置建议优化</span></li>
+        </ul>
+        <div class="panel-actions">
+          <button class="btn btn-primary" id="expandReportBtn">展开完整报告</button>
+          <button class="btn btn-secondary"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出</button>
+          <button class="btn btn-secondary"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 刷新</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel fade-up delay-5">
+      <div class="panel-header">
+        <div class="panel-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 快捷操作</div>
+      </div>
+      <div class="panel-body">
+        <div class="section-title">常用功能</div>
+        <div class="action-grid">
+          <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> 新建配置</button>
+          <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 权益库存</button>
+          <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> 增减库存</button>
+          <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 短信模板</button>
+        </div>
+        <div class="section-title">智能建议</div>
+        <div class="ai-suggest">
+          <div class="ai-suggest-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> AI 建议</div>
+          <div class="ai-suggest-text">"RCQZFBHB10"配置关联的供应商库存分布不均，建议开启穿插调用模式以均衡消耗。</div>
+          <a class="ai-suggest-link">去操作 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="section-title">最近操作</div>
+        <div>
+          <div class="recent-item"><span>编辑权益配置</span><span class="recent-time">1h</span></div>
+          <div class="recent-item"><span>增加库存-支付宝红包</span><span class="recent-time">3h</span></div>
+          <div class="recent-item"><span>创建短信模板</span><span class="recent-time">1d</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CHAT PANEL -->
+  <div class="section-label">AI 数据查询</div>
+  <div class="panel fade-up delay-5" style="margin-bottom:24px">
+    <div class="panel-header">
+      <div class="panel-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 自然语言查询</div>
+      <div class="panel-meta">输入问题，AI 将为你查询数据并生成分析</div>
+    </div>
+    <div class="chat-area">
+      <div class="msg msg-user">
+        <div class="msg-user-bubble">RCQZFBHB10的完整关联链路是什么</div>
+      </div>
+      <div class="msg">
+        <div class="msg-ai-header"><div class="msg-ai-avatar">AI</div><div class="msg-ai-name">分析助手</div></div>
+        <div class="msg-ai-bubble">
+          <p style="margin-bottom:12px">RCQZFBHB10（重庆移动-支付宝红包10元）的完整关联链路：</p>
+          <p style="margin-bottom:12px">权益配置 RCQZFBHB10 → 权益库存"重庆支付宝库存"(余量8,200) → 商品规格"支付宝红包10元-移动版" → 供应商产品：丰享(优先级1) + 兑吧(优先级2)</p>
+          <div class="msg-suggestions">
+            <span>推荐追问</span>
+            <button class="suggestion-chip">查看库存余量</button>
+            <button class="suggestion-chip">编辑关联配置</button>
+            <button class="suggestion-chip">查看发放记录</button>
+            <button class="suggestion-chip">供应商切换频率</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" placeholder="继续提问，如：只看CPA渠道的数据...">
+      <button class="btn-send">发送</button>
+    </div>
+  </div>
 
   <!-- SECTION: INVENTORY + ALERTS -->
   <div class="section-label">运营监控</div>
@@ -1327,6 +1617,36 @@ function renderChannelMatrix(){
   });
 }
 
+// === REPORT DRAWER FUNCTION ===
+function setupReportDrawer(){
+  const overlay = document.getElementById('reportOverlay');
+  const drawer = document.getElementById('reportDrawer');
+  const closeBtn = document.getElementById('reportCloseBtn');
+  const expandBtn = document.getElementById('expandReportBtn');
+
+  function openDrawer(){
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer(){
+    overlay.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if(expandBtn){
+    expandBtn.addEventListener('click', openDrawer);
+  }
+  if(closeBtn){
+    closeBtn.addEventListener('click', closeDrawer);
+  }
+  if(overlay){
+    overlay.addEventListener('click', closeDrawer);
+  }
+}
+
 // === INIT ===
 function init(){
   renderKPIs();
@@ -1344,6 +1664,7 @@ function init(){
   renderAlertFeed();
   renderSupplierTable();
   setupDateFilters();
+  setupReportDrawer();
 }
 window.addEventListener('load',init);
 
@@ -1450,5 +1771,80 @@ window.addEventListener('resize',()=>{
   smoothResizeMatrix();
 });
 </script>
+
+<!-- REPORT DRAWER -->
+<div class="report-overlay" id="reportOverlay"></div>
+<div class="report-drawer" id="reportDrawer">
+  <div class="report-drawer-header">
+    <div style="display:flex;align-items:center">
+      <h2>运营日报</h2>
+      <span class="report-date">2026-06-22</span>
+    </div>
+    <button class="report-close-btn" id="reportCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="report-drawer-body">
+    <div class="report-section">
+      <div class="report-section-title"><span class="rpt-dot" style="background:var(--blue)"></span>今日节奏</div>
+      <div class="report-timeline">
+        <div class="timeline-item ok"><span class="timeline-time">09:00</span>系统启动正常，各服务健康</div>
+        <div class="timeline-item warn"><span class="timeline-time">10:15</span>腾讯视频月卡发放失败率升至5.2%，已触发预警</div>
+        <div class="timeline-item ok"><span class="timeline-time">11:30</span>库存同步任务完成，数据一致性99.7%</div>
+        <div class="timeline-item alert"><span class="timeline-time">14:22</span>芒果TV月卡库存预警：预计2天内耗尽</div>
+        <div class="timeline-item ok"><span class="timeline-time">16:00</span>例行数据备份完成</div>
+      </div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title"><span class="rpt-dot" style="background:var(--green)"></span>目标达成</div>
+      <div class="target-row">
+        <span class="target-label">发放目标</span>
+        <div class="target-bar-bg"><div class="target-bar-fill" style="width:86%;background:var(--green)"></div><div class="target-marker" style="left:100%"></div></div>
+        <span class="target-val">4,120 / 4,800</span>
+        <span class="target-pct">86%</span>
+      </div>
+      <div class="target-row">
+        <span class="target-label">成功率</span>
+        <div class="target-bar-bg"><div class="target-bar-fill" style="width:96%;background:var(--blue)"></div><div class="target-marker" style="left:98%"></div></div>
+        <span class="target-val">96.2%</span>
+        <span class="target-pct">98%</span>
+      </div>
+      <div class="target-row">
+        <span class="target-label">库存健康</span>
+        <div class="target-bar-bg"><div class="target-bar-fill" style="width:78%;background:var(--amber)"></div><div class="target-marker" style="left:90%"></div></div>
+        <span class="target-val">78%</span>
+        <span class="target-pct">90%</span>
+      </div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title"><span class="rpt-dot" style="background:var(--amber)"></span>权益发放排行</div>
+      <table class="rpt-table">
+        <thead><tr><th>权益名称</th><th>发放量</th><th>成功率</th><th>趋势</th></tr></thead>
+        <tbody>
+          <tr><td>爱奇艺月卡</td><td class="mono">1,280</td><td class="mono">98.5%</td><td><span class="rpt-badge up">+12%</span></td></tr>
+          <tr><td>腾讯视频月卡</td><td class="mono">960</td><td class="mono">91.7%</td><td><span class="rpt-badge down">-8%</span></td></tr>
+          <tr><td>优酷视频月卡</td><td class="mono">840</td><td class="mono">97.2%</td><td><span class="rpt-badge up">+5%</span></td></tr>
+          <tr><td>饿了么月卡</td><td class="mono">620</td><td class="mono">99.1%</td><td><span class="rpt-badge flat">0%</span></td></tr>
+          <tr><td>网易云音乐月卡</td><td class="mono">420</td><td class="mono">96.8%</td><td><span class="rpt-badge up">+3%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title"><span class="rpt-dot" style="background:var(--red)"></span>操作日志</div>
+      <div class="op-log-item"><span class="op-log-time">15:32</span><span class="op-log-content"><strong>admin</strong> 编辑权益配置 RCQZFBHB10</span></div>
+      <div class="op-log-item"><span class="op-log-time">14:18</span><span class="op-log-content"><strong>运营组</strong> 增加库存-支付宝红包 5,000份</span></div>
+      <div class="op-log-item"><span class="op-log-time">11:45</span><span class="op-log-content"><strong>admin</strong> 创建短信模板 会员到期提醒</span></div>
+      <div class="op-log-item"><span class="op-log-time">09:20</span><span class="op-log-content"><strong>系统</strong> 自动调整供应商优先级</span></div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title"><span class="rpt-dot" style="background:var(--blue)"></span>AI 智能建议</div>
+      <div class="report-ai-suggest">
+        <div class="report-ai-suggest-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> AI 分析</div>
+        <div class="report-ai-suggest-item">腾讯视频月卡发放失败率偏高，建议联系供应商检查接口状态或切换备用供应商</div>
+        <div class="report-ai-suggest-item">5个权益库存低于安全阈值，建议及时补货，其中芒果TV月卡已触发紧急预警</div>
+        <div class="report-ai-suggest-item">"RCQZFBHB10"配置关联的供应商库存分布不均，建议开启穿插调用模式</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
