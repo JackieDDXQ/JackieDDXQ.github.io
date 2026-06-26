@@ -1,0 +1,3745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知枢 · 质量分层定价体系</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Syne:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --card-hover: #fafbfc;
+  --border: #e2e5ea;
+  --border-light: #f0f1f3;
+  --text: #1a1d21;
+  --text-secondary: #5f6368;
+  --text-muted: #9aa0a6;
+  --primary: #1a56db;
+  --primary-light: #e8f0fe;
+  --primary-dark: #1347b8;
+  --accent: #7c3aed;
+  --accent-light: #ede9fe;
+  --success: #059669;
+  --success-light: #d1fae5;
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+  --info: #2563eb;
+  --info-light: #dbeafe;
+  --tier1: #6b7280;
+  --tier1-bg: #f3f4f6;
+  --tier2: #059669;
+  --tier2-bg: #d1fae5;
+  --tier3: #7c3aed;
+  --tier3-bg: #ede9fe;
+  --tier4: #d97706;
+  --tier4-bg: #fef3c7;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --font: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: 'Syne', var(--font);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; min-width: 1080px; }
+
+/* ===== HEADER ===== */
+.header { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
+.header-logo { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+.header-logo span { color: var(--text-muted); font-weight: 400; font-size: 13px; margin-left: 10px; font-family: var(--font); }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.header-user { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.header-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; }
+
+/* ===== TABS ===== */
+.tab-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 0; }
+.tab-item { padding: 12px 20px; font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab-item:hover { color: var(--text); background: var(--card-hover); }
+.tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+.tab-item .tab-badge { display: inline-block; background: var(--primary-light); color: var(--primary); font-size: 11px; padding: 1px 6px; border-radius: 10px; margin-left: 6px; font-weight: 600; }
+
+/* ===== MAIN LAYOUT ===== */
+.main { max-width: 1200px; margin: 0 auto; padding: 24px 32px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ===== METRICS ROW ===== */
+.metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.metric-card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border-light); }
+.metric-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.metric-value { font-size: 28px; font-weight: 700; font-family: var(--font-mono); letter-spacing: -1px; }
+.metric-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.metric-trend { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; font-weight: 600; }
+.metric-trend.up { color: var(--success); }
+.metric-trend.down { color: var(--danger); }
+
+/* ===== TIER BADGE ===== */
+.tier-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.tier-badge.t1 { background: var(--tier1-bg); color: var(--tier1); }
+.tier-badge.t2 { background: var(--tier2-bg); color: var(--tier2); }
+.tier-badge.t3 { background: var(--tier3-bg); color: var(--tier3); }
+.tier-badge.t4 { background: var(--tier4-bg); color: var(--tier4); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap { margin-top: 10px; }
+.progress-bar { height: 6px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.progress-fill.t2 { background: linear-gradient(90deg, var(--tier2), #34d399); }
+.progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ===== CONTENT GRID ===== */
+.content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+.content-main { min-width: 0; }
+
+/* ===== PANEL ===== */
+.panel { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-light); margin-bottom: 20px; }
+.panel-header { padding: 16px 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.panel-title { font-size: 15px; font-weight: 600; }
+.panel-body { padding: 0; }
+.panel-body.padded { padding: 20px; }
+
+/* ===== QUESTION LIST ===== */
+.q-filters { display: flex; gap: 0; padding: 0 20px; border-bottom: 1px solid var(--border-light); }
+.q-filter { padding: 10px 14px; font-size: 13px; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+.q-filter:hover { color: var(--text); }
+.q-filter.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 500; }
+.q-filter .count { font-size: 11px; color: var(--text-muted); margin-left: 4px; }
+.q-item { display: grid; grid-template-columns: 1fr auto auto auto auto; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--border-light); transition: background 0.15s; cursor: pointer; }
+.q-item:last-child { border-bottom: none; }
+.q-item:hover { background: var(--card-hover); }
+.q-title { font-size: 13px; font-weight: 500; line-height: 1.5; }
+.q-id { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
+.q-category { font-size: 12px; color: var(--text-secondary); background: var(--bg); padding: 3px 10px; border-radius: 12px; white-space: nowrap; }
+
+/* ===== STATUS BADGE ===== */
+.status-badge { font-size: 12px; padding: 3px 10px; border-radius: 12px; font-weight: 500; white-space: nowrap; }
+.status-badge.draft { background: #f3f4f6; color: #6b7280; }
+.status-badge.review { background: #dbeafe; color: #2563eb; }
+.status-badge.passed { background: #d1fae5; color: #059669; }
+.status-badge.purchased { background: #ede9fe; color: #7c3aed; }
+.status-badge.settled { background: #f0fdf4; color: #16a34a; }
+.status-badge.rejected { background: #fee2e2; color: #dc2626; }
+
+/* ===== QUALITY SCORE ===== */
+.q-score { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.q-score-bar { width: 40px; height: 5px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+.q-score-fill { height: 100%; border-radius: 3px; }
+.q-score.pending { color: var(--text-muted); }
+.q-score.high { color: var(--success); }
+.q-score.mid { color: var(--warning); }
+.q-score.low { color: var(--danger); }
+
+/* ===== EARNINGS ===== */
+.q-earning { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; }
+.q-earning .unit { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+
+/* ===== SIDEBAR ===== */
+.sidebar-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-light); margin-bottom: 16px; overflow: hidden; }
+.sidebar-header { padding: 14px 16px; border-bottom: 1px solid var(--border-light); font-size: 14px; font-weight: 600; }
+.sidebar-body { padding: 16px; }
+
+/* ===== LEVEL UPGRADE ===== */
+.upgrade-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 13px; }
+.upgrade-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.upgrade-icon.done { background: var(--success-light); color: var(--success); }
+.upgrade-icon.pending { background: var(--border-light); color: var(--text-muted); }
+.upgrade-text { color: var(--text-secondary); }
+.upgrade-text strong { color: var(--text); font-weight: 600; }
+.upgrade-value { margin-left: auto; font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+
+/* ===== RECOMMEND ITEM ===== */
+.recommend-item { padding: 12px 0; border-bottom: 1px solid var(--border-light); }
+.recommend-item:last-child { border-bottom: none; padding-bottom: 0; }
+.recommend-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.recommend-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.recommend-earning { color: var(--primary); font-weight: 600; font-family: var(--font-mono); }
+.hot-tag { background: #fef2f2; color: #ef4444; font-size: 10px; padding: 1px 6px; border-radius: 8px; font-weight: 600; }
+
+/* ===== STREAK ===== */
+.streak-display { display: flex; gap: 4px; margin: 12px 0; }
+.streak-day { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+.streak-day.active { background: var(--success-light); color: var(--success); }
+.streak-day.inactive { background: var(--border-light); color: var(--text-muted); }
+.streak-day.today { background: var(--primary); color: #fff; }
+
+/* ===== PRICING FORMULA ===== */
+.formula-box { background: #f8f9fc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 20px; margin: 12px 0; font-family: var(--font-mono); font-size: 13px; line-height: 2; color: var(--text); }
+.formula-box .label { color: var(--text-muted); font-size: 11px; font-family: var(--font); }
+
+/* ===== 选题广场 ===== */
+.market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.market-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-light); padding: 20px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden; }
+.market-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--primary); }
+.market-card.hot { border-color: #fca5a5; }
+.market-card.hot::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ef4444, #f97316); }
+.market-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.market-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+.market-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.market-stat-label { font-size: 11px; color: var(--text-muted); }
+.market-stat-value { font-size: 16px; font-weight: 700; font-family: var(--font-mono); }
+.market-earning-range { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-light); }
+.market-earning-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.market-earning-bar { height: 8px; background: var(--border-light); border-radius: 4px; position: relative; }
+.market-earning-fill { position: absolute; height: 100%; border-radius: 4px; }
+.market-earning-values { display: flex; justify-content: space-between; font-size: 12px; font-family: var(--font-mono); margin-top: 4px; }
+.demand-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.demand-tag.high { background: #fef2f2; color: #ef4444; }
+.demand-tag.mid { background: #fffbeb; color: #d97706; }
+.demand-tag.low { background: #f0fdf4; color: #16a34a; }
+
+/* ===== PRICING CALCULATOR ===== */
+.calc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.calc-section { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-light); padding: 24px; }
+.calc-title { font-size: 15px; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+.calc-field { margin-bottom: 20px; }
+.calc-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.calc-label .value { font-family: var(--font-mono); color: var(--primary); font-weight: 600; }
+.calc-select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-family: var(--font); color: var(--text); background: var(--card); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%239aa0a6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+.calc-range { width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: var(--border-light); border-radius: 3px; outline: none; cursor: pointer; }
+.calc-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 1px 4px rgba(26,86,219,0.3); }
+.calc-range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.calc-result { text-align: center; padding: 32px 24px; }
+.calc-result-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.calc-result-value { font-size: 48px; font-weight: 700; font-family: var(--font-mono); color: var(--primary); letter-spacing: -2px; }
+.calc-result-unit { font-size: 16px; color: var(--text-secondary); font-weight: 400; }
+.calc-result-breakdown { margin-top: 24px; text-align: left; }
+.calc-breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--border-light); }
+.calc-breakdown-row:last-child { border-bottom: none; font-weight: 600; }
+.calc-breakdown-label { color: var(--text-secondary); }
+.calc-breakdown-value { font-family: var(--font-mono); font-weight: 500; }
+.calc-comparison { margin-top: 20px; padding: 16px; background: #f8f9fc; border-radius: var(--radius-sm); }
+.calc-comparison-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; }
+.calc-comparison-item { display: flex; justify-content: space-between; padding: 6px 0; font-size: 12px; }
+.calc-comparison-item .label { color: var(--text-muted); }
+.calc-comparison-item .val { font-family: var(--font-mono); font-weight: 500; }
+
+/* ===== SCORING TIMELINE ===== */
+.timeline { display: flex; align-items: flex-start; padding: 20px 0; }
+.timeline-step { flex: 1; text-align: center; position: relative; }
+.timeline-step::after { content: ''; position: absolute; top: 14px; left: 50%; width: 100%; height: 2px; background: var(--border-light); }
+.timeline-step:last-child::after { display: none; }
+.timeline-step.completed::after { background: var(--success); }
+.timeline-step.current::after { background: linear-gradient(90deg, var(--success), var(--border-light)); }
+.timeline-dot { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; position: relative; z-index: 1; margin-bottom: 8px; }
+.timeline-dot.pending { background: var(--border-light); color: var(--text-muted); }
+.timeline-dot.completed { background: var(--success); color: #fff; }
+.timeline-dot.current { background: var(--primary); color: #fff; box-shadow: 0 0 0 4px rgba(26,86,219,0.15); }
+.timeline-label { font-size: 12px; font-weight: 500; color: var(--text); }
+.timeline-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* ===== DESIGN SPEC TAB ===== */
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.spec-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-light); padding: 24px; }
+.spec-card.full { grid-column: 1 / -1; }
+.spec-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 8px; }
+.spec-card h3 .icon { font-size: 18px; }
+
+/* ===== LINE ICONS ===== */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #666666;
+  font-size: 24px;
+  line-height: 1;
+}
+.spec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.spec-table th { text-align: left; padding: 8px 12px; background: #f8f9fc; font-weight: 600; font-size: 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+.spec-table td { padding: 8px 12px; border-bottom: 1px solid var(--border-light); }
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-note { background: #fffbeb; border-left: 3px solid var(--warning); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: #92400e; margin-top: 12px; line-height: 1.7; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.3s ease; }
+
+/* ===== EARNINGS CHART ===== */
+.earnings-chart { padding: 16px 0; }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; }
+.chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.chart-bar { width: 100%; border-radius: 3px 3px 0 0; transition: height 0.4s ease; min-height: 4px; }
+.chart-bar-label { font-size: 10px; color: var(--text-muted); }
+.chart-bar-value { font-size: 10px; font-family: var(--font-mono); font-weight: 600; color: var(--text-secondary); }
+
+/* ===== QUESTION DETAIL MODAL ===== */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; justify-content: center; align-items: center; }
+.modal-overlay.show { display: flex; }
+.modal { background: var(--card); border-radius: 12px; width: 640px; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+.modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-size: 16px; font-weight: 600; }
+.modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--bg); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+.modal-close:hover { background: var(--border); }
+.modal-body { padding: 24px; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">知枢<span>专家工作台</span></div>
+  <div class="header-right">
+    <span style="font-size:12px;color:var(--text-muted);">质量分层定价 · 原型演示</span>
+    <div class="header-user">
+      <div class="header-avatar">张</div>
+      <span style="font-weight:500;">张明远</span>
+      <span class="tier-badge t2">L2 熟手</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <div class="tab-item active" data-tab="spec">定价规则<span class="tab-badge">规则+计算器</span></div>
+  <div class="tab-item" data-tab="dashboard">工作台</div>
+  <div class="tab-item" data-tab="market">选题广场</div>
+  <div class="tab-item" data-tab="upload">上传题目</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ============================== -->
+<!-- TAB: 定价规则 -->
+<!-- ============================== -->
+<div class="tab-content active" id="tab-spec">
+
+<!-- PRICING CALCULATOR - PROMINENT POSITION -->
+<div style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-radius:var(--radius);padding:24px;border:2px solid var(--border);margin-bottom:32px;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="width:40px;height:40px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:600;">酬金预估计算器</h3>
+      <p style="font-size:12px;color:var(--text-muted);">输入参数，实时计算您的预估酬金</p>
+    </div>
+  </div>
+
+  <div class="calc-layout">
+    <div class="calc-section" style="background:#fff;border-radius:var(--radius-sm);padding:20px;">
+      <div class="calc-title">参数设置</div>
+
+      <div class="calc-field">
+        <div class="calc-label"><span>品类</span></div>
+        <select class="calc-select" id="calc-category" onchange="calculatePrice()">
+          <option value="code" data-base="70" data-coeff="1.4">代码生成（基础¥70 · 系数1.4）</option>
+          <option value="math" data-base="65" data-coeff="1.3">数学推理（基础¥65 · 系数1.3）</option>
+          <option value="logic" data-base="55" data-coeff="1.1">逻辑推理（基础¥55 · 系数1.1）</option>
+          <option value="nlp" data-base="50" data-coeff="1.0">自然语言处理（基础¥50 · 系数1.0）</option>
+          <option value="general" data-base="40" data-coeff="0.8">通用知识（基础¥40 · 系数0.8）</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-label"><span>专家等级</span></div>
+        <select class="calc-select" id="calc-tier" onchange="calculatePrice()">
+          <option value="1.0">L1 新星（系数 1.0×）</option>
+          <option value="1.5" selected>L2 熟手（系数 1.5×）</option>
+          <option value="2.2">L3 精英（系数 2.2×）</option>
+          <option value="3.5">L4 大师（系数 3.5×）</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-label">
+          <span>审核效率分</span>
+          <span class="value" id="efficiency-val">90</span>
+        </div>
+        <input type="range" class="calc-range" id="calc-efficiency" min="20" max="100" value="90" oninput="updateEfficiency();calculatePrice()">
+        <div class="calc-range-labels"><span>20 (退回2次)</span><span>60</span><span>100 (一次过)</span></div>
+      </div>
+
+      <div style="padding:12px;background:#fef3c7;border-radius:var(--radius-sm);font-size:12px;color:#92400e;line-height:1.6;border:1px solid #fcd34d;">
+        <strong>前提条件：</strong>题目已通过审核并被采购。未通过审核酬金为¥0；通过但未采购仅获¥50审核费。
+      </div>
+    </div>
+
+    <div class="calc-section" style="background:#fff;border-radius:var(--radius-sm);padding:20px;">
+      <div class="calc-title">预估酬金</div>
+      <div class="calc-result">
+        <div class="calc-result-label">单题预估酬金</div>
+        <div class="calc-result-value" id="calc-total">¥278</div>
+        <div style="margin-top:4px;font-size:13px;color:var(--text-muted);">已通过审核并被采购</div>
+
+        <div class="calc-result-breakdown">
+          <div style="padding:10px;background:#f0fdf4;border-radius:var(--radius-sm);margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;color:#166534;font-weight:600;">第一层：审核通过费</span>
+              <span style="font-family:var(--font-mono);font-size:15px;font-weight:700;color:#166534;" id="bd-review-fee">¥50</span>
+            </div>
+          </div>
+          <div style="padding:10px;background:#e8f0fe;border-radius:var(--radius-sm);margin-bottom:10px;" id="bonus-section">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:13px;color:#1e40af;font-weight:600;">第二层：采购奖金</span>
+              <span style="font-family:var(--font-mono);font-size:15px;font-weight:700;color:#1e40af;" id="bd-bonus">¥228</span>
+            </div>
+            <div style="font-size:12px;color:#1e40af;line-height:1.8;padding-left:8px;border-left:2px solid #93c5fd;">
+              <div style="display:flex;justify-content:space-between;"><span>品类基础单价</span><span id="bd-base" style="font-family:var(--font-mono);">¥70</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>专家等级系数</span><span id="bd-tier" style="font-family:var(--font-mono);">×1.5</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>效率系数 (效率分/100)</span><span id="bd-efficiency" style="font-family:var(--font-mono);">×0.90</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>领域系数</span><span id="bd-domain" style="font-family:var(--font-mono);">×1.4</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>采购倍率</span><span style="font-family:var(--font-mono);">×2.2</span></div>
+            </div>
+          </div>
+          <div class="calc-breakdown-row" style="padding-top:12px;border-top:2px solid var(--border);">
+            <span class="calc-breakdown-label" style="font-weight:600;color:var(--text);">总酬金</span>
+            <span class="calc-breakdown-value" style="font-size:16px;color:var(--primary);font-weight:700;" id="bd-total">¥278</span>
+          </div>
+        </div>
+
+        <div class="calc-comparison">
+          <div class="calc-comparison-title">不同等级酬金对比</div>
+          <div class="calc-comparison-item">
+            <span class="label"><span class="tier-badge t1" style="font-size:10px;padding:1px 6px;">L1</span> 新星</span>
+            <span class="val" id="cmp-l1">¥182</span>
+          </div>
+          <div class="calc-comparison-item">
+            <span class="label"><span class="tier-badge t2" style="font-size:10px;padding:1px 6px;">L2</span> 熟手</span>
+            <span class="val" id="cmp-l2" style="color:var(--primary);font-weight:700;">¥278</span>
+          </div>
+          <div class="calc-comparison-item">
+            <span class="label"><span class="tier-badge t3" style="font-size:10px;padding:1px 6px;">L3</span> 精英</span>
+            <span class="val" id="cmp-l3">¥412</span>
+          </div>
+          <div class="calc-comparison-item">
+            <span class="label"><span class="tier-badge t4" style="font-size:10px;padding:1px 6px;">L4</span> 大师</span>
+            <span class="val" id="cmp-l4">¥664</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 规则详情分隔 -->
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+  <div style="height:1px;background:var(--border);flex:1;"></div>
+  <span style="font-size:13px;color:var(--text-muted);font-weight:500;">完整规则说明</span>
+  <div style="height:1px;background:var(--border);flex:1;"></div>
+</div>
+
+<div class="spec-grid">
+
+  <!-- 两层报酬模型 -->
+  <div class="spec-card full">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="2"/><circle cx="12" cy="15" r="1"/><path d="M6 11V6a6 6 0 0 1 12 0v5"/></svg></span> 两层报酬模型（核心设计）</h3>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">将报酬拆成两个独立的支付事件，各管一件事：审核通过费尊重投入，采购奖金奖励质量。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+      <div style="padding:20px;background:#f0fdf4;border-radius:var(--radius-sm);border:1px solid #bbf7d0;">
+        <div style="font-size:13px;font-weight:600;color:#166534;margin-bottom:8px;">第一层：审核通过费</div>
+        <div style="font-size:28px;font-weight:700;font-family:var(--font-mono);color:#166534;">¥50</div>
+        <div style="font-size:12px;color:#166534;margin-top:6px;line-height:1.6;">
+          触发：终审通过即刻结算<br>
+          金额：固定，不随等级/品类变化<br>
+          作用：尊重创作投入，提供确定性收入
+        </div>
+      </div>
+      <div style="padding:20px;background:#e8f0fe;border-radius:var(--radius-sm);border:1px solid #93c5fd;">
+        <div style="font-size:13px;font-weight:600;color:#1e40af;margin-bottom:8px;">第二层：采购奖金</div>
+        <div style="font-size:18px;font-weight:700;font-family:var(--font-mono);color:#1e40af;line-height:1.4;">基础单价 × 等级系数<br>× 效率系数 × 领域系数 × 2.2</div>
+        <div style="font-size:12px;color:#1e40af;margin-top:6px;line-height:1.6;">
+          触发：题目被采购后结算<br>
+          金额：随等级/品类/审核效率变化<br>
+          作用：奖励高质量产出，与平台收入对齐
+        </div>
+      </div>
+    </div>
+    <div class="formula-box">
+      <span class="label">完整公式</span><br>
+      <strong style="color:var(--danger);">IF 审核未通过 → 酬金 = ¥0</strong><br>
+      <strong style="color:#166534;">IF 审核通过（未采购）→ 酬金 = ¥50（仅审核通过费）</strong><br>
+      <strong style="color:#1e40af;">IF 审核通过且被采购 → 酬金 = ¥50 + 基础单价 × 等级系数 × (效率分/100) × 领域系数 × 2.2</strong>
+    </div>
+    <div class="spec-note">
+      <strong>审核效率分</strong> = 100 − 退回次数×25 − 审核天数×5。一次过2天 = 90分；退回1次 = 55–65分；退回2次 = 20–40分。反映题目本身的表述质量和难度匹配度。<br>
+      <strong>采购倍率 2.2</strong> 是调节杠杆，确保天花板达到 ¥800（L4·代码·满分效率）。可根据平台财务模型调整。
+    </div>
+  </div>
+
+  <!-- 结算流程 -->
+  <div class="spec-card">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></span> 结算流程（两阶段到账）</h3>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">专家的报酬分两笔到账，每笔有明确的触发条件和时间点。</p>
+    <div class="timeline">
+      <div class="timeline-step completed">
+        <div class="timeline-dot completed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="timeline-label">终审通过</div>
+        <div class="timeline-desc">即结¥50</div>
+      </div>
+      <div class="timeline-step current">
+        <div class="timeline-dot current">↑</div>
+        <div class="timeline-label">上线售卖</div>
+        <div class="timeline-desc">等待采购…</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot pending"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="2"/><circle cx="12" cy="15" r="1"/><path d="M6 11V6a6 6 0 0 1 12 0v5"/></svg></div>
+        <div class="timeline-label">被采购</div>
+        <div class="timeline-desc">结算采购奖金</div>
+      </div>
+    </div>
+    <table class="spec-table">
+      <tr><th>场景</th><th>第一层</th><th>第二层</th><th>总收入</th></tr>
+      <tr><td>审核未通过</td><td style="color:var(--danger);">¥0</td><td style="color:var(--text-muted);">—</td><td style="font-weight:600;">¥0</td></tr>
+      <tr><td>通过但未采购</td><td>¥50</td><td style="color:var(--text-muted);">—</td><td style="font-weight:600;">¥50</td></tr>
+      <tr><td>通过且被采购</td><td>¥50</td><td>公式计算</td><td style="font-weight:600;color:var(--primary);">¥50 + 奖金</td></tr>
+    </table>
+    <div class="spec-note">
+      未被采购的题目只产生¥50审核费，平台不承担大额成本。专家仍获得"通过"的认可和确定性收入。
+    </div>
+  </div>
+
+  <!-- 等级体系 -->
+  <div class="spec-card">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span> 专家等级体系（四级 · merit维度）</h3>
+    <table class="spec-table">
+      <tr><th>等级</th><th>准入条件</th><th>酬金系数</th><th>特权</th></tr>
+      <tr>
+        <td><span class="tier-badge t1">L1 新星</span></td>
+        <td>注册并通过身份审核</td>
+        <td style="font-family:var(--font-mono);font-weight:600;">1.0×</td>
+        <td>前5题审核费提升至¥60</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge t2">L2 熟手</span></td>
+        <td>≥10题通过 · 通过率≥65% · 活跃≥2月</td>
+        <td style="font-family:var(--font-mono);font-weight:600;">1.5×</td>
+        <td>高需求品类优先推荐</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge t3">L3 精英</span></td>
+        <td>≥30题通过 · 通过率≥75% · 采购率≥30% · 活跃≥4月</td>
+        <td style="font-family:var(--font-mono);font-weight:600;">2.2×</td>
+        <td>专属选题池 + 品类定价建议权</td>
+      </tr>
+      <tr>
+        <td><span class="tier-badge t4">L4 大师</span></td>
+        <td>≥50题通过 · 通过率≥80% · 采购率≥45% · 活跃≥6月 + 导师认证</td>
+        <td style="font-family:var(--font-mono);font-weight:600;">3.5×</td>
+        <td>自定义定价权 + 品类顾问</td>
+      </tr>
+    </table>
+    <div class="spec-note">
+      <strong>保护机制：</strong>降级不即时触发。连续2个月不达标 → 30天保护期（维持原等级酬金）→ 保护期内恢复则不降级。<br>
+      <strong>与邀请体系的关系：</strong>质量等级（L1-L4）独立于邀请等级（开拓者/领航者/探索者），两者并行。邀请等级决定团队关系，质量等级决定酬金系数。
+    </div>
+  </div>
+
+  <!-- 领域系数 -->
+  <div class="spec-card">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></span> 领域系数（品类供需调节）</h3>
+    <table class="spec-table">
+      <tr><th>品类</th><th>供需状态</th><th>领域系数</th><th>基础单价</th></tr>
+      <tr><td>代码生成</td><td><span class="demand-tag high">高需求</span></td><td style="font-family:var(--font-mono);font-weight:600;">1.4</td><td>¥70</td></tr>
+      <tr><td>数学推理</td><td><span class="demand-tag high">高需求</span></td><td style="font-family:var(--font-mono);font-weight:600;">1.3</td><td>¥65</td></tr>
+      <tr><td>逻辑推理</td><td><span class="demand-tag mid">中需求</span></td><td style="font-family:var(--font-mono);font-weight:600;">1.1</td><td>¥55</td></tr>
+      <tr><td>自然语言处理</td><td><span class="demand-tag mid">中需求</span></td><td style="font-family:var(--font-mono);font-weight:600;">1.0</td><td>¥50</td></tr>
+      <tr><td>通用知识</td><td><span class="demand-tag low">供给充足</span></td><td style="font-family:var(--font-mono);font-weight:600;">0.8</td><td>¥40</td></tr>
+    </table>
+    <div class="formula-box" style="margin-top:16px;">
+      <span class="label">采购奖金公式（第二层）</span><br>
+      <strong>采购奖金 = 基础单价 × 等级系数 × (效率分/100) × 领域系数 × 2.2</strong><br>
+      <span class="label" style="margin-top:4px;display:inline-block;">效率分范围: 20–100 · 采购倍率: 2.2 · 天花板: ¥800</span>
+    </div>
+    <div class="spec-note">
+      <strong>为什么需要采购倍率 2.2？</strong>基础单价×等级×领域三者相乘的天花板只有¥343（代码×L4×1.4），加入2.2倍采购倍率后可达¥750，加上¥50审核通过费正好触达¥800天花板。采购倍率是平台可调节的财务杠杆。
+    </div>
+  </div>
+
+  <!-- 状态机 -->
+  <div class="spec-card">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span> 题目生命周期</h3>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+      <span class="status-badge draft">草稿</span><span style="color:var(--text-muted);">→</span>
+      <span class="status-badge review">已提交</span><span style="color:var(--text-muted);">→</span>
+      <span class="status-badge review">审核中</span><span style="color:var(--text-muted);">→</span>
+      <span class="status-badge passed">已通过</span><span style="color:var(--text-muted);">→</span>
+      <span class="status-badge purchased">已被采购</span><span style="color:var(--text-muted);">→</span>
+      <span class="status-badge settled">已结算</span>
+    </div>
+    <div style="margin-left:24px;padding-left:16px;border-left:2px solid var(--danger-light);margin-top:8px;">
+      <span style="font-size:12px;color:var(--text-muted);">退回分支：</span>
+      <span class="status-badge rejected">已退回</span>
+      <span style="font-size:12px;color:var(--text-muted);margin-left:8px;">→ 修改后可重新提交</span>
+    </div>
+    <div style="margin-left:24px;padding-left:16px;border-left:2px solid var(--warning-light);margin-top:8px;">
+      <span style="font-size:12px;color:var(--text-muted);">未采纳：</span>
+      <span style="font-size:12px;color:var(--text-secondary);">上线30天无采购 → 仍可被后续采购，不影响结算分</span>
+    </div>
+  </div>
+
+  <!-- 分阶段上线 -->
+  <div class="spec-card">
+    <h3><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M12 16L9 20"/><path d="M12 16l3 4"/><path d="M15 10l-3-3-3 3"/></svg></span> 分阶段上线计划</h3>
+    <table class="spec-table">
+      <tr><th>阶段</th><th>内容</th><th>周期</th></tr>
+      <tr>
+        <td><strong>Phase 1 · MVP</strong></td>
+        <td>两维度评分 + 四级等级 + 固定领域系数 + 保底机制 + 降级缓冲</td>
+        <td>4–6周</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 2 · 增长</strong></td>
+        <td>动态领域系数 + 连续活跃奖励 + 导师机制 + 题目收益报告</td>
+        <td>+4周</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 3 · 生态</strong></td>
+        <td>AI训练效果第三维度 + 二次分成 + 长期贡献里程碑</td>
+        <td>+4周</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB: 专家工作台 -->
+<!-- ============================== -->
+<div class="tab-content" id="tab-dashboard">
+
+<!-- Metrics Row -->
+<div class="metrics-row fade-in">
+  <div class="metric-card">
+    <div class="metric-label">本月收益</div>
+    <div class="metric-value" style="color:var(--primary);">¥4,200</div>
+    <div class="metric-sub">
+      <span class="metric-trend up">↑ 18%</span> 较上月
+      &nbsp;·&nbsp; 审核费 ¥400 + 采购奖金 ¥3,800
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">当前等级</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="tier-badge t2" style="font-size:14px;padding:4px 14px;">L2 熟手</span>
+      <span style="font-size:13px;color:var(--text-secondary);">酬金系数</span>
+      <span style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--tier2);">1.5×</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill t2" style="width:60%;"></div></div>
+      <div class="progress-label"><span>距 L3 精英</span><span>60%</span></div>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">连续活跃</div>
+    <div style="display:flex;align-items:baseline;gap:4px;">
+      <span class="metric-value" style="color:var(--success);">5</span>
+      <span style="font-size:14px;color:var(--text-secondary);">个月</span>
+    </div>
+    <div class="metric-sub">距下次评估 3 天 · 保持活跃可获得月度 +10% 加成</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">累计通过题目</div>
+    <div style="display:flex;align-items:baseline;gap:6px;">
+      <span class="metric-value">18</span>
+      <span style="font-size:13px;color:var(--text-muted);">/ 30 (L3门槛)</span>
+    </div>
+    <div class="metric-sub">通过率 <strong style="color:var(--success);">78%</strong> · 平均采购率 <strong style="color:var(--success);">38%</strong></div>
+  </div>
+</div>
+
+<!-- Content Grid -->
+<div class="content-grid">
+
+  <!-- Main Content -->
+  <div class="content-main">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">我的题目</span>
+        <button onclick="document.querySelector('[data-tab=upload]').click()" style="padding:6px 16px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);">+ 出新题</button>
+      </div>
+      <div class="q-filters">
+        <div class="q-filter active">全部<span class="count">9</span></div>
+        <div class="q-filter">草稿<span class="count">1</span></div>
+        <div class="q-filter">审核中<span class="count">1</span></div>
+        <div class="q-filter">已退回<span class="count">1</span></div>
+        <div class="q-filter">已通过<span class="count">2</span></div>
+        <div class="q-filter">已采购<span class="count">3</span></div>
+        <div class="q-filter">已结算<span class="count">1</span></div>
+      </div>
+      <div class="panel-body">
+        <!-- Question 1 -->
+        <div class="q-item" onclick="showQuestionDetail(0)">
+          <div>
+            <div class="q-title">微分方程在人口增长模型中的应用题</div>
+            <div class="q-id">M-20260618-1001-042</div>
+          </div>
+          <div class="q-category">数学推理</div>
+          <div class="status-badge settled">已结算</div>
+          <div class="q-score high"><div class="q-score-bar"><div class="q-score-fill" style="width:82%;background:var(--success);"></div></div>82</div>
+          <div class="q-earning">¥301</div>
+        </div>
+        <!-- Question 2 -->
+        <div class="q-item" onclick="showQuestionDetail(1)">
+          <div>
+            <div class="q-title">二叉搜索树的旋转操作与平衡性证明</div>
+            <div class="q-id">C-20260615-2003-018</div>
+          </div>
+          <div class="q-category">代码生成</div>
+          <div class="status-badge purchased">已采购</div>
+          <div class="q-score high"><div class="q-score-bar"><div class="q-score-fill" style="width:89%;background:var(--success);"></div></div>89</div>
+          <div class="q-earning">¥341</div>
+        </div>
+        <!-- Question 3 -->
+        <div class="q-item" onclick="showQuestionDetail(2)">
+          <div>
+            <div class="q-title">基于上下文推断句子情感极性</div>
+            <div class="q-id">N-20260612-3001-007</div>
+          </div>
+          <div class="q-category">自然语言处理</div>
+          <div class="status-badge settled">已结算</div>
+          <div class="q-score mid"><div class="q-score-bar"><div class="q-score-fill" style="width:65%;background:var(--warning);"></div></div>65</div>
+          <div class="q-earning">¥141</div>
+        </div>
+        <!-- Question 4 -->
+        <div class="q-item" onclick="showReviewProgress()">
+          <div>
+            <div class="q-title">三阶幻方的构造与唯一性证明</div>
+            <div class="q-id">L-20260620-4001-003</div>
+          </div>
+          <div class="q-category">逻辑推理</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+            <span class="status-badge review">复审中</span>
+            <span style="font-size:10px;color:var(--text-muted);">初审✓ → 复审中 → 终审</span>
+          </div>
+          <div class="q-score pending">—</div>
+          <div class="q-earning" style="color:var(--text-muted);">待评分</div>
+        </div>
+        <!-- Question 5 -->
+        <div class="q-item">
+          <div>
+            <div class="q-title">数据库 SQL 注入防御方案设计题</div>
+            <div class="q-id">—</div>
+          </div>
+          <div class="q-category" style="opacity:0.5;">未选择</div>
+          <div class="status-badge draft">草稿</div>
+          <div class="q-score pending">—</div>
+          <div class="q-earning" style="color:var(--text-muted);">—</div>
+        </div>
+        <!-- Question 5.5: Rejected -->
+        <div class="q-item" onclick="showRejectedInfo()">
+          <div>
+            <div class="q-title">简单排序算法的时间复杂度比较</div>
+            <div class="q-id">C-20260610-2003-016</div>
+          </div>
+          <div class="q-category">代码生成</div>
+          <div class="status-badge rejected">已退回</div>
+          <div class="q-score pending">—</div>
+          <div class="q-earning" style="color:var(--danger);font-weight:600;">¥0</div>
+        </div>
+        <!-- Question 6 -->
+        <div class="q-item" onclick="showQuestionDetail(3)">
+          <div>
+            <div class="q-title">条件概率与贝叶斯公式综合应用</div>
+            <div class="q-id">M-20260605-1001-039</div>
+          </div>
+          <div class="q-category">数学推理</div>
+          <div class="status-badge settled">已结算</div>
+          <div class="q-score mid"><div class="q-score-bar"><div class="q-score-fill" style="width:74%;background:var(--warning);"></div></div>74</div>
+          <div class="q-earning">¥301</div>
+        </div>
+        <!-- Question 7 -->
+        <div class="q-item" onclick="showQuestionDetail(4)">
+          <div>
+            <div class="q-title">Python异步编程 asyncio 实战任务设计</div>
+            <div class="q-id">C-20260601-2003-015</div>
+          </div>
+          <div class="q-category">代码生成</div>
+          <div class="status-badge purchased">已采购</div>
+          <div class="q-score high"><div class="q-score-bar"><div class="q-score-fill" style="width:91%;background:var(--success);"></div></div>91</div>
+          <div class="q-earning">¥341</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Level Upgrade -->
+    <div class="sidebar-card">
+      <div class="sidebar-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>升级 L3 精英</div>
+      <div class="sidebar-body">
+        <div class="upgrade-item">
+          <div class="upgrade-icon done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="upgrade-text">通过率 ≥ <strong>75%</strong></div>
+          <div class="upgrade-value" style="color:var(--success);">78% ✓</div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-icon pending"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+          <div class="upgrade-text">累计通过 ≥ <strong>30题</strong></div>
+          <div class="upgrade-value">18/30</div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-icon done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="upgrade-text">采购率 ≥ <strong>30%</strong></div>
+          <div class="upgrade-value" style="color:var(--success);">38% ✓</div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-icon done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="upgrade-text">连续活跃 ≥ <strong>4个月</strong></div>
+          <div class="upgrade-value" style="color:var(--success);">5月 ✓</div>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:var(--primary-light);border-radius:var(--radius-sm);font-size:12px;color:var(--primary);line-height:1.6;">
+          再产出 <strong>12 道通过审核的题目</strong>即可升级，酬金系数将从 1.5× 提升至 <strong>2.2×</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak -->
+    <div class="sidebar-card">
+      <div class="sidebar-header">🔥 本周活跃</div>
+      <div class="sidebar-body">
+        <div class="streak-display">
+          <div class="streak-day active">一</div>
+          <div class="streak-day active">二</div>
+          <div class="streak-day active">三</div>
+          <div class="streak-day inactive">四</div>
+          <div class="streak-day today">五</div>
+          <div class="streak-day inactive">六</div>
+          <div class="streak-day inactive">日</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-muted);">本月已产出 <strong style="color:var(--text);">6</strong> 题，保持 3题/月可获得 +10% 月度加成</div>
+      </div>
+    </div>
+
+    <!-- Monthly Earnings Chart -->
+    <div class="sidebar-card">
+      <div class="sidebar-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>月度收益趋势</div>
+      <div class="sidebar-body">
+        <div class="earnings-chart">
+          <div class="chart-bars">
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">2.1k</div>
+              <div class="chart-bar" style="height:44%;background:var(--primary-light);"></div>
+              <div class="chart-bar-label">1月</div>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">2.5k</div>
+              <div class="chart-bar" style="height:52%;background:var(--primary-light);"></div>
+              <div class="chart-bar-label">2月</div>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">3.1k</div>
+              <div class="chart-bar" style="height:65%;background:var(--primary-light);"></div>
+              <div class="chart-bar-label">3月</div>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">3.6k</div>
+              <div class="chart-bar" style="height:75%;background:var(--primary-light);"></div>
+              <div class="chart-bar-label">4月</div>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">4.2k</div>
+              <div class="chart-bar" style="height:88%;background:var(--primary);opacity:0.6;"></div>
+              <div class="chart-bar-label">5月</div>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar-value">4.8k</div>
+              <div class="chart-bar" style="height:100%;background:var(--primary);"></div>
+              <div class="chart-bar-label">6月</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+</div>
+</div>
+
+<!-- ============================== -->
+<!-- TAB: 上传题目 -->
+<!-- ============================== -->
+<div class="tab-content" id="tab-upload">
+
+<!-- Upload Flow Container -->
+<div class="upload-flow-container">
+
+  <!-- Step Progress Indicator -->
+  <div class="upload-step-progress">
+    <div class="upload-step-item active" id="upload-step-1">
+      <div class="upload-step-circle">1</div>
+      <div class="upload-step-label">选择科目</div>
+    </div>
+    <div class="upload-step-line" id="upload-line-1"></div>
+    <div class="upload-step-item" id="upload-step-2">
+      <div class="upload-step-circle">2</div>
+      <div class="upload-step-label">上传内容</div>
+    </div>
+    <div class="upload-step-line" id="upload-line-2"></div>
+    <div class="upload-step-item" id="upload-step-3">
+      <div class="upload-step-circle">3</div>
+      <div class="upload-step-label">提交审核</div>
+    </div>
+  </div>
+
+  <!-- Step 1: Subject Selection -->
+  <div class="upload-step-content active" id="upload-content-1">
+    <div class="upload-header-banner">
+      <div class="upload-banner-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="upload-banner-content">
+        <h2>选择科目并领取题目编号</h2>
+        <p>请选择您要出题的项目和科目，系统将自动生成唯一的题目编号</p>
+      </div>
+    </div>
+
+    <div class="upload-selection-panel">
+      <!-- Project Selection -->
+      <div class="upload-selection-section">
+        <div class="upload-selection-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          选择项目
+        </div>
+        <div class="upload-project-grid">
+          <div class="upload-project-card" onclick="selectProject('ai-basic')" data-project="ai-basic">
+            <div class="upload-project-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="M1 12h6m6 0h6"/><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="upload-project-name">AI基础训练</div>
+            <div class="upload-project-info">第1期 · 数学、代码、逻辑</div>
+          </div>
+          <div class="upload-project-card" onclick="selectProject('ai-advanced')" data-project="ai-advanced">
+            <div class="upload-project-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="upload-project-name">AI进阶训练</div>
+            <div class="upload-project-info">第2期 · 高数、算法、ML</div>
+          </div>
+          <div class="upload-project-card" onclick="selectProject('ai-expert')" data-project="ai-expert">
+            <div class="upload-project-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="upload-project-name">AI专家训练</div>
+            <div class="upload-project-info">第3期 · NLP、CV、RL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject Selection -->
+      <div class="upload-selection-section" id="subject-selection-section" style="display:none;">
+        <div class="upload-selection-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          选择科目
+        </div>
+        <div class="upload-subject-grid" id="subject-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Question ID Generation & Claim -->
+      <div class="upload-qid-section" id="qid-section" style="display:none;">
+        <div class="upload-qid-card" id="qid-card">
+          <div class="upload-qid-header">
+            <div class="upload-qid-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+            </div>
+            <div class="upload-qid-title">题目编号已生成</div>
+          </div>
+          <div class="upload-qid-value" id="qid-value">—</div>
+          <div class="upload-qid-meta">
+            <span id="qid-project">—</span>
+            <span class="upload-qid-divider">·</span>
+            <span id="qid-subject">—</span>
+          </div>
+          <div class="upload-qid-actions">
+            <button class="upload-qid-btn claim" id="qid-claim-btn" onclick="claimQuestionId()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              确认领取此编号
+            </button>
+            <button class="upload-qid-btn regenerate" onclick="regenerateQuestionId()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              重新生成
+            </button>
+          </div>
+        </div>
+        <div class="upload-qid-claimed" id="qid-claimed" style="display:none;">
+          <div class="upload-qid-claimed-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="upload-qid-claimed-title">编号已领取</div>
+          <div class="upload-qid-claimed-value" id="qid-claimed-value">—</div>
+          <div class="upload-qid-claimed-tip">此编号已锁定，将用于本次题目上传</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="upload-step-actions" id="step1-actions">
+        <button class="upload-step-btn secondary" onclick="resetSelection()">重置选择</button>
+        <button class="upload-step-btn primary" id="step1-next-btn" onclick="goToUploadStep(2)" disabled>
+          下一步：上传内容
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Upload Content -->
+  <div class="upload-step-content" id="upload-content-2">
+    <!-- Sticky Header with QID -->
+    <div class="upload-sticky-header">
+      <div class="upload-sticky-qid">
+        <span class="upload-sticky-label">题目编号</span>
+        <span class="upload-sticky-value" id="sticky-qid">—</span>
+      </div>
+      <div class="upload-sticky-subject">
+        <span class="upload-sticky-label">科目</span>
+        <span class="upload-sticky-value" id="sticky-subject">—</span>
+      </div>
+      <div class="upload-sticky-actions">
+        <button class="upload-sticky-btn" onclick="goToUploadStep(1)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          返回
+        </button>
+        <button class="upload-sticky-btn save" onclick="saveUploadDraft()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          暂存
+        </button>
+        <button class="upload-sticky-btn submit" onclick="goToUploadStep(3)">
+          提交审核
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Upload Instructions Banner -->
+    <div class="upload-instructions-banner">
+      <div class="upload-banner-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      </div>
+      <div class="upload-banner-text">
+        <p>请按照"题目""答案""解析""题目完整PDF"四部分分别上传内容。您可以直接上传图片由系统自动识别，或直接在输入框输入LaTeX格式内容。</p>
+        <div class="upload-banner-links">
+          <a href="#" class="upload-link">下载题目要求</a>
+          <a href="#" class="upload-link">下载模板格式</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Content Sections -->
+    <div class="upload-content-area">
+      <!-- Upload Question -->
+      <div class="upload-section">
+        <div class="upload-section-header">
+          <div class="upload-section-bar"></div>
+          <div class="upload-section-title">上传题目</div>
+        </div>
+        <div class="upload-section-grid">
+          <div class="upload-dropzone" 
+               ondrop="handleUploadDrop(event, 'question')" 
+               ondragover="handleUploadDragOver(event)" 
+               ondragleave="handleUploadDragLeave(event)"
+               onclick="document.getElementById('question-img-input').click()">
+            <input type="file" id="question-img-input" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleImgUpload(event, 'question')">
+            <div class="upload-dropzone-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <div class="upload-dropzone-text">点击或拖拽上传图片<br>支持 Ctrl+V 粘贴</div>
+          </div>
+          <div class="upload-editor-panel">
+            <div class="upload-editor-header">
+              <span class="upload-editor-label">请输入题目</span>
+              <div class="upload-editor-toolbar">
+                <button class="upload-toolbar-btn" title="加粗" onclick="insertFormat('**', '**')"><strong>B</strong></button>
+                <button class="upload-toolbar-btn" title="斜体" onclick="insertFormat('*', '*')"><em>I</em></button>
+                <button class="upload-toolbar-btn" title="公式" onclick="insertFormula()">∑</button>
+              </div>
+            </div>
+            <div class="upload-textarea" contenteditable="true" oninput="syncPreview('question')" data-section="question"></div>
+          </div>
+          <div class="upload-preview-panel">
+            <div class="upload-preview-header">预览</div>
+            <div class="upload-preview-content" id="question-preview">
+              <span class="upload-preview-placeholder">预览区域</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Answer -->
+      <div class="upload-section">
+        <div class="upload-section-header">
+          <div class="upload-section-bar"></div>
+          <div class="upload-section-title">上传答案</div>
+        </div>
+        <div class="upload-section-grid">
+          <div class="upload-dropzone" 
+               ondrop="handleUploadDrop(event, 'answer')" 
+               ondragover="handleUploadDragOver(event)" 
+               ondragleave="handleUploadDragLeave(event)"
+               onclick="document.getElementById('answer-img-input').click()">
+            <input type="file" id="answer-img-input" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleImgUpload(event, 'answer')">
+            <div class="upload-dropzone-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <div class="upload-dropzone-text">点击或拖拽上传图片</div>
+          </div>
+          <div class="upload-editor-panel">
+            <div class="upload-editor-header">
+              <span class="upload-editor-label">请输入答案</span>
+            </div>
+            <div class="upload-textarea" contenteditable="true" oninput="syncPreview('answer')" data-section="answer"></div>
+          </div>
+          <div class="upload-preview-panel">
+            <div class="upload-preview-header">预览</div>
+            <div class="upload-preview-content" id="answer-preview">
+              <span class="upload-preview-placeholder">预览区域</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Analysis -->
+      <div class="upload-section">
+        <div class="upload-section-header">
+          <div class="upload-section-bar"></div>
+          <div class="upload-section-title">上传解析</div>
+        </div>
+        <div class="upload-section-grid">
+          <div class="upload-dropzone" 
+               ondrop="handleUploadDrop(event, 'analysis')" 
+               ondragover="handleUploadDragOver(event)" 
+               ondragleave="handleUploadDragLeave(event)"
+               onclick="document.getElementById('analysis-img-input').click()">
+            <input type="file" id="analysis-img-input" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleImgUpload(event, 'analysis')">
+            <div class="upload-dropzone-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <div class="upload-dropzone-text">点击或拖拽上传图片</div>
+          </div>
+          <div class="upload-editor-panel">
+            <div class="upload-editor-header">
+              <span class="upload-editor-label">请输入解析</span>
+            </div>
+            <div class="upload-textarea" contenteditable="true" oninput="syncPreview('analysis')" data-section="analysis"></div>
+          </div>
+          <div class="upload-preview-panel">
+            <div class="upload-preview-header">预览</div>
+            <div class="upload-preview-content" id="analysis-preview">
+              <span class="upload-preview-placeholder">预览区域</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload PDF -->
+      <div class="upload-section">
+        <div class="upload-section-header">
+          <div class="upload-section-bar"></div>
+          <div class="upload-section-title">上传PDF文件</div>
+        </div>
+        <div class="upload-pdf-area">
+          <button class="upload-pdf-btn" onclick="document.getElementById('pdf-input').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            选择文件
+          </button>
+          <input type="file" id="pdf-input" accept=".pdf" style="display:none;">
+          <span class="upload-pdf-info">格式要求为PDF，文件名为题目编号.pdf</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Submit Confirmation -->
+  <div class="upload-step-content" id="upload-content-3">
+    <div class="upload-confirm-panel">
+      <div class="upload-confirm-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h2 class="upload-confirm-title">确认提交审核</h2>
+      <p class="upload-confirm-desc">提交后将进入三轮审核流程，通过后即可获得审核费</p>
+      
+      <div class="upload-confirm-summary">
+        <div class="upload-confirm-row">
+          <span class="upload-confirm-label">题目编号</span>
+          <span class="upload-confirm-value mono" id="confirm-qid">—</span>
+        </div>
+        <div class="upload-confirm-row">
+          <span class="upload-confirm-label">科目</span>
+          <span class="upload-confirm-value" id="confirm-subject">—</span>
+        </div>
+        <div class="upload-confirm-row">
+          <span class="upload-confirm-label">题目字数</span>
+          <span class="upload-confirm-value" id="confirm-question-chars">0</span>
+        </div>
+        <div class="upload-confirm-row">
+          <span class="upload-confirm-label">答案字数</span>
+          <span class="upload-confirm-value" id="confirm-answer-chars">0</span>
+        </div>
+        <div class="upload-confirm-row">
+          <span class="upload-confirm-label">解析字数</span>
+          <span class="upload-confirm-value" id="confirm-analysis-chars">0</span>
+        </div>
+      </div>
+
+      <div class="upload-confirm-flow">
+        <div class="upload-flow-step">
+          <div class="upload-flow-num">①</div>
+          <div class="upload-flow-name">初审</div>
+          <div class="upload-flow-time">≤1小时</div>
+        </div>
+        <div class="upload-flow-arrow">→</div>
+        <div class="upload-flow-step">
+          <div class="upload-flow-num">②</div>
+          <div class="upload-flow-name">复审</div>
+          <div class="upload-flow-time">1-3天</div>
+        </div>
+        <div class="upload-flow-arrow">→</div>
+        <div class="upload-flow-step">
+          <div class="upload-flow-num">③</div>
+          <div class="upload-flow-name">终审</div>
+          <div class="upload-flow-time">1-3天</div>
+        </div>
+        <div class="upload-flow-arrow">→</div>
+        <div class="upload-flow-step success">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><rect x="6" y="11" width="12" height="8" rx="2"/><circle cx="12" cy="15" r="1"/><path d="M6 11V6a6 6 0 0 1 12 0v5"/></svg>
+          <div class="upload-flow-name">上线</div>
+          <div class="upload-flow-time">售卖</div>
+        </div>
+      </div>
+
+      <div class="upload-confirm-actions">
+        <button class="upload-confirm-btn back" onclick="goToUploadStep(2)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          返回修改
+        </button>
+        <button class="upload-confirm-btn submit" onclick="submitQuestion()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          确认提交
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success State -->
+  <div class="upload-step-content" id="upload-content-success" style="display:none;">
+    <div class="upload-success-panel">
+      <div class="upload-success-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h2 class="upload-success-title">提交成功！</h2>
+      <p class="upload-success-desc">您的题目已进入审核队列</p>
+      <p class="upload-success-time">预计 1-3 个工作日内完成初审</p>
+      <div class="upload-success-actions">
+        <button class="upload-success-btn primary" onclick="resetUploadFlow()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+          继续上传新题目
+        </button>
+        <button class="upload-success-btn" onclick="document.querySelector('[data-tab=dashboard]').click()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          查看我的题目
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /tab-upload -->
+
+<!-- ============================== -->
+<!-- TAB: 选题广场 -->
+<!-- ============================== -->
+<div class="tab-content" id="tab-market">
+
+<div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;">
+  <div>
+    <h2 style="font-size:18px;font-weight:600;">选题广场</h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:2px;">根据你的等级（L2 熟手 · 系数 1.5×）展示预估酬金</p>
+  </div>
+  <div style="display:flex;gap:12px;">
+    <div style="display:flex;gap:8px;padding:6px;border:1px solid var(--border);border-radius:var(--radius-sm);">
+      <button style="padding:6px 14px;border:none;background:none;color:var(--primary);font-size:13px;font-weight:600;border-radius:6px;cursor:pointer;font-family:var(--font);">热门</button>
+      <button style="padding:6px 14px;border:none;background:none;color:var(--text-secondary);font-size:13px;border-radius:6px;cursor:pointer;font-family:var(--font);">推荐</button>
+      <button style="padding:6px 14px;border:none;background:none;color:var(--text-secondary);font-size:13px;border-radius:6px;cursor:pointer;font-family:var(--font);">新手友好</button>
+    </div>
+    <select class="calc-select" style="width:auto;padding:8px 32px 8px 12px;">
+      <option>全部品类</option>
+      <option>数学推理</option>
+      <option>代码生成</option>
+      <option>逻辑推理</option>
+      <option>自然语言处理</option>
+      <option>通用知识</option>
+    </select>
+    <select class="calc-select" style="width:auto;padding:8px 32px 8px 12px;">
+      <option>按酬金排序</option>
+      <option>按需求热度排序</option>
+      <option>按通过率排序</option>
+    </select>
+  </div>
+</div>
+
+<!-- 快捷操作区 -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+  <button onclick="document.querySelector('[data-tab=upload]').click()" style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:transform 0.15s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14"/><path d="M5 12l7-7 7 7"/>
+    </svg>
+    <div style="text-align:left;">
+      <div>立即出题</div>
+      <div style="font-size:11px;font-weight:400;opacity:0.85;">开始创作新题目</div>
+    </div>
+  </button>
+  <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-sm);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--text);">本周高需求</div>
+      <div style="font-size:11px;color:var(--text-muted);">代码生成 · +40%酬金</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-sm);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    </svg>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--text);">通过率</div>
+      <div style="font-size:11px;color:var(--success);">本周 82% · +3%</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-sm);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+    </svg>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--text);">待审核</div>
+      <div style="font-size:11px;color:var(--warning);">1 题 · 复审中</div>
+    </div>
+  </div>
+</div>
+
+<div class="market-grid">
+  <!-- Card 1: 代码生成 -->
+  <div class="market-card hot" onclick="jumpToUploadFromMarket('code')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div class="market-name">代码生成</div>
+      <span class="demand-tag high">高需求</span>
+    </div>
+    <div class="market-desc">算法实现、数据结构、编程范式、系统设计</div>
+    <div class="market-stats">
+      <div><div class="market-stat-label">基础单价</div><div class="market-stat-value">¥70</div></div>
+      <div><div class="market-stat-label">领域系数</div><div class="market-stat-value" style="color:var(--danger);">1.4×</div></div>
+      <div><div class="market-stat-label">平均通过率</div><div class="market-stat-value">72%</div></div>
+      <div><div class="market-stat-label">平均采购率</div><div class="market-stat-value">45%</div></div>
+    </div>
+    <div class="market-earning-range">
+      <div class="market-earning-label">你的预估酬金范围（L2 · 1.5×）</div>
+      <div class="market-earning-bar">
+        <div class="market-earning-fill" style="left:30%;width:55%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:4px;"></div>
+      </div>
+      <div class="market-earning-values"><span style="color:var(--text-muted);">¥140</span><span style="font-weight:700;color:var(--primary);">¥184 – ¥221</span><span style="color:var(--text-muted);">¥343</span></div>
+    </div>
+    <button class="market-card-btn" style="margin-top:12px;width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      立即出题
+    </button>
+  </div>
+
+  <!-- Card 2: 数学推理 -->
+  <div class="market-card hot" onclick="jumpToUploadFromMarket('math')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div class="market-name">数学推理</div>
+      <span class="demand-tag high">高需求</span>
+    </div>
+    <div class="market-desc">微积分、线性代数、概率论、数论、组合数学</div>
+    <div class="market-stats">
+      <div><div class="market-stat-label">基础单价</div><div class="market-stat-value">¥65</div></div>
+      <div><div class="market-stat-label">领域系数</div><div class="market-stat-value" style="color:var(--danger);">1.3×</div></div>
+      <div><div class="market-stat-label">平均通过率</div><div class="market-stat-value">75%</div></div>
+      <div><div class="market-stat-label">平均采购率</div><div class="market-stat-value">42%</div></div>
+    </div>
+    <div class="market-earning-range">
+      <div class="market-earning-label">你的预估酬金范围（L2 · 1.5×）</div>
+      <div class="market-earning-bar">
+        <div class="market-earning-fill" style="left:25%;width:50%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:4px;"></div>
+      </div>
+      <div class="market-earning-values"><span style="color:var(--text-muted);">¥127</span><span style="font-weight:700;color:var(--primary);">¥164 – ¥213</span><span style="color:var(--text-muted);">¥277</span></div>
+    </div>
+    <button class="market-card-btn" style="margin-top:12px;width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      立即出题
+    </button>
+  </div>
+
+  <!-- Card 3: 逻辑推理 -->
+  <div class="market-card" onclick="jumpToUploadFromMarket('logic')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div class="market-name">逻辑推理</div>
+      <span class="demand-tag mid">中需求</span>
+    </div>
+    <div class="market-desc">命题逻辑、矩阵推理、幻方、博弈论</div>
+    <div class="market-stats">
+      <div><div class="market-stat-label">基础单价</div><div class="market-stat-value">¥55</div></div>
+      <div><div class="market-stat-label">领域系数</div><div class="market-stat-value">1.1×</div></div>
+      <div><div class="market-stat-label">平均通过率</div><div class="market-stat-value">80%</div></div>
+      <div><div class="market-stat-label">平均采购率</div><div class="market-stat-value">35%</div></div>
+    </div>
+    <div class="market-earning-range">
+      <div class="market-earning-label">你的预估酬金范围（L2 · 1.5×）</div>
+      <div class="market-earning-bar">
+        <div class="market-earning-fill" style="left:20%;width:45%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:4px;"></div>
+      </div>
+      <div class="market-earning-values"><span style="color:var(--text-muted);">¥96</span><span style="font-weight:700;color:var(--primary);">¥128 – ¥152</span><span style="color:var(--text-muted);">¥183</span></div>
+    </div>
+    <button class="market-card-btn" style="margin-top:12px;width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      立即出题
+    </button>
+  </div>
+
+  <!-- Card 4: 自然语言处理 -->
+  <div class="market-card" onclick="jumpToUploadFromMarket('nlp')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div class="market-name">自然语言处理</div>
+      <span class="demand-tag mid">中需求</span>
+    </div>
+    <div class="market-desc">语义理解、情感分析、文本生成、机器翻译</div>
+    <div class="market-stats">
+      <div><div class="market-stat-label">基础单价</div><div class="market-stat-value">¥50</div></div>
+      <div><div class="market-stat-label">领域系数</div><div class="market-stat-value">1.0×</div></div>
+      <div><div class="market-stat-label">平均通过率</div><div class="market-stat-value">70%</div></div>
+      <div><div class="market-stat-label">平均采购率</div><div class="market-stat-value">30%</div></div>
+    </div>
+    <div class="market-earning-range">
+      <div class="market-earning-label">你的预估酬金范围（L2 · 1.5×）</div>
+      <div class="market-earning-bar">
+        <div class="market-earning-fill" style="left:18%;width:42%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:4px;"></div>
+      </div>
+      <div class="market-earning-values"><span style="color:var(--text-muted);">¥79</span><span style="font-weight:700;color:var(--primary);">¥105 – ¥131</span><span style="color:var(--text-muted);">¥147</span></div>
+    </div>
+    <button class="market-card-btn" style="margin-top:12px;width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      立即出题
+    </button>
+  </div>
+
+  <!-- Card 5: 通用知识 -->
+  <div class="market-card" onclick="jumpToUploadFromMarket('general')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div class="market-name">通用知识</div>
+      <span class="demand-tag low">供给充足</span>
+    </div>
+    <div class="market-desc">百科常识、历史文化、地理、生活科学</div>
+    <div class="market-stats">
+      <div><div class="market-stat-label">基础单价</div><div class="market-stat-value">¥40</div></div>
+      <div><div class="market-stat-label">领域系数</div><div class="market-stat-value" style="color:var(--success);">0.8×</div></div>
+      <div><div class="market-stat-label">平均通过率</div><div class="market-stat-value">85%</div></div>
+      <div><div class="market-stat-label">平均采购率</div><div class="market-stat-value">25%</div></div>
+    </div>
+    <div class="market-earning-range">
+      <div class="market-earning-label">你的预估酬金范围（L2 · 1.5×）</div>
+      <div class="market-earning-bar">
+        <div class="market-earning-fill" style="left:12%;width:35%;background:linear-gradient(90deg,var(--text-muted),#9ca3af);border-radius:4px;"></div>
+      </div>
+      <div class="market-earning-values"><span style="color:var(--text-muted);">¥60</span><span style="font-weight:700;color:var(--text-secondary);">¥79 – ¥98</span><span style="color:var(--text-muted);">¥118</span></div>
+    </div>
+    <button class="market-card-btn" style="margin-top:12px;width:100%;padding:10px;background:var(--text-secondary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      立即出题
+    </button>
+  </div>
+
+  <!-- Card 6: Placeholder -->
+  <div class="market-card" style="border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;min-height:240px;cursor:default;">
+    <div style="text-align:center;color:var(--text-muted);">
+      <div style="font-size:32px;margin-bottom:8px;opacity:0.4;">+</div>
+      <div style="font-size:13px;">更多品类即将开放</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+</div><!-- /main -->
+
+<!-- QUESTION DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">题目详情</span>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== PRICING CALCULATOR (Two-Layer Model) =====
+function updateEfficiency() {
+  const el = document.getElementById('calc-efficiency');
+  const valEl = document.getElementById('efficiency-val');
+  if (el && valEl) {
+    valEl.textContent = el.value;
+  }
+}
+
+function calculatePrice() {
+  const catSelect = document.getElementById('calc-category');
+  const tierEl = document.getElementById('calc-tier');
+  const efficiencyEl = document.getElementById('calc-efficiency');
+  
+  if (!catSelect || !tierEl || !efficiencyEl) return;
+  
+  const tierVal = parseFloat(tierEl.value);
+  const efficiency = parseInt(efficiencyEl.value);
+
+  const selectedOpt = catSelect.options[catSelect.selectedIndex];
+  if (!selectedOpt) return;
+  
+  const basePrice = parseInt(selectedOpt.dataset.base);
+  const domainCoeff = parseFloat(selectedOpt.dataset.coeff);
+
+  const REVIEW_FEE = 50;
+  const PURCHASE_MULTIPLIER = 2.2;
+  const efficiencyCoeff = efficiency / 100;
+
+  const bonus = Math.round(basePrice * tierVal * efficiencyCoeff * domainCoeff * PURCHASE_MULTIPLIER);
+  const total = REVIEW_FEE + bonus;
+
+  const setText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  setText('calc-total', '¥' + total);
+  setText('bd-review-fee', '¥' + REVIEW_FEE);
+  setText('bd-bonus', '¥' + bonus);
+  setText('bd-base', '¥' + basePrice);
+  setText('bd-tier', '×' + tierVal);
+  setText('bd-efficiency', '×' + efficiencyCoeff.toFixed(2));
+  setText('bd-domain', '×' + domainCoeff);
+  setText('bd-total', '¥' + total);
+
+  const tiers = [1.0, 1.5, 2.2, 3.5];
+  const ids = ['cmp-l1', 'cmp-l2', 'cmp-l3', 'cmp-l4'];
+  tiers.forEach((t, i) => {
+    const el = document.getElementById(ids[i]);
+    if (!el) return;
+    const tierBonus = Math.round(basePrice * t * efficiencyCoeff * domainCoeff * PURCHASE_MULTIPLIER);
+    const tierTotal = REVIEW_FEE + tierBonus;
+    el.textContent = '¥' + tierTotal;
+    el.style.color = t === tierVal ? 'var(--primary)' : '';
+    el.style.fontWeight = t === tierVal ? '700' : '500';
+  });
+
+  generateTips(efficiency, tierVal, basePrice, domainCoeff, total);
+}
+
+function generateTips(efficiency, tier, base, domain, total) {
+  const tips = [];
+  const REVIEW_FEE = 50;
+  const PM = 2.2;
+
+  if (efficiency < 90) {
+    const gain = Math.round(base * tier * ((efficiency + 10) / 100) * domain * PM) - Math.round(base * tier * (efficiency / 100) * domain * PM);
+    tips.push(`效率分从 ${efficiency} 提升到 ${efficiency + 10}，采购奖金可增加约 <strong style="color:var(--success);">¥${gain}</strong>`);
+  }
+
+  if (tier < 2.2) {
+    const nextTier = tier === 1.0 ? 1.5 : 2.2;
+    const nextName = tier === 1.0 ? 'L2 熟手' : 'L3 精英';
+    const currentBonus = Math.round(base * tier * (efficiency / 100) * domain * PM);
+    const nextBonus = Math.round(base * nextTier * (efficiency / 100) * domain * PM);
+    tips.push(`升级到 <strong>${nextName}</strong>（系数 ${nextTier}×），采购奖金从 ¥${currentBonus} 增至 ¥${nextBonus}`);
+  }
+
+  if (domain < 1.3) {
+    tips.push(`切换到 <strong>高需求品类</strong>（如代码生成，领域系数1.4×）可显著提升采购奖金`);
+  }
+
+  if (tips.length === 0) {
+    tips.push('当前参数下收益已接近上限，建议关注<strong>连续活跃奖励</strong>和<strong>导师机制</strong>获取额外收益');
+  }
+
+  const tipsElement = document.getElementById('calc-tips');
+  if (tipsElement) {
+    tipsElement.innerHTML = tips.map(t => `<div style="padding:4px 0;">• ${t}</div>`).join('');
+  }
+}
+
+// ===== QUESTION DETAIL MODAL =====
+const questions = [
+  {
+    title: '微分方程在人口增长模型中的应用题',
+    id: 'M-20260618-1001-042',
+    category: '数学推理',
+    status: '已结算',
+    statusClass: 'settled',
+    q: 82,
+    earning: 301,
+    basePrice: 65,
+    domainCoeff: 1.3,
+    tierCoeff: 1.5,
+    approvalRate: 100,
+    purchaseRate: 67,
+    timeline: [
+      { label: '提交', date: '6月18日', status: 'completed' },
+      { label: '初审通过', date: '6月18日 · 2小时', status: 'completed' },
+      { label: '复审通过', date: '6月19日 · 1天', status: 'completed' },
+      { label: '终审通过', date: '6月20日 · 1天', status: 'completed' },
+      { label: '上线售卖 → 被采购', date: '6月25日 · 4天', status: 'completed' },
+      { label: '已结算', date: '效率分 90', status: 'completed' },
+    ]
+  },
+  {
+    title: '二叉搜索树的旋转操作与平衡性证明',
+    id: 'C-20260615-2003-018',
+    category: '代码生成',
+    status: '已采购',
+    statusClass: 'purchased',
+    q: 89,
+    earning: 341,
+    basePrice: 70,
+    domainCoeff: 1.4,
+    tierCoeff: 1.5,
+    approvalRate: 100,
+    purchaseRate: 80,
+    timeline: [
+      { label: '提交', date: '6月15日', status: 'completed' },
+      { label: '初审通过', date: '6月16日', status: 'completed' },
+      { label: '复审通过', date: '6月17日', status: 'completed' },
+      { label: '终审通过', date: '6月18日', status: 'completed' },
+      { label: '被采购', date: '6月22日', status: 'completed' },
+      { label: '分数锁定', date: '7月15日', status: 'pending' },
+    ]
+  },
+  {
+    title: '基于上下文推断句子情感极性',
+    id: 'N-20260612-3001-007',
+    category: '自然语言处理',
+    status: '已结算',
+    statusClass: 'settled',
+    q: 65,
+    earning: 141,
+    basePrice: 50,
+    domainCoeff: 1.0,
+    tierCoeff: 1.5,
+    approvalRate: 100,
+    purchaseRate: 38,
+    timeline: [
+      { label: '提交', date: '6月12日', status: 'completed' },
+      { label: '初审通过', date: '6月13日 · 1天', status: 'completed' },
+      { label: '复审退回', date: '6月14日', status: 'completed' },
+      { label: '修改重提', date: '6月15日', status: 'completed' },
+      { label: '终审通过', date: '6月17日 · 共5天', status: 'completed' },
+      { label: '已结算', date: '效率分 55（退回1次）', status: 'completed' },
+    ]
+  },
+  {
+    title: '条件概率与贝叶斯公式综合应用',
+    id: 'M-20260605-1001-039',
+    category: '数学推理',
+    status: '已结算',
+    statusClass: 'settled',
+    q: 74,
+    earning: 301,
+    basePrice: 65,
+    domainCoeff: 1.3,
+    tierCoeff: 1.5,
+    approvalRate: 100,
+    purchaseRate: 52,
+    timeline: [
+      { label: '提交', date: '6月5日', status: 'completed' },
+      { label: '初审通过', date: '6月6日', status: 'completed' },
+      { label: '复审通过', date: '6月7日', status: 'completed' },
+      { label: '终审通过', date: '6月8日', status: 'completed' },
+      { label: '被采购', date: '6月15日', status: 'completed' },
+      { label: '分数锁定', date: '7月5日', status: 'completed' },
+    ]
+  },
+  {
+    title: 'Python异步编程 asyncio 实战任务设计',
+    id: 'C-20260601-2003-015',
+    category: '代码生成',
+    status: '已采购',
+    statusClass: 'purchased',
+    q: 91,
+    earning: 341,
+    basePrice: 70,
+    domainCoeff: 1.4,
+    tierCoeff: 1.5,
+    approvalRate: 100,
+    purchaseRate: 84,
+    timeline: [
+      { label: '提交', date: '6月1日', status: 'completed' },
+      { label: '初审通过', date: '6月2日', status: 'completed' },
+      { label: '复审通过', date: '6月3日', status: 'completed' },
+      { label: '终审通过', date: '6月4日', status: 'completed' },
+      { label: '被采购', date: '6月8日', status: 'completed' },
+      { label: '分数锁定', date: '7月1日', status: 'completed' },
+    ]
+  }
+];
+
+function showQuestionDetail(idx) {
+  const q = questions[idx];
+  document.getElementById('modal-title').textContent = q.title;
+
+  const REVIEW_FEE = 50;
+  const PM = 2.2;
+  const efficiency = q.q >= 80 ? 90 : q.q >= 60 ? 55 : 40;
+  const efficiencyCoeff = efficiency / 100;
+  const bonus = Math.round(q.basePrice * q.tierCoeff * efficiencyCoeff * q.domainCoeff * PM);
+
+  let html = `
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:20px;">
+      <span class="status-badge ${q.statusClass}">${q.status}</span>
+      <span class="q-category">${q.category}</span>
+      <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);margin-left:auto;">${q.id}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+      <div style="padding:20px;background:#f0fdf4;border-radius:var(--radius-sm);border:1px solid #bbf7d0;text-align:center;">
+        <div style="font-size:12px;color:#166534;margin-bottom:4px;">审核通过费</div>
+        <div style="font-size:28px;font-weight:700;font-family:var(--font-mono);color:#166534;">¥${REVIEW_FEE}</div>
+      </div>
+      <div style="padding:20px;background:#e8f0fe;border-radius:var(--radius-sm);border:1px solid #93c5fd;text-align:center;">
+        <div style="font-size:12px;color:#1e40af;margin-bottom:4px;">采购奖金</div>
+        <div style="font-size:28px;font-weight:700;font-family:var(--font-mono);color:#1e40af;">¥${bonus}</div>
+      </div>
+    </div>
+    <div style="padding:16px;background:#f8f9fc;border-radius:var(--radius-sm);margin-bottom:24px;">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">酬金计算明细</div>
+      <div style="font-family:var(--font-mono);font-size:13px;line-height:1.8;color:var(--text);">
+        <div>采购奖金 = ${q.basePrice} × ${q.tierCoeff} × ${efficiencyCoeff} × ${q.domainCoeff} × ${PM} = ¥${bonus}</div>
+        <div style="font-weight:600;color:var(--primary);">总酬金 = ¥${REVIEW_FEE} + ¥${bonus} = ¥${q.earning}</div>
+      </div>
+    </div>
+    <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">审核时间线</h4>
+    <div style="border-left:2px solid var(--border-light);padding-left:16px;">`;
+
+  q.timeline.forEach((step, i) => {
+    const isCompleted = step.status === 'completed';
+    html += `
+      <div style="position:relative;padding:10px 0;">
+        <div style="position:absolute;left:-24px;width:10px;height:10px;border-radius:50%;background:${isCompleted ? 'var(--success)' : 'var(--border)'};border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.1);"></div>
+        <div style="font-size:13px;font-weight:500;color:${isCompleted ? 'var(--text)' : 'var(--text-muted)'};">${step.label}</div>
+        <div style="font-size:11px;color:var(--text-muted);">${step.date}</div>
+      </div>`;
+  });
+
+  html += `
+    </div>
+    <div style="margin-top:20px;padding:12px;background:#fffbeb;border-radius:var(--radius-sm);font-size:12px;color:#92400e;line-height:1.6;border:1px solid #fef3c7;">
+      <strong>效率分 ${efficiency}</strong> = 100 − 退回次数×25 − 审核天数×5<br>
+      当前效率系数：${efficiencyCoeff} · 可通过一次过审提升至 1.0（效率分100）
+    </div>`;
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function showRejectedInfo() {
+  document.getElementById('modal-title').textContent = '简单排序算法的时间复杂度比较';
+  let html = `
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:20px;">
+      <span class="status-badge rejected">已退回</span>
+      <span class="q-category">代码生成</span>
+      <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);margin-left:auto;">C-20260610-2003-016</span>
+    </div>
+    <div style="text-align:center;padding:24px;background:#fef2f2;border-radius:var(--radius-sm);border:1px solid #fecaca;margin-bottom:24px;">
+      <div style="font-size:12px;color:#991b1b;margin-bottom:4px;">酬金</div>
+      <div style="font-size:36px;font-weight:700;font-family:var(--font-mono);color:var(--danger);">¥0</div>
+      <div style="font-size:13px;color:#991b1b;margin-top:8px;">⛳ 审核硬门槛：未通过审核的题目不计酬金</div>
+    </div>
+    <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">退回原因</h4>
+    <div style="margin-bottom:24px;">
+      <div style="padding:10px 14px;background:#f8f9fc;border-radius:var(--radius-sm);font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:8px;">
+        <strong>复审退回</strong> · 6月11日<br>
+        题目难度不足，仅涉及基础概念对比，缺乏推理深度，不符合"高中竞赛及以上"的平台定位。
+      </div>
+      <div style="padding:10px 14px;background:#fef2f2;border-radius:var(--radius-sm);font-size:13px;color:#991b1b;line-height:1.7;border:1px solid #fee2e2;">
+        <strong>终审退回</strong> · 6月12日<br>
+        经复审修改后仍未达标，建议参考平台题库中的同类高难度题目，加强题目的挑战性和创新性。
+      </div>
+    </div>
+    <div style="padding:16px;background:#f0fdf4;border-radius:var(--radius-sm);border:1px solid #bbf7d0;">
+      <div style="font-size:13px;color:#166534;font-weight:600;margin-bottom:8px;">下一步建议</div>
+      <ul style="font-size:12px;color:#166534;line-height:1.8;padding-left:16px;">
+        <li>参考平台"代码生成"品类下的高通过率题目</li>
+        <li>增加算法优化、复杂度分析等深度内容</li>
+        <li>引入边界条件、特殊情况分析等维度</li>
+        <li>修改后可重新提交，不影响效率分计算（但审核天数会累积）</li>
+      </ul>
+    </div>`;
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function showReviewProgress() {
+  document.getElementById('modal-title').textContent = '三阶幻方的构造与唯一性证明';
+  let html = `
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:20px;">
+      <span class="status-badge review">复审中</span>
+      <span class="q-category">逻辑推理</span>
+      <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);margin-left:auto;">L-20260620-4001-003</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
+      <div style="text-align:center;padding:16px;background:#f0fdf4;border-radius:var(--radius-sm);border:1px solid #bbf7d0;">
+        <div style="margin-bottom:4px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div style="font-size:12px;font-weight:600;color:#166534;">初审通过</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">6月20日 · 2小时</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#e8f0fe;border-radius:var(--radius-sm);border:1px solid #93c5fd;">
+        <div style="margin-bottom:4px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></div>
+        <div style="font-size:12px;font-weight:600;color:#1e40af;">复审中</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">已处理 1天</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f8f9fc;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="margin-bottom:4px;opacity:0.4;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+        <div style="font-size:12px;color:var(--text-muted);">终审</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">预计 1–3天</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f8f9fc;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="margin-bottom:4px;opacity:0.4;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="2"/><circle cx="12" cy="15" r="1"/><path d="M6 11V6a6 6 0 0 1 12 0v5"/></svg></div>
+        <div style="font-size:12px;color:var(--text-muted);">上线售卖</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">等待审核</div>
+      </div>
+    </div>
+    <div style="padding:16px;background:#fffbeb;border-radius:var(--radius-sm);border:1px solid #fef3c7;">
+      <div style="font-size:13px;color:#92400e;font-weight:600;margin-bottom:8px;">效率分预估</div>
+      <div style="font-size:12px;color:#92400e;line-height:1.6;">
+        当前审核耗时：<strong>2天</strong>（初审2小时不计入）<br>
+        若一次通过且3天内完成 → 效率分约 <strong>85</strong>（效率系数 0.85）<br>
+        任一轮被退回 → 退回次数×25 将直接扣除效率分
+      </div>
+    </div>`;
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal(e) {
+  if (!e || e.target.classList.contains('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('show');
+  }
+}
+
+// ===== UPLOAD FLOW FUNCTIONS =====
+
+// Subject data by project
+const projectData = {
+  'ai-basic': { name: 'AI基础训练', phase: '第1期', subjects: [
+    { value: 'math', label: '数学', prefix: 'M' },
+    { value: 'code', label: '代码生成', prefix: 'C' },
+    { value: 'logic', label: '逻辑推理', prefix: 'L' },
+    { value: 'nlp', label: '自然语言处理', prefix: 'N' },
+    { value: 'general', label: '通用知识', prefix: 'G' }
+  ]},
+  'ai-advanced': { name: 'AI进阶训练', phase: '第2期', subjects: [
+    { value: 'math-adv', label: '高等数学', prefix: 'HM' },
+    { value: 'code-adv', label: '算法与数据结构', prefix: 'AS' },
+    { value: 'logic-adv', label: '形式逻辑', prefix: 'FL' },
+    { value: 'ml', label: '机器学习', prefix: 'ML' }
+  ]},
+  'ai-expert': { name: 'AI专家训练', phase: '第3期', subjects: [
+    { value: 'nlp-adv', label: 'NLP专项', prefix: 'NP' },
+    { value: 'cv', label: '计算机视觉', prefix: 'CV' },
+    { value: 'rl', label: '强化学习', prefix: 'RL' }
+  ]}
+};
+
+// State management
+let uploadState = {
+  selectedProject: null,
+  selectedSubject: null,
+  questionId: null,
+  questionIdClaimed: false,
+  fromMarket: false,
+  marketSubjectKey: null
+};
+
+// Project selection
+function selectProject(projectKey) {
+  // Remove previous selection
+  document.querySelectorAll('.upload-project-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  
+  // Add selection
+  const selectedCard = document.querySelector(`.upload-project-card[data-project="${projectKey}"]`);
+  if (selectedCard) {
+    selectedCard.classList.add('selected');
+  }
+  
+  uploadState.selectedProject = projectKey;
+  uploadState.selectedSubject = null;
+  uploadState.questionId = null;
+  uploadState.questionIdClaimed = false;
+  
+  // Show subject section
+  const subjectSection = document.getElementById('subject-selection-section');
+  subjectSection.style.display = 'block';
+  
+  // Populate subjects
+  const subjectGrid = document.getElementById('subject-grid');
+  const project = projectData[projectKey];
+  subjectGrid.innerHTML = '';
+  
+  project.subjects.forEach(subject => {
+    const btn = document.createElement('button');
+    btn.className = 'upload-subject-btn';
+    btn.onclick = () => selectSubject(subject.value);
+    btn.innerHTML = `
+      <span>${subject.label}</span>
+      <span class="upload-subject-prefix">${subject.prefix}</span>
+    `;
+    subjectGrid.appendChild(btn);
+  });
+  
+  // Hide QID section
+  document.getElementById('qid-section').style.display = 'none';
+  document.getElementById('qid-card').style.display = 'block';
+  document.getElementById('qid-claimed').style.display = 'none';
+  
+  // Disable next button
+  document.getElementById('step1-next-btn').disabled = true;
+}
+
+// Subject selection
+function selectSubject(subjectValue) {
+  // Remove previous selection
+  document.querySelectorAll('.upload-subject-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+  
+  // Add selection
+  event.currentTarget.classList.add('selected');
+  
+  uploadState.selectedSubject = subjectValue;
+  uploadState.questionIdClaimed = false;
+  
+  // Generate question ID
+  generateQuestionId();
+  
+  // Show QID section
+  document.getElementById('qid-section').style.display = 'block';
+  document.getElementById('qid-card').style.display = 'block';
+  document.getElementById('qid-claimed').style.display = 'none';
+  
+  // Disable next button until claimed
+  document.getElementById('step1-next-btn').disabled = true;
+}
+
+// Generate question ID
+function generateQuestionId() {
+  if (!uploadState.selectedProject || !uploadState.selectedSubject) return;
+  
+  const project = projectData[uploadState.selectedProject];
+  const subject = project.subjects.find(s => s.value === uploadState.selectedSubject);
+  const prefix = subject.prefix;
+  
+  // Generate ID: PREFIX-YYYYMMDD-期数-序号
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,'0')}${String(today.getDate()).padStart(2,'0')}`;
+  const phaseNum = project.phase.replace('第', '').replace('期', '').padStart(4, '0');
+  const seqNum = String(Math.floor(Math.random() * 900) + 100).padStart(3, '0');
+  
+  uploadState.questionId = `${prefix}-${dateStr}-${phaseNum}-${seqNum}`;
+  
+  // Update display
+  document.getElementById('qid-value').textContent = uploadState.questionId;
+  document.getElementById('qid-project').textContent = project.name;
+  document.getElementById('qid-subject').textContent = subject.label;
+}
+
+// Regenerate question ID
+function regenerateQuestionId() {
+  generateQuestionId();
+  uploadState.questionIdClaimed = false;
+  document.getElementById('qid-card').style.display = 'block';
+  document.getElementById('qid-claimed').style.display = 'none';
+  document.getElementById('step1-next-btn').disabled = true;
+}
+
+// Claim question ID
+function claimQuestionId() {
+  if (!uploadState.questionId) return;
+  
+  uploadState.questionIdClaimed = true;
+  
+  // Show claimed state
+  document.getElementById('qid-card').style.display = 'none';
+  document.getElementById('qid-claimed').style.display = 'block';
+  document.getElementById('qid-claimed-value').textContent = uploadState.questionId;
+  
+  // Enable next button
+  document.getElementById('step1-next-btn').disabled = false;
+  
+  // Show toast notification
+  showToast('success', '题目编号已领取', uploadState.questionId);
+}
+
+// Reset selection
+function resetSelection() {
+  uploadState = {
+    selectedProject: null,
+    selectedSubject: null,
+    questionId: null,
+    questionIdClaimed: false,
+    fromMarket: false,
+    marketSubjectKey: null
+  };
+  
+  document.querySelectorAll('.upload-project-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  
+  document.getElementById('subject-selection-section').style.display = 'none';
+  document.getElementById('qid-section').style.display = 'none';
+  document.getElementById('step1-next-btn').disabled = true;
+}
+
+// Go to upload step
+function goToUploadStep(step) {
+  // Update step indicators
+  for (let i = 1; i <= 3; i++) {
+    const stepItem = document.getElementById(`upload-step-${i}`);
+    const stepLine = document.getElementById(`upload-line-${i-1}`);
+    
+    if (i < step) {
+      stepItem.classList.remove('active');
+      stepItem.classList.add('completed');
+      if (stepLine) stepLine.classList.add('active');
+    } else if (i === step) {
+      stepItem.classList.add('active');
+      stepItem.classList.remove('completed');
+    } else {
+      stepItem.classList.remove('active', 'completed');
+      if (stepLine) stepLine.classList.remove('active');
+    }
+  }
+  
+  // Show/hide step content
+  document.querySelectorAll('.upload-step-content').forEach(content => {
+    content.classList.remove('active');
+  });
+  document.getElementById(`upload-content-${step}`).classList.add('active');
+  
+  // Update sticky header and confirmation if going to step 2 or 3
+  if (step >= 2) {
+    const project = projectData[uploadState.selectedProject];
+    const subject = project.subjects.find(s => s.value === uploadState.selectedSubject);
+    
+    document.getElementById('sticky-qid').textContent = uploadState.questionId;
+    document.getElementById('sticky-subject').textContent = subject.label;
+    
+    if (step === 3) {
+      document.getElementById('confirm-qid').textContent = uploadState.questionId;
+      document.getElementById('confirm-subject').textContent = subject.label;
+      
+      // Calculate word counts
+      const questionText = document.querySelector('.upload-textarea[data-section="question"]');
+      const answerText = document.querySelector('.upload-textarea[data-section="answer"]');
+      const analysisText = document.querySelector('.upload-textarea[data-section="analysis"]');
+      
+      document.getElementById('confirm-question-chars').textContent = (questionText?.textContent?.length || 0) + ' 字';
+      document.getElementById('confirm-answer-chars').textContent = (answerText?.textContent?.length || 0) + ' 字';
+      document.getElementById('confirm-analysis-chars').textContent = (analysisText?.textContent?.length || 0) + ' 字';
+    }
+  }
+}
+
+// Upload handlers
+function handleUploadDragOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+
+function handleUploadDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function handleUploadDrop(e, type) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const files = e.dataTransfer.files;
+  if (files.length > 0) {
+    handleImageUpload(files[0], type);
+  }
+}
+
+function handleImgUpload(e, type) {
+  const files = e.target.files;
+  if (files.length > 0) {
+    handleImageUpload(files[0], type);
+  }
+}
+
+function handleImageUpload(file, type) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dropzone = event?.target?.closest('.upload-dropzone') || 
+                     document.getElementById(`${type}-img-input`).parentElement;
+    dropzone.innerHTML = `<img src="${e.target.result}" style="max-width:100%;max-height:180px;object-fit:contain;" />`;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Preview sync
+function syncPreview(section) {
+  const textarea = event.target;
+  const preview = document.getElementById(`${section}-preview`);
+  const text = textarea.textContent || textarea.innerHTML || '';
+  preview.innerHTML = text || '<span class="upload-preview-placeholder">预览区域</span>';
+}
+
+// Format helpers
+function insertFormat(before, after) {
+  const textarea = event.target.closest('.upload-editor-panel').querySelector('.upload-textarea');
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    const selectedText = range.toString();
+    const newText = document.createTextNode(before + selectedText + after);
+    range.deleteContents();
+    range.insertNode(newText);
+  }
+}
+
+function insertFormula() {
+  const textarea = event.target.closest('.upload-editor-panel').querySelector('.upload-textarea');
+  textarea.textContent += '$$\\quad$$';
+}
+
+// Save draft
+function saveUploadDraft() {
+  showToast('success', '草稿已保存', uploadState.questionId);
+}
+
+// Submit question
+function submitQuestion() {
+  const submitBtn = event.target;
+  const originalContent = submitBtn.innerHTML;
+  
+  submitBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="upload-loading"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 提交中...';
+  submitBtn.disabled = true;
+  
+  setTimeout(() => {
+    // Show success
+    document.querySelectorAll('.upload-step-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    document.getElementById('upload-content-success').style.display = 'block';
+    document.getElementById('upload-content-success').classList.add('active');
+    
+    submitBtn.innerHTML = originalContent;
+    submitBtn.disabled = false;
+    
+    showToast('success', '题目已提交', '预计1-3个工作日内完成初审');
+  }, 1500);
+}
+
+// Reset upload flow
+function resetUploadFlow() {
+  uploadState = {
+    selectedProject: null,
+    selectedSubject: null,
+    questionId: null,
+    questionIdClaimed: false,
+    fromMarket: false,
+    marketSubjectKey: null
+  };
+  
+  // Reset UI
+  document.querySelectorAll('.upload-project-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  
+  document.querySelectorAll('.upload-subject-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+  
+  document.getElementById('subject-selection-section').style.display = 'none';
+  document.getElementById('qid-section').style.display = 'none';
+  document.getElementById('qid-card').style.display = 'block';
+  document.getElementById('qid-claimed').style.display = 'none';
+  
+  // Reset step indicators
+  for (let i = 1; i <= 3; i++) {
+    const stepItem = document.getElementById(`upload-step-${i}`);
+    const stepLine = document.getElementById(`upload-line-${i-1}`);
+    stepItem.classList.remove('active', 'completed');
+    if (stepLine) stepLine.classList.remove('active');
+  }
+  document.getElementById('upload-step-1').classList.add('active');
+  
+  // Reset step content
+  document.querySelectorAll('.upload-step-content').forEach(content => {
+    content.classList.remove('active');
+  });
+  document.getElementById('upload-content-1').classList.add('active');
+  document.getElementById('upload-content-success').style.display = 'none';
+  
+  // Clear textareas
+  document.querySelectorAll('.upload-textarea').forEach(ta => {
+    ta.textContent = '';
+  });
+  
+  // Reset previews
+  document.querySelectorAll('.upload-preview-content').forEach(pc => {
+    pc.innerHTML = '<span class="upload-preview-placeholder">预览区域</span>';
+  });
+  
+  // Disable next button
+  document.getElementById('step1-next-btn').disabled = true;
+}
+
+// Toast notification
+function showToast(type, title, message) {
+  // Remove existing toast
+  const existingToast = document.querySelector('.upload-toast');
+  if (existingToast) existingToast.remove();
+  
+  const toast = document.createElement('div');
+  toast.className = `upload-toast ${type}`;
+  toast.innerHTML = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'warning'})" stroke-width="2">
+      ${type === 'success' ? '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' : 
+        type === 'error' ? '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>' :
+        '<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>'}
+    </svg>
+    <div>
+      <div style="font-size:13px;font-weight:600;">${title}</div>
+      <div style="font-size:12px;color:var(--text-muted);">${message}</div>
+    </div>
+  `;
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideIn 0.3s ease reverse';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Jump from market to upload (exposed for market page)
+function jumpToUploadFromMarket(subjectKey) {
+  document.querySelector('[data-tab="upload"]').click();
+  
+  const projectMap = {
+    'math': 'ai-basic',
+    'code': 'ai-basic',
+    'logic': 'ai-basic',
+    'nlp': 'ai-basic',
+    'general': 'ai-basic',
+    'math-adv': 'ai-advanced',
+    'code-adv': 'ai-advanced',
+    'logic-adv': 'ai-advanced',
+    'ml': 'ai-advanced',
+    'nlp-adv': 'ai-expert',
+    'cv': 'ai-expert',
+    'rl': 'ai-expert'
+  };
+  
+  const projectKey = projectMap[subjectKey];
+  if (!projectKey) return;
+  
+  uploadState.fromMarket = true;
+  uploadState.marketSubjectKey = subjectKey;
+  
+  setTimeout(() => {
+    selectProject(projectKey);
+    
+    setTimeout(() => {
+      const subjectBtn = findSubjectButton(subjectKey);
+      if (subjectBtn) {
+        subjectBtn.click();
+        
+        setTimeout(() => {
+          if (uploadState.questionId && !uploadState.questionIdClaimed) {
+            claimQuestionId();
+            
+            setTimeout(() => {
+              showToast('info', '已从选题广场跳转', '题目编号已自动领取，可开始上传内容');
+            }, 300);
+          }
+        }, 150);
+      }
+    }, 200);
+  }, 150);
+}
+
+function findSubjectButton(subjectKey) {
+  const btns = document.querySelectorAll('.upload-subject-btn');
+  for (const btn of btns) {
+    const prefixEl = btn.querySelector('.upload-subject-prefix');
+    const labelEl = btn.querySelector('span:first-child');
+    
+    if (prefixEl) {
+      const prefix = prefixEl.textContent.toUpperCase();
+      const keyMap = {
+        'M': 'math', 'C': 'code', 'L': 'logic', 'N': 'nlp', 'G': 'general',
+        'HM': 'math-adv', 'AS': 'code-adv', 'FL': 'logic-adv', 'ML': 'ml',
+        'NP': 'nlp-adv', 'CV': 'cv', 'RL': 'rl'
+      };
+      if (keyMap[prefix] === subjectKey) return btn;
+    }
+    
+    if (labelEl) {
+      const label = labelEl.textContent.trim();
+      const labelMap = {
+        '数学': 'math', '代码生成': 'code', '逻辑推理': 'logic',
+        '自然语言处理': 'nlp', '通用知识': 'general',
+        '高等数学': 'math-adv', '算法与数据结构': 'code-adv',
+        '形式逻辑': 'logic-adv', '机器学习': 'ml',
+        'NLP专项': 'nlp-adv', '计算机视觉': 'cv', '强化学习': 'rl'
+      };
+      if (labelMap[label] === subjectKey) return btn;
+    }
+  }
+  return null;
+}
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Tab switching
+  document.querySelectorAll('.tab-item').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Filter switching
+  document.querySelectorAll('.q-filter').forEach(f => {
+    f.addEventListener('click', function() {
+      document.querySelectorAll('.q-filter').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Initialize calculator
+  calculatePrice();
+});
+</script>
+<style>
+/* Upload Flow Styles */
+.upload-flow-container {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-light);
+}
+
+/* Step Progress Indicator */
+.upload-step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+  background: linear-gradient(180deg, var(--card-hover) 0%, var(--card) 100%);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.upload-step-item.active, .upload-step-item.completed {
+  opacity: 1;
+}
+
+.upload-step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.upload-step-item.active .upload-step-circle {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.15);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(26, 86, 219, 0.1); }
+}
+
+.upload-step-item.completed .upload-step-circle {
+  background: var(--success);
+  color: #fff;
+}
+
+.upload-step-item.completed .upload-step-circle::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.upload-step-item.completed .upload-step-circle {
+  font-size: 0;
+}
+
+.upload-step-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.upload-step-item.active .upload-step-label {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.upload-step-item.completed .upload-step-label {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.upload-step-line {
+  width: 80px;
+  height: 3px;
+  background: var(--border);
+  margin: 0 20px;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-step-line.active {
+  background: var(--success);
+}
+
+.upload-step-line.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Step Content */
+.upload-step-content {
+  display: none;
+}
+
+.upload-step-content.active {
+  display: block;
+}
+
+/* Header Banner */
+.upload-header-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--primary-light), #dbeafe);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.upload-banner-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.upload-banner-content h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+
+.upload-banner-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Selection Panel */
+.upload-selection-panel {
+  padding: 24px;
+}
+
+.upload-selection-section {
+  margin-bottom: 24px;
+}
+
+.upload-selection-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* Project Grid */
+.upload-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.upload-project-card {
+  padding: 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--card);
+  text-align: center;
+  position: relative;
+}
+
+.upload-project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: linear-gradient(135deg, rgba(26, 86, 219, 0.08), rgba(26, 86, 219, 0.04));
+}
+
+.upload-project-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(26, 86, 219, 0.15);
+}
+
+.upload-project-card:hover::before {
+  opacity: 1;
+}
+
+.upload-project-card.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.2), 0 8px 16px rgba(26, 86, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+.upload-project-card.selected::before {
+  opacity: 1;
+}
+
+.upload-project-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  animation: checkPop 0.3s ease;
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.upload-project-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.upload-project-card.selected .upload-project-icon {
+  color: var(--primary);
+}
+
+.upload-project-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.upload-project-info {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Subject Grid */
+.upload-subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.upload-subject-btn {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.upload-subject-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 86, 219, 0.1);
+}
+
+.upload-subject-btn.selected {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 86, 219, 0.2);
+}
+
+.upload-subject-btn.selected .upload-subject-prefix {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.upload-subject-prefix {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg);
+}
+
+.upload-subject-btn.selected .upload-subject-prefix {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Question ID Section */
+.upload-qid-section {
+  margin-top: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+.upload-qid-card {
+  padding: 32px;
+  background: linear-gradient(135deg, #dbeafe 0%, var(--primary-light) 100%);
+  border: 3px solid var(--primary);
+  border-radius: var(--radius);
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(26, 86, 219, 0.15);
+}
+
+.upload-qid-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.upload-qid-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.upload-qid-icon {
+  color: var(--primary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-qid-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+.upload-qid-value {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--primary-dark);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  background: var(--card);
+  padding: 16px 24px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.upload-qid-meta {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.upload-qid-divider {
+  margin: 0 4px;
+  color: var(--border);
+}
+
+.upload-qid-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.upload-qid-btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-family: var(--font);
+}
+
+.upload-qid-btn.claim {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(26, 86, 219, 0.3);
+}
+
+.upload-qid-btn.claim:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 86, 219, 0.4);
+}
+
+.upload-qid-btn.regenerate {
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--border);
+}
+
+.upload-qid-btn.regenerate:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--card-hover);
+}
+
+/* QID Claimed State */
+.upload-qid-claimed {
+  padding: 32px;
+  background: linear-gradient(135deg, var(--success-light), #d1fae5);
+  border: 3px solid var(--success);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.15);
+  animation: successPop 0.4s ease;
+}
+
+@keyframes successPop {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.upload-qid-claimed-icon {
+  margin-bottom: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  border-radius: 50%;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  animation: iconBounce 0.5s ease;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.upload-qid-claimed-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.upload-qid-claimed-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--success);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  background: var(--card);
+  padding: 16px 24px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  border: 2px solid var(--success);
+}
+
+.upload-qid-claimed-tip {
+  font-size: 14px;
+  color: var(--text);
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.upload-qid-claimed-tip::before {
+  content: '🔒';
+  font-size: 16px;
+}
+
+/* Step Actions */
+.upload-step-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.upload-step-btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.upload-step-btn.primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+.upload-step-btn.primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.upload-step-btn.primary:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.upload-step-btn.secondary {
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.upload-step-btn.secondary:hover {
+  border-color: var(--text-secondary);
+}
+
+/* Sticky Header */
+.upload-sticky-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--primary-light);
+  border-bottom: 1px solid #d9e4ff;
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+}
+
+.upload-sticky-qid, .upload-sticky-subject {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-sticky-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.upload-sticky-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.upload-sticky-qid .upload-sticky-value {
+  font-family: var(--font-mono);
+}
+
+.upload-sticky-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.upload-sticky-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.upload-sticky-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.upload-sticky-btn.save {
+  background: var(--card);
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.upload-sticky-btn.submit {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* Instructions Banner */
+.upload-instructions-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-instructions-banner .upload-banner-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.upload-banner-text {
+  flex: 1;
+}
+
+.upload-banner-text p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.upload-banner-links {
+  display: flex;
+  gap: 16px;
+}
+
+.upload-link {
+  font-size: 13px;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.upload-link:hover {
+  text-decoration: underline;
+}
+
+/* Upload Content Area */
+.upload-content-area {
+  padding: 24px;
+}
+
+.upload-section {
+  margin-bottom: 32px;
+}
+
+.upload-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.upload-section-bar {
+  width: 3px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.upload-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upload-section-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  gap: 16px;
+}
+
+/* Dropzone */
+.upload-dropzone {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--card-hover);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 20px;
+}
+
+.upload-dropzone:hover, .upload-dropzone.drag-over {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.upload-dropzone-icon {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.upload-dropzone-text {
+  font-size: 13px;
+  color: var(--primary);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Editor Panel */
+.upload-editor-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card);
+}
+
+.upload-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--card-hover);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-editor-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.upload-editor-toolbar {
+  display: flex;
+  gap: 4px;
+}
+
+.upload-toolbar-btn {
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.upload-toolbar-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.upload-textarea {
+  min-height: 200px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.8;
+  outline: none;
+  font-family: inherit;
+  background: var(--card);
+}
+
+.upload-textarea:focus {
+  background: #fff;
+}
+
+/* Preview Panel */
+.upload-preview-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-hover);
+}
+
+.upload-preview-header {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--card);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-preview-content {
+  min-height: 200px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.upload-preview-placeholder {
+  color: var(--text-muted);
+}
+
+/* PDF Area */
+.upload-pdf-area {
+  padding: 16px;
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload-pdf-btn {
+  padding: 8px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upload-pdf-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.upload-pdf-info {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Confirm Panel */
+.upload-confirm-panel {
+  padding: 48px;
+  text-align: center;
+}
+
+.upload-confirm-icon {
+  margin-bottom: 16px;
+}
+
+.upload-confirm-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.upload-confirm-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.upload-confirm-summary {
+  background: var(--card-hover);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upload-confirm-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.upload-confirm-row:last-child {
+  border-bottom: none;
+}
+
+.upload-confirm-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.upload-confirm-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upload-confirm-value.mono {
+  font-family: var(--font-mono);
+  color: var(--primary);
+}
+
+/* Confirm Flow */
+.upload-confirm-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.upload-flow-step {
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.upload-flow-step.success {
+  border-color: var(--success);
+  background: var(--success-light);
+}
+
+.upload-flow-num {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.upload-flow-step.success .upload-flow-num {
+  color: var(--success);
+}
+
+.upload-flow-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upload-flow-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.upload-flow-arrow {
+  padding: 0 8px;
+  color: var(--text-muted);
+}
+
+/* Confirm Actions */
+.upload-confirm-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.upload-confirm-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.upload-confirm-btn.back {
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.upload-confirm-btn.submit {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+/* Success Panel */
+.upload-success-panel {
+  padding: 48px;
+  text-align: center;
+}
+
+.upload-success-icon {
+  margin-bottom: 16px;
+}
+
+.upload-success-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--success);
+  margin-bottom: 8px;
+}
+
+.upload-success-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.upload-success-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.upload-success-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.upload-success-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.upload-success-btn.primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+/* Loading Animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.upload-loading {
+  animation: spin 1s linear infinite;
+}
+
+/* Toast Notification */
+.upload-toast {
+  position: fixed;
+  top: 80px;
+  right: 32px;
+  padding: 16px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideIn 0.3s ease;
+}
+
+.upload-toast.success {
+  border: 1px solid var(--success);
+}
+
+.upload-toast.error {
+  border: 1px solid var(--danger);
+}
+
+.upload-toast.warning {
+  border: 1px solid var(--warning);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Loading Skeleton */
+.upload-skeleton {
+  background: linear-gradient(90deg, var(--card-hover) 25%, var(--border-light) 50%, var(--card-hover) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Upload progress indicator */
+.upload-progress-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: var(--radius);
+  z-index: 10;
+}
+
+.upload-progress-ring {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.upload-progress-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Step transition animation */
+.upload-step-content.active {
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Back to market link */
+.upload-back-market {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.upload-back-market:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* Section status badge */
+.upload-section-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.upload-section-status.pending {
+  background: var(--bg);
+  color: var(--text-muted);
+}
+
+.upload-section-status.done {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.upload-section-status.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  body { min-width: auto; }
+  .main { padding: 16px; }
+  
+  .metrics-row { grid-template-columns: repeat(2, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+  .market-grid { grid-template-columns: repeat(2, 1fr); }
+  .calc-layout { grid-template-columns: 1fr; }
+  .spec-grid { grid-template-columns: 1fr; }
+  
+  .upload-section-grid {
+    grid-template-columns: 150px 1fr;
+  }
+  
+  .upload-preview-panel {
+    display: none;
+  }
+  
+  .upload-project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 16px; height: 48px; }
+  .header-logo { font-size: 16px; }
+  .header-logo span { display: none; }
+  .tab-bar { padding: 0 16px; overflow-x: auto; white-space: nowrap; }
+  .tab-item { padding: 10px 14px; font-size: 13px; flex-shrink: 0; }
+  
+  .metrics-row { grid-template-columns: 1fr; }
+  .market-grid { grid-template-columns: 1fr; }
+  
+  .upload-step-progress {
+    padding: 16px 8px;
+    gap: 4px;
+  }
+  
+  .upload-step-item {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .upload-step-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .upload-step-label {
+    font-size: 11px;
+  }
+  
+  .upload-step-line {
+    width: 40px;
+    margin: 0 8px;
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+  
+  .upload-selection-panel { padding: 16px; }
+  
+  .upload-qid-value {
+    font-size: 20px;
+    padding: 12px 16px;
+  }
+  
+  .upload-qid-card, .upload-qid-claimed {
+    padding: 20px;
+  }
+  
+  .upload-qid-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .upload-qid-btn {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .upload-sticky-header {
+    padding: 8px 16px;
+    top: 48px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .upload-sticky-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .upload-content-area { padding: 16px; }
+  
+  .upload-section-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .upload-dropzone {
+    min-height: 120px;
+  }
+  
+  .upload-textarea {
+    min-height: 150px;
+  }
+  
+  .upload-confirm-panel, .upload-success-panel {
+    padding: 32px 16px;
+  }
+  
+  .upload-confirm-flow {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .upload-flow-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+  
+  .upload-confirm-actions, .upload-success-actions {
+    flex-direction: column;
+  }
+  
+  .upload-confirm-btn, .upload-success-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .upload-step-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .upload-step-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .upload-toast {
+    left: 16px;
+    right: 16px;
+    top: 64px;
+  }
+  
+  .modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-right .header-user span { display: none; }
+  .tab-item { font-size: 12px; padding: 8px 12px; }
+  
+  .upload-step-line { width: 24px; margin: 0 4px; }
+  .upload-step-label { font-size: 10px; }
+  .upload-step-circle { width: 24px; height: 24px; font-size: 11px; }
+}
+
+</style>
+</body>
+</html>
