@@ -9,12 +9,28 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
         .project-page {
             padding-top: 6rem;
             max-width: 100%;
             margin: 0 auto;
             padding-left: 5%;
             padding-right: 5%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 769px) {
+            .project-page {
+                padding-right: calc(5% + 80px);
+            }
         }
 
         @media (min-width: 640px) {
@@ -115,9 +131,9 @@
         }
 
         .project-section {
-            margin-bottom: 4rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid var(--divider-ink);
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .section-header {
@@ -294,6 +310,170 @@
                 grid-template-columns: 1fr !important;
             }
         }
+
+        @media (max-width: 1024px) {
+            .project-section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            
+            .project-section div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .project-section div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .floating-nav-item .nav-label,
+            .floating-nav-item .nav-number {
+                display: none;
+            }
+
+            .floating-nav-item svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .floating-nav-item {
+                padding: 0.4rem;
+            }
+        }
+
+        #floating-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        #floating-nav:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .floating-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.375rem 0.625rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--ink-light);
+            text-decoration: none;
+            font-size: 0.7rem;
+            opacity: 0.65;
+        }
+
+        .floating-nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+            color: var(--ink-gray);
+            opacity: 1;
+            transform: translateX(-2px);
+        }
+
+        .floating-nav-item.active {
+            background-color: var(--accent-brown);
+            color: var(--paper-bg);
+            opacity: 1;
+            box-shadow: 0 2px 6px rgba(148, 103, 74, 0.25);
+        }
+
+        .floating-nav-item svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .floating-nav-item .nav-label {
+            white-space: nowrap;
+        }
+
+        .floating-nav-item .nav-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        #floating-nav-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            #floating-nav {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                left: auto;
+                transform: translateY(0);
+                flex-direction: row;
+                flex-wrap: wrap;
+                max-width: calc(100vw - 40px);
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+            }
+
+            #floating-nav.open {
+                max-height: 400px;
+                opacity: 1;
+            }
+
+            #floating-nav-toggle {
+                display: flex;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 48px;
+                height: 48px;
+                background-color: var(--accent-brown);
+                color: var(--paper-bg);
+                border: none;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                z-index: 1001;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            #floating-nav-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            #floating-nav-toggle.open {
+                transform: rotate(180deg);
+                background-color: var(--ink-black);
+            }
+
+            .floating-nav-item {
+                padding: 0.625rem 0.875rem;
+                font-size: 0.8125rem;
+            }
+
+            .project-section iframe {
+                height: 400px !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .project-section iframe {
+                height: 500px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -308,6 +488,70 @@
             </div>
         </div>
     </nav>
+
+    <nav id="floating-nav">
+        <a href="#section-01" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <span class="nav-label">背景</span>
+            <span class="nav-number">01</span>
+        </a>
+        <a href="#section-02" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M2 12h20"/>
+            </svg>
+            <span class="nav-label">挑战与解法</span>
+            <span class="nav-number">02</span>
+        </a>
+        <a href="#section-04" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+            </svg>
+            <span class="nav-label">成果</span>
+            <span class="nav-number">04</span>
+        </a>
+        <a href="#section-05" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            <span class="nav-label">系统架构</span>
+            <span class="nav-number">05</span>
+        </a>
+        <a href="#section-06" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            <span class="nav-label">业务流程</span>
+            <span class="nav-number">06</span>
+        </a>
+        <a href="#section-07" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span class="nav-label">业务价值</span>
+            <span class="nav-number">07</span>
+        </a>
+        <a href="#section-08" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
+            </svg>
+            <span class="nav-label">数据看板</span>
+            <span class="nav-number">08</span>
+        </a>
+        <a href="#section-prototype" class="floating-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+            <span class="nav-label">原型展示</span>
+        </a>
+    </nav>
+
+    <button id="floating-nav-toggle" aria-label="Toggle navigation">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+    </button>
 
     <main class="main-content project-page">
         <div class="project-header">
@@ -324,7 +568,7 @@
             </div>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-01">
             <div class="section-header">
                 <span class="section-number">01</span>
                 <span class="section-label">CONTEXT</span>
@@ -334,7 +578,7 @@
             
             <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-top: 2rem; margin-bottom: 1rem;">行业背景与业务痛点</h4>
             <p style="font-size: 0.9375rem; color: var(--ink-gray); line-height: 1.8; max-width: 800px;">随着5G时代的到来，运营商面临着激烈的市场竞争和用户增长瓶颈。为提升用户粘性和ARPU值，运营商需要通过丰富的权益体系来增强产品竞争力。然而，原有的权益运营存在以下核心痛点：</p>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px;">
+            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
                 <li style="margin-bottom: 0.75rem;"><strong>业务碎片化严重</strong>：10+省级单位及专业公司各自为政，业务规则不统一，难以形成规模化运营能力</li>
                 <li style="margin-bottom: 0.75rem;"><strong>权益品类复杂</strong>：涵盖茶饮、音视频、生活服务等数十种权益类型，结算口径复杂，资金风险高</li>
                 <li style="margin-bottom: 0.75rem;"><strong>系统对接困难</strong>：上下游系统多达数十个，接口标准不统一，新业务接入周期长达数月</li>
@@ -344,7 +588,7 @@
             
             <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-top: 2rem; margin-bottom: 1rem;">需求分析与战略定位</h4>
             <p style="font-size: 0.9375rem; color: var(--ink-gray); line-height: 1.8; max-width: 800px;">基于深度的业务访谈和竞品分析，项目团队明确了以下核心需求：</p>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px;">
+            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
                 <li style="margin-bottom: 0.5rem;"><strong>统一运营能力</strong>：构建集团级权益运营中台，实现规则统一、流程统一、数据统一</li>
                 <li style="margin-bottom: 0.5rem;"><strong>快速接入能力</strong>：通过配置化方式，将新单位接入周期从月级缩短至周级</li>
                 <li style="margin-bottom: 0.5rem;"><strong>全链路可观测</strong>：建立金融级对账机制，确保每一笔资金流向可追溯</li>
@@ -353,7 +597,7 @@
             </ul>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-02">
             <div class="challenge-solution-grid">
                 <div>
                     <div class="section-header" style="justify-content: flex-start;">
@@ -390,7 +634,7 @@
             </div>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-04">
             <div class="section-header">
                 <span class="section-number">04</span>
                 <span class="section-label">RESULTS</span>
@@ -412,7 +656,7 @@
             </div>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-05">
             <div class="section-header">
                 <span class="section-number">05</span>
                 <span class="section-label">SYSTEM ARCHITECTURE</span>
@@ -497,7 +741,7 @@
             </div>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-06">
             <div class="section-header">
                 <span class="section-number">06</span>
                 <span class="section-label">PROCESS</span>
@@ -539,7 +783,7 @@
             </div>
         </div>
 
-        <div class="project-section">
+        <div class="project-section" id="section-07">
             <div class="section-header">
                 <span class="section-number">07</span>
                 <span class="section-label">BUSINESS VALUE</span>
@@ -547,25 +791,190 @@
             </div>
             
             <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 600; color: var(--ink-black); margin-top: 1.5rem; margin-bottom: 1rem;">业务价值体现</h4>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px;">
+            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
                 <li style="margin-bottom: 0.5rem;"><strong>运营效率提升</strong>：权益发放时效从T+1提升至分钟级，人工操作减少80%</li>
                 <li style="margin-bottom: 0.5rem;"><strong>业务规模扩展</strong>：支撑从单一省份到10+省级单位及专业公司的规模化运营</li>
-                <li style="margin-bottom: 0.5rem;"><strong>资金风险控制</strong>：金融级对账机制，资金差错率降至0.01%以下</li>
-                <li style="margin-bottom: 0.5rem;"><strong>数据驱动决策</strong>：全链路数据可视化，运营分析效率提升3倍</li>
                 <li><strong>快速业务创新</strong>：配置化接入规范，新业务上线周期从月级缩至周级</li>
             </ul>
             
             <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 600; color: var(--ink-black); margin-top: 1.5rem; margin-bottom: 1rem;">未来规划</h4>
-            <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7;">基于现有中台能力，未来将重点推进以下方向：</p>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px;">
-                <li style="margin-bottom: 0.5rem;"><strong>B2B2C商城拓展</strong>：利用云仓的商品供给能力，打造面向C端用户的权益商城</li>
-                <li style="margin-bottom: 0.5rem;"><strong>智能推荐引擎</strong>：基于用户画像和行为数据，实现权益的精准推荐</li>
-                <li style="margin-bottom: 0.5rem;"><strong>API开放平台</strong>：将核心能力对外开放，赋能合作伙伴</li>
-                <li><strong>AI智能运营</strong>：引入AI技术，实现运营策略的自动优化</li>
+            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 0.5rem;"><strong>AI智能运营</strong>：引入AI技术，实现运营策略的自动优化与智能决策</li>
+                <li style="margin-bottom: 0.5rem;"><strong>智能推荐引擎</strong>：基于用户画像和行为数据，实现权益的精准推荐与个性化匹配</li>
+                <li><strong>B2B2C商城拓展</strong>：利用云仓的商品供给能力，打造面向C端用户的权益商城，探索新的商业模式</li>
             </ul>
         </div>
 
-        <div class="prototype-section">
+        <div class="project-section" id="section-08">
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <span class="section-label">DATA DASHBOARD</span>
+                <span class="section-title">数据看板</span>
+            </div>
+            <p>数据看板作为权益运营的核心可视化工具，提供全链路业务数据的实时监控与智能分析能力，帮助用户快速理解业务现状并支持高效决策。</p>
+
+            <div style="margin-top: 2rem;">
+                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">功能架构</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                    <div>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 01</span>
+                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">KPI监控</div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">智能洞察</div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">运营简报</div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">快捷操作</div>
+                        </div>
+                    </div>
+                    <div>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 02</span>
+                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">趋势分析<br><span style="font-size: 0.625rem; color: var(--ink-light);">订单量/成本/核销</span></div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">核心指标<br><span style="font-size: 0.625rem; color: var(--ink-light);">留存/在订时长</span></div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">效率矩阵<br><span style="font-size: 0.625rem; color: var(--ink-light);">单位/渠道分析</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 03</span>
+                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">AI数据查询<br><span style="font-size: 0.625rem; color: var(--ink-light);">自然语言交互</span></div>
+                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">运营日报<br><span style="font-size: 0.625rem; color: var(--ink-light);">完整报告抽屉</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">数据更新机制</h4>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">更新频率</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">数据内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">实时</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">权益发放、核销订单等核心指标实时同步</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">每小时</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">库存、供应商数据定时同步</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">离线</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">支持离线查看历史数据快照</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">整合</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">云仓、万象、灵霄三大系统数据统一呈现</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">一致</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">金融级对账机制确保数据准确性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <div style="margin-top: 3rem;">
+                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">场景交互</h4>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">场景</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">触发操作</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">系统反馈</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">输出结果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 0.5rem;"></span>
+                                    监控场景
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">查看KPI卡片实时数据、浏览智能洞察告警、监控运营简报待办</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">数字实时更新、异常指标高亮、待办数量红点提示</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速识别业务异常，及时响应关键问题</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--blue); display: inline-block; margin-right: 0.5rem;"></span>
+                                    分析场景
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">设置时间筛选器、悬停图表查看详情、点击矩阵节点钻取</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">图表实时重绘、浮动卡片展示明细、侧边详情面板展开</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">深入分析数据趋势，定位问题根源</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber); display: inline-block; margin-right: 0.5rem;"></span>
+                                    决策场景
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">自然语言查询、展开运营日报、导出数据分析报告</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">AI生成分析结论、抽屉展示完整报告、下载Excel/PDF文件</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">获取智能决策建议，支撑业务决策</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="margin-top: 3rem;">
+                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">用户旅程</h4>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">角色</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">场景</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">操作路径</th>
+                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">预期结果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP01</span>
+                                    运营专员
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">日常巡检</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → 查看智能洞察 → 处理告警 → 浏览运营简报 → 执行快捷操作</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">及时发现业务异常，快速处理待办事项，保持运营流程顺畅</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP02</span>
+                                    管理层
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速决策</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → 浏览KPI卡片 → 设置时间范围 → 查看趋势图表 → 展开运营日报</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速掌握业务全貌，获取关键指标趋势，支持战略决策制定</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
+                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP03</span>
+                                    数据分析师
+                                </td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">深度查询</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → AI自然语言查询 → 钻取矩阵详情 → 查看留存分析 → 导出数据报告</td>
+                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">获取深度数据分析，定位业务优化点，输出专业分析报告</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="./data-dashboard.html" target="_blank" class="prototype-link">
+                    <span>→</span>
+                    <span>体验数据看板</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="prototype-section" id="section-prototype">
             <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
                 <a href="./depot/dist/index.html" target="_blank" class="prototype-link">
@@ -605,6 +1014,76 @@
 
     <script>
         document.body.style.opacity = '1';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.floating-nav-item');
+            const navToggle = document.getElementById('floating-nav-toggle');
+            const floatingNav = document.getElementById('floating-nav');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 100;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 768) {
+                        floatingNav.classList.remove('open');
+                        navToggle.classList.remove('open');
+                    }
+                });
+            });
+
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    floatingNav.classList.toggle('open');
+                    navToggle.classList.toggle('open');
+                });
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -50% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.getAttribute('id');
+                        navItems.forEach(item => {
+                            if (item.getAttribute('href') === '#' + sectionId) {
+                                item.classList.add('active');
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            const sections = [
+                document.getElementById('section-01'),
+                document.getElementById('section-02'),
+                document.getElementById('section-04'),
+                document.getElementById('section-05'),
+                document.getElementById('section-06'),
+                document.getElementById('section-07'),
+                document.getElementById('section-08'),
+                document.getElementById('section-prototype')
+            ];
+
+            sections.forEach(section => {
+                if (section) {
+                    observer.observe(section);
+                }
+            });
+        });
     </script>
 </body>
 </html>
