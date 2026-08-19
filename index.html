@@ -7,16 +7,22 @@
     <meta name="keywords" content="产品经理,清华大学,运营商权益,中台能力,复杂系统设计">
     <meta name="author" content="Jackie Hou">
     <title>Jackie Hou - Product Manager</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='88' height='88' rx='12' fill='none' stroke='%23a63c2a' stroke-width='5'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-size='44' fill='%23a63c2a' font-family='Georgia,serif' font-weight='700'%3EJH%3C/text%3E%3C/svg%3E">
+    <meta property="og:title" content="Jackie Hou - Product Manager">
+    <meta property="og:description" content="产品经理，清华大学本硕，复杂业务架构设计专家">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="grain" aria-hidden="true"></div>
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
     <!-- 顶部导航栏 -->
     <nav class="navbar">
         <div class="navbar-content">
-            <span class="nav-item active">Jackie's Portfolio</span>
+            <a href="index.html" class="nav-brand" aria-label="Jackie Hou 首页">Jackie&rsquo;s Portfolio</a>
             <div class="navbar-right">
                 <a href="about.html" class="nav-item">About</a>
                 <a href="experience.html" class="nav-item">Experience</a>
@@ -27,68 +33,75 @@
     </nav>
 
     <!-- 主内容区 -->
-    <main class="main-content">
-        <!-- Hero区域 -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Jackie Hou</h1>
-                <div class="hero-subtitle">产品经理，清华本硕。</div>
-                <p class="hero-description">深研复杂业务架构，以确定性的逻辑驱动不确定的增长。</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary">查看近期项目</button>
-                    <button class="btn btn-secondary">联系我</button>
+    <main id="main-content" class="main-content">
+        <!-- Hero 区域 -->
+        <section id="hero" class="hero-section" aria-labelledby="hero-title">
+            <p class="hero-kicker">Portfolio &middot; Vol.01 &mdash; 2026</p>
+            <h1 id="hero-title" class="hero-title">Jackie Hou</h1>
+            <div class="hero-row">
+                <div class="hero-text">
+                    <p class="hero-subtitle">产品经理，清华本硕。<br>深研复杂业务架构，以确定性的逻辑驱动不确定的增长。</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">查看近期项目</a>
+                        <a href="contact.html" class="btn btn-secondary">联系我</a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-value">3+</span>
-                    <span class="stat-label">年产品经验</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">5+</span>
-                    <span class="stat-label">核心项目交付</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">70%+</span>
-                    <span class="stat-label">效率提升</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">1000万+</span>
-                    <span class="stat-label">级别项目</span>
-                </div>
+                <p class="hero-vertical" aria-hidden="true">纸墨之间 &middot; 构筑之道</p>
             </div>
         </section>
 
+        <!-- 数据带 -->
+        <div class="stats-band">
+            <dl class="stats-list">
+                <div class="stat-item">
+                    <dt class="stat-label">年产品经验</dt>
+                    <dd class="stat-value">3<span class="stat-plus">+</span></dd>
+                </div>
+                <div class="stat-item">
+                    <dt class="stat-label">核心项目交付</dt>
+                    <dd class="stat-value">5<span class="stat-plus">+</span></dd>
+                </div>
+                <div class="stat-item">
+                    <dt class="stat-label">效率提升</dt>
+                    <dd class="stat-value">70<span class="stat-plus">+</span></dd>
+                </div>
+                <div class="stat-item">
+                    <dt class="stat-label">项目规模</dt>
+                    <dd class="stat-value">1000<span class="stat-unit">万</span><span class="stat-plus">+</span></dd>
+                </div>
+            </dl>
+        </div>
+
         <!-- 分隔线 -->
-        <div class="divider"></div>
+        <hr class="divider">
 
         <!-- 时间线区域 -->
-        <section class="timeline-section">
+        <section id="experience" class="timeline-section" aria-labelledby="experience-heading">
             <div class="section-header">
-                <span class="section-number">01</span>
-                <h2 class="section-title">工作经历</h2>
-                <span class="section-label">TIMELINE</span>
+                <span class="section-number" aria-hidden="true">01</span>
+                <h2 id="experience-heading" class="section-title">工作经历</h2>
+                <span class="section-label" aria-hidden="true">TIMELINE</span>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2025.01 至今</div>
+                    <div class="timeline-date">2025.01<br>至今</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">产品经理</h3>
-                        <p class="timeline-company">北京觉观科技有限公司 | 北京市</p>
+                        <p class="timeline-company">北京觉观科技有限公司 <span class="timeline-loc">北京市</span></p>
                         <ul class="timeline-list">
                             <li>主导设计并落地连接运营商、供应商与用户的B2B2C平台，覆盖千万级用户权益分发场景</li>
-                            <li>设计"云仓+万象+灵霄"产品架构，支撑10余家运营商省级单位及专业公司业务</li>
-                            <li>命题智能协同平台：连接高校师生、行业专家与AI企业，构建"创作-审核-激励"闭环</li>
-                            <li>中移金科和包APP出行权益生态：构建一站式充电服务与"会员状态制"权益生态</li>
-                            <li>多租户会员订阅商城：采用"一套代码，多租户配置"方案，开发周期压缩70%</li>
+                            <li>设计&ldquo;云仓+万象+灵霄&rdquo;产品架构，支撑10余家运营商省级单位及专业公司业务</li>
+                            <li>命题智能协同平台：连接高校师生、行业专家与AI企业，构建&ldquo;创作-审核-激励&rdquo;闭环</li>
+                            <li>中移金科和包APP出行权益生态：构建一站式充电服务与&ldquo;会员状态制&rdquo;权益生态</li>
+                            <li>多租户会员订阅商城：采用&ldquo;一套代码，多租户配置&rdquo;方案，开发周期压缩70%</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">2023.08 - 2024.12</div>
+                    <div class="timeline-date">2023.08<br>2024.12</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">新航程(管培生)</h3>
-                        <p class="timeline-company">招商蛇口北京公司 | 北京市</p>
+                        <p class="timeline-company">招商蛇口北京公司 <span class="timeline-loc">北京市</span></p>
                         <ul class="timeline-list">
                             <li>通过流程拆解与节点优化，团队协作效率提升30%+，核心功能渗透率从30%提升至90%</li>
                             <li>3个月内推动7个项目423场直播，获客1108条，直接促成5单成交，GMV 3195万</li>
@@ -100,18 +113,19 @@
         </section>
 
         <!-- 分隔线 -->
-        <div class="divider"></div>
+        <hr class="divider">
 
         <!-- 核心能力区域 -->
-        <section class="capabilities-section">
+        <section id="capabilities" class="capabilities-section" aria-labelledby="capabilities-heading">
             <div class="section-header">
-                <span class="section-number">02</span>
-                <h2 class="section-title">核心能力</h2>
-                <span class="section-label">CAPABILITIES</span>
+                <span class="section-number" aria-hidden="true">02</span>
+                <h2 id="capabilities-heading" class="section-title">核心能力</h2>
+                <span class="section-label" aria-hidden="true">CAPABILITIES</span>
             </div>
             <div class="capabilities-grid">
                 <div class="capability-card">
-                    <h3 class="capability-title">战略与架构 Strategy</h3>
+                    <span class="capability-seal" aria-hidden="true">壹</span>
+                    <h3 class="capability-title">战略与架构 <span class="capability-en">Strategy</span></h3>
                     <ul class="capability-list">
                         <li>复杂业务抽象与系统化架构设计</li>
                         <li>平台生态机制规划</li>
@@ -119,7 +133,8 @@
                     </ul>
                 </div>
                 <div class="capability-card">
-                    <h3 class="capability-title">思维与方法 Methodology</h3>
+                    <span class="capability-seal" aria-hidden="true">贰</span>
+                    <h3 class="capability-title">思维与方法 <span class="capability-en">Methodology</span></h3>
                     <ul class="capability-list">
                         <li>闭环思维与数据驱动决策</li>
                         <li>极致的产品化与复用思维</li>
@@ -127,7 +142,8 @@
                     </ul>
                 </div>
                 <div class="capability-card">
-                    <h3 class="capability-title">执行与落地 Execution</h3>
+                    <span class="capability-seal" aria-hidden="true">叁</span>
+                    <h3 class="capability-title">执行与落地 <span class="capability-en">Execution</span></h3>
                     <ul class="capability-list">
                         <li>全生命周期产品管理</li>
                         <li>精细化的运营闭环构建</li>
@@ -135,82 +151,77 @@
                     </ul>
                 </div>
             </div>
-
         </section>
 
         <!-- 分隔线 -->
-        <div class="divider"></div>
+        <hr class="divider">
 
         <!-- 项目展示区域 -->
-        <section class="projects-section">
+        <section id="projects" class="projects-section" aria-labelledby="projects-heading">
             <div class="section-header">
-                <span class="section-number">03</span>
-                <h2 class="section-title">项目展示</h2>
-                <span class="section-label">PROJECTS</span>
+                <span class="section-number" aria-hidden="true">03</span>
+                <h2 id="projects-heading" class="section-title">项目展示</h2>
+                <span class="section-label" aria-hidden="true">PROJECTS</span>
             </div>
-            <div class="projects-grid">
-                <a href="projects/rights-management.html" class="project-link">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-date">2025.01 至今</span>
-                        </div>
-                        <h3 class="project-title">运营商权益全链路管理系统</h3>
-                        <p class="project-desc">设计"云仓+万象+灵霄"产品架构，支撑10余家运营商省级单位及专业公司业务</p>
-                        <span class="project-expand">查看项目</span>
+            <div class="projects-index">
+                <a href="projects/rights-management.html" class="project-row">
+                    <span class="project-row-num" aria-hidden="true">01</span>
+                    <div class="project-row-main">
+                        <h3 class="project-row-title">运营商权益全链路管理系统</h3>
+                        <p class="project-row-desc">云仓 + 万象 + 灵霄三层产品架构，支撑十余家运营商省级单位及专业公司业务</p>
                     </div>
+                    <span class="project-row-date">2025.01 &mdash; 至今</span>
+                    <span class="project-row-arrow" aria-hidden="true">&rarr;</span>
                 </a>
-                <a href="projects/zhishu-platform.html" class="project-link">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-date">2025.04-2025.09</span>
-                        </div>
-                        <h3 class="project-title">命题智能协同平台</h3>
-                        <p class="project-desc">连接高校师生、行业专家与AI企业，18,000+优质题目沉淀</p>
-                        <span class="project-expand">查看项目</span>
+                <a href="projects/zhishu-platform.html" class="project-row">
+                    <span class="project-row-num" aria-hidden="true">02</span>
+                    <div class="project-row-main">
+                        <h3 class="project-row-title">命题智能协同平台</h3>
+                        <p class="project-row-desc">连接高校师生、行业专家与 AI 企业，18,000+ 优质题目沉淀</p>
                     </div>
+                    <span class="project-row-date">2025.04 &mdash; 2025.09</span>
+                    <span class="project-row-arrow" aria-hidden="true">&rarr;</span>
                 </a>
-                <a href="projects/chuxing-equity.html" class="project-link">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-date">2026.01 至今</span>
-                        </div>
-                        <h3 class="project-title">中移金科和包APP出行权益生态</h3>
-                        <p class="project-desc">构建一站式充电服务与会员状态制权益生态</p>
-                        <span class="project-expand">查看项目</span>
+                <a href="projects/chuxing-equity.html" class="project-row">
+                    <span class="project-row-num" aria-hidden="true">03</span>
+                    <div class="project-row-main">
+                        <h3 class="project-row-title">中移金科和包APP出行权益生态</h3>
+                        <p class="project-row-desc">一站式充电服务与&ldquo;会员状态制&rdquo;权益生态</p>
                     </div>
+                    <span class="project-row-date">2026.01 &mdash; 至今</span>
+                    <span class="project-row-arrow" aria-hidden="true">&rarr;</span>
                 </a>
-                <a href="projects/multi-tenant-mall.html" class="project-link">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-date">2025.06 - 2025.08</span>
-                        </div>
-                        <h3 class="project-title">多租户会员订阅商城</h3>
-                        <p class="project-desc">一套代码，多租户配置，开发周期压缩70%</p>
-                        <span class="project-expand">查看项目</span>
+                <a href="projects/multi-tenant-mall.html" class="project-row">
+                    <span class="project-row-num" aria-hidden="true">04</span>
+                    <div class="project-row-main">
+                        <h3 class="project-row-title">多租户会员订阅商城</h3>
+                        <p class="project-row-desc">一套代码，多租户配置，开发周期压缩 70%</p>
                     </div>
+                    <span class="project-row-date">2025.06 &mdash; 2025.08</span>
+                    <span class="project-row-arrow" aria-hidden="true">&rarr;</span>
                 </a>
             </div>
-            <div style="text-align: right; margin-top: 2rem;">
-                <a href="projects.html" class="project-link" style="font-size: 0.875rem; color: var(--accent-brown); text-decoration: none;">
+            <div class="projects-more">
+                <a href="projects.html" class="project-link-more">
                     <span>查看更多项目</span>
-                    <span>→</span>
+                    <span aria-hidden="true">&rarr;</span>
                 </a>
             </div>
         </section>
 
         <!-- 分隔线 -->
-        <div class="divider"></div>
+        <hr class="divider">
 
         <!-- 联系区域 -->
-        <section class="contact-section">
+        <section id="contact" class="contact-section" aria-labelledby="contact-heading">
             <div class="section-header">
-                <span class="section-number">04</span>
-                <h2 class="section-title">联系</h2>
-                <span class="section-label">CONTACT</span>
+                <span class="section-number" aria-hidden="true">04</span>
+                <h2 id="contact-heading" class="section-title">联系</h2>
+                <span class="section-label" aria-hidden="true">CONTACT</span>
             </div>
             <div class="contact-content">
                 <div class="contact-text">
-                    <h3>一起构建卓越产品。</h3>
+                    <h3 class="contact-headline">一起构建<br>卓越产品。</h3>
                     <p>期待与您探讨复杂系统的平衡之美。</p>
                 </div>
                 <div class="contact-info">
@@ -219,17 +230,24 @@
                         <a href="mailto:Jackiehou2016@outlook.com">Jackiehou2016@outlook.com</a>
                     </div>
                 </div>
+                <div class="contact-seal" aria-hidden="true">
+                    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="86" height="86" rx="10" stroke="currentColor" stroke-width="3"/>
+                        <text x="48" y="54" text-anchor="middle" font-size="30" fill="currentColor" font-family="Fraunces, Georgia, serif" font-weight="600" letter-spacing="1">JH</text>
+                        <text x="48" y="74" text-anchor="middle" font-size="9" fill="currentColor" font-family="JetBrains Mono, monospace" letter-spacing="2">EST. 2023</text>
+                    </svg>
+                </div>
             </div>
         </section>
-
-        <!-- 页脚 -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
-                <p class="footer-credit">Designed & Developed by Jackie Hou</p>
-            </div>
-        </footer>
     </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
+            <p class="footer-credit">Designed &amp; Developed by Jackie Hou</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
