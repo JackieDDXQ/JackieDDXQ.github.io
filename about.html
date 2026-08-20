@@ -6,27 +6,34 @@
     <title>关于 | Jackie Hou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Jackie Hou 的产品方法、核心能力、AI 实践与教育背景。">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500;600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <nav class="navbar">
+<body class="interior-page">
+    <div class="grain" aria-hidden="true"></div>
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
+    <header class="site-header navbar">
         <div class="navbar-content">
-            <a href="index.html" class="nav-item">Jackie's Portfolio</a>
-            <div class="navbar-right">
+            <a href="index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span></button>
+            <nav id="site-navigation" class="navbar-right" aria-label="主导航">
+                <a href="index.html" class="nav-item">Index</a>
                 <a href="about.html" class="nav-item active">About</a>
                 <a href="experience.html" class="nav-item">Experience</a>
                 <a href="projects.html" class="nav-item">Projects</a>
                 <a href="contact.html" class="nav-item">Contact</a>
-            </div>
+                <span class="nav-location">Based in Beijing</span>
+            </nav>
         </div>
-    </nav>
+        <span class="site-progress" aria-hidden="true"></span>
+    </header>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content">
         <section class="about-section">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2 class="section-title">关于</h2>
+                <h1 class="section-title">关于</h1>
                 <span class="section-label">ABOUT</span>
             </div>
             
@@ -149,18 +156,13 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer footer">
         <div class="footer-content">
             <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
+            <p class="footer-credit">Product systems, documented with intent.</p>
+            <a href="#main-content">Back to top ↑</a>
         </div>
     </footer>
-
-    <script>
-        document.body.style.opacity = '0';
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.transition = 'opacity 0.3s ease';
-            document.body.style.opacity = '1';
-        });
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>
