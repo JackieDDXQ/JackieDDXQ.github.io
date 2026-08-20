@@ -3,482 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>运营商权益全链路管理系统 | Jackie Hou</title>
+    <title>运营商权益全链路管理平台｜Jackie Hou Product Case Study</title>
+    <meta name="description" content="面向运营商联合会员业务，规划云仓、万象与灵霄三套系统，覆盖供应商接入、权益配置、套餐推广、用户领取与订单履约。">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="运营商权益全链路管理平台｜Jackie Hou Product Case Study">
+    <meta property="og:description" content="将分散的供应商产品、权益库存、运营商套餐与渠道推广，连接成从供给到履约的完整业务系统。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta name="description" content="运营商权益全链路管理系统：云仓、万象、灵霄三层产品架构案例。">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500;600;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        .project-page {
-            padding-top: 6rem;
-            max-width: 100%;
-            margin: 0 auto;
-            padding-left: 5%;
-            padding-right: 5%;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        @media (min-width: 769px) {
-            .project-page {
-                padding-right: calc(5% + 80px);
-            }
-        }
-
-        @media (min-width: 640px) {
-            .project-page {
-                max-width: 90%;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .project-page {
-                max-width: 85%;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .project-page {
-                max-width: 1024px;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .project-page {
-                max-width: 1100px;
-            }
-        }
-
-        @media (min-width: 1536px) {
-            .project-page {
-                max-width: 1200px;
-            }
-        }
-
-        .project-header {
-            margin-bottom: 4rem;
-        }
-
-        .project-meta {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-category-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-brown);
-        }
-
-        .project-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--paper-bg-light);
-            border: 1px solid var(--border-ink);
-        }
-
-        .project-title-large {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 3rem;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--ink-black);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-subtitle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .project-subtitle {
-            font-size: 1rem;
-            color: var(--ink-gray);
-            margin: 0;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .project-section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-        }
-
-        .section-label {
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-light);
-        }
-
-        .section-title {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            margin-left: auto;
-        }
-
-        .project-section p {
-            font-size: 0.9375rem;
-            color: var(--ink-gray);
-            line-height: 1.8;
-            max-width: 600px;
-        }
-
-        .challenge-solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .challenge-item,
-        .solution-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .challenge-number,
-        .solution-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-            margin-bottom: 0.5rem;
-        }
-
-        .challenge-text,
-        .solution-text {
-            font-size: 0.875rem;
-            color: var(--ink-gray);
-            line-height: 1.7;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .result-card {
-            background-color: var(--paper-bg-light);
-            padding: 2rem;
-            border: 1px solid var(--border-ink);
-        }
-
-        .result-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .prototype-section {
-            margin-top: 2rem;
-        }
-
-        .prototype-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--accent-brown);
-            text-decoration: none;
-            padding: 0;
-            border: none;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .prototype-link:hover {
-            text-decoration: underline;
-        }
-
-        .next-project {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--divider-ink);
-            margin-top: 2rem;
-        }
-
-        .next-project-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-light);
-        }
-
-        .next-project-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .next-project-link:hover {
-            color: var(--accent-brown);
-        }
-
-        @media (max-width: 768px) {
-            .project-title-large {
-                font-size: 2rem;
-            }
-
-            .challenge-solution-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .next-project {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .project-section div[style*="grid-template-columns: repeat(3, 1fr)"] {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .project-section div[style*="grid-template-columns: repeat(4, 1fr)"] {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .project-section div[style*="grid-template-columns: repeat(5, 1fr)"] {
-                grid-template-columns: repeat(3, 1fr) !important;
-            }
-            
-            .project-section div[style*="grid-template-columns: repeat(4, 1fr)"] {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            
-            .project-section div[style*="grid-template-columns: repeat(3, 1fr)"] {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-
-            .floating-nav-item .nav-label,
-            .floating-nav-item .nav-number {
-                display: none;
-            }
-
-            .floating-nav-item svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .floating-nav-item {
-                padding: 0.4rem;
-            }
-        }
-
-        #floating-nav {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        #floating-nav:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            background-color: rgba(255, 255, 255, 0.98);
-        }
-
-        .floating-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.375rem 0.625rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: color 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
-            color: var(--ink-light);
-            text-decoration: none;
-            font-size: 0.7rem;
-            opacity: 0.65;
-        }
-
-        .floating-nav-item:hover {
-            background-color: rgba(0, 0, 0, 0.03);
-            color: var(--ink-gray);
-            opacity: 1;
-            transform: translateX(-2px);
-        }
-
-        .floating-nav-item.active {
-            background-color: var(--accent-brown);
-            color: var(--paper-bg);
-            opacity: 1;
-            box-shadow: 0 2px 6px rgba(148, 103, 74, 0.25);
-        }
-
-        .floating-nav-item svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-
-        .floating-nav-item .nav-label {
-            white-space: nowrap;
-        }
-
-        .floating-nav-item .nav-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.625rem;
-            font-weight: 600;
-        }
-
-        #floating-nav-toggle {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            #floating-nav {
-                top: auto;
-                bottom: 20px;
-                right: 20px;
-                left: auto;
-                transform: translateY(0);
-                flex-direction: row;
-                flex-wrap: wrap;
-                max-width: calc(100vw - 40px);
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
-            }
-
-            #floating-nav.open {
-                max-height: 400px;
-                opacity: 1;
-            }
-
-            #floating-nav-toggle {
-                display: flex;
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 48px;
-                height: 48px;
-                background-color: var(--accent-brown);
-                color: var(--paper-bg);
-                border: none;
-                border-radius: 50%;
-                align-items: center;
-                justify-content: center;
-                z-index: 1001;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                cursor: pointer;
-                transition: transform 0.3s ease, background-color 0.3s ease;
-            }
-
-            #floating-nav-toggle:hover {
-                transform: scale(1.1);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            }
-
-            #floating-nav-toggle.open {
-                transform: rotate(180deg);
-                background-color: var(--ink-black);
-            }
-
-            .floating-nav-item {
-                padding: 0.625rem 0.875rem;
-                font-size: 0.8125rem;
-            }
-
-            .project-section iframe {
-                height: 400px !important;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .project-section iframe {
-                height: 500px !important;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./telecom-case.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "运营商权益全链路管理平台",
+      "author": {"@type": "Person", "name": "Jackie Hou"},
+      "inLanguage": "zh-CN",
+      "description": "一个关于运营商权益供给、配置、推广与履约的产品系统案例。"
+    }
+    </script>
 </head>
-<body class="interior-page project-detail-page">
+<body class="interior-page project-detail-page telecom-case">
     <div class="grain" aria-hidden="true"></div>
     <a href="#main-content" class="skip-link">跳转到主要内容</a>
+
     <header class="site-header navbar">
         <div class="navbar-content">
             <a href="../index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
@@ -495,596 +44,284 @@
         <span class="site-progress" aria-hidden="true"></span>
     </header>
 
-    <nav id="floating-nav">
-        <a href="#section-01" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-            </svg>
-            <span class="nav-label">背景</span>
-            <span class="nav-number">01</span>
-        </a>
-        <a href="#section-02" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20M2 12h20"/>
-            </svg>
-            <span class="nav-label">挑战与解法</span>
-            <span class="nav-number">02</span>
-        </a>
-        <a href="#section-04" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
-            </svg>
-            <span class="nav-label">成果</span>
-            <span class="nav-number">04</span>
-        </a>
-        <a href="#section-05" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-            </svg>
-            <span class="nav-label">系统架构</span>
-            <span class="nav-number">05</span>
-        </a>
-        <a href="#section-06" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-            <span class="nav-label">业务流程</span>
-            <span class="nav-number">06</span>
-        </a>
-        <a href="#section-07" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-            <span class="nav-label">业务价值</span>
-            <span class="nav-number">07</span>
-        </a>
-        <a href="#section-08" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
-            </svg>
-            <span class="nav-label">数据看板</span>
-            <span class="nav-number">08</span>
-        </a>
-        <a href="#section-prototype" class="floating-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-            <span class="nav-label">原型展示</span>
-        </a>
-    </nav>
-
-    <button id="floating-nav-toggle" aria-label="Toggle navigation">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-        </svg>
-    </button>
-
-    <main id="main-content" class="main-content project-page">
-        <div class="project-header">
-            <div class="project-meta">
-                <div class="project-category-wrapper">
-                    <span class="project-category">CASE 01</span>
-                    <span class="project-badge">2025.01 至今</span>
-                </div>
-            </div>
-            <h1 class="project-title-large">运营商权益全链路管理系统</h1>
-            <div class="project-subtitle-wrapper">
-                <p class="project-subtitle">云仓 + 万象 + 灵霄 产品架构</p>
-                <span class="project-tag">支撑 10+ 运营商省级单位及专业公司</span>
+    <main id="main-content" class="tc-shell">
+        <div class="tc-bridge" aria-label="项目页面工具">
+            <a href="../projects.html">← 返回项目档案 / Project archive</a>
+            <div class="tc-view-switch" aria-label="阅读模式">
+                <span aria-current="page">Story</span>
+                <button type="button" data-open-dialog="atlas-dialog">Open Atlas</button>
             </div>
         </div>
 
-        <div class="project-section" id="section-01">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <span class="section-label">CONTEXT</span>
-                <span class="section-title">背景</span>
-            </div>
-            <p>为运营商集团搭建端到端的权益分发与履约平台，覆盖千万级用户场景，整合茶饮、音视频、生活服务等头部品牌资源。</p>
-            
-            <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-top: 2rem; margin-bottom: 1rem;">行业背景与业务痛点</h4>
-            <p style="font-size: 0.9375rem; color: var(--ink-gray); line-height: 1.8; max-width: 800px;">随着5G时代的到来，运营商面临着激烈的市场竞争和用户增长瓶颈。为提升用户粘性和ARPU值，运营商需要通过丰富的权益体系来增强产品竞争力。然而，原有的权益运营存在以下核心痛点：</p>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 0.75rem;"><strong>业务碎片化严重</strong>：10+省级单位及专业公司各自为政，业务规则不统一，难以形成规模化运营能力</li>
-                <li style="margin-bottom: 0.75rem;"><strong>权益品类复杂</strong>：涵盖茶饮、音视频、生活服务等数十种权益类型，结算口径复杂，资金风险高</li>
-                <li style="margin-bottom: 0.75rem;"><strong>系统对接困难</strong>：上下游系统多达数十个，接口标准不统一，新业务接入周期长达数月</li>
-                <li style="margin-bottom: 0.75rem;"><strong>数据孤岛问题</strong>：各系统数据独立，缺乏统一的业务视图和运营分析能力</li>
-                <li><strong>履约效率低下</strong>：权益发放依赖人工干预，自动化程度低，用户体验差</li>
-            </ul>
-            
-            <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin-top: 2rem; margin-bottom: 1rem;">需求分析与战略定位</h4>
-            <p style="font-size: 0.9375rem; color: var(--ink-gray); line-height: 1.8; max-width: 800px;">基于深度的业务访谈和竞品分析，项目团队明确了以下核心需求：</p>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 0.5rem;"><strong>统一运营能力</strong>：构建集团级权益运营中台，实现规则统一、流程统一、数据统一</li>
-                <li style="margin-bottom: 0.5rem;"><strong>快速接入能力</strong>：通过配置化方式，将新单位接入周期从月级缩短至周级</li>
-                <li style="margin-bottom: 0.5rem;"><strong>全链路可观测</strong>：建立金融级对账机制，确保每一笔资金流向可追溯</li>
-                <li style="margin-bottom: 0.5rem;"><strong>高可用架构</strong>：支撑千万级用户规模，确保系统稳定性和业务连续性</li>
-                <li><strong>横向扩展能力</strong>：支持B2B2C商城等新业务形态的快速孵化</li>
-            </ul>
-        </div>
+        <article>
+            <header class="tc-hero" aria-labelledby="case-title">
+                <p class="tc-kicker">Case 01 · Interactive System Atlas</p>
+                <h1 id="case-title" class="tc-hero__title">运营商权益<span>全链路平台</span></h1>
+                <div class="tc-hero__aside">
+                    <p class="tc-hero__lead">将分散的供应商产品、权益库存、运营商套餐与渠道推广，连接成从供给到履约的完整业务系统。</p>
+                    <dl class="tc-meta">
+                        <div><dt>项目范围</dt><dd>云仓、万象、灵霄、权益领取端</dd></div>
+                        <div><dt>核心工作</dt><dd>业务建模、产品架构、规则设计、原型与需求交付</dd></div>
+                        <div><dt>服务对象</dt><dd>供应商、运营团队、运营商、推广渠道与终端用户</dd></div>
+                        <div><dt>阅读时间</dt><dd>Story 约 6–8 分钟；Atlas 可自由探索</dd></div>
+                    </dl>
+                </div>
+                <div class="tc-hero__map tc-ui-embed" aria-label="系统范围：供应商经过云仓、万象与运营商，最终服务用户；灵霄连接运营商和渠道">
+                    <span>供应商</span>
+                    <span class="tc-system">云仓<br>Supply</span>
+                    <span class="tc-system">万象<br>Service</span>
+                    <span>运营商</span>
+                    <span class="tc-system">灵霄<br>Growth</span>
+                    <span>用户触点</span>
+                </div>
+            </header>
 
-        <div class="project-section" id="section-02">
-            <div class="challenge-solution-grid">
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">02</span>
-                        <span class="section-label">CHALLENGE</span>
-                        <span class="section-title">挑战</span>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">10+ 省级单位及专业公司业务规则碎片化，难以统一梳理</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">权益品类多样、结算口径复杂，资金风险高</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">对接上下游系统复杂，交付节奏不可控</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">03</span>
-                        <span class="section-label">SOLUTION</span>
-                        <span class="section-title">解法</span>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">抽象"云仓+万象+灵霄"三层架构，分离库存、商品与履约能力</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">建立金融级流程与对账机制，全链路可观测</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">推出配置化接入规范，新单位接入周期从月级缩至周级</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="tc-story">
+                <nav class="tc-rail" aria-label="案例章节">
+                    <a href="#overview" class="floating-nav-item active"><span>00</span><span>Overview</span></a>
+                    <a href="#tensions" class="floating-nav-item"><span>01</span><span>Complexity</span></a>
+                    <a href="#architecture" class="floating-nav-item"><span>02</span><span>Boundaries</span></a>
+                    <a href="#supply" class="floating-nav-item"><span>03</span><span>Supply</span></a>
+                    <a href="#service" class="floating-nav-item"><span>04</span><span>Service</span></a>
+                    <a href="#growth" class="floating-nav-item"><span>05</span><span>Growth</span></a>
+                    <a href="#experience" class="floating-nav-item"><span>06</span><span>Experience</span></a>
+                    <a href="#journey" class="floating-nav-item"><span>07</span><span>Journey</span></a>
+                    <a href="#delivery" class="floating-nav-item"><span>08</span><span>Delivery</span></a>
+                </nav>
 
-        <div class="project-section" id="section-04">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <span class="section-label">RESULTS</span>
-                <span class="section-title">成果</span>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <span class="result-value">10+</span>
-                    <span class="result-label">接入单位</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">100万+</span>
-                    <span class="result-label">年度覆盖用户</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">-70%</span>
-                    <span class="result-label">接入周期</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-section" id="section-05">
-            <div class="section-header">
-                <span class="section-number">05</span>
-                <span class="section-label">SYSTEM ARCHITECTURE</span>
-                <span class="section-title">系统架构与核心功能</span>
-            </div>
-            <p>整个中台由三个职责分明、高效协同的系统构成，形成完整的权益运营闭环：</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
-                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: border-color 0.3s ease, background-color 0.3s ease; cursor: default;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">云仓系统</h4>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown);">DEPOT</span>
-                    </div>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为商品供应链中枢，汇聚并管理来自各大供应商的商品/服务资源池，为万象提供商品来源。</p>
-                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            商品库管理：聚合标准化商品
-                        </li>
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            商品与规格关联：定义供应商与规格
-                        </li>
-                        <li style="padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            供应稳定性：接口对接与库存同步
-                        </li>
-                    </ul>
-                </div>
-                
-                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: border-color 0.3s ease, background-color 0.3s ease; cursor: default;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">万象系统</h4>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown);">OMNI</span>
-                    </div>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为权益管理与核销中枢，负责将云仓商品包装成权益，进行配置、库存管理及发放核销，是权益业务落地的核心网关。</p>
-                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            权益库存管理：从云仓同步形成权益库存
-                        </li>
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            权益精细配置：定义编码、类型等参数
-                        </li>
-                        <li style="padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            核销任务管理：支持实时与历史订单任务
-                        </li>
-                    </ul>
-                </div>
-                
-                <div style="padding: 1.75rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); transition: border-color 0.3s ease, background-color 0.3s ease; cursor: default;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                        <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--ink-black); margin: 0;">灵霄系统</h4>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown);">CEL</span>
-                    </div>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--divider-ink);">作为渠道推广与套餐办理平台，管理运营商套餐，对接信息流渠道，提供办理接口，处理推广业务流程。</p>
-                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-bottom: 0.75rem;">核心功能</div>
-                    <ul style="list-style: none; padding: 0; font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.6;">
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            策划管理：管理全部套餐信息
-                        </li>
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            渠道推广：配置渠道可推广套餐
-                        </li>
-                        <li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            办理流程：短信下发、验证码验证
-                        </li>
-                        <li style="padding-left: 1rem; position: relative;">
-                            <span style="position: absolute; left: 0; color: var(--accent-brown);">•</span>
-                            限办策略：设定办理量与时间限制
-                        </li>
-                    </ul>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-section" id="section-06">
-            <div class="section-header">
-                <span class="section-number">06</span>
-                <span class="section-label">PROCESS</span>
-                <span class="section-title">核心业务流程</span>
-            </div>
-            <p>一次典型闭环流程如下，展示三大系统的协作机制：</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem;">
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">01</span>
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">广告投放</h4>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">信息流渠道在灵霄配置的推广规则下，向目标用户投放联合会员套餐广告。</p>
-                </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">02</span>
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">用户办理</h4>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">用户点击广告填写信息，渠道调用灵霄接口办理套餐。</p>
-                </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">03</span>
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">权益触发</h4>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">运营商侧确认套餐办理成功后，主动调用万象系统，触发对应权益的发放任务。</p>
-                </div>
-                <div style="padding: 1.5rem; background-color: var(--paper-bg-light); border: 1px solid var(--border-ink); text-align: center;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent-brown); display: block; margin-bottom: 0.75rem;">04</span>
-                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 0.75rem;">权益下发</h4>
-                    <p style="font-size: 0.8125rem; color: var(--ink-gray); line-height: 1.5;">万象系统根据配置的规则，调用云仓系统获取具体的权益卡券，并将其发放至用户手机号，完成服务交付。</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 3rem; padding: 1.5rem 0; background-color: var(--paper-bg);">
-                <p style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.8; margin: 0; text-align: left; word-break: normal; overflow-wrap: anywhere; line-break: strict;">
-                    <strong style="color: var(--ink-black);">系统协作关系：</strong>
-                    <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-brown);">灵霄系统</span> 作为推广前端触达用户，接收办理请求；
-                    <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-brown);">万象系统</span> 作为权益中枢，接收运营商触发信号并协调权益发放；
-                    <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-brown);">云仓系统</span> 作为供应链基础层，提供商品库存支持。
-                    三者形成 "<span style="font-family: 'JetBrains Mono', monospace;">灵霄 → 万象 → 云仓</span>" 的完整协作链路，实现从用户触达到权益交付的端到端闭环。
-                </p>
-            </div>
-        </div>
-
-        <div class="project-section" id="section-07">
-            <div class="section-header">
-                <span class="section-number">07</span>
-                <span class="section-label">BUSINESS VALUE</span>
-                <span class="section-title">业务价值与未来规划</span>
-            </div>
-            
-            <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 600; color: var(--ink-black); margin-top: 1.5rem; margin-bottom: 1rem;">业务价值体现</h4>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 0.5rem;"><strong>运营效率提升</strong>：权益发放时效从T+1提升至分钟级，人工操作减少80%</li>
-                <li style="margin-bottom: 0.5rem;"><strong>业务规模扩展</strong>：支撑从单一省份到10+省级单位及专业公司的规模化运营</li>
-                <li><strong>快速业务创新</strong>：配置化接入规范，新业务上线周期从月级缩至周级</li>
-            </ul>
-            
-            <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 600; color: var(--ink-black); margin-top: 1.5rem; margin-bottom: 1rem;">未来规划</h4>
-            <ul style="font-size: 0.875rem; color: var(--ink-gray); line-height: 1.7; max-width: 700px; list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 0.5rem;"><strong>AI智能运营</strong>：引入AI技术，实现运营策略的自动优化与智能决策</li>
-                <li style="margin-bottom: 0.5rem;"><strong>智能推荐引擎</strong>：基于用户画像和行为数据，实现权益的精准推荐与个性化匹配</li>
-                <li><strong>B2B2C商城拓展</strong>：利用云仓的商品供给能力，打造面向C端用户的权益商城，探索新的商业模式</li>
-            </ul>
-        </div>
-
-        <div class="project-section" id="section-08">
-            <div class="section-header">
-                <span class="section-number">08</span>
-                <span class="section-label">DATA DASHBOARD</span>
-                <span class="section-title">数据看板</span>
-            </div>
-            <p>数据看板作为权益运营的核心可视化工具，提供全链路业务数据的实时监控与智能分析能力，帮助用户快速理解业务现状并支持高效决策。<a href="./data-dashboard.html" target="_blank" rel="noopener noreferrer" aria-label="体验数据看板（在新窗口打开）" class="prototype-link" style="margin-left: 0.5rem;">体验数据看板 →</a></p>
-
-            <div style="margin-top: 2rem;">
-                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">功能架构</h4>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                    <div>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 01</span>
-                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">KPI监控</div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">智能洞察</div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">运营简报</div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">快捷操作</div>
+                <div class="tc-sections">
+                    <section id="overview" class="tc-section" aria-labelledby="overview-title">
+                        <div class="tc-section__head">
+                            <span class="tc-section-index">00</span>
+                            <h2 id="overview-title">不是三套后台，<br>而是一套业务系统</h2>
+                            <p class="tc-section__summary">项目定位<br>A configurable infrastructure for telecom benefit operations.</p>
                         </div>
-                    </div>
-                    <div>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 02</span>
-                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">趋势分析<br><span style="font-size: 0.625rem; color: var(--ink-light);">订单量/成本/核销</span></div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">核心指标<br><span style="font-size: 0.625rem; color: var(--ink-light);">留存/在订时长</span></div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">效率矩阵<br><span style="font-size: 0.625rem; color: var(--ink-light);">单位/渠道分析</span></div>
+                        <div class="tc-prose tc-prose--lead" data-reveal>
+                            <p>这项工作的核心，不是分别设计云仓、万象和灵霄三个管理后台，而是把供应商产品、标准商品、权益库存、运营商套餐、推广渠道与用户领取组织成边界清晰、规则可配置、过程可追踪的产品体系。</p>
+                            <p class="tc-callout">先把对象与边界拆清，功能才有稳定的落点。</p>
+                            <p>平台包含两条相互衔接的业务链：供给链负责把外部产品转化为稳定的权益资源；销售履约链负责控制套餐办理，并在成功后完成权益发放、领取与结果追踪。</p>
                         </div>
-                    </div>
-                    <div>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; color: var(--accent-brown);">LAYER 03</span>
-                        <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">AI数据查询<br><span style="font-size: 0.625rem; color: var(--ink-light);">自然语言交互</span></div>
-                            <div style="padding: 0.5rem 0.75rem; background: rgba(0,0,0,0.02); border-radius: 0.25rem; font-size: 0.75rem; color: var(--ink-gray);">运营日报<br><span style="font-size: 0.625rem; color: var(--ink-light);">完整报告抽屉</span></div>
+                    </section>
+
+                    <section id="tensions" class="tc-section" aria-labelledby="tensions-title">
+                        <div class="tc-section__head">
+                            <span class="tc-section-index">01</span>
+                            <h2 id="tensions-title">权益业务的复杂，<br>不在“发一张券”</h2>
+                            <p class="tc-section__summary">Problem framing<br>用户只看见一张月卡，系统必须处理四组变化。</p>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="tc-prose">
+                            <p>用户最终看到的，可能只是一张腾讯视频月卡。但在它被发放之前，系统需要回答：它由谁供货、以什么权益形态出售、通过哪个运营商和渠道办理，以及最终如何到达用户。</p>
+                        </div>
+                        <div class="tc-tensions">
+                            <article class="tc-tension" data-reveal><span class="tc-tension__question">Who supplies it?</span><h3>供给不统一</h3><p>同一种权益可能由多个供应商提供，编码、成本、库存与履约方式各不相同。</p></article>
+                            <article class="tc-tension" data-reveal><span class="tc-tension__question">How is it packaged?</span><h3>权益形态复杂</h3><p>原子、组合、N 选 M、附赠权益与不同发放方式需要共享一套稳定资源。</p></article>
+                            <article class="tc-tension" data-reveal><span class="tc-tension__question">Where is it sold?</span><h3>销售规则多变</h3><p>不同省份、套餐和渠道拥有独立编码、合作关系、时间与办理限制。</p></article>
+                            <article class="tc-tension" data-reveal><span class="tc-tension__question">How is it received?</span><h3>用户状态分叉</h3><p>自动、手动、直充、券码与二维码，分别对应不同操作和结果状态。</p></article>
+                        </div>
+                    </section>
 
-            <div style="margin-top: 3rem;">
-                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">数据更新机制</h4>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">更新频率</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">数据内容</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">实时</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">权益发放、核销订单等核心指标实时同步</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">每小时</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">库存、供应商数据定时同步</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">离线</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">支持离线查看历史数据快照</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">整合</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">云仓、万象、灵霄三大系统数据统一呈现</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-black); font-weight: 500;">一致</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">金融级对账机制确保数据准确性</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            <div style="margin-top: 3rem;">
-                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">场景交互</h4>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">场景</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">触发操作</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">系统反馈</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">输出结果</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 0.5rem;"></span>
-                                    监控场景
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">查看KPI卡片实时数据、浏览智能洞察告警、监控运营简报待办</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">数字实时更新、异常指标高亮、待办数量红点提示</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速识别业务异常，及时响应关键问题</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--blue); display: inline-block; margin-right: 0.5rem;"></span>
-                                    分析场景
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">设置时间筛选器、悬停图表查看详情、点击矩阵节点钻取</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">图表实时重绘、浮动卡片展示明细、侧边详情面板展开</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">深入分析数据趋势，定位问题根源</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber); display: inline-block; margin-right: 0.5rem;"></span>
-                                    决策场景
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">自然语言查询、展开运营日报、导出数据分析报告</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">AI生成分析结论、抽屉展示完整报告、下载Excel/PDF文件</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">获取智能决策建议，支撑业务决策</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div style="margin-top: 3rem;">
-                <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">用户旅程</h4>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.12);">
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">角色</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">场景</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">操作路径</th>
-                                <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600; color: var(--ink-black); font-family: 'Source Serif 4', Georgia, serif;">预期结果</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP01</span>
-                                    运营专员
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">日常巡检</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → 查看智能洞察 → 处理告警 → 浏览运营简报 → 执行快捷操作</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">及时发现业务异常，快速处理待办事项，保持运营流程顺畅</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP02</span>
-                                    管理层
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速决策</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → 浏览KPI卡片 → 设置时间范围 → 查看趋势图表 → 展开运营日报</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">快速掌握业务全貌，获取关键指标趋势，支持战略决策制定</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">
-                                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown); margin-right: 0.5rem;">OP03</span>
-                                    数据分析师
-                                </td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">深度查询</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">登录 → AI自然语言查询 → 钻取矩阵详情 → 查看留存分析 → 导出数据报告</td>
-                                <td style="padding: 0.75rem 1rem; color: var(--ink-gray);">获取深度数据分析，定位业务优化点，输出专业分析报告</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                    <section id="architecture" class="tc-section" aria-labelledby="architecture-title">
+                        <div class="tc-section__head">
+                            <span class="tc-section-index">02</span>
+                            <h2 id="architecture-title">按业务对象和变化频率，<br>拆出四层边界</h2>
+                            <p class="tc-section__summary">Architecture decision<br>让不同变化停留在最合适的系统里。</p>
+                        </div>
+                        <div class="tc-prose"><p>没有把所有能力塞进一个后台，而是让供给变化、权益包装变化、运营策略变化与用户领取变化各自被对应系统吸收。上层业务依赖稳定对象，而不直接追随底层供应商变化。</p></div>
+                        <div class="tc-architecture tc-ui-embed" data-reveal>
+                            <article class="tc-layer tc-layer--supply"><span class="tc-layer__type">Supply / 供给</span><h3>云仓</h3><p>管理供应商、产品、品牌、商品、规格及供应关系，把外部供给转为内部标准商品。</p><p class="tc-layer__change">吸收供应商接入、编码与商品变化</p></article>
+                            <article class="tc-layer tc-layer--service"><span class="tc-layer__type">Service / 服务</span><h3>万象</h3><p>管理权益库存、权益配置、发放、短信、核销和订单，把商品资源包装为可交付权益。</p><p class="tc-layer__change">吸收权益组合与履约规则变化</p></article>
+                            <article class="tc-layer tc-layer--growth"><span class="tc-layer__type">Growth / 增长</span><h3>灵霄</h3><p>管理运营商策划、套餐、渠道、推广及办理限制，控制权益如何进入具体销售场景。</p><p class="tc-layer__change">吸收运营商与渠道策略变化</p></article>
+                            <article class="tc-layer tc-layer--experience"><span class="tc-layer__type">Experience / 触点</span><h3>领取端</h3><p>面向用户统一呈现订单、领取、选择、兑换和结果状态，把后台复杂性收束为清晰操作。</p><p class="tc-layer__change">吸收领取方式与状态变化</p></article>
+                        </div>
+                    </section>
 
-        <div class="prototype-section" id="section-prototype">
-            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                <a href="./depot/dist/index.html" target="_blank" rel="noopener noreferrer" aria-label="体验云仓系统（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>云仓系统</span>
-                </a>
-                <a href="./omni/dist/index.html" target="_blank" rel="noopener noreferrer" aria-label="体验万象系统（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>万象系统</span>
-                </a>
-                <a href="./cel/frontend/dist/index.html" target="_blank" rel="noopener noreferrer" aria-label="体验灵霄系统（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>灵霄系统</span>
-                </a>
-                <a href="./data-dashboard.html" target="_blank" rel="noopener noreferrer" aria-label="体验数据看板（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>数据看板</span>
-                </a>
-            </div>
-        </div>
+                    <section id="supply" class="tc-section" aria-labelledby="supply-title">
+                        <div class="tc-section__head"><span class="tc-section-index">03</span><h2 id="supply-title">把不稳定的外部供给，<br>转成稳定商品</h2><p class="tc-section__summary">Decision 01 · Standardization<br>上层不直接依赖某一家供应商。</p></div>
+                        <div class="tc-decision-layout">
+                            <div class="tc-decision-copy">
+                                <h3>为什么增加“商品规格”这一层？</h3>
+                                <p>供应商产品是外部对象，标准商品规格是内部调用对象。同一规格可以关联多个供应商产品，并用状态和优先级形成主备供货关系。</p>
+                                <ul class="tc-decision-points"><li>统一不同供应商的命名、编码和履约差异</li><li>上层只调用标准规格，不绑定具体供应商</li><li>供应异常时可切换路线，不改动权益配置</li></ul>
+                            </div>
+                            <div>
+                                <div class="tc-model tc-ui-embed">
+                                    <div class="tc-model__title"><strong>供应标准化模型</strong><span class="tc-caption">ENTITY FLOW</span></div>
+                                    <div class="tc-flow" aria-label="供应商经过供应商产品映射到标准商品规格，再归属商品与品牌"><div class="tc-flow__node">供应商</div><div class="tc-flow__node">供应商产品</div><div class="tc-flow__node">标准商品规格</div><div class="tc-flow__node">商品 / 品牌</div></div>
+                                </div>
+                                <div class="tc-lab tc-ui-embed" data-lab="supplier">
+                                    <div class="tc-lab__head"><span class="tc-lab__tag">Rule Lab 01</span><span class="tc-lab__status" id="supplier-route" aria-live="polite">当前调用：供应商 A</span></div>
+                                    <div class="tc-segmented" aria-label="供应商状态"><button type="button" aria-pressed="true" data-supplier-mode="normal">正常供货</button><button type="button" aria-pressed="false" data-supplier-mode="fallback">模拟 A 异常</button></div>
+                                    <div class="tc-supplier-list">
+                                        <div class="tc-supplier" data-supplier="a" data-active="true"><strong>供应商 A</strong><span>优先级 01</span><span>正常供货</span></div>
+                                        <div class="tc-supplier" data-supplier="b" data-active="false"><strong>供应商 B</strong><span>优先级 02</span><span>备用供货</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-        <div class="next-project">
-            <span class="next-project-label">下一个项目</span>
-            <a href="multi-tenant-mall.html" class="next-project-link">
-                <span>多租户会员订阅商城</span>
-                <i style="font-size: 0.875rem;">→</i>
-            </a>
-        </div>
+                    <section id="service" class="tc-section" aria-labelledby="service-title">
+                        <div class="tc-section__head"><span class="tc-section-index">04</span><h2 id="service-title">把标准商品进一步抽象成，<br>可配置的权益</h2><p class="tc-section__summary">Decision 02 · Abstraction<br>让库存资源与对外权益表达分别变化。</p></div>
+                        <div class="tc-decision-layout">
+                            <div class="tc-decision-copy">
+                                <h3>为什么不能把商品直接挂到套餐？</h3>
+                                <p>权益库存聚合并调度底层商品规格，权益配置负责对外名称、组合关系、发放方式与领取规则。两次抽象让供给变化不直接冲击运营商产品。</p>
+                                <ul class="tc-decision-points"><li>商品规格 → 权益库存：统一资源与调用策略</li><li>权益库存 → 权益配置：定义原子、组合和 N 选 M</li><li>权益配置 → 运营商套餐：进入具体销售场景</li></ul>
+                            </div>
+                            <div>
+                                <div class="tc-model tc-ui-embed">
+                                    <div class="tc-model__title"><strong>权益对象模型</strong><span class="tc-caption">BENEFIT MODEL</span></div>
+                                    <div class="tc-flow" aria-label="商品规格转为权益库存，再配置为原子或组合权益，最后关联运营商套餐"><div class="tc-flow__node">商品规格</div><div class="tc-flow__node">权益库存</div><div class="tc-flow__node">原子权益</div><div class="tc-flow__node">组合权益</div><div class="tc-flow__node">运营商套餐</div></div>
+                                </div>
+                                <div class="tc-lab tc-ui-embed" data-lab="inventory">
+                                    <div class="tc-lab__head"><span class="tc-lab__tag">Rule Lab 02</span><span class="tc-lab__status" id="inventory-summary" aria-live="polite">发放 10 份 · 优先级调用</span></div>
+                                    <div class="tc-segmented" aria-label="库存调用方式"><button type="button" aria-pressed="true" data-routing-mode="priority">优先级调用</button><button type="button" aria-pressed="false" data-routing-mode="interleave">穿插调用</button></div>
+                                    <div class="tc-routing" aria-label="各库存的发放分配">
+                                        <div class="tc-routing__item"><span>库存 A</span><div class="tc-routing__bar"><span class="tc-routing__fill" data-route-fill="a"></span></div><strong data-route-value="a">10</strong></div>
+                                        <div class="tc-routing__item"><span>库存 B</span><div class="tc-routing__bar"><span class="tc-routing__fill" data-route-fill="b"></span></div><strong data-route-value="b">0</strong></div>
+                                        <div class="tc-routing__item"><span>库存 C</span><div class="tc-routing__bar"><span class="tc-routing__fill" data-route-fill="c"></span></div><strong data-route-value="c">0</strong></div>
+                                    </div>
+                                    <label class="tc-range">需要发放的权益数量<input type="range" min="5" max="30" value="10" step="1" data-routing-amount aria-label="需要发放的权益数量"><output data-routing-output>10</output></label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="growth" class="tc-section" aria-labelledby="growth-title">
+                        <div class="tc-section__head"><span class="tc-section-index">05</span><h2 id="growth-title">在不同运营商和渠道之间，<br>控制套餐办理</h2><p class="tc-section__summary">Decision 03 · Policy hierarchy<br>限制逐层叠加，下层不能突破上层边界。</p></div>
+                        <div class="tc-decision-layout">
+                            <div class="tc-decision-copy">
+                                <h3>用三级策略模型管理多方差异</h3>
+                                <p>运营商策划定义合作背景，套餐模板承载权益与运营商标识，推广产品把套餐分发到具体渠道。办理限制分别落在运营商、套餐和渠道层。</p>
+                                <ul class="tc-decision-points"><li>每层都可配置限量、限时和黑名单</li><li>多个层级同时生效时，限制取交集</li><li>渠道的时间和额度不能突破上层范围</li></ul>
+                            </div>
+                            <div>
+                                <div class="tc-model tc-ui-embed">
+                                    <div class="tc-model__title"><strong>增长对象关系</strong><span class="tc-caption">POLICY CHAIN</span></div>
+                                    <div class="tc-flow" aria-label="运营商策划经过套餐模板与推广产品关联渠道"><div class="tc-flow__node">运营商策划</div><div class="tc-flow__node">套餐模板</div><div class="tc-flow__node">推广产品</div><div class="tc-flow__node">渠道</div></div>
+                                </div>
+                                <div class="tc-lab tc-ui-embed" data-lab="policy">
+                                    <div class="tc-lab__head"><span class="tc-lab__tag">Rule Lab 03</span><span class="tc-lab__status">北京移动 / 联合会员 / 渠道 A</span></div>
+                                    <div class="tc-policy">
+                                        <label><input type="checkbox" checked data-policy-check><strong>运营商层允许办理</strong><span class="tc-policy__level">LEVEL 01</span></label>
+                                        <label><input type="checkbox" checked data-policy-check><strong>套餐处于可办时段</strong><span class="tc-policy__level">LEVEL 02</span></label>
+                                        <label><input type="checkbox" checked data-policy-check><strong>渠道仍有当日额度</strong><span class="tc-policy__level">LEVEL 03</span></label>
+                                    </div>
+                                    <div class="tc-policy-result" data-policy-result data-allowed="true" aria-live="polite"><span>三级策略共同判断</span><strong>允许办理</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="experience" class="tc-section" aria-labelledby="experience-title">
+                        <div class="tc-section__head"><span class="tc-section-index">06</span><h2 id="experience-title">后台规则越复杂，<br>用户体验越需要简单</h2><p class="tc-section__summary">Decision 04 · State translation<br>把配置差异翻译为清晰的下一步行动。</p></div>
+                        <div class="tc-prose"><p>用户不需要理解权益库存或履约策略，只关心拥有什么、是否需要操作、可以选择什么、是否已经到账，以及失败后怎么办。因此领取端不按后台对象展示，而按用户状态组织信息。</p></div>
+                        <div class="tc-matrix tc-ui-embed" data-reveal>
+                            <table>
+                                <thead><tr><th>后台配置</th><th>用户端表达</th><th>关键状态</th></tr></thead>
+                                <tbody>
+                                    <tr><td>原子权益 + 自动下发</td><td>无需领取，直接查看结果</td><td>处理中 / 成功 / 失败</td></tr>
+                                    <tr><td>原子权益 + 手动领取</td><td>展示“去领取”操作</td><td>未领取 / 已领取 / 过期</td></tr>
+                                    <tr><td>组合权益 + 全部发放</td><td>逐项展示每个权益结果</td><td>部分成功 / 全部完成</td></tr>
+                                    <tr><td>组合权益 + N 选 M</td><td>进入详情完成选择</td><td>待选择 / 已确认</td></tr>
+                                    <tr><td>券码 / 二维码 / 直充</td><td>展示对应兑换信息或到账状态</td><td>可使用 / 已使用 / 已作废</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tc-preview-layout tc-ui-embed">
+                            <div class="tc-control-group">
+                                <label>权益形态<select data-claim-shape><option value="atomic">原子权益</option><option value="bundle">组合权益</option></select></label>
+                                <label>领取方式<select data-claim-mode><option value="manual">手动领取</option><option value="auto">自动下发</option><option value="choice">N 选 M</option></select></label>
+                                <label>交付载体<select data-claim-delivery><option value="direct">直充</option><option value="code">券码</option><option value="qr">二维码</option></select></label>
+                            </div>
+                            <div class="tc-phone" aria-live="polite">
+                                <div class="tc-phone__screen"><div class="tc-phone__bar" aria-hidden="true"></div><div class="tc-phone__card"><small data-claim-status>WAITING FOR CLAIM</small><h3 data-claim-title>腾讯视频月卡</h3><p data-claim-copy>确认充值手机号后领取，到账结果将在当前页面更新。</p><button class="tc-phone__action" type="button" data-claim-action>去领取</button></div></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="journey" class="tc-section tc-journey-section" aria-labelledby="journey-title">
+                        <div class="tc-section__head"><span class="tc-section-index">07</span><h2 id="journey-title">一张腾讯视频月卡，<br>如何走完全链路</h2><p class="tc-section__summary">End-to-end journey<br>从渠道提交到用户看到到账结果。</p></div>
+                        <div class="tc-journey-controls tc-ui-embed"><p id="journey-status" class="tc-lab__status" aria-live="polite">静态展示完整流程</p><button type="button" data-journey-play>播放链路</button></div>
+                        <div class="tc-journey tc-ui-embed">
+                            <article class="tc-journey__step"><span>01 / CHANNEL</span><h3>提交办理</h3><p>渠道 A 提交某省移动联合会员套餐办理请求。</p></article>
+                            <article class="tc-journey__step"><span>02 / CEL</span><h3>策略校验</h3><p>灵霄验证渠道身份、套餐关系和三级限办策略。</p></article>
+                            <article class="tc-journey__step"><span>03 / OPERATOR</span><h3>套餐订购</h3><p>运营商完成套餐订购，并返回办理结果。</p></article>
+                            <article class="tc-journey__step"><span>04 / TRIGGER</span><h3>触发发放</h3><p>订购成功后，运营商通知万象下发对应权益。</p></article>
+                            <article class="tc-journey__step"><span>05 / OMNI</span><h3>匹配权益</h3><p>万象匹配权益配置、领取方式与可用库存。</p></article>
+                            <article class="tc-journey__step"><span>06 / DEPOT</span><h3>选择供给</h3><p>云仓根据商品规格、状态和优先级选择供应商。</p></article>
+                            <article class="tc-journey__step"><span>07 / SUPPLIER</span><h3>完成直充</h3><p>供应商向用户手机号完成具体权益履约。</p></article>
+                            <article class="tc-journey__step"><span>08 / USER</span><h3>查看结果</h3><p>用户在领取端查看到账、失败或后续处理状态。</p></article>
+                        </div>
+                    </section>
+
+                    <section id="delivery" class="tc-section" aria-labelledby="delivery-title">
+                        <div class="tc-section__head"><span class="tc-section-index">08</span><h2 id="delivery-title">从业务模型，<br>走到产品交付</h2><p class="tc-section__summary">Delivery & evidence<br>用可验证产出说明项目，而不是虚构大数字。</p></div>
+                        <div class="tc-delivery">
+                            <div class="tc-delivery-list">
+                                <div class="tc-delivery-row"><span>01 / 梳理</span><strong>多方对象和流程缺少统一结构</strong><p>沉淀业务全景图、对象关系与新品接入流程。</p></div>
+                                <div class="tc-delivery-row"><span>02 / 架构</span><strong>三套系统边界如何划分</strong><p>明确供给、服务、增长和用户触点的模块分工。</p></div>
+                                <div class="tc-delivery-row"><span>03 / 规则</span><strong>多供应商、组合权益与限办如何生效</strong><p>输出供应关系、库存调度、状态流与策略模型。</p></div>
+                                <div class="tc-delivery-row"><span>04 / 交付</span><strong>跨系统需求如何准确实现</strong><p>形成后台及用户端需求、原型、字段和异常说明。</p></div>
+                                <div class="tc-delivery-row"><span>05 / 落地</span><strong>业务人员如何正确使用</strong><p>整理新品上架步骤、编码规范与业务操作指南。</p></div>
+                            </div>
+                            <aside class="tc-outcomes"><h3>可验证的产品成果</h3><ol><li>建立从供应商接入到用户领取的完整业务闭环。</li><li>支持多供应商、原子/组合权益、N 选 M 与多级办理策略。</li><li>通过商品规格、权益库存和权益配置分层，降低上下游直接耦合。</li><li>将新品接入沉淀为可复用流程，并统一关键编码与测试规则。</li></ol></aside>
+                        </div>
+                        <div class="tc-evidence-strip" aria-label="项目原型证据">
+                            <a class="tc-evidence-link" href="./depot/dist/index.html" target="_blank" rel="noopener noreferrer"><small>SUPPLY / PROTOTYPE</small><strong>云仓系统</strong><span>查看标准商品与供应关系 →</span></a>
+                            <a class="tc-evidence-link" href="./omni/dist/index.html" target="_blank" rel="noopener noreferrer"><small>SERVICE / PROTOTYPE</small><strong>万象系统</strong><span>查看权益库存与配置 →</span></a>
+                            <a class="tc-evidence-link" href="./cel/frontend/dist/index.html" target="_blank" rel="noopener noreferrer"><small>GROWTH / PROTOTYPE</small><strong>灵霄系统</strong><span>查看套餐与渠道规则 →</span></a>
+                            <button class="tc-evidence-link" type="button" data-open-dialog="evidence-dialog"><small>EVIDENCE / INDEX</small><strong>证据索引</strong><span>查看原型说明与边界 →</span></button>
+                        </div>
+                        <div class="tc-prose"><p class="tc-callout">这页刻意不展示材料无法证明的规模和效率数字。可信度本身，也是产品表达的一部分。</p></div>
+                    </section>
+                </div>
+            </div>
+        </article>
+
+        <nav class="tc-project-nav" aria-label="项目翻页">
+            <a href="../projects.html"><small>ALL PROJECTS</small><strong>返回项目档案</strong></a>
+            <a href="./zhishu-platform.html"><small>NEXT CASE 02</small><strong>命题智能协同平台 →</strong></a>
+        </nav>
     </main>
 
-    <footer class="site-footer footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
-            <p class="footer-credit">Designed & Developed by Jackie Hou</p>
-            <a href="#main-content">Back to top ↑</a>
+    <dialog id="atlas-dialog" class="tc-dialog" aria-labelledby="atlas-title">
+        <div class="tc-dialog__bar"><span>ATLAS / SYSTEM RELATIONSHIPS</span><button class="tc-dialog__close" type="button" data-close-dialog aria-label="关闭系统图谱">×</button></div>
+        <div class="tc-atlas tc-ui-embed">
+            <div class="tc-atlas__canvas" aria-label="运营商权益平台系统关系图">
+                <button class="tc-atlas-node" type="button" data-node="supplier" aria-pressed="false">供应商<br>External supply</button>
+                <button class="tc-atlas-node" type="button" data-node="depot" aria-pressed="true">云仓<br>Supply layer</button>
+                <button class="tc-atlas-node" type="button" data-node="omni" aria-pressed="false">万象<br>Service layer</button>
+                <button class="tc-atlas-node" type="button" data-node="operator" aria-pressed="false">运营商<br>Package order</button>
+                <button class="tc-atlas-node" type="button" data-node="cel" aria-pressed="false">灵霄<br>Growth layer</button>
+                <button class="tc-atlas-node" type="button" data-node="channel" aria-pressed="false">渠道<br>Acquisition</button>
+                <button class="tc-atlas-node" type="button" data-node="user" aria-pressed="false">用户<br>Claim result</button>
+            </div>
+            <aside class="tc-atlas__detail">
+                <small id="atlas-label">SUPPLY / 01</small><h2 id="atlas-title">云仓</h2><p id="atlas-description">把不同供应商提供的非标准产品，转化为可被上层稳定调用的标准商品规格。</p>
+                <ul id="atlas-objects"><li>供应商与供应商产品</li><li>品牌、商品与商品规格</li><li>多供应商供货关系</li></ul>
+                <a id="atlas-evidence-link" href="./depot/dist/index.html" target="_blank" rel="noopener noreferrer">打开相关原型 ↗</a>
+            </aside>
         </div>
+    </dialog>
+
+    <dialog id="evidence-dialog" class="tc-dialog tc-evidence-dialog" aria-labelledby="evidence-title">
+        <div class="tc-dialog__bar"><span>EVIDENCE / PROTOTYPE INDEX</span><button class="tc-dialog__close" type="button" data-close-dialog aria-label="关闭证据索引">×</button></div>
+        <div class="tc-evidence-dialog__body">
+            <small class="tc-lab__tag">WHAT THE PROTOTYPES PROVE</small><h2 id="evidence-title">证据不是截图墙，<br>而是设计判断的出处</h2><p>现有原型用于验证对象、字段、规则和状态是否真实存在。它们不代表线上最终视觉，也不承担正文叙事。</p>
+            <div class="tc-evidence-strip">
+                <a class="tc-evidence-link" href="./depot/dist/index.html" target="_blank" rel="noopener noreferrer"><small>01 / SUPPLY</small><strong>云仓</strong><span>商品规格、供应关系、优先级</span></a>
+                <a class="tc-evidence-link" href="./omni/dist/index.html" target="_blank" rel="noopener noreferrer"><small>02 / SERVICE</small><strong>万象</strong><span>权益库存、组合配置、发放</span></a>
+                <a class="tc-evidence-link" href="./cel/frontend/dist/index.html" target="_blank" rel="noopener noreferrer"><small>03 / GROWTH</small><strong>灵霄</strong><span>套餐、渠道、限办策略</span></a>
+                <a class="tc-evidence-link" href="./data-dashboard.html" target="_blank" rel="noopener noreferrer"><small>04 / OBSERVABILITY</small><strong>数据看板</strong><span>订单与业务状态观察</span></a>
+            </div>
+        </div>
+    </dialog>
+
+    <footer class="site-footer footer">
+        <div class="footer-content"><p>&copy; 2026 Jackie Hou. All rights reserved.</p><p class="footer-credit">Product systems, documented with intent.</p><a href="#main-content">Back to top ↑</a></div>
     </footer>
-
-    <script src="../script.js"></script>
-    <script>
-        document.body.style.opacity = '1';
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.floating-nav-item');
-            const navToggle = document.getElementById('floating-nav-toggle');
-            const floatingNav = document.getElementById('floating-nav');
-
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const offsetTop = targetElement.offsetTop - 100;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                    if (window.innerWidth <= 768) {
-                        floatingNav.classList.remove('open');
-                        navToggle.classList.remove('open');
-                    }
-                });
-            });
-
-            if (navToggle) {
-                navToggle.addEventListener('click', function() {
-                    floatingNav.classList.toggle('open');
-                    navToggle.classList.toggle('open');
-                });
-            }
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '-100px 0px -50% 0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const sectionId = entry.target.getAttribute('id');
-                        navItems.forEach(item => {
-                            if (item.getAttribute('href') === '#' + sectionId) {
-                                item.classList.add('active');
-                            } else {
-                                item.classList.remove('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            const sections = [
-                document.getElementById('section-01'),
-                document.getElementById('section-02'),
-                document.getElementById('section-04'),
-                document.getElementById('section-05'),
-                document.getElementById('section-06'),
-                document.getElementById('section-07'),
-                document.getElementById('section-08'),
-                document.getElementById('section-prototype')
-            ];
-
-            sections.forEach(section => {
-                if (section) {
-                    observer.observe(section);
-                }
-            });
-        });
-    </script>
+    <script src="../script.js" defer></script>
+    <script src="./telecom-case.js" defer></script>
 </body>
 </html>
