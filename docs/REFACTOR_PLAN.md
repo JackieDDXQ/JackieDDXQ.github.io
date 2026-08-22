@@ -76,3 +76,12 @@ Deliverable: a coherent portfolio with no knowingly broken public navigation.
 - All links in the slice resolve locally.
 - The slice works at desktop and mobile widths and remains readable without JavaScript.
 - Changes are committed and pushed to `redesign/v2`; `main` remains untouched until approval.
+
+## Progress update — 2026-08-22
+
+- Translated the Chinese serif demo into a reusable dark editorial system: near-black canvas, four-column guide grid, warm-white serif typography, mono metadata, and a single orange-red accent.
+- Rebuilt the homepage opening frame and extended the same visual language through evidence, featured work, project archive, profile, contact, and footer sections.
+- Applied the system to About, Experience, Projects, Contact, all four standard case pages, and the rights-management interactive atlas without changing their public URLs.
+- Unified the navigation order and Chinese labels across all ten portfolio pages.
+- Verified the ten redesigned pages and shared assets over the local HTTP preview; all returned HTTP 200 and all referenced local files resolved.
+- Kept the redesign isolated to `redesign/v2`; no publishing configuration or `main` branch changes were made.
