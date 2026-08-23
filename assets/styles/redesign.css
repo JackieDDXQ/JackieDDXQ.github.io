@@ -1,20 +1,31 @@
 :root {
-  --demo-black: #090a08;
-  --demo-black-soft: #10110f;
-  --demo-white: #efeee9;
-  --demo-muted: #9b9b95;
-  --demo-line: rgba(239, 238, 233, 0.1);
-  --demo-line-soft: rgba(239, 238, 233, 0.055);
-  --demo-accent: #ff4d2e;
+  --demo-black: #151613;
+  --demo-black-soft: #1e201c;
+  --demo-black-deep: #10110e;
+  --demo-white: #e7e2d8;
+  --demo-muted: #aaa399;
+  --demo-ink-soft: #c6bfb5;
+  --demo-line: rgba(231, 226, 216, 0.14);
+  --demo-line-strong: rgba(231, 226, 216, 0.24);
+  --demo-line-soft: rgba(231, 226, 216, 0.07);
+  --demo-grid-line: rgba(231, 226, 216, 0.08);
+  --demo-grid-line-soft: rgba(231, 226, 216, 0.04);
+  --demo-accent: #c7795f;
+  --demo-accent-soft: rgba(199, 121, 95, 0.08);
+  --demo-header-bg: rgba(21, 22, 19, 0.9);
+  --demo-header-solid: rgba(21, 22, 19, 0.98);
+  --demo-surface: rgba(30, 32, 28, 0.88);
+  --demo-surface-soft: rgba(30, 32, 28, 0.64);
+  --demo-surface-subtle: rgba(30, 32, 28, 0.42);
   --paper: var(--demo-black);
-  --paper-deep: #060705;
+  --paper-deep: var(--demo-black-deep);
   --paper-light: var(--demo-black-soft);
   --ink: var(--demo-white);
-  --ink-soft: #c5c4be;
+  --ink-soft: var(--demo-ink-soft);
   --ink-faint: var(--demo-muted);
   --accent: var(--demo-accent);
   --line: var(--demo-line);
-  --line-strong: rgba(239, 238, 233, 0.2);
+  --line-strong: var(--demo-line-strong);
   --line-soft: var(--demo-line-soft);
   --paper-raised: var(--demo-black-soft);
   --paper-bg: var(--demo-black);
@@ -25,14 +36,90 @@
   --accent-brown: var(--demo-accent);
   --accent-sepia: var(--demo-accent);
   --accent-deep: var(--demo-accent);
-  --accent-soft: rgba(255, 77, 46, 0.06);
+  --accent-soft: var(--demo-accent-soft);
   --border-ink: var(--demo-line);
   --divider-ink: var(--demo-line-soft);
   --vermilion: var(--demo-accent);
   --vermilion-deep: var(--demo-accent);
-  --vermilion-wash: rgba(255, 77, 46, 0.06);
+  --vermilion-wash: var(--demo-accent-soft);
   --hairline: var(--demo-line);
   --hairline-soft: var(--demo-line-soft);
+  --font-serif: "Noto Serif SC", "Songti SC", STSong, Georgia, serif;
+  --font-display: var(--font-serif);
+  --font-latin: var(--font-serif);
+  --font-body: var(--font-serif);
+  --font-mono: var(--font-serif);
+  --type-page-title: clamp(3rem, 6vw, 6rem);
+  --type-case-title: clamp(3rem, 6vw, 6.75rem);
+}
+
+body.interior-page {
+  --demo-black: #f2eee6;
+  --demo-black-soft: #e8e1d6;
+  --demo-black-deep: #ddd4c6;
+  --demo-white: #1d1b18;
+  --demo-muted: #6b655d;
+  --demo-ink-soft: #4f4a43;
+  --demo-line: rgba(29, 27, 24, 0.14);
+  --demo-line-strong: rgba(29, 27, 24, 0.24);
+  --demo-line-soft: rgba(29, 27, 24, 0.07);
+  --demo-grid-line: rgba(29, 27, 24, 0.055);
+  --demo-grid-line-soft: rgba(29, 27, 24, 0.028);
+  --demo-accent: #9f4638;
+  --demo-accent-soft: rgba(159, 70, 56, 0.07);
+  --demo-header-bg: rgba(242, 238, 230, 0.91);
+  --demo-header-solid: rgba(242, 238, 230, 0.98);
+  --demo-surface: rgba(232, 225, 214, 0.86);
+  --demo-surface-soft: rgba(232, 225, 214, 0.66);
+  --demo-surface-subtle: rgba(232, 225, 214, 0.4);
+  --paper: var(--demo-black);
+  --paper-deep: var(--demo-black-deep);
+  --paper-light: var(--demo-black-soft);
+  --ink: var(--demo-white);
+  --ink-soft: var(--demo-ink-soft);
+  --ink-faint: var(--demo-muted);
+  --accent: var(--demo-accent);
+  --line: var(--demo-line);
+  --line-strong: var(--demo-line-strong);
+  --line-soft: var(--demo-line-soft);
+  --paper-raised: var(--demo-black-soft);
+  --paper-bg: var(--demo-black);
+  --paper-bg-light: var(--demo-black-soft);
+  --ink-black: var(--demo-white);
+  --ink-gray: var(--demo-ink-soft);
+  --ink-light: var(--demo-muted);
+  --accent-brown: var(--demo-accent);
+  --accent-sepia: var(--demo-accent);
+  --accent-deep: var(--demo-accent);
+  --accent-soft: var(--demo-accent-soft);
+  --border-ink: var(--demo-line);
+  --divider-ink: var(--demo-line-soft);
+  --vermilion: var(--demo-accent);
+  --vermilion-deep: var(--demo-accent);
+  --vermilion-wash: var(--demo-accent-soft);
+  --hairline: var(--demo-line);
+  --hairline-soft: var(--demo-line-soft);
+  color-scheme: light;
+}
+
+body.case-zhishu {
+  --demo-accent: #4e5f91;
+  --demo-accent-soft: rgba(78, 95, 145, 0.08);
+}
+
+body.case-chuxing {
+  --demo-accent: #3f6b57;
+  --demo-accent-soft: rgba(63, 107, 87, 0.08);
+}
+
+body.case-multi-tenant {
+  --demo-accent: #856137;
+  --demo-accent-soft: rgba(133, 97, 55, 0.08);
+}
+
+body.case-physical {
+  --demo-accent: #62594f;
+  --demo-accent-soft: rgba(98, 89, 79, 0.08);
 }
 
 html {
@@ -40,14 +127,26 @@ html {
   background: var(--demo-black);
 }
 
+html:has(body.interior-page) {
+  color-scheme: light;
+  background: #f2eee6;
+}
+
 body {
   color: var(--demo-white);
   background-color: var(--demo-black);
   background-image:
-    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-line-soft) 25%, transparent calc(25% + 1px)),
-    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-line) 50%, transparent calc(50% + 1px)),
-    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-line-soft) 75%, transparent calc(75% + 1px));
+    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-grid-line-soft) 25%, transparent calc(25% + 1px)),
+    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-grid-line-soft) 75%, transparent calc(75% + 1px));
   background-attachment: fixed;
+}
+
+/* The portfolio uses one editorial typeface across headings, copy, metadata,
+   controls, and legacy case-study styles. */
+body,
+body :where(*) {
+  font-family: var(--font-serif) !important;
 }
 
 body::before {
@@ -72,9 +171,14 @@ a {
   mix-blend-mode: soft-light;
 }
 
+body.interior-page .grain {
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+
 .site-header {
   color: var(--demo-white);
-  background: rgba(9, 10, 8, 0.88);
+  background: var(--demo-header-bg);
   border-color: var(--demo-line);
   backdrop-filter: blur(18px);
 }
@@ -182,12 +286,12 @@ body.home-page {
   color: var(--demo-white);
   background-color: var(--demo-black);
   background-image:
-    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-line-soft) 25%, transparent calc(25% + 1px)),
-    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-line) 50%, transparent calc(50% + 1px)),
-    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-line-soft) 75%, transparent calc(75% + 1px)),
-    linear-gradient(to bottom, transparent calc(25vh - 1px), var(--demo-line-soft) 25vh, transparent calc(25vh + 1px)),
-    linear-gradient(to bottom, transparent calc(50vh - 1px), var(--demo-line-soft) 50vh, transparent calc(50vh + 1px)),
-    linear-gradient(to bottom, transparent calc(75vh - 1px), var(--demo-line-soft) 75vh, transparent calc(75vh + 1px));
+    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-grid-line-soft) 25%, transparent calc(25% + 1px)),
+    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-grid-line-soft) 75%, transparent calc(75% + 1px)),
+    linear-gradient(to bottom, transparent calc(25vh - 1px), var(--demo-grid-line-soft) 25vh, transparent calc(25vh + 1px)),
+    linear-gradient(to bottom, transparent calc(50vh - 1px), var(--demo-grid-line-soft) 50vh, transparent calc(50vh + 1px)),
+    linear-gradient(to bottom, transparent calc(75vh - 1px), var(--demo-grid-line-soft) 75vh, transparent calc(75vh + 1px));
 }
 
 .home-page .grain {
@@ -303,7 +407,7 @@ body.home-page {
   width: 100%;
   margin: 0;
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(4.2rem, 9.35vw, 10.4rem);
   font-weight: 600;
   line-height: 0.96;
@@ -415,7 +519,7 @@ body.home-page {
 
 .home-page .section-block {
   position: relative;
-  background: rgba(9, 10, 8, 0.68);
+  background: rgba(21, 22, 19, 0.68);
 }
 
 .home-page .archive-section-heading {
@@ -445,7 +549,7 @@ body.home-page {
 .home-page .featured-case__copy h2,
 .home-page .profile-career h2,
 .home-page .archive-contact h2 {
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
 }
 
 .home-page .featured-case__copy h2 {
@@ -483,7 +587,7 @@ body.home-page {
 .home-page .preview-stack span {
   color: var(--demo-white);
   border-color: var(--demo-line);
-  background: rgba(16, 17, 15, 0.94);
+  background: rgba(30, 32, 28, 0.94);
 }
 
 .home-page .architecture-node small,
@@ -505,8 +609,28 @@ body.home-page {
 
 .home-page .project-index-list > li:hover,
 .home-page .project-index-list > li:focus-within {
-  background: rgba(255, 77, 46, 0.035);
+  background: var(--demo-accent-soft);
   border-color: var(--demo-accent);
+}
+
+.home-page .project-index-list > li:nth-child(1) {
+  --demo-accent: #91a0cd;
+  --demo-accent-soft: rgba(145, 160, 205, 0.08);
+}
+
+.home-page .project-index-list > li:nth-child(2) {
+  --demo-accent: #8eb49f;
+  --demo-accent-soft: rgba(142, 180, 159, 0.08);
+}
+
+.home-page .project-index-list > li:nth-child(3) {
+  --demo-accent: #c7a16d;
+  --demo-accent-soft: rgba(199, 161, 109, 0.08);
+}
+
+.home-page .project-index-list > li:nth-child(4) {
+  --demo-accent: #ada398;
+  --demo-accent-soft: rgba(173, 163, 152, 0.08);
 }
 
 .home-page .project-preview__frame::before,
@@ -532,16 +656,93 @@ body.home-page {
   border-color: var(--demo-accent);
 }
 
+/* Homepage statement — a calm editorial bridge between positioning and work. */
+.home-page .home-statement {
+  color: var(--demo-white);
+  background: #1b1c19;
+  border-color: var(--demo-line);
+}
+
+.home-page .home-statement .archive-section-heading {
+  color: var(--demo-muted);
+  border-color: var(--demo-line);
+}
+
+.home-page .home-statement .archive-section-heading p:first-child {
+  color: var(--demo-white);
+}
+
+.home-page .home-statement .archive-section-heading p:first-child span {
+  color: var(--demo-accent);
+}
+
+.home-statement__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr);
+  gap: clamp(50px, 9vw, 150px);
+  align-items: end;
+  padding-top: clamp(54px, 8vw, 100px);
+}
+
+.home-statement__grid h2 {
+  max-width: 16ch;
+  margin: 0;
+  color: var(--demo-white);
+  font-size: clamp(2.45rem, 5vw, 5.7rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.055em;
+}
+
+.home-statement__grid h2 em {
+  color: var(--demo-accent);
+  font-style: normal;
+}
+
+.home-statement__body > p {
+  max-width: 34rem;
+  margin: 0 0 38px;
+  color: var(--demo-ink-soft);
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
+  line-height: 1.9;
+}
+
+.home-statement__facts {
+  margin: 0;
+  border-top: 1px solid var(--demo-line);
+}
+
+.home-statement__facts > div {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--demo-line);
+}
+
+.home-statement__facts dt {
+  color: var(--demo-accent);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-statement__facts dd {
+  margin: 0;
+  color: var(--demo-white);
+  font-size: 0.82rem;
+}
+
 /* Editorial interior pages. */
 .interior-page .main-content > section:first-child > .section-header {
   min-height: clamp(250px, 36vw, 470px);
   padding-top: clamp(60px, 8vw, 120px);
 }
 
-.interior-page .main-content > section:first-child > .section-header .section-title {
+body.interior-page .main-content > section:first-child > .section-header .section-title {
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
-  font-size: clamp(4.2rem, 11vw, 10.5rem);
+  font-family: var(--font-serif);
+  font-size: var(--type-page-title);
   font-weight: 600;
   line-height: 0.9;
 }
@@ -562,7 +763,7 @@ body.home-page {
 
 .about-content p:first-child {
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.45rem, 2.4vw, 2.45rem);
   line-height: 1.65;
 }
@@ -584,7 +785,7 @@ body.home-page {
 
 .capability-section .section-title,
 .education-section .section-title {
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(2.4rem, 5vw, 5.2rem);
   font-weight: 600;
   line-height: 1;
@@ -597,11 +798,11 @@ body.home-page {
 .capability-card {
   color: var(--demo-white);
   border-color: var(--demo-line) !important;
-  background: rgba(9, 10, 8, 0.62) !important;
+  background: var(--demo-surface-soft) !important;
 }
 
 .capability-card:hover {
-  background: rgba(255, 77, 46, 0.045) !important;
+  background: var(--demo-accent-soft) !important;
 }
 
 .capability-card li::before {
@@ -629,7 +830,7 @@ body.home-page {
 }
 
 .experience-title {
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(2.3rem, 4.6vw, 5rem);
   font-weight: 600;
 }
@@ -644,23 +845,50 @@ body.home-page {
 }
 
 .projects-grid .project-link {
+  --project-accent: var(--demo-accent);
+  --project-accent-soft: var(--demo-accent-soft);
   border-color: var(--demo-line);
+}
+
+.projects-grid .project-link:nth-child(1) {
+  --project-accent: #9f4638;
+  --project-accent-soft: rgba(159, 70, 56, 0.07);
+}
+
+.projects-grid .project-link:nth-child(2) {
+  --project-accent: #4e5f91;
+  --project-accent-soft: rgba(78, 95, 145, 0.08);
+}
+
+.projects-grid .project-link:nth-child(3) {
+  --project-accent: #3f6b57;
+  --project-accent-soft: rgba(63, 107, 87, 0.08);
+}
+
+.projects-grid .project-link:nth-child(4) {
+  --project-accent: #856137;
+  --project-accent-soft: rgba(133, 97, 55, 0.08);
+}
+
+.projects-grid .project-link:nth-child(5) {
+  --project-accent: #62594f;
+  --project-accent-soft: rgba(98, 89, 79, 0.08);
 }
 
 .projects-grid .project-card {
   grid-template-columns: minmax(140px, 1.5fr) minmax(0, 7fr) 110px;
   min-height: clamp(150px, 14vw, 210px);
   color: var(--demo-white);
-  background: rgba(9, 10, 8, 0.4);
+  background: var(--demo-surface-subtle);
 }
 
 .projects-grid .project-card:hover {
-  color: var(--demo-accent);
-  background: rgba(255, 77, 46, 0.035);
+  color: var(--project-accent);
+  background: var(--project-accent-soft);
 }
 
 .projects-grid .project-title {
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.8rem, 3.6vw, 4.2rem);
   font-weight: 600;
 }
@@ -671,7 +899,224 @@ body.home-page {
 }
 
 .projects-grid .project-expand {
+  color: var(--project-accent);
+}
+
+/* Project catalogue — list first, system preview second. */
+.projects-page-intro {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: end;
+  padding: clamp(42px, 6vw, 76px) 0 28px;
+  border-bottom: 1px solid var(--demo-line);
+}
+
+.projects-page-intro p {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--demo-ink-soft);
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+  line-height: 1.8;
+}
+
+.projects-page-intro span {
+  color: var(--demo-muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.project-catalog {
+  display: grid;
+  grid-template-columns: minmax(0, 7.5fr) minmax(320px, 4.5fr);
+  gap: clamp(34px, 6vw, 90px);
+  padding-top: 38px;
+}
+
+.project-catalog__header,
+.project-catalog .project-index-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 118px 20px;
+  gap: 16px;
+  align-items: center;
+}
+
+.project-catalog__header {
+  padding-bottom: 12px;
+  color: var(--demo-muted);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-catalog-list > li {
+  --catalog-accent: var(--demo-accent);
+  --catalog-accent-soft: var(--demo-accent-soft);
+}
+
+.project-catalog-list > li:nth-child(2) { --catalog-accent: #4e5f91; --catalog-accent-soft: rgba(78, 95, 145, 0.08); }
+.project-catalog-list > li:nth-child(3) { --catalog-accent: #3f6b57; --catalog-accent-soft: rgba(63, 107, 87, 0.08); }
+.project-catalog-list > li:nth-child(4) { --catalog-accent: #856137; --catalog-accent-soft: rgba(133, 97, 55, 0.08); }
+.project-catalog-list > li:nth-child(5) { --catalog-accent: #62594f; --catalog-accent-soft: rgba(98, 89, 79, 0.08); }
+
+.project-catalog-list .project-index-row {
+  min-height: clamp(126px, 12vw, 168px);
+}
+
+.project-catalog-list .project-index-row__main strong {
+  color: var(--demo-white);
+  font-size: clamp(1.35rem, 2.25vw, 2.35rem);
+}
+
+.project-catalog-list .project-index-row__main small {
+  color: var(--demo-muted);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.project-catalog-list .project-index-row__number,
+.project-catalog-list .project-index-row__arrow {
+  color: var(--catalog-accent);
+}
+
+.project-catalog-list > li:hover,
+.project-catalog-list > li:focus-within {
+  border-color: var(--catalog-accent);
+  background: var(--catalog-accent-soft);
+}
+
+.project-catalog__preview {
+  padding-left: 0;
+}
+
+.project-catalog__preview .project-preview__frame {
+  height: min(560px, calc(100vh - 150px));
+  min-height: 430px;
+  background: var(--demo-surface-soft);
+}
+
+#catalog-preview-rights { --accent: #9f4638; }
+#catalog-preview-zhishu { --accent: #4e5f91; }
+#catalog-preview-travel { --accent: #3f6b57; }
+#catalog-preview-mall { --accent: #856137; }
+#catalog-preview-physical { --accent: #62594f; }
+
+.catalog-system-flow {
+  display: flex;
+  width: min(100%, 360px);
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.catalog-system-flow > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 20px;
+  color: var(--demo-white);
+  border: 1px solid var(--accent);
+  background: var(--demo-black-soft);
+  font-size: 1rem;
+}
+
+.catalog-system-flow small {
+  color: var(--demo-muted);
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+
+.catalog-system-flow i {
+  width: 1px;
+  height: 24px;
+  margin: 0 auto;
+  background: var(--accent);
+}
+
+/* About — a concrete four-pass working method. */
+.working-method-section {
+  padding-block: clamp(70px, 10vw, 130px);
+}
+
+.working-method-section .section-header {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 18px;
+  align-items: end;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--demo-line);
+}
+
+.working-method-section .section-title {
+  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.working-method-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(260px, 4fr);
+  gap: clamp(50px, 9vw, 140px);
+  align-items: end;
+  padding-block: clamp(52px, 8vw, 96px);
+}
+
+.working-method-intro h3 {
+  margin: 0;
+  color: var(--demo-white);
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.055em;
+}
+
+.working-method-intro p {
+  margin: 0;
+  color: var(--demo-ink-soft);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.working-method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--demo-line);
+  border-left: 1px solid var(--demo-line);
+  list-style: none;
+}
+
+.working-method-grid li {
+  min-height: 260px;
+  padding: clamp(24px, 3vw, 38px);
+  border-right: 1px solid var(--demo-line);
+  border-bottom: 1px solid var(--demo-line);
+  background: var(--demo-surface-subtle);
+}
+
+.working-method-grid span {
+  display: block;
+  margin-bottom: 54px;
   color: var(--demo-accent);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.working-method-grid strong {
+  display: block;
+  color: var(--demo-white);
+  font-size: clamp(1.7rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+}
+
+.working-method-grid p {
+  margin: 14px 0 0;
+  color: var(--demo-muted);
+  font-size: 0.78rem;
+  line-height: 1.75;
 }
 
 .contact-page-section .contact-content {
@@ -728,10 +1173,14 @@ body.home-page {
   max-width: 12ch;
   margin-top: clamp(34px, 5vw, 68px);
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif !important;
-  font-size: clamp(3.8rem, 8vw, 8.8rem) !important;
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-case-title) !important;
   font-weight: 600 !important;
   line-height: 1.02 !important;
+}
+
+.telecom-case .tc-hero__title {
+  font-size: var(--type-case-title);
 }
 
 .project-page .project-subtitle {
@@ -754,7 +1203,7 @@ body.home-page {
 
 .project-page .project-section .section-title {
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.8rem, 3.6vw, 3.8rem);
   font-weight: 600;
 }
@@ -779,7 +1228,7 @@ body.home-page {
   padding: clamp(24px, 3vw, 40px);
   border-right: 1px solid var(--demo-line);
   border-bottom: 1px solid var(--demo-line);
-  background: rgba(9, 10, 8, 0.54);
+  background: var(--demo-surface-soft);
 }
 
 .project-page .results-grid {
@@ -793,7 +1242,7 @@ body.home-page {
   border: 0;
   border-right: 1px solid var(--demo-line);
   border-bottom: 1px solid var(--demo-line);
-  background: rgba(16, 17, 15, 0.76);
+  background: var(--demo-surface);
 }
 
 .project-page .result-value {
@@ -810,7 +1259,7 @@ body.home-page {
 
 .project-page .prototype-link:hover {
   border-color: var(--demo-accent);
-  background: rgba(255, 77, 46, 0.045);
+  background: var(--demo-accent-soft);
 }
 
 .project-page .next-project {
@@ -822,7 +1271,7 @@ body.home-page {
 .project-page .next-project-link,
 .project-page .prev-project {
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.1rem, 2vw, 2rem);
 }
 
@@ -833,7 +1282,7 @@ body.home-page {
 
 #floating-nav {
   border-color: var(--demo-line) !important;
-  background: rgba(9, 10, 8, 0.94) !important;
+  background: var(--demo-header-solid) !important;
 }
 
 .floating-nav-item {
@@ -847,6 +1296,8 @@ body.home-page {
 
 /* Rights-management atlas — retain its interaction model, recolor the shell. */
 .telecom-case {
+  --tc-font-editorial: var(--font-serif);
+  --tc-font-interface: var(--font-serif);
   --tc-paper: var(--demo-black);
   --tc-paper-bright: var(--demo-black-soft);
   --tc-ink: var(--demo-white);
@@ -860,13 +1311,13 @@ body.home-page {
   --tc-night: #050604;
   background-color: var(--demo-black);
   background-image:
-    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-line-soft) 25%, transparent calc(25% + 1px)),
-    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-line) 50%, transparent calc(50% + 1px)),
-    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-line-soft) 75%, transparent calc(75% + 1px));
+    linear-gradient(to right, transparent calc(25% - 1px), var(--demo-grid-line-soft) 25%, transparent calc(25% + 1px)),
+    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to right, transparent calc(75% - 1px), var(--demo-grid-line-soft) 75%, transparent calc(75% + 1px));
 }
 
 .telecom-case .site-header {
-  background: rgba(9, 10, 8, 0.88);
+  background: var(--demo-header-bg);
 }
 
 .telecom-case .tc-shell {
@@ -894,7 +1345,7 @@ body.home-page {
 .telecom-case .tc-architecture,
 .telecom-case .tc-lab,
 .telecom-case .tc-model {
-  background: rgba(16, 17, 15, 0.9);
+  background: var(--demo-surface);
 }
 
 .telecom-case .tc-hero {
@@ -906,7 +1357,7 @@ body.home-page {
 .telecom-case .tc-callout,
 .telecom-case .tc-decision-copy h3 {
   color: var(--demo-white);
-  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-family: var(--font-serif);
 }
 
 .telecom-case .tc-hero__title span,
@@ -951,12 +1402,132 @@ body.home-page {
   background: var(--demo-black-soft);
 }
 
+.telecom-case .tc-view-switch a {
+  padding: 0.45rem 0.75rem;
+  color: var(--demo-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.telecom-case .tc-view-switch a:hover,
+.telecom-case .tc-view-switch a:focus-visible {
+  color: var(--demo-accent);
+  background: var(--demo-accent-soft);
+}
+
+/* Inline system view replaces the hidden atlas dialog. */
+.telecom-case .tc-system-view {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  min-height: 640px;
+  overflow: hidden;
+  color: var(--demo-white);
+  border: 1px solid var(--demo-line);
+  background: var(--demo-surface-soft);
+}
+
+.telecom-case .tc-system-view .tc-atlas__canvas {
+  min-height: 640px;
+  background-color: rgba(242, 238, 230, 0.48);
+  background-image:
+    linear-gradient(var(--demo-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--demo-grid-line) 1px, transparent 1px);
+}
+
+.telecom-case .tc-system-view .tc-atlas__canvas::before {
+  background: var(--demo-line-strong);
+}
+
+.telecom-case .tc-system-view .tc-atlas-node {
+  color: var(--demo-ink-soft);
+  border-color: var(--demo-line-strong);
+  background: rgba(242, 238, 230, 0.9);
+}
+
+.telecom-case .tc-system-view .tc-atlas-node:hover,
+.telecom-case .tc-system-view .tc-atlas-node:focus-visible,
+.telecom-case .tc-system-view .tc-atlas-node[aria-pressed="true"] {
+  color: var(--demo-white);
+  border-color: var(--demo-accent);
+  background: var(--demo-accent-soft);
+}
+
+.telecom-case .tc-system-view .tc-atlas__detail {
+  padding: clamp(2rem, 4vw, 3.5rem);
+  color: var(--demo-white);
+  border-left: 1px solid var(--demo-line);
+  background: var(--demo-black-soft);
+}
+
+.telecom-case .tc-system-view .tc-atlas__detail small,
+.telecom-case .tc-system-view .tc-atlas__reading span {
+  color: var(--demo-accent);
+}
+
+.telecom-case .tc-system-view .tc-atlas__detail h3 {
+  margin: 1.25rem 0 1rem;
+  color: var(--demo-white);
+  font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.telecom-case .tc-system-view .tc-atlas__detail > p {
+  color: var(--demo-ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.85;
+}
+
+.telecom-case .tc-atlas__reading {
+  display: grid;
+  gap: 7px;
+  padding: 14px 0;
+  border-top: 1px solid var(--demo-line);
+}
+
+.telecom-case .tc-atlas__reading span {
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.telecom-case .tc-atlas__reading strong {
+  color: var(--demo-white);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.telecom-case .tc-system-view .tc-atlas__detail li {
+  color: var(--demo-ink-soft);
+  border-color: var(--demo-line);
+}
+
+.telecom-case .tc-atlas__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.telecom-case .tc-system-view .tc-atlas__actions a {
+  color: var(--demo-white);
+  border-color: var(--demo-line-strong);
+}
+
+.telecom-case .tc-system-view .tc-atlas__actions a:first-child {
+  color: var(--demo-black);
+  border-color: var(--demo-accent);
+  background: var(--demo-accent);
+}
+
 @media (max-width: 900px) {
   body.home-page {
     background-image:
-      linear-gradient(to right, transparent calc(50% - 1px), var(--demo-line) 50%, transparent calc(50% + 1px)),
-      linear-gradient(to bottom, transparent calc(33.333vh - 1px), var(--demo-line-soft) 33.333vh, transparent calc(33.333vh + 1px)),
-      linear-gradient(to bottom, transparent calc(66.666vh - 1px), var(--demo-line-soft) 66.666vh, transparent calc(66.666vh + 1px));
+      linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line) 50%, transparent calc(50% + 1px)),
+      linear-gradient(to bottom, transparent calc(33.333vh - 1px), var(--demo-grid-line-soft) 33.333vh, transparent calc(33.333vh + 1px)),
+      linear-gradient(to bottom, transparent calc(66.666vh - 1px), var(--demo-grid-line-soft) 66.666vh, transparent calc(66.666vh + 1px));
   }
 
   .home-page .navbar-right {
@@ -982,17 +1553,35 @@ body.home-page {
   .project-page .project-header {
     min-height: 540px;
   }
+
+  .home-statement__grid,
+  .working-method-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .working-method-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .telecom-case .tc-system-view {
+    grid-template-columns: 1fr;
+  }
+
+  .telecom-case .tc-system-view .tc-atlas__detail {
+    border-top: 1px solid var(--demo-line);
+    border-left: 0;
+  }
 }
 
 @media (max-width: 767px) {
   body {
     background-image:
-      linear-gradient(to right, transparent calc(50% - 1px), var(--demo-line) 50%, transparent calc(50% + 1px));
+      linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line) 50%, transparent calc(50% + 1px));
   }
 
   .site-header .navbar-right,
   .is-ready .site-header .navbar-right {
-    background: rgba(9, 10, 8, 0.98);
+    background: var(--demo-header-solid);
     border-color: var(--demo-line);
   }
 
@@ -1020,7 +1609,7 @@ body.home-page {
   }
 
   .home-page .navbar-right {
-    background: rgba(9, 10, 8, 0.98);
+    background: var(--demo-header-solid);
     border-color: var(--demo-line);
   }
 
@@ -1079,6 +1668,15 @@ body.home-page {
   .home-page .evidence-item {
     min-height: 132px;
     border-bottom: 1px solid var(--demo-line);
+  }
+
+  .home-statement__grid {
+    gap: 42px;
+    padding-top: 42px;
+  }
+
+  .home-statement__grid h2 {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
   }
 
   .home-page .featured-case__link,
@@ -1142,6 +1740,49 @@ body.home-page {
     grid-column: 1;
     grid-row: auto;
     justify-self: start;
+  }
+
+  .projects-page-intro {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-catalog {
+    grid-template-columns: 1fr;
+  }
+
+  .project-catalog__header,
+  .project-catalog .project-index-row {
+    grid-template-columns: 36px minmax(0, 1fr) 20px;
+  }
+
+  .project-catalog__header span:nth-child(3),
+  .project-catalog-list .project-index-row__type {
+    display: none;
+  }
+
+  .project-catalog-list .project-index-row {
+    min-height: 150px;
+  }
+
+  .working-method-section .section-header {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .working-method-section .section-label {
+    display: none;
+  }
+
+  .working-method-intro h3 {
+    font-size: clamp(2.6rem, 12vw, 4.4rem);
+  }
+
+  .working-method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .working-method-grid li {
+    min-height: 220px;
   }
 
   .project-detail-page .project-page {

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../shared/admin-ui.css">
     <title>万象系统 - 商品详情</title>
     <style>
         * {
@@ -1061,13 +1062,6 @@
                             <a href="address-manage.html">地址管理</a>
                         </li>
                     </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="#核销管理">
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>核销管理
-                    </a>
                 </li>
                 <li class="menu-item">
                     <a href="#短信模板">
@@ -2203,6 +2197,18 @@
 
         document.querySelectorAll('.store-checkbox').forEach(cb => {
             cb.addEventListener('change', selectStore);
+        });
+
+        document.querySelectorAll('#brandModal .btn-view-detail').forEach(link => {
+            link.href = 'brand-manage.html';
+        });
+
+        document.querySelectorAll('#storeModal .btn-view-detail').forEach(link => {
+            link.href = 'store-manage.html';
+        });
+
+        document.querySelectorAll('#benefitModal .btn-view-detail').forEach(link => {
+            link.href = '../../rights-management/omni/dist/index.html#/equity/inventory/1';
         });
 
         document.querySelectorAll('.modal-overlay').forEach(modal => {

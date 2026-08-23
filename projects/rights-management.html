@@ -10,7 +10,7 @@
     <meta property="og:description" content="将分散的供应商产品、权益库存、运营商套餐与渠道推广，连接成从供给到履约的完整业务系统。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/styles/site.css">
     <link rel="stylesheet" href="../assets/styles/cases/rights-management.css">
     <link rel="stylesheet" href="../assets/styles/redesign.css">
@@ -25,7 +25,7 @@
     }
     </script>
 </head>
-<body class="interior-page project-detail-page telecom-case">
+<body class="interior-page project-detail-page telecom-case case-rights">
     <div class="grain" aria-hidden="true"></div>
     <a href="#main-content" class="skip-link">跳转到主要内容</a>
 
@@ -50,7 +50,7 @@
             <a href="../projects.html">← 返回项目档案 / Project archive</a>
             <div class="tc-view-switch" aria-label="阅读模式">
                 <span aria-current="page">Story</span>
-                <button type="button" data-open-dialog="atlas-dialog">Open Atlas</button>
+                <a href="#architecture">System view</a>
             </div>
         </div>
 
@@ -128,11 +128,28 @@
                             <p class="tc-section__summary">Architecture decision<br>让不同变化停留在最合适的系统里。</p>
                         </div>
                         <div class="tc-prose"><p>没有把所有能力塞进一个后台，而是让供给变化、权益包装变化、运营策略变化与用户领取变化各自被对应系统吸收。上层业务依赖稳定对象，而不直接追随底层供应商变化。</p></div>
-                        <div class="tc-architecture tc-ui-embed" data-reveal>
-                            <article class="tc-layer tc-layer--supply"><span class="tc-layer__type">Supply / 供给</span><h3>云仓</h3><p>管理供应商、产品、品牌、商品、规格及供应关系，把外部供给转为内部标准商品。</p><p class="tc-layer__change">吸收供应商接入、编码与商品变化</p></article>
-                            <article class="tc-layer tc-layer--service"><span class="tc-layer__type">Service / 服务</span><h3>万象</h3><p>管理权益库存、权益配置、发放、短信、核销和订单，把商品资源包装为可交付权益。</p><p class="tc-layer__change">吸收权益组合与履约规则变化</p></article>
-                            <article class="tc-layer tc-layer--growth"><span class="tc-layer__type">Growth / 增长</span><h3>灵霄</h3><p>管理运营商策划、套餐、渠道、推广及办理限制，控制权益如何进入具体销售场景。</p><p class="tc-layer__change">吸收运营商与渠道策略变化</p></article>
-                            <article class="tc-layer tc-layer--experience"><span class="tc-layer__type">Experience / 触点</span><h3>领取端</h3><p>面向用户统一呈现订单、领取、选择、兑换和结果状态，把后台复杂性收束为清晰操作。</p><p class="tc-layer__change">吸收领取方式与状态变化</p></article>
+                        <div class="tc-system-view tc-atlas tc-ui-embed" data-reveal>
+                            <div class="tc-atlas__canvas" aria-label="运营商权益平台系统关系图；选择模块查看职责、对象与关键判断">
+                                <button class="tc-atlas-node" type="button" data-node="supplier" aria-pressed="false">供应商<br>External supply</button>
+                                <button class="tc-atlas-node" type="button" data-node="depot" aria-pressed="true">云仓<br>Supply layer</button>
+                                <button class="tc-atlas-node" type="button" data-node="omni" aria-pressed="false">万象<br>Service layer</button>
+                                <button class="tc-atlas-node" type="button" data-node="operator" aria-pressed="false">运营商<br>Package order</button>
+                                <button class="tc-atlas-node" type="button" data-node="cel" aria-pressed="false">灵霄<br>Growth layer</button>
+                                <button class="tc-atlas-node" type="button" data-node="channel" aria-pressed="false">渠道<br>Acquisition</button>
+                                <button class="tc-atlas-node" type="button" data-node="user" aria-pressed="false">用户<br>Claim result</button>
+                            </div>
+                            <aside class="tc-atlas__detail" aria-live="polite">
+                                <small id="atlas-label">SUPPLY / 01</small>
+                                <h3 id="atlas-title">云仓</h3>
+                                <p id="atlas-description">把不同供应商提供的非标准产品，转化为可被上层稳定调用的标准商品规格。</p>
+                                <div class="tc-atlas__reading"><span>吸收的变化</span><strong id="atlas-change">供应商接入、编码与商品变化</strong></div>
+                                <div class="tc-atlas__reading"><span>关键判断</span><strong id="atlas-decision">用内部商品规格隔离外部供应差异。</strong></div>
+                                <ul id="atlas-objects"><li>供应商与供应商产品</li><li>品牌、商品与商品规格</li><li>多供应商供货关系</li></ul>
+                                <div class="tc-atlas__actions">
+                                    <a id="atlas-section-link" href="#supply">查看对应判断 ↓</a>
+                                    <a id="atlas-evidence-link" href="./prototypes/rights-management/depot/dist/index.html" target="_blank" rel="noopener noreferrer">打开相关原型 ↗</a>
+                                </div>
+                            </aside>
                         </div>
                     </section>
 
@@ -286,26 +303,6 @@
         </nav>
     </main>
 
-    <dialog id="atlas-dialog" class="tc-dialog" aria-labelledby="atlas-title">
-        <div class="tc-dialog__bar"><span>ATLAS / SYSTEM RELATIONSHIPS</span><button class="tc-dialog__close" type="button" data-close-dialog aria-label="关闭系统图谱">×</button></div>
-        <div class="tc-atlas tc-ui-embed">
-            <div class="tc-atlas__canvas" aria-label="运营商权益平台系统关系图">
-                <button class="tc-atlas-node" type="button" data-node="supplier" aria-pressed="false">供应商<br>External supply</button>
-                <button class="tc-atlas-node" type="button" data-node="depot" aria-pressed="true">云仓<br>Supply layer</button>
-                <button class="tc-atlas-node" type="button" data-node="omni" aria-pressed="false">万象<br>Service layer</button>
-                <button class="tc-atlas-node" type="button" data-node="operator" aria-pressed="false">运营商<br>Package order</button>
-                <button class="tc-atlas-node" type="button" data-node="cel" aria-pressed="false">灵霄<br>Growth layer</button>
-                <button class="tc-atlas-node" type="button" data-node="channel" aria-pressed="false">渠道<br>Acquisition</button>
-                <button class="tc-atlas-node" type="button" data-node="user" aria-pressed="false">用户<br>Claim result</button>
-            </div>
-            <aside class="tc-atlas__detail">
-                <small id="atlas-label">SUPPLY / 01</small><h2 id="atlas-title">云仓</h2><p id="atlas-description">把不同供应商提供的非标准产品，转化为可被上层稳定调用的标准商品规格。</p>
-                <ul id="atlas-objects"><li>供应商与供应商产品</li><li>品牌、商品与商品规格</li><li>多供应商供货关系</li></ul>
-                <a id="atlas-evidence-link" href="./prototypes/rights-management/depot/dist/index.html" target="_blank" rel="noopener noreferrer">打开相关原型 ↗</a>
-            </aside>
-        </div>
-    </dialog>
-
     <dialog id="evidence-dialog" class="tc-dialog tc-evidence-dialog" aria-labelledby="evidence-title">
         <div class="tc-dialog__bar"><span>EVIDENCE / PROTOTYPE INDEX</span><button class="tc-dialog__close" type="button" data-close-dialog aria-label="关闭证据索引">×</button></div>
         <div class="tc-evidence-dialog__body">
@@ -324,6 +321,6 @@
         <div class="footer-content"><p>&copy; 2026 Jackie Hou. All rights reserved.</p><p class="footer-credit">Product systems, documented with intent.</p><a href="#main-content">Back to top ↑</a></div>
     </footer>
     <script src="../assets/scripts/site.js" defer></script>
-    <script src="../assets/scripts/cases/rights-management.js" defer></script>
+    <script src="../assets/scripts/cases/rights-management.js?v=20260823" defer></script>
 </body>
 </html>

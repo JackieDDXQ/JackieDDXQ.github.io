@@ -13,9 +13,9 @@
   --rm-success: #0f9f6e;
   --rm-warning: #d97706;
   --rm-danger: #dc2626;
-  --rm-radius-sm: 6px;
-  --rm-radius: 10px;
-  --rm-radius-lg: 14px;
+  --rm-radius-sm: 0;
+  --rm-radius: 0;
+  --rm-radius-lg: 0;
   --rm-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.04);
   --rm-sidebar-width: 232px;
   --rm-header-height: 64px;
@@ -28,6 +28,24 @@
 
 * {
   box-sizing: border-box;
+}
+
+/* Keep every system on the same flat, monochrome visual language. */
+body *:not(#rm-rounded-component),
+body *:not(#rm-rounded-component)::before,
+body *:not(#rm-rounded-component)::after {
+  border-radius: 0 !important;
+}
+
+svg,
+.anticon,
+.el-icon,
+.rm-brand-mark,
+.rm-avatar,
+.ant-avatar,
+.el-avatar,
+[class*="icon"] {
+  filter: grayscale(1) saturate(0) !important;
 }
 
 html,

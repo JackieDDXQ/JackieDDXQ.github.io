@@ -130,26 +130,33 @@
   }
 
   function initProjectPreview() {
-    const list = document.querySelector('.project-index-list');
-    const preview = document.querySelector('.project-preview');
-    if (!list || !preview) return;
+    const roots = [
+      ...document.querySelectorAll('[data-project-preview-root]'),
+      ...document.querySelectorAll('.project-archive__layout:not([data-project-preview-root])'),
+    ];
 
-    const switchPreview = (row) => {
-      const targetId = row?.dataset.preview;
-      if (!targetId) return;
-      const target = document.getElementById(targetId);
-      if (!target || target.classList.contains('is-active')) return;
+    roots.forEach((root) => {
+      const list = root.querySelector('.project-index-list');
+      const preview = root.querySelector('.project-preview');
+      if (!list || !preview) return;
 
-      preview.querySelectorAll('.project-preview__item').forEach((item) => {
-        item.classList.toggle('is-active', item === target);
+      const switchPreview = (row) => {
+        const targetId = row?.dataset.preview;
+        if (!targetId) return;
+        const target = document.getElementById(targetId);
+        if (!target || !preview.contains(target) || target.classList.contains('is-active')) return;
+
+        preview.querySelectorAll('.project-preview__item').forEach((item) => {
+          item.classList.toggle('is-active', item === target);
+        });
+      };
+
+      list.addEventListener('pointerover', (event) => {
+        switchPreview(event.target.closest('[data-preview]'));
       });
-    };
-
-    list.addEventListener('pointerover', (event) => {
-      switchPreview(event.target.closest('[data-preview]'));
-    });
-    list.addEventListener('focusin', (event) => {
-      switchPreview(event.target.closest('[data-preview]'));
+      list.addEventListener('focusin', (event) => {
+        switchPreview(event.target.closest('[data-preview]'));
+      });
     });
   }
 

@@ -12,50 +12,71 @@
       label: 'EXTERNAL SUPPLY / 00',
       title: '供应商',
       description: '外部供给对象提供真实商品或服务，其编码、库存和履约方式不应直接暴露给上层权益业务。',
+      change: '外部产品、库存、成本与履约接口变化',
+      decision: '让外部差异止步于供给边界，不直接进入权益配置。',
       objects: ['供应商档案与接入状态', '外部产品编码与履约方式', '成本、库存与接口差异'],
-      href: ''
+      href: '',
+      sectionHref: '#supply'
     },
     depot: {
       label: 'SUPPLY / 01',
       title: '云仓',
       description: '把不同供应商提供的非标准产品，转化为可被上层稳定调用的标准商品规格。',
+      change: '供应商接入、编码与商品变化',
+      decision: '用内部商品规格隔离外部供应差异。',
       objects: ['供应商与供应商产品', '品牌、商品与商品规格', '多供应商供货关系'],
-      href: './prototypes/rights-management/depot/dist/index.html'
+      href: './prototypes/rights-management/depot/dist/index.html',
+      sectionHref: '#supply'
     },
     omni: {
       label: 'SERVICE / 02',
       title: '万象',
       description: '将标准商品组织为权益库存，再配置为原子、组合或 N 选 M 权益，并管理发放与核销。',
+      change: '权益组合、库存调用与履约规则变化',
+      decision: '让库存资源与对外权益表达分别变化。',
       objects: ['权益库存与调用策略', '原子 / 组合权益配置', '发放、短信、核销与订单'],
-      href: './prototypes/rights-management/omni/dist/index.html'
+      href: './prototypes/rights-management/omni/dist/index.html',
+      sectionHref: '#service'
     },
     operator: {
       label: 'BUSINESS PARTNER / 03',
       title: '运营商',
       description: '承载不同省份和专业公司的套餐标识与订购结果，办理成功后触发对应权益履约。',
+      change: '省份、套餐标识、合作关系与订购结果变化',
+      decision: '把外部订购结果翻译为内部可追踪的履约触发。',
       objects: ['运营商与策划关系', '套餐标识与订购结果', '办理成功后的发放触发'],
-      href: ''
+      href: '',
+      sectionHref: '#growth'
     },
     cel: {
       label: 'GROWTH / 04',
       title: '灵霄',
       description: '把运营商套餐配置为可推广产品，关联具体渠道，并通过三级策略控制办理边界。',
+      change: '运营商、套餐、渠道与办理策略变化',
+      decision: '限制逐层叠加，下层配置不能突破上层边界。',
       objects: ['运营商策划与套餐模板', '推广产品与合作方式', '运营商 / 套餐 / 渠道策略'],
-      href: './prototypes/rights-management/cel/frontend/dist/index.html'
+      href: './prototypes/rights-management/cel/frontend/dist/index.html',
+      sectionHref: '#growth'
     },
     channel: {
       label: 'ACQUISITION / 05',
       title: '推广渠道',
       description: '在授权范围内触达目标用户并提交套餐办理请求，受渠道身份、额度、时间和人群规则约束。',
+      change: '渠道身份、额度、时段与目标人群变化',
+      decision: '把渠道差异收束为可配置、可解释的办理边界。',
       objects: ['渠道身份与 AppId', '推广产品关系', '办理额度、时段与黑名单'],
-      href: ''
+      href: '',
+      sectionHref: '#growth'
     },
     user: {
       label: 'EXPERIENCE / 06',
       title: '用户触点',
       description: '将复杂权益配置翻译为领取、选择、兑换和结果查看，让用户只面对清晰的下一步操作。',
+      change: '领取方式、交付载体与结果状态变化',
+      decision: '后台规则越复杂，前台越要只呈现当前可执行动作。',
       objects: ['订单与权益列表', '手动领取与 N 选 M', '券码、二维码、直充与结果状态'],
-      href: ''
+      href: '',
+      sectionHref: '#experience'
     }
   };
 
@@ -85,9 +106,12 @@
     const label = document.getElementById('atlas-label');
     const title = document.getElementById('atlas-title');
     const description = document.getElementById('atlas-description');
+    const change = document.getElementById('atlas-change');
+    const decision = document.getElementById('atlas-decision');
     const list = document.getElementById('atlas-objects');
     const link = document.getElementById('atlas-evidence-link');
-    if (!nodes.length || !label || !title || !description || !list || !link) return;
+    const sectionLink = document.getElementById('atlas-section-link');
+    if (!nodes.length || !label || !title || !description || !change || !decision || !list || !link || !sectionLink) return;
 
     nodes.forEach((node) => {
       node.addEventListener('click', () => {
@@ -97,6 +121,8 @@
         label.textContent = content.label;
         title.textContent = content.title;
         description.textContent = content.description;
+        change.textContent = content.change;
+        decision.textContent = content.decision;
         list.replaceChildren(...content.objects.map((item) => {
           const li = document.createElement('li');
           li.textContent = item;
@@ -104,6 +130,7 @@
         }));
         link.hidden = !content.href;
         if (content.href) link.href = content.href;
+        sectionLink.href = content.sectionHref;
       }, { signal });
     });
   }
