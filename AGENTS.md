@@ -9,12 +9,15 @@
 ## Architecture
 
 - The public site is a static multi-page site built with HTML, CSS, and vanilla JavaScript.
-- Top-level pages share `style.css` and `script.js`.
-- `projects/` contains case-study pages plus three independent Vite prototypes:
-  - `projects/omni`: React
-  - `projects/depot`: React + TypeScript
-  - `projects/cel/frontend`: Vue
+- Top-level pages share assets from `assets/styles/` and `assets/scripts/`.
+- `projects/*.html` contains the public case-study pages.
+- `projects/prototypes/` groups supporting prototypes by case, including three independent Vite apps:
+  - `projects/prototypes/rights-management/omni`: React
+  - `projects/prototypes/rights-management/depot`: React + TypeScript
+  - `projects/prototypes/rights-management/cel/frontend`: Vue
+- `shoppingMall/`, `teld/`, and the legacy prototype folders under `projects/` contain generated redirect pages for old public URLs. Canonical prototype files live under `projects/prototypes/`.
 - Some prototype `dist/` directories are intentionally tracked because portfolio pages link to the built demos. Do not delete or regenerate them unless the related source is changed and verified.
+- After adding or renaming pure-HTML prototype pages, run `npm run generate:redirects` to refresh the compatibility paths.
 
 ## Working rules
 

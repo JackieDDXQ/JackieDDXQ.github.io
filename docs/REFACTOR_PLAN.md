@@ -85,3 +85,21 @@ Deliverable: a coherent portfolio with no knowingly broken public navigation.
 - Unified the navigation order and Chinese labels across all ten portfolio pages.
 - Verified the ten redesigned pages and shared assets over the local HTTP preview; all returned HTTP 200 and all referenced local files resolved.
 - Kept the redesign isolated to `redesign/v2`; no publishing configuration or `main` branch changes were made.
+
+## Repository structure update — 2026-08-22
+
+- Moved shared CSS and JavaScript into `assets/styles/` and `assets/scripts/`, with rights-management assets nested under `cases/`.
+- Kept top-level navigation pages and `projects/*.html` case-study URLs unchanged.
+- Consolidated all supporting prototypes under `projects/prototypes/`, grouped by the case they support.
+- Added generated compatibility pages for the former `projects/omni`, `projects/depot`, `projects/cel`, `projects/emall`, `shoppingMall`, and `teld` public paths.
+- Moved the multi-server Windows launcher into `scripts/` and updated it for the canonical prototype paths.
+- Added `projects/README.md` as the page-to-prototype map and `npm run generate:redirects` for maintaining legacy URLs.
+
+## Rights-management prototype unification — 2026-08-22
+
+- Audited the three supporting applications and documented 59 meaningful routes in `docs/RIGHTS_MANAGEMENT_PROTOTYPES.md`.
+- Added `/projects/prototypes/rights-management/index.html` as the human-readable prototype directory and linked it from the case evidence dialog.
+- Kept the existing React, React + TypeScript, and Vue architectures while introducing a shared visual foundation in `projects/prototypes/rights-management/shared/`.
+- Standardized the application shell, navigation language, colors, spacing, card, table, form, focus, responsive, and reduced-motion behavior across all three systems.
+- Exposed previously unreachable prototype work: the Omni write-off pages and the CEL member, app-config, user, role, and log pages.
+- Preserved the canonical entry URLs and generated legacy redirects; no publishing configuration was changed.

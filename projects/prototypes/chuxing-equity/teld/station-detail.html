@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 充电站详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 180px;
+            background-color: #fff;
+            color: #333;
+            border-right: 1px solid #e0e0e0;
+        }
+        .logo {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+        .menu {
+            list-style: none;
+        }
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .menu-item:hover {
+            background-color: #f5f7fa;
+        }
+        .menu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .submenu {
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .submenu.show {
+            display: block;
+        }
+        .submenu-item {
+            padding: 10px 20px 10px 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .submenu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .submenu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: white;
+            padding: 0 20px;
+            height: 64px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .breadcrumb {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #1890ff;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-actions span {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .header-actions span:hover {
+            background-color: #f0f0f0;
+        }
+        .content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-primary {
+            background-color: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+        .btn-primary:hover {
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #666;
+            border-color: #d9d9d9;
+        }
+        .btn-secondary:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .btn-success {
+            background-color: #52c41a;
+            color: white;
+            border-color: #52c41a;
+        }
+        .btn-success:hover {
+            background-color: #73d13d;
+            border-color: #73d13d;
+        }
+        .section {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #333;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        th {
+            background-color: #fafafa;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status-tag {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .status-normal {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .status-maintenance {
+            background-color: #fff7e6;
+            color: #faad14;
+            border: 1px solid #ffd591;
+        }
+        .status-offline {
+            background-color: #fff2f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+        .status-building {
+            background-color: #f0f5ff;
+            color: #1890ff;
+            border: 1px solid #adc6ff;
+        }
+        .status-idle {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .status-charging {
+            background-color: #e6f7ff;
+            color: #1890ff;
+            border: 1px solid #91d5ff;
+        }
+        .status-fault {
+            background-color: #fff2f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+        .status-reserved {
+            background-color: #f9f0ff;
+            color: #722ed1;
+            border: 1px solid #d3adf7;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20system%20logo%20with%20blue%20and%20green%20colors&image_size=square" alt="管理后台">
+                <span>管理后台</span>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active">
+                    示例-充电品牌
+                    <ul class="submenu show">
+                        <li class="submenu-item">权益管理</li>
+                        <li class="submenu-item">订购管理</li>
+                        <li class="submenu-item">订单管理</li>
+                        <li class="submenu-item active">站点管理</li>
+                        <li class="submenu-item">用户管理</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="breadcrumb">
+                    首页 / 示例-充电品牌 / 站点管理 / 充电站详情
+                </div>
+                <div class="header-actions">
+                    <span>🔍</span>
+                    <span>📝</span>
+                    <span>🔔</span>
+                    <span>👤</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">电站详情</div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="window.location.href='station-management.html'">返回列表</button>
+                    </div>
+                </div>
+                
+                <!-- 基础核心信息 -->
+                <div class="section">
+                    <div class="section-title">1. 基础核心信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">电站名称</div>
+                            <div class="info-value">北京朝阳充电站</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">电站ID</div>
+                            <div class="info-value">ST001</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">电站状态</div>
+                            <div class="info-value"><span class="status-tag status-normal">正常</span></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">运营商ID</div>
+                            <div class="info-value">OP001</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">设备所属方ID</div>
+                            <div class="info-value">OW001</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">电站类型</div>
+                            <div class="info-value">公共</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">国家代码</div>
+                            <div class="info-value">CN</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">省市辖区编码</div>
+                            <div class="info-value">110105</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">详细地址</div>
+                            <div class="info-value">北京市朝阳区建国路88号</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">经度</div>
+                            <div class="info-value">116.4668</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">纬度</div>
+                            <div class="info-value">39.9042</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 运营服务信息 -->
+                <div class="section">
+                    <div class="section-title">2. 运营服务信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">车位数量</div>
+                            <div class="info-value">20</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">车位楼层信息</div>
+                            <div class="info-value">地下一层</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">营业时间</div>
+                            <div class="info-value">24小时</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">站点引导</div>
+                            <div class="info-value">从建国路入口进入，地下一层B区</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">适配车型</div>
+                            <div class="info-value">所有电动车型</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">是否支持预约</div>
+                            <div class="info-value">是</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">电站是否带地锁</div>
+                            <div class="info-value">是</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">支付方式</div>
+                            <div class="info-value">微信、支付宝、银行卡</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 费用核心信息 -->
+                <div class="section">
+                    <div class="section-title">3. 费用核心信息</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>费用类型</th>
+                                    <th>峰时</th>
+                                    <th>平时</th>
+                                    <th>谷时</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>充电电费率</td>
+                                    <td>1.2元/度</td>
+                                    <td>0.8元/度</td>
+                                    <td>0.5元/度</td>
+                                </tr>
+                                <tr>
+                                    <td>服务费率</td>
+                                    <td>0.3元/度</td>
+                                    <td>0.2元/度</td>
+                                    <td>0.1元/度</td>
+                                </tr>
+                                <tr>
+                                    <td>停车费</td>
+                                    <td colspan="3">前2小时免费，超过2小时每小时5元</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div class="section">
+                    <div class="section-title">4. 联系信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">站点电话</div>
+                            <div class="info-value">010-12345678</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">服务电话</div>
+                            <div class="info-value">400-123-4567</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 充电桩详情 -->
+                <div class="section">
+                    <div class="section-title">5. 充电桩详情</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>充电桩编码</th>
+                                    <th>设备名称</th>
+                                    <th>设备类型</th>
+                                    <th>设备总功率</th>
+                                    <th>设备生产日期</th>
+                                    <th>额定功率</th>
+                                    <th>额定电压/电流</th>
+                                    <th>国家标准</th>
+                                    <th>车位号</th>
+                                    <th>设备所属方</th>
+                                    <th>是否带地锁</th>
+                                    <th>充电接口实时状态</th>
+                                    <th>车位状态</th>
+                                    <th>地锁状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>EQ001</td>
+                                    <td>直流充电桩1</td>
+                                    <td>直流</td>
+                                    <td>120kW</td>
+                                    <td>2023-01-01</td>
+                                    <td>60kW</td>
+                                    <td>750V/80A</td>
+                                    <td>2015</td>
+                                    <td>B1-01</td>
+                                    <td>特来电</td>
+                                    <td>是</td>
+                                    <td><span class="status-tag status-idle">空闲</span></td>
+                                    <td><span class="status-tag status-idle">空闲</span></td>
+                                    <td>解锁</td>
+                                </tr>
+                                <tr>
+                                    <td>EQ002</td>
+                                    <td>直流充电桩2</td>
+                                    <td>直流</td>
+                                    <td>120kW</td>
+                                    <td>2023-01-01</td>
+                                    <td>60kW</td>
+                                    <td>750V/80A</td>
+                                    <td>2015</td>
+                                    <td>B1-02</td>
+                                    <td>特来电</td>
+                                    <td>是</td>
+                                    <td><span class="status-tag status-charging">充电中</span></td>
+                                    <td><span class="status-tag status-offline">占用</span></td>
+                                    <td>上锁</td>
+                                </tr>
+                                <tr>
+                                    <td>EQ003</td>
+                                    <td>交流充电桩1</td>
+                                    <td>交流</td>
+                                    <td>7kW</td>
+                                    <td>2023-01-01</td>
+                                    <td>7kW</td>
+                                    <td>220V/32A</td>
+                                    <td>2011</td>
+                                    <td>B1-03</td>
+                                    <td>特来电</td>
+                                    <td>否</td>
+                                    <td><span class="status-tag status-fault">故障</span></td>
+                                    <td><span class="status-tag status-idle">空闲</span></td>
+                                    <td>解锁</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                Copyright © 2024 管理后台 All rights reserved.
+            </div>
+        </div>
+    </div>
+    <script>
+        // 菜单展开/折叠功能
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const submenu = this.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('show');
+                }
+            });
+        });
+        
+        // 菜单点击事件处理
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有菜单项的active类
+                document.querySelectorAll('.menu-item, .submenu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+                // 添加当前菜单项的active类
+                this.classList.add('active');
+                this.closest('.menu-item').classList.add('active');
+                
+                // 处理页面跳转
+                const menuText = this.textContent.trim();
+                if (menuText === '订单管理') {
+                    window.location.href = 'order-management-charging.html';
+                } else if (menuText === '订购管理') {
+                    window.location.href = 'order-management.html';
+                } else if (menuText === '站点管理') {
+                    window.location.href = 'station-management.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

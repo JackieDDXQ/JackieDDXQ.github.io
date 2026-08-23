@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 充电订单详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 180px;
+            background-color: #fff;
+            color: #333;
+            border-right: 1px solid #e0e0e0;
+        }
+        .logo {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+        .menu {
+            list-style: none;
+        }
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .menu-item:hover {
+            background-color: #f5f7fa;
+        }
+        .menu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .submenu {
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .submenu.show {
+            display: block;
+        }
+        .submenu-item {
+            padding: 10px 20px 10px 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .submenu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .submenu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: white;
+            padding: 0 20px;
+            height: 64px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .breadcrumb {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #1890ff;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-actions span {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .header-actions span:hover {
+            background-color: #f0f0f0;
+        }
+        .content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-primary {
+            background-color: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+        .btn-primary:hover {
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #666;
+            border-color: #d9d9d9;
+        }
+        .btn-secondary:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .btn-success {
+            background-color: #52c41a;
+            color: white;
+            border-color: #52c41a;
+        }
+        .btn-success:hover {
+            background-color: #73d13d;
+            border-color: #73d13d;
+        }
+        .btn-danger {
+            background-color: #ff4d4f;
+            color: white;
+            border-color: #ff4d4f;
+        }
+        .btn-danger:hover {
+            background-color: #ff7875;
+            border-color: #ff7875;
+        }
+        .section {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #333;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        th {
+            background-color: #fafafa;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status-tag {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .status-success {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .status-processing {
+            background-color: #fff7e6;
+            color: #faad14;
+            border: 1px solid #ffd591;
+        }
+        .status-failed {
+            background-color: #fff2f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+        .status-cancelled {
+            background-color: #f0f0f0;
+            color: #999;
+            border: 1px solid #d9d9d9;
+        }
+        .status-pending {
+            background-color: #e6f7ff;
+            color: #1890ff;
+            border: 1px solid #91d5ff;
+        }
+        .status-charging {
+            background-color: #e6f7ff;
+            color: #1890ff;
+            border: 1px solid #91d5ff;
+        }
+        .status-settling {
+            background-color: #f9f0ff;
+            color: #722ed1;
+            border: 1px solid #d3adf7;
+        }
+        .status-refunding {
+            background-color: #fff7e6;
+            color: #faad14;
+            border: 1px solid #ffd591;
+        }
+        .status-prepaid {
+            background-color: #e6f7ff;
+            color: #1890ff;
+            border: 1px solid #91d5ff;
+        }
+        .status-refund-pending {
+            background-color: #fff7e6;
+            color: #faad14;
+            border: 1px solid #ffd591;
+        }
+        .status-completed {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20system%20logo%20with%20blue%20and%20green%20colors&image_size=square" alt="管理后台">
+                <span>管理后台</span>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active">
+                    示例-充电品牌
+                    <ul class="submenu show">
+                        <li class="submenu-item">权益管理</li>
+                        <li class="submenu-item">订购管理</li>
+                        <li class="submenu-item active">订单管理</li>
+                        <li class="submenu-item">站点管理</li>
+                        <li class="submenu-item">用户管理</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="breadcrumb">
+                    首页 / 示例-充电品牌 / 订单管理 / 订单详情
+                </div>
+                <div class="header-actions">
+                    <span>🔍</span>
+                    <span>📝</span>
+                    <span>🔔</span>
+                    <span>👤</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">充电订单详情</div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="window.location.href='order-management-charging.html'">返回列表</button>
+                    </div>
+                </div>
+                
+                <!-- 订单基本信息 -->
+                <div class="section">
+                    <div class="section-title">1. 订单基本信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">订单编号</div>
+                            <div class="info-value">2037354074599178240</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">手机号</div>
+                            <div class="info-value">13800000101</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">订单状态</div>
+                            <div class="info-value"><span class="status-tag status-success">已完成</span></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">创建时间</div>
+                            <div class="info-value">2026-03-31 10:20:38</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">完成时间</div>
+                            <div class="info-value">2026-03-31 11:07:30</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 费用明细 -->
+                <div class="section">
+                    <div class="section-title">2. 费用明细</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>费用类型</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>金额</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>电费</td>
+                                    <td>1.2元/kWh</td>
+                                    <td>15.5 kWh</td>
+                                    <td>¥18.60</td>
+                                    <td>峰时电价</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td>└ 电费折扣</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-¥2.45</td>
+                                    <td>特来电95折电费折扣卡</td>
+                                </tr>
+                                <tr>
+                                    <td>服务费</td>
+                                    <td>0.3元/kWh</td>
+                                    <td>15.5 kWh</td>
+                                    <td>¥4.65</td>
+                                    <td>服务费</td>
+                                </tr>
+                                <tr style="font-weight: bold;">
+                                    <td>优惠前总金额</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>¥23.25</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>整单-满减券</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-¥5.00</td>
+                                    <td>特来电满20元减5元充电权益</td>
+                                </tr>
+                                <tr style="font-weight: bold;">
+                                    <td>总计</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>¥15.80</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 支付结算信息 -->
+                <div class="section">
+                    <div class="section-title">3. 支付结算信息</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>支付方式</th>
+                                    <th>支付订单号</th>
+                                    <th>预付金额</th>
+                                    <th>预付时间</th>
+                                    <th>实付金额</th>
+                                    <th>退款发起时间</th>
+                                    <th>退款金额</th>
+                                    <th>退款到账时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>和包支付</td>
+                                    <td>HB20260331110545123456789</td>
+                                    <td>¥20.00</td>
+                                    <td>2026-03-31 10:20:38</td>
+                                    <td>¥15.80</td>
+                                    <td>2026-03-31 11:07:00</td>
+                                    <td>¥4.20</td>
+                                    <td>2026-03-31 11:07:30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 充电详情 -->
+                <div class="section">
+                    <div class="section-title">4. 充电详情</div>
+                    
+                    <!-- 站场/设备信息 -->
+                    <div class="section-subtitle" style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 12px; margin-top: 16px;">站场/设备信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">充电站名称</div>
+                            <div class="info-value">北京朝阳充电站</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">充电站地址</div>
+                            <div class="info-value">北京市朝阳区建国路88号</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">设备编码</div>
+                            <div class="info-value">EQ001</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">设备类型</div>
+                            <div class="info-value">直流充电桩</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">额定功率</div>
+                            <div class="info-value">60kW</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">车位号</div>
+                            <div class="info-value">B1-01</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 全量时间信息 -->
+                    <div class="section-subtitle" style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 12px; margin-top: 24px;">全量时间信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">订单创建时间</div>
+                            <div class="info-value">2026-03-31 10:20:38</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">支付完成时间</div>
+                            <div class="info-value">2026-03-31 10:20:38</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">开始充电时间</div>
+                            <div class="info-value">2026-03-31 10:20:38</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">结束充电时间</div>
+                            <div class="info-value">2026-03-31 11:05:45</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">退款发起时间</div>
+                            <div class="info-value">2026-03-31 11:07:00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">退款到账时间</div>
+                            <div class="info-value">2026-03-31 11:07:30</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 计费策略信息 -->
+                    <div class="section-subtitle" style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 12px; margin-top: 24px;">计费策略信息</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">场站计费策略</div>
+                            <div class="info-value">峰谷电价策略</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">计费时段数</div>
+                            <div class="info-value">2</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 充电量 & 费用核心数据 -->
+                    <div class="section-subtitle" style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 12px; margin-top: 24px;">充电量 & 费用核心数据</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">累计充电量（度）</div>
+                            <div class="info-value">15.500</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">总电费（元）</div>
+                            <div class="info-value">16.15</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">总服务费（元）</div>
+                            <div class="info-value">4.65</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">累计总金额（元）</div>
+                            <div class="info-value">20.80</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 充电明细信息 -->
+                    <div class="section-subtitle" style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 12px; margin-top: 24px;">充电明细信息</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>时段起止时间</th>
+                                    <th>充电量</th>
+                                    <th>时段电费</th>
+                                    <th>时段服务费</th>
+                                    <th>时段总费用</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2026-03-31 10:20:38 - 2026-03-31 11:00:00</td>
+                                    <td>14.2 kWh</td>
+                                    <td>¥17.04</td>
+                                    <td>¥4.26</td>
+                                    <td>¥21.30</td>
+                                </tr>
+                                <tr>
+                                    <td>2026-03-31 11:00:00 - 2026-03-31 11:05:45</td>
+                                    <td>1.3 kWh</td>
+                                    <td>¥1.17</td>
+                                    <td>¥0.39</td>
+                                    <td>¥1.56</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 关联订单信息 -->
+                <div class="section">
+                    <div class="section-title">5. 关联订单信息</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>订单编号</th>
+                                    <th>订单类型</th>
+                                    <th>金额</th>
+                                    <th>订单状态</th>
+                                    <th>创建时间</th>
+                                    <th>完成时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2037354074599178241</td>
+                                    <td>超时占用费</td>
+                                    <td>¥10.00</td>
+                                    <td><span class="status-tag status-success">已支付</span></td>
+                                    <td>2026-03-31 11:30:00</td>
+                                    <td>2026-03-31 11:35:00</td>
+                                    <td class="actions">
+                                        <button class="btn btn-secondary" onclick="window.location.href='order-detail-occupation.html'">详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                Copyright © 2024 管理后台 All rights reserved.
+            </div>
+        </div>
+    </div>
+    <script>
+        // 菜单展开/折叠功能
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const submenu = this.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('show');
+                }
+            });
+        });
+        
+        // 菜单点击事件处理
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有菜单项的active类
+                document.querySelectorAll('.menu-item, .submenu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+                // 添加当前菜单项的active类
+                this.classList.add('active');
+                this.closest('.menu-item').classList.add('active');
+                
+                // 处理页面跳转
+                const menuText = this.textContent.trim();
+                if (menuText === '订单管理') {
+                    window.location.href = 'order-management-charging.html';
+                } else if (menuText === '订购管理') {
+                    window.location.href = 'order-management.html';
+                } else if (menuText === '站点管理') {
+                    window.location.href = 'station-management.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

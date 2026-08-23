@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄金会员套餐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #E8593C;
+            --primary-light: #F5925E;
+            --primary-dark: #D64525;
+            --header-gradient: linear-gradient(145deg, #D64525 0%, #E8593C 45%, #F5925E 100%);
+            --bg-color: #FFF6F2;
+            --surface: #FFFFFF;
+            --badge-bg: rgba(232,89,60,0.1);
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .header-banner {
+            background: var(--header-gradient);
+            padding: 45px 20px 35px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 28px 28px;
+        }
+        
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .back-btn svg { width: 16px; height: 16px; color: #666; }
+        
+        .banner-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .banner-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .price-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .current-price {
+            font-size: 52px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .current-price .unit {
+            font-size: 22px;
+            margin-left: 3px;
+        }
+        
+        .original-price {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+        
+        .discount-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .period {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 25px 20px;
+            padding-bottom: 100px;
+        }
+        
+        .benefits-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            color: var(--text-primary);
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            margin-right: 10px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .benefit-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(233, 93, 122, 0.08);
+            border: 1px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(233, 93, 122, 0.12);
+        }
+        
+        .benefit-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            box-shadow: 0 4px 10px rgba(233, 93, 122, 0.3);
+        }
+        
+        .benefit-content {
+            flex: 1;
+        }
+        
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        
+        .benefit-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        
+        .description-section {
+            margin-bottom: 25px;
+        }
+        
+        .description-content {
+            background-color: var(--bg-color);
+            padding: 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .description-content p {
+            margin-bottom: 10px;
+        }
+        
+        .description-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-top: 1px solid var(--secondary-color);
+            padding: 15px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 15px rgba(233, 93, 122, 0.08);
+        }
+        
+        .price-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .total-label {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .total-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .buy-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 16px rgba(233, 93, 122, 0.35);
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(233, 93, 122, 0.45);
+        }
+        
+        .buy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .security-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-banner">
+            <div class="back-btn" onclick="window.location.href='index.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </div>
+            <div class="banner-title">黄金会员</div>
+            <div class="banner-subtitle">尊享多重特权，购物更省心</div>
+            <div class="price-container">
+                <span class="current-price">¥19.9<span class="unit">/月</span></span>
+                <span class="original-price">¥29.9/月</span>
+                <span class="discount-tag">立省10元</span>
+            </div>
+            <div class="period">连续包月 · 随时可取消</div>
+        </div>
+        
+        <div class="content">
+            <div class="benefits-section">
+                <div class="section-title">会员专享权益</div>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💸</div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">购物优惠</div>
+                            <div class="benefit-desc">全场商品9折优惠，每月赠送满100减20优惠券</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🚚</div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">免费配送</div>
+                            <div class="benefit-desc">每月3次免费配送服务，不限订单金额</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">👑</div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">专属客服</div>
+                            <div class="benefit-desc">24小时专属客服，优先处理您的问题</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎁</div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">新品试用</div>
+                            <div class="benefit-desc">优先参与新品试用活动，抢先体验新功能</div>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌟</div>
+                        <div class="benefit-content">
+                            <div class="benefit-title">积分加倍</div>
+                            <div class="benefit-desc">购物获得双倍积分，积分可兑换更多好礼</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-section">
+                <div class="section-title">订购说明</div>
+                <div class="description-content">
+                    <p>1. 会员有效期为30天，自开通之日起计算</p>
+                    <p>2. 开通会员后，系统将自动续费，您可以随时取消</p>
+                    <p>3. 取消续费后，会员权益将在当前周期结束后停止</p>
+                </div>
+            </div>
+            
+            <div class="security-info">
+                🔒 安全支付 · 随时退款 · 隐私保护
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="price-info">
+                <div class="total-label">合计</div>
+                <div class="total-price">¥19.9</div>
+            </div>
+            <button class="buy-btn" onclick="alert('支付成功！'); window.location.href='benefit-detail.html'">立即开通</button>
+        </div>
+    </div>
+</body>
+</html>
