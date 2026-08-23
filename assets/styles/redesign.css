@@ -49,8 +49,8 @@
   --font-latin: var(--font-serif);
   --font-body: var(--font-serif);
   --font-mono: var(--font-serif);
-  --type-page-title: clamp(3rem, 6vw, 6rem);
-  --type-case-title: clamp(3rem, 6vw, 6.75rem);
+  --type-page-title: clamp(2.7rem, 4.6vw, 4.6rem);
+  --type-case-title: clamp(2.9rem, 4.8vw, 4.8rem);
 }
 
 body.interior-page {
@@ -408,7 +408,7 @@ body.home-page {
   margin: 0;
   color: var(--demo-white);
   font-family: var(--font-serif);
-  font-size: clamp(4.2rem, 9.35vw, 10.4rem);
+  font-size: clamp(3.1rem, 5.8vw, 5rem);
   font-weight: 600;
   line-height: 0.96;
   letter-spacing: -0.07em;
@@ -554,7 +554,7 @@ body.home-page {
 
 .home-page .featured-case__copy h2 {
   max-width: 9ch;
-  font-size: clamp(3rem, 6.4vw, 7.2rem);
+  font-size: clamp(2.65rem, 4.6vw, 4.7rem);
   font-weight: 600;
   line-height: 1.03;
 }
@@ -643,7 +643,7 @@ body.home-page {
 }
 
 .home-page .profile-career h2 {
-  font-size: clamp(3rem, 5vw, 5.8rem);
+  font-size: clamp(2.5rem, 3.9vw, 3.9rem);
   font-weight: 600;
 }
 
@@ -688,7 +688,7 @@ body.home-page {
   max-width: 16ch;
   margin: 0;
   color: var(--demo-white);
-  font-size: clamp(2.45rem, 5vw, 5.7rem);
+  font-size: clamp(2.15rem, 3.8vw, 3.9rem);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.055em;
@@ -786,7 +786,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 .capability-section .section-title,
 .education-section .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  font-size: clamp(2.2rem, 4.2vw, 4.2rem);
   font-weight: 600;
   line-height: 1;
 }
@@ -831,7 +831,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 
 .experience-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.3rem, 4.6vw, 5rem);
+  font-size: clamp(2.15rem, 4vw, 4.1rem);
   font-weight: 600;
 }
 
@@ -889,7 +889,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 
 .projects-grid .project-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.6vw, 4.2rem);
+  font-size: clamp(1.7rem, 3vw, 3.25rem);
   font-weight: 600;
 }
 
@@ -1050,7 +1050,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 }
 
 .working-method-section .section-title {
-  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  font-size: clamp(2.2rem, 4.2vw, 4.2rem);
   font-weight: 600;
   line-height: 1;
 }
@@ -1066,7 +1066,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 .working-method-intro h3 {
   margin: 0;
   color: var(--demo-white);
-  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  font-size: clamp(2.5rem, 4.4vw, 4.55rem);
   font-weight: 600;
   line-height: 1.18;
   letter-spacing: -0.055em;
@@ -1127,7 +1127,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 .contact-page-section .contact-text h3 {
   color: var(--demo-white);
   font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
-  font-size: clamp(3rem, 7vw, 7rem);
+  font-size: clamp(2.6rem, 4.7vw, 4.7rem);
   font-weight: 600;
 }
 
@@ -1248,7 +1248,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 .project-page .result-value {
   color: var(--demo-white);
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 5.5rem);
+  font-size: clamp(2.2rem, 4vw, 4.2rem);
 }
 
 .project-page .prototype-link {
@@ -1469,7 +1469,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 .telecom-case .tc-system-view .tc-atlas__detail h3 {
   margin: 1.25rem 0 1rem;
   color: var(--demo-white);
-  font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+  font-size: clamp(2.2rem, 3.6vw, 3.5rem);
   font-weight: 600;
   line-height: 1;
 }
@@ -1539,7 +1539,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
   }
 
   .home-page .demo-hero__title {
-    font-size: clamp(4rem, 13vw, 7.2rem);
+    font-size: clamp(3rem, 6.2vw, 4.8rem);
   }
 
   .home-page .archive-hero__statement {
@@ -1629,7 +1629,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
   }
 
   .home-page .demo-hero__title {
-    font-size: clamp(3.2rem, 16vw, 5.4rem);
+    font-size: clamp(2.65rem, 12vw, 3.75rem);
     line-height: 1.02;
   }
 
@@ -1774,7 +1774,7 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
   }
 
   .working-method-intro h3 {
-    font-size: clamp(2.6rem, 12vw, 4.4rem);
+    font-size: clamp(2.35rem, 10vw, 3.45rem);
   }
 
   .working-method-grid {

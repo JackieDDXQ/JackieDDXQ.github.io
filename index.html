@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/site.css">
     <link rel="stylesheet" href="assets/styles/redesign.css?v=20260823-2">
+    <link rel="stylesheet" href="assets/styles/motion.css?v=20260823-1">
 </head>
 <body class="home-page">
     <div class="grain" aria-hidden="true"></div>
@@ -37,29 +38,31 @@
     </header>
 
     <main id="main-content" class="main-content archive-home">
-        <section class="archive-hero demo-hero" aria-labelledby="hero-title">
+        <section class="archive-hero demo-hero" aria-labelledby="hero-title" data-hero-scene>
             <div class="demo-hero__meta" aria-label="个人信息">
                 <span>JACKIE HOU</span>
                 <span>产品经理</span>
                 <span>BEIJING · CN</span>
             </div>
-            <div class="archive-hero__copy">
-                <p class="archive-kicker">PRODUCT MANAGER <span>/</span> COMPLEX SYSTEMS</p>
-                <h1 id="hero-title" class="archive-hero__title demo-hero__title">
-                    <span class="demo-title-line">让复杂，</span>
-                    <span class="demo-title-line demo-title-line--middle">成为可以运行的</span>
-                    <span class="demo-title-line demo-title-line--accent">系统。</span>
-                </h1>
-                <div class="archive-hero__statement">
-                    <p class="archive-hero__lead">从模糊问题到清晰结构</p>
-                    <p class="archive-hero__body">我关注多角色、多链路和边界不清的产品问题，通过产品架构、规则设计与协作机制，让复杂业务从判断走向落地。</p>
-                    <div class="archive-actions"><a class="text-link text-link--primary" href="#featured-work">查看代表项目 <span aria-hidden="true">↘</span></a><a class="text-link" href="about.html">了解我 <span aria-hidden="true">→</span></a></div>
+            <div class="demo-hero__layout">
+                <div class="archive-hero__copy" data-hero-layer="copy">
+                    <p class="archive-kicker">PRODUCT MANAGER <span>/</span> COMPLEX SYSTEMS</p>
+                    <h1 id="hero-title" class="archive-hero__title demo-hero__title">
+                        <span class="demo-title-line">让复杂，</span>
+                        <span class="demo-title-line demo-title-line--middle">成为可以运行的</span>
+                        <span class="demo-title-line demo-title-line--accent">系统。</span>
+                    </h1>
+                    <div class="archive-hero__statement">
+                        <p class="archive-hero__lead">从模糊问题到清晰结构</p>
+                        <p class="archive-hero__body">我关注多角色、多链路和边界不清的产品问题，通过产品架构、规则设计与协作机制，让复杂业务从判断走向落地。</p>
+                        <div class="archive-actions"><a class="text-link text-link--primary" href="#featured-work">查看代表项目 <span aria-hidden="true">↘</span></a><a class="text-link" href="about.html">了解我 <span aria-hidden="true">→</span></a></div>
+                    </div>
                 </div>
             </div>
-            <span class="demo-hero__index" aria-hidden="true">01 / 05</span>
+            <div class="demo-hero__footer" aria-hidden="true"><span>01 / 05</span><span>SCROLL TO EXPLORE</span></div>
         </section>
 
-        <section class="home-statement section-block" aria-labelledby="statement-title" data-reveal>
+        <section class="home-statement section-block" aria-labelledby="statement-title" data-reveal data-motion-section="statement">
             <div class="archive-section-heading"><p><span>00</span> Working statement</p><p>一种工作方式</p></div>
             <div class="home-statement__grid">
                 <h2 id="statement-title">我关注的不是<br>功能本身，<br>而是功能背后的<br><em>角色、规则与关系。</em></h2>
@@ -72,9 +75,24 @@
                     </dl>
                 </div>
             </div>
+            <div class="demo-hero__visual home-statement__visual" aria-hidden="true" data-statement-visual>
+                <span class="demo-hero__visual-word">STRUCTURE</span>
+                <div class="demo-hero__visual-frame">
+                    <span class="demo-hero__visual-index">SYSTEM / 01</span>
+                    <div class="demo-hero__visual-map">
+                        <span class="demo-hero__visual-node">角色</span>
+                        <i></i>
+                        <span class="demo-hero__visual-node demo-hero__visual-node--accent">规则</span>
+                        <i></i>
+                        <span class="demo-hero__visual-node">关系</span>
+                    </div>
+                    <p>FROM AMBIGUITY<br>TO AN OPERABLE SYSTEM</p>
+                </div>
+                <span class="demo-hero__visual-caption">PRODUCT ARCHITECTURE / RULE DESIGN</span>
+            </div>
         </section>
 
-        <section id="featured-work" class="featured-case section-block" aria-labelledby="featured-title" data-reveal>
+        <section id="featured-work" class="featured-case section-block" aria-labelledby="featured-title" data-reveal data-motion-section="featured">
             <div class="archive-section-heading"><p><span>01</span> Featured case</p><p>From fragmented rules to a reusable system</p></div>
             <a class="featured-case__link" href="projects/rights-management.html">
                 <div class="featured-case__copy">
@@ -84,7 +102,7 @@
                     <div class="featured-case__result"><span>关键判断</span><strong>按变化来源拆分供给、服务、增长与用户触点，降低上下游直接耦合。</strong></div>
                     <span class="featured-case__cta">View full case <i aria-hidden="true">→</i></span>
                 </div>
-                <div class="featured-architecture" aria-hidden="true">
+                <div class="featured-architecture" aria-hidden="true" data-motion-architecture>
                     <div class="featured-architecture__label">SYSTEM / 01</div>
                     <div class="architecture-flow"><div class="architecture-node architecture-node--cloud"><span>01</span><strong>云仓</strong><small>供给标准化</small></div><span class="architecture-connector"></span><div class="architecture-node architecture-node--omni"><span>02</span><strong>万象</strong><small>权益配置履约</small></div><span class="architecture-connector"></span><div class="architecture-node architecture-node--cel"><span>03</span><strong>灵霄</strong><small>套餐渠道增长</small></div></div>
                     <div class="architecture-parties"><span>供应商</span><span>平台</span><span>运营商</span><span>用户</span></div>
@@ -92,7 +110,7 @@
             </a>
         </section>
 
-        <section id="project-index" class="project-archive section-block" aria-labelledby="project-index-title">
+        <section id="project-index" class="project-archive section-block" aria-labelledby="project-index-title" data-motion-section="archive">
             <div class="archive-section-heading" data-reveal><p><span>02</span> Selected work</p><p>Product systems across platforms and growth</p></div>
             <h2 id="project-index-title" class="visually-hidden">项目索引</h2>
             <div class="project-archive__layout">
@@ -133,6 +151,10 @@
     </main>
 
     <footer class="site-footer footer"><div class="footer-content"><p>© 2026 Jackie Hou</p><p class="footer-credit">Product systems, documented with intent.</p><a href="#main-content">Back to top ↑</a></div></footer>
+    <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
     <script src="assets/scripts/site.js" defer></script>
+    <script src="assets/scripts/motion.js?v=20260823-1" defer></script>
 </body>
 </html>
