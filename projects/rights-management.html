@@ -236,13 +236,14 @@
                         <div class="tc-prose"><p>用户不需要理解权益库存或履约策略，只关心拥有什么、是否需要操作、可以选择什么、是否已经到账，以及失败后怎么办。因此领取端不按后台对象展示，而按用户状态组织信息。</p></div>
                         <div class="tc-matrix tc-ui-embed" data-reveal>
                             <table>
-                                <thead><tr><th>后台配置</th><th>用户端表达</th><th>关键状态</th></tr></thead>
+                                <caption><span>CONFIGURATION → EXPERIENCE</span>后台规则如何转译为用户下一步</caption>
+                                <thead><tr><th scope="col">后台配置</th><th scope="col">用户端表达</th><th scope="col">关键状态</th></tr></thead>
                                 <tbody>
-                                    <tr><td>原子权益 + 自动下发</td><td>无需领取，直接查看结果</td><td>处理中 / 成功 / 失败</td></tr>
-                                    <tr><td>原子权益 + 手动领取</td><td>展示“去领取”操作</td><td>未领取 / 已领取 / 过期</td></tr>
-                                    <tr><td>组合权益 + 全部发放</td><td>逐项展示每个权益结果</td><td>部分成功 / 全部完成</td></tr>
-                                    <tr><td>组合权益 + N 选 M</td><td>进入详情完成选择</td><td>待选择 / 已确认</td></tr>
-                                    <tr><td>券码 / 二维码 / 直充</td><td>展示对应兑换信息或到账状态</td><td>可使用 / 已使用 / 已作废</td></tr>
+                                    <tr><td data-index="01" data-label="后台配置">原子权益 + 自动下发</td><td data-label="用户端表达">无需领取，直接查看结果</td><td data-label="关键状态"><span class="tc-state-sequence">处理中 / 成功 / 失败</span></td></tr>
+                                    <tr><td data-index="02" data-label="后台配置">原子权益 + 手动领取</td><td data-label="用户端表达">展示“去领取”操作</td><td data-label="关键状态"><span class="tc-state-sequence">未领取 / 已领取 / 过期</span></td></tr>
+                                    <tr><td data-index="03" data-label="后台配置">组合权益 + 全部发放</td><td data-label="用户端表达">逐项展示每个权益结果</td><td data-label="关键状态"><span class="tc-state-sequence">部分成功 / 全部完成</span></td></tr>
+                                    <tr><td data-index="04" data-label="后台配置">组合权益 + N 选 M</td><td data-label="用户端表达">进入详情完成选择</td><td data-label="关键状态"><span class="tc-state-sequence">待选择 / 已确认</span></td></tr>
+                                    <tr><td data-index="05" data-label="后台配置">券码 / 二维码 / 直充</td><td data-label="用户端表达">展示对应兑换信息或到账状态</td><td data-label="关键状态"><span class="tc-state-sequence">可使用 / 已使用 / 已作废</span></td></tr>
                                 </tbody>
                             </table>
                         </div>

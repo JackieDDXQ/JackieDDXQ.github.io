@@ -623,16 +623,6 @@ body.home-page {
   --demo-accent-soft: rgba(142, 180, 159, 0.08);
 }
 
-.home-page .project-index-list > li:nth-child(3) {
-  --demo-accent: #c7a16d;
-  --demo-accent-soft: rgba(199, 161, 109, 0.08);
-}
-
-.home-page .project-index-list > li:nth-child(4) {
-  --demo-accent: #ada398;
-  --demo-accent-soft: rgba(173, 163, 152, 0.08);
-}
-
 .home-page .project-preview__frame::before,
 .home-page .featured-architecture::before {
   opacity: 0.32;
