@@ -392,7 +392,7 @@ body.home-page {
 
 .home-statement__grid h2 {
   max-width: 18ch;
-  font-size: clamp(2.15rem, 3.8vw, 3.9rem);
+  font-size: clamp(1.9rem, 3.1vw, 3.2rem);
   line-height: 1.3;
   letter-spacing: -0.04em;
 }
@@ -414,7 +414,7 @@ body.home-page {
 
 .home-statement--compact .home-statement__grid h2 {
   max-width: 19ch;
-  font-size: clamp(2.2rem, 3.35vw, 3.45rem);
+  font-size: clamp(1.9rem, 2.8vw, 2.85rem);
   line-height: 1.28;
 }
 
@@ -461,7 +461,7 @@ body.home-page {
 
 .home-page .featured-case__copy h2 {
   max-width: 8em;
-  font-size: clamp(2.65rem, 4.6vw, 4.7rem);
+  font-size: clamp(2.25rem, 3.8vw, 3.9rem);
   line-height: 1.12;
   letter-spacing: -0.045em;
 }
@@ -530,7 +530,7 @@ body.home-page {
 .featured-projects__more-heading p strong {
   color: var(--home-light);
   font-family: var(--font-serif);
-  font-size: clamp(1.55rem, 2.4vw, 2.35rem);
+  font-size: clamp(1.35rem, 2vw, 2rem);
   font-weight: 500;
   line-height: 1.1;
 }
@@ -630,7 +630,7 @@ body.home-page {
 }
 
 .home-page .profile-career h2 {
-  font-size: clamp(2.5rem, 3.9vw, 3.9rem);
+  font-size: clamp(2.1rem, 3.2vw, 3.2rem);
 }
 
 .home-page .archive-contact {
@@ -638,7 +638,7 @@ body.home-page {
 }
 
 .home-page .archive-contact h2 {
-  font-size: clamp(2.4rem, 4vw, 4.1rem);
+  font-size: clamp(2rem, 3.35vw, 3.35rem);
   letter-spacing: -0.04em;
 }
 
@@ -776,7 +776,7 @@ body.home-page {
   }
 
   .home-statement__grid h2 {
-    font-size: clamp(2rem, 8vw, 2.9rem);
+    font-size: clamp(1.8rem, 7vw, 2.45rem);
   }
 
   .home-page .home-statement--compact {
@@ -789,7 +789,7 @@ body.home-page {
   }
 
   .home-statement--compact .home-statement__grid h2 {
-    font-size: clamp(2rem, 9.5vw, 2.85rem);
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
   }
 
   .featured-projects__more {
@@ -807,7 +807,7 @@ body.home-page {
   }
 
   .home-page .featured-case__copy h2 {
-    font-size: clamp(2.35rem, 10vw, 3.3rem);
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
   }
 
   .home-page .featured-architecture {
@@ -818,7 +818,7 @@ body.home-page {
 
   .home-page .profile-career h2,
   .home-page .archive-contact h2 {
-    font-size: clamp(2.25rem, 9vw, 3.1rem);
+    font-size: clamp(1.9rem, 7.5vw, 2.6rem);
   }
 }
 
