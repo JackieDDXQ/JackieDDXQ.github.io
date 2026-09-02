@@ -50,7 +50,7 @@
   --font-body: var(--font-serif);
   --font-mono: var(--font-serif);
   --type-page-title: clamp(2.3rem, 3.8vw, 3.8rem);
-  --type-case-title: clamp(2.45rem, 4vw, 4rem);
+  --type-case-title: clamp(3rem, 5.4vw, 5.5rem);
   --type-section-title: clamp(1.7rem, 3vw, 3.1rem);
   --type-editorial-title: clamp(2rem, 3.5vw, 3.55rem);
   --type-card-title: clamp(1.4rem, 2.35vw, 2.45rem);
@@ -141,7 +141,6 @@ body {
   background-color: var(--demo-black);
   background-image:
     linear-gradient(to right, transparent calc(25% - 1px), var(--demo-grid-line-soft) 25%, transparent calc(25% + 1px)),
-    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line-soft) 50%, transparent calc(50% + 1px)),
     linear-gradient(to right, transparent calc(75% - 1px), var(--demo-grid-line-soft) 75%, transparent calc(75% + 1px));
   background-attachment: fixed;
 }
@@ -1177,6 +1176,10 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
   line-height: 1.02 !important;
 }
 
+.project-title-break--mobile {
+  display: none;
+}
+
 .telecom-case .tc-hero__title {
   font-size: var(--type-case-title);
 }
@@ -1310,7 +1313,6 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
   background-color: var(--demo-black);
   background-image:
     linear-gradient(to right, transparent calc(25% - 1px), var(--demo-grid-line-soft) 25%, transparent calc(25% + 1px)),
-    linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line-soft) 50%, transparent calc(50% + 1px)),
     linear-gradient(to right, transparent calc(75% - 1px), var(--demo-grid-line-soft) 75%, transparent calc(75% + 1px));
 }
 
@@ -1592,9 +1594,24 @@ body.interior-page .main-content > section:first-child > .section-header .sectio
 }
 
 @media (max-width: 767px) {
+  :root {
+    --type-case-title: clamp(2.8rem, 12.5vw, 3.4rem);
+  }
+
   body {
-    background-image:
-      linear-gradient(to right, transparent calc(50% - 1px), var(--demo-grid-line-soft) 50%, transparent calc(50% + 1px));
+    background-image: none;
+  }
+
+  .telecom-case {
+    background-image: none;
+  }
+
+  .project-title-break--desktop {
+    display: none;
+  }
+
+  .project-title-break--mobile {
+    display: initial;
   }
 
   .site-header .navbar-right,
