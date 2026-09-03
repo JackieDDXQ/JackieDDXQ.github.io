@@ -3,309 +3,812 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中移金科和包APP出行权益生态 | Jackie Hou</title>
+    <title>和包 App × 特来电充电服务接入 | Jackie Hou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500;600;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles/site.css">
     <style>
-        .project-page {
-            padding-top: 6rem;
-            max-width: 100%;
-            margin: 0 auto;
-            padding-left: 5%;
-            padding-right: 5%;
+        .case-chuxing .project-header {
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (min-width: 640px) {
-            .project-page {
-                max-width: 90%;
-            }
+        .case-chuxing .project-header::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: min(42vw, 520px);
+            aspect-ratio: 1;
+            border: 1px solid var(--demo-line);
+            background:
+                linear-gradient(var(--demo-line-soft) 1px, transparent 1px),
+                linear-gradient(90deg, var(--demo-line-soft) 1px, transparent 1px);
+            background-size: 42px 42px;
+            opacity: 0.62;
+            transform: translate(22%, 35%) rotate(-8deg);
+            pointer-events: none;
         }
 
-        @media (min-width: 768px) {
-            .project-page {
-                max-width: 85%;
-            }
+        .case-chuxing .project-header > * {
+            position: relative;
+            z-index: 1;
         }
 
-        @media (min-width: 1024px) {
-            .project-page {
-                max-width: 1024px;
-            }
+        .case-chuxing .project-page .project-title-large {
+            max-width: 16ch;
         }
 
-        @media (min-width: 1280px) {
-            .project-page {
-                max-width: 1100px;
-            }
-        }
-
-        @media (min-width: 1536px) {
-            .project-page {
-                max-width: 1200px;
-            }
-        }
-
-        .project-header {
-            margin-bottom: 4rem;
-        }
-
-        .project-meta {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-category-wrapper {
+        .case-chuxing .project-category-wrapper {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-brown);
-        }
-
-        .project-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--paper-bg-light);
-            border: 1px solid var(--border-ink);
-        }
-
-        .project-title-large {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 3rem;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--ink-black);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-subtitle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
             flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
-        .project-subtitle {
-            font-size: 1rem;
-            color: var(--ink-gray);
+        .case-chuxing .project-category,
+        .case-chuxing .section-number {
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .case-chuxing .project-badge {
+            padding: 0.35rem 0.7rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+        }
+
+        .case-chuxing .project-subtitle-wrapper {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+            align-items: end;
+            gap: clamp(32px, 6vw, 88px);
+            margin-top: clamp(28px, 5vw, 56px);
+        }
+
+        .case-chuxing .project-subtitle {
+            max-width: 43rem;
+            font-family: var(--font-serif);
+            font-size: clamp(1.15rem, 2.1vw, 1.75rem);
+            line-height: 1.55;
+        }
+
+        .case-hero-meta {
+            display: grid;
+            gap: 0;
+            margin: 0;
+            border-top: 1px solid var(--demo-line);
+        }
+
+        .case-hero-meta div {
+            display: grid;
+            grid-template-columns: 88px 1fr;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--demo-line-soft);
+        }
+
+        .case-hero-meta dt,
+        .case-hero-meta dd {
             margin: 0;
         }
 
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--ink-light);
+        .case-hero-meta dt {
+            color: var(--demo-muted);
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
-        .project-section {
-            margin-bottom: 4rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid var(--divider-ink);
+        .case-hero-meta dd {
+            color: var(--demo-white);
+            font-size: 0.85rem;
+            line-height: 1.6;
         }
 
-        .section-header {
+        .case-chuxing .project-section > .section-header {
+            margin-bottom: clamp(36px, 6vw, 72px);
+        }
+
+        .case-chuxing .project-section .section-title {
+            margin: 0;
+            text-align: right;
+        }
+
+        .case-chuxing .section-label {
+            color: var(--demo-muted);
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .case-copy {
+            max-width: 49rem;
+            color: var(--demo-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.9;
+        }
+
+        .case-lede {
+            max-width: 58rem;
+            margin: 0 0 clamp(42px, 7vw, 82px);
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: clamp(1.55rem, 3.3vw, 3.05rem);
+            font-weight: 500;
+            line-height: 1.32;
+            letter-spacing: -0.025em;
+        }
+
+        .case-lede em {
+            color: var(--demo-accent);
+            font-style: normal;
+        }
+
+        .case-eyebrow {
+            display: block;
+            margin-bottom: 16px;
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .party-grid,
+        .rail-grid,
+        .truth-grid,
+        .decision-grid,
+        .delivery-grid {
+            display: grid;
+            border-top: 1px solid var(--demo-line);
+            border-left: 1px solid var(--demo-line);
+        }
+
+        .party-grid,
+        .rail-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .party-card,
+        .rail-card,
+        .truth-card,
+        .decision-card,
+        .delivery-card {
+            position: relative;
+            min-width: 0;
+            padding: clamp(24px, 3.4vw, 44px);
+            border-right: 1px solid var(--demo-line);
+            border-bottom: 1px solid var(--demo-line);
+            background: var(--demo-surface-soft);
+        }
+
+        .party-card:nth-child(2) {
+            background: var(--demo-accent-soft);
+        }
+
+        .party-card__index,
+        .rail-card__index,
+        .delivery-card__index {
+            display: block;
+            margin-bottom: clamp(40px, 7vw, 88px);
+            color: var(--demo-muted);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+        }
+
+        .party-card h3,
+        .rail-card h3,
+        .decision-card h3,
+        .delivery-card h3,
+        .exception-card h3,
+        .consistency-card h3 {
+            margin: 0 0 14px;
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 2vw, 1.7rem);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .party-card p,
+        .rail-card p,
+        .truth-card p,
+        .decision-card p,
+        .delivery-card p,
+        .exception-card p,
+        .consistency-card p {
+            max-width: none;
+            margin: 0;
+            color: var(--demo-muted);
+            font-size: 0.91rem;
+            line-height: 1.75;
+        }
+
+        .party-card__boundary {
+            display: block;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--demo-line-soft);
+            color: var(--demo-muted);
+            font-size: 0.76rem;
+            line-height: 1.65;
+        }
+
+        .orchestration-map {
+            display: grid;
+            grid-template-columns: 1fr auto 1.15fr auto 1fr;
+            align-items: stretch;
+            margin-top: clamp(42px, 7vw, 82px);
+            border-block: 1px solid var(--demo-line);
+        }
+
+        .orchestration-map__node {
+            display: flex;
+            min-height: 160px;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 24px;
+            padding: clamp(24px, 3vw, 38px);
+        }
+
+        .orchestration-map__node strong {
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 2vw, 1.65rem);
+            font-weight: 600;
+        }
+
+        .orchestration-map__node small {
+            color: var(--demo-muted);
+            font-size: 0.76rem;
+            line-height: 1.65;
+        }
+
+        .orchestration-map__node--core {
+            background: var(--demo-accent-soft);
+        }
+
+        .orchestration-map__arrow {
+            display: grid;
+            min-width: 56px;
+            place-items: center;
+            border-inline: 1px solid var(--demo-line);
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+        }
+
+        .rail-card {
+            min-height: 340px;
+        }
+
+        .rail-card__flow {
+            display: grid;
+            gap: 10px;
+            margin-top: 30px;
+            color: var(--demo-white);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            line-height: 1.6;
+        }
+
+        .rail-card__flow span {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 10px;
         }
 
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-        }
-
-        .section-label {
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-light);
-        }
-
-        .section-title {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--ink-black);
+        .rail-card__flow span:not(:last-child)::after {
+            content: "→";
             margin-left: auto;
+            color: var(--demo-accent);
         }
 
-        .project-section p {
-            font-size: 0.9375rem;
-            color: var(--ink-gray);
-            line-height: 1.8;
-            max-width: 600px;
-        }
-
-        .challenge-solution-grid {
+        .journey-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            border-top: 1px solid var(--demo-line);
+            border-left: 1px solid var(--demo-line);
         }
 
-        .challenge-item,
-        .solution-item {
-            margin-bottom: 1.5rem;
+        .journey-step {
+            min-height: 250px;
+            padding: clamp(22px, 3vw, 36px);
+            border-right: 1px solid var(--demo-line);
+            border-bottom: 1px solid var(--demo-line);
         }
 
-        .challenge-number,
-        .solution-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-            margin-bottom: 0.5rem;
+        .journey-step__num {
+            display: block;
+            margin-bottom: 58px;
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
         }
 
-        .challenge-text,
-        .solution-text {
-            font-size: 0.875rem;
-            color: var(--ink-gray);
+        .journey-step h3 {
+            margin: 0 0 12px;
+            color: var(--demo-white);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .journey-step p {
+            max-width: none;
+            margin: 0;
+            color: var(--demo-muted);
+            font-size: 0.82rem;
             line-height: 1.7;
         }
 
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+        .truth-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: clamp(42px, 7vw, 82px);
         }
 
-        .result-card {
-            background-color: var(--paper-bg-light);
-            padding: 2rem;
-            border: 1px solid var(--border-ink);
+        .truth-card {
+            min-height: 185px;
         }
 
-        .result-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--ink-black);
+        .truth-card code {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 28px;
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
         }
 
-        .result-label {
-            font-size: 0.75rem;
-            color: var(--ink-light);
+        .truth-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: 1.08rem;
+        }
+
+        .exception-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1px;
+            margin-top: clamp(36px, 6vw, 64px);
+            background: var(--demo-line);
+            border: 1px solid var(--demo-line);
+        }
+
+        .exception-card {
+            min-height: 270px;
+            padding: clamp(26px, 4vw, 48px);
+            background: var(--demo-black);
+        }
+
+        .exception-card__status {
+            display: inline-flex;
+            margin-bottom: 42px;
+            padding: 7px 10px;
+            border: 1px solid var(--demo-line);
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.08em;
+        }
+
+        .case-table-wrap {
+            overflow-x: auto;
+            margin-top: clamp(42px, 7vw, 82px);
+            border: 1px solid var(--demo-line);
+        }
+
+        .case-table {
+            width: 100%;
+            min-width: 820px;
+            border-collapse: collapse;
+            color: var(--demo-muted);
+            font-size: 0.82rem;
+            line-height: 1.65;
+        }
+
+        .case-table th,
+        .case-table td {
+            padding: 20px 22px;
+            border-right: 1px solid var(--demo-line-soft);
+            border-bottom: 1px solid var(--demo-line-soft);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .case-table th {
+            color: var(--demo-white);
+            background: var(--demo-surface-soft);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+        }
+
+        .case-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .case-table th:last-child,
+        .case-table td:last-child {
+            border-right: 0;
+        }
+
+        .case-table strong {
+            color: var(--demo-white);
+            font-weight: 600;
+        }
+
+        .decision-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: clamp(42px, 7vw, 82px);
+        }
+
+        .decision-card {
+            display: flex;
+            min-height: 370px;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 48px;
+        }
+
+        .decision-card--wide {
+            grid-column: 1 / -1;
+            min-height: 300px;
+            background: var(--demo-accent-soft);
+        }
+
+        .decision-card__topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            color: var(--demo-muted);
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .decision-card__number {
+            color: var(--demo-accent);
+        }
+
+        .decision-card__body {
+            max-width: 40rem;
+        }
+
+        .decision-card--wide .decision-card__body {
+            display: grid;
+            max-width: none;
+            grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+            align-items: end;
+            gap: clamp(32px, 7vw, 92px);
+        }
+
+        .decision-card h3 {
+            max-width: 18ch;
+            font-size: clamp(1.45rem, 2.6vw, 2.35rem);
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+        }
+
+        .decision-card__principle {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+            line-height: 1.55;
+        }
+
+        .decision-card__result {
+            display: grid;
+            grid-template-columns: 84px 1fr;
+            gap: 18px;
+            padding-top: 20px;
+            border-top: 1px solid var(--demo-line-soft);
+        }
+
+        .decision-card__result span {
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .decision-card__result strong {
+            color: var(--demo-muted);
+            font-size: 0.82rem;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .consistency-loop {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            margin-top: clamp(42px, 7vw, 82px);
+            background: var(--demo-line);
+            border: 1px solid var(--demo-line);
+        }
+
+        .consistency-card {
+            min-height: 250px;
+            padding: clamp(25px, 3.6vw, 44px);
+            background: var(--demo-black);
+        }
+
+        .consistency-card__tag {
+            display: block;
+            margin-bottom: 50px;
+            color: var(--demo-accent);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .delivery-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .delivery-card {
+            min-height: 310px;
+        }
+
+        .case-note {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: clamp(24px, 5vw, 64px);
+            margin-top: clamp(42px, 7vw, 82px);
+            padding: clamp(26px, 4vw, 48px);
+            border: 1px solid var(--demo-line);
+            background: var(--demo-accent-soft);
+        }
+
+        .case-note strong {
+            color: var(--demo-white);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .case-note p {
+            max-width: 50rem;
+            margin: 0;
+            color: var(--demo-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
         }
 
         .prototype-section {
-            margin-top: 2rem;
+            padding-block: clamp(70px, 10vw, 140px);
+            border-bottom: 1px solid var(--demo-line);
+        }
+
+        .prototype-section__head {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 32px;
+            margin-bottom: 34px;
+        }
+
+        .prototype-section h2 {
+            margin: 0;
+            color: var(--demo-white);
+            font-family: var(--font-serif);
+            font-size: var(--type-section-title);
+            font-weight: 600;
+        }
+
+        .prototype-section p {
+            max-width: 38rem;
+            margin: 10px 0 0;
+            color: var(--demo-muted);
+            line-height: 1.75;
+        }
+
+        .prototype-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .prototype-embed {
+            overflow: hidden;
+            border: 1px solid var(--demo-line);
+            background: #eef2f6;
+        }
+
+        .prototype-embed__bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 52px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--demo-line);
+            background: var(--demo-surface-soft);
+        }
+
+        .prototype-embed__label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--demo-white);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .prototype-embed__label::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--demo-accent);
+            box-shadow: 0 0 0 5px var(--demo-accent-soft);
+        }
+
+        .prototype-embed__hint {
+            color: var(--demo-muted);
+            font-size: 0.72rem;
+        }
+
+        .prototype-embed iframe {
+            display: block;
+            width: 100%;
+            height: min(900px, 82vh);
+            min-height: 720px;
+            border: 0;
+            background: #eef2f6;
         }
 
         .prototype-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
+            gap: 0.65rem;
+            padding: 0.85rem 1.2rem;
+            border: 1px solid var(--demo-line);
+            color: var(--demo-accent);
+            font-size: 0.83rem;
             font-weight: 500;
-            color: var(--accent-brown);
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--border-ink);
-            transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
         }
 
-        .prototype-link:hover {
-            border-color: var(--accent-brown);
-            background-color: var(--paper-bg-light);
+        .prototype-link:hover,
+        .prototype-link:focus-visible {
+            border-color: var(--demo-accent);
+            background: var(--demo-accent-soft);
         }
 
-        .next-project {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--divider-ink);
-            margin-top: 2rem;
-        }
-
-        .next-project-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-light);
-        }
-
-        .next-project-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .next-project-link:hover {
-            color: var(--accent-brown);
-        }
-
-        .prev-project {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .prev-project:hover {
-            color: var(--accent-brown);
-        }
-
-        @media (max-width: 768px) {
-            .project-title-large {
-                font-size: 2rem;
-            }
-
-            .challenge-solution-grid {
+        @media (max-width: 980px) {
+            .case-chuxing .project-subtitle-wrapper,
+            .decision-card--wide .decision-card__body {
                 grid-template-columns: 1fr;
             }
 
-            .results-grid {
+            .party-grid,
+            .rail-grid,
+            .consistency-loop {
                 grid-template-columns: 1fr;
             }
 
-            .next-project {
+            .truth-grid,
+            .delivery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .journey-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .party-card,
+            .rail-card {
+                min-height: auto;
+            }
+
+            .party-card__index,
+            .rail-card__index,
+            .delivery-card__index {
+                margin-bottom: 42px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .case-chuxing .project-header::after {
+                width: 88vw;
+                opacity: 0.38;
+            }
+
+            .case-chuxing .project-subtitle-wrapper {
+                gap: 40px;
+            }
+
+            .case-chuxing .project-page .project-title-large {
+                max-width: 12ch;
+            }
+
+            .case-chuxing .project-section .section-title {
+                grid-column: 1 / -1;
+                text-align: left;
+            }
+
+            .orchestration-map {
+                grid-template-columns: 1fr;
+            }
+
+            .orchestration-map__arrow {
+                min-height: 50px;
+                border-block: 1px solid var(--demo-line);
+                border-inline: 0;
+                transform: rotate(90deg);
+            }
+
+            .journey-grid,
+            .truth-grid,
+            .exception-grid,
+            .decision-grid,
+            .delivery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .journey-step,
+            .truth-card,
+            .decision-card,
+            .delivery-card {
+                min-height: auto;
+            }
+
+            .decision-card--wide {
+                grid-column: auto;
+            }
+
+            .journey-step__num {
+                margin-bottom: 36px;
+            }
+
+            .case-note,
+            .prototype-section__head {
+                grid-template-columns: 1fr;
+            }
+
+            .prototype-embed__bar {
+                align-items: flex-start;
                 flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+                gap: 4px;
+            }
+
+            .prototype-embed iframe {
+                height: 812px;
+                min-height: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .prototype-link {
+                transition: none;
             }
         }
     </style>
+    <link rel="stylesheet" href="../assets/styles/redesign.css?v=20260901-1">
 </head>
-<body class="interior-page project-detail-page">
+<body class="interior-page project-detail-page case-chuxing">
     <div class="grain" aria-hidden="true"></div>
     <a href="#main-content" class="skip-link">跳转到主要内容</a>
     <header class="site-header navbar">
@@ -313,114 +816,467 @@
             <a href="../index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span></button>
             <nav id="site-navigation" class="navbar-right" aria-label="主导航">
-                <a href="../index.html" class="nav-item">Index</a>
-                <a href="../about.html" class="nav-item">About</a>
-                <a href="../experience.html" class="nav-item">Experience</a>
-                <a href="../projects.html" class="nav-item active">Projects</a>
-                <a href="../contact.html" class="nav-item">Contact</a>
-                <span class="nav-location">Based in Beijing</span>
+                <a href="../index.html" class="nav-item">首页</a>
+                <a href="../projects.html" class="nav-item active">项目</a>
+                <a href="../experience.html" class="nav-item">经历</a>
+                <a href="../about.html" class="nav-item">关于</a>
+                <a href="../contact.html" class="nav-item">联系</a>
+                <span class="nav-location">INDEX / 2026</span>
             </nav>
         </div>
         <span class="site-progress" aria-hidden="true"></span>
     </header>
 
-    <main id="main-content" class="main-content project-page">
-        <div class="project-header">
+    <main id="main-content" class="main-content project-page case-shell">
+        <header class="project-header">
             <div class="project-meta">
                 <div class="project-category-wrapper">
-                    <span class="project-category">CASE 03</span>
-                    <span class="project-badge">2026.01 - 至今</span>
+                    <span class="project-category">CASE 03 · PRODUCT ORCHESTRATION</span>
+                    <span class="project-badge">2026 · 方案设计 / 联调准备</span>
                 </div>
             </div>
-            <h1 class="project-title-large">中移金科和包APP出行权益生态</h1>
+            <h1 class="project-title-large">和包 App ×<br class="project-title-break--mobile">特来电<br class="project-title-break--desktop">充电<br class="project-title-break--mobile">服务接入</h1>
             <div class="project-subtitle-wrapper">
-                <p class="project-subtitle">构建一站式充电服务与会员状态制权益生态</p>
+                <p class="project-subtitle">觉观作为中间平台，连接和包身份与支付能力、会员权益和特来电充电履约，设计一条可恢复、可对账的充电交易闭环。</p>
+                <dl class="case-hero-meta">
+                    <div>
+                        <dt>角色</dt>
+                        <dd>产品经理</dd>
+                    </div>
+                    <div>
+                        <dt>载体</dt>
+                        <dd>和包 App 内充电 H5 / 订单中心</dd>
+                    </div>
+                    <div>
+                        <dt>协作方</dt>
+                        <dd>中移金科 · 觉观 · 特来电</dd>
+                    </div>
+                    <div>
+                        <dt>范围</dt>
+                        <dd>身份、权益、订单、支付与状态同步</dd>
+                    </div>
+                </dl>
             </div>
-        </div>
+        </header>
 
-        <div class="project-section">
+        <section class="project-section" aria-labelledby="section-context">
             <div class="section-header">
                 <span class="section-number">01</span>
                 <span class="section-label">CONTEXT</span>
-                <span class="section-title">背景</span>
+                <h2 id="section-context" class="section-title">不是嵌入一个页面，而是接入一套交易能力</h2>
             </div>
-            <p>中移金科和包APP出行权益生态项目是中国移动金融科技有限公司面向新能源汽车用户打造的一站式出行服务平台的拳头项目。项目以充电服务为核心切入点，深度整合国内头部充电桩运营商特来电的资源与数据能力，在和包APP内构建完整的"查找桩—预约桩—导航至桩—充电支付—会员权益核销"全链路用户体验。</p>
-            <p style="margin-top: 1rem;">在数字化转型的大背景下，出行权益作为和包APP连接高频生活场景的关键纽带，承担着提升APP活跃度、丰富用户粘性场景、完善中国移动支付生态的战略使命。本项目通过设计科学的会员状态制权益体系，将用户成长路径与充电消费行为深度绑定，让用户每一次充电都能感受到会员身份的增值与专属权益的尊享感，从而形成"消费—成长—再消费"的正向循环。</p>
-            <p style="margin-top: 1rem;">作为产品设计师，我深度参与了从需求洞察、用户旅程设计、会员体系架构搭建到高保真原型输出的全流程工作，致力于在有限的APP界面空间内，呈现出清晰、易懂、有吸引力的权益感知与兑换体验。</p>
-        </div>
+            <p class="case-lede">用户只看见一次扫码，背后却横跨三套系统。项目的核心，是让<em>入口、资金与充电履约</em>在同一条体验里成立。</p>
+            <p class="case-copy">和包提供用户入口、身份与支付能力；特来电提供电站、充电枪、启停控制和最终账单；觉观承接 H5、用户映射、权益、订单、支付编排、退款补缴与状态同步。产品方案需要把三方清晰分工，同时保证用户始终感受到这是和包内的一次连续充电服务。</p>
 
-        <div class="project-section">
-            <div class="challenge-solution-grid">
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">02</span>
-                        <span class="section-label">CHALLENGE</span>
-                        <span class="section-title">挑战</span>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">充电服务场景碎片化，用户体验割裂</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">权益体系复杂，用户感知不清晰</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">数据孤岛，无法精准运营</p>
-                    </div>
+            <div class="party-grid" aria-label="三方职责边界">
+                <article class="party-card">
+                    <span class="party-card__index">01 / ENTRY</span>
+                    <h3>和包 / 中移金科</h3>
+                    <p>提供 App 入口、原生扫码、一次性 Ticket、会员销售与和包支付能力。</p>
+                    <span class="party-card__boundary">边界：不直接创建充电订单，也不控制充电枪。</span>
+                </article>
+                <article class="party-card">
+                    <span class="party-card__index">02 / ORCHESTRATOR</span>
+                    <h3>觉观</h3>
+                    <p>承载充电 H5 与交易中台，统一编排身份、权益、订单、支付、启停、结算和异常恢复。</p>
+                    <span class="party-card__boundary">价值：把分散能力转换为一条可执行、可恢复的业务流程。</span>
+                </article>
+                <article class="party-card">
+                    <span class="party-card__index">03 / FULFILLMENT</span>
+                    <h3>特来电</h3>
+                    <p>提供电站与枪口状态、物理启停、实时充电数据和最终账单。</p>
+                    <span class="party-card__boundary">边界：不处理和包会员、支付和页面逻辑。</span>
+                </article>
+            </div>
+
+            <div class="orchestration-map" aria-label="三方系统关系">
+                <div class="orchestration-map__node">
+                    <strong>和包 App</strong>
+                    <small>扫码 / Ticket / 会员 / 支付</small>
                 </div>
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">03</span>
-                        <span class="section-label">SOLUTION</span>
-                        <span class="section-title">解法</span>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">与特来电深度合作，提供一站式查找、预约、支付体验</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">设计会员状态制权益体系，清晰区分不同层级权益</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">构建用户画像与行为分析体系，支撑精准运营</p>
-                    </div>
+                <span class="orchestration-map__arrow" aria-hidden="true">→</span>
+                <div class="orchestration-map__node orchestration-map__node--core">
+                    <strong>觉观充电 H5 + 中台</strong>
+                    <small>用户映射 / 权益 / 订单状态机 / 交易编排 / 事件同步</small>
+                </div>
+                <span class="orchestration-map__arrow" aria-hidden="true">→</span>
+                <div class="orchestration-map__node">
+                    <strong>特来电</strong>
+                    <small>站枪 / 启停 / 充电数据 / 最终账单</small>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="project-section">
+        <section class="project-section" aria-labelledby="section-model">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <span class="section-label">PRODUCT MODEL</span>
+                <h2 id="section-model" class="section-title">先拆开三条链路，再让它们在结算处汇合</h2>
+            </div>
+            <p class="case-lede">身份、权益、交易彼此关联，但不能互相替代。<em>拆开权威来源</em>，才能避免一个状态变化拖垮整条链路。</p>
+
+            <div class="rail-grid">
+                <article class="rail-card">
+                    <span class="rail-card__index">A / IDENTITY</span>
+                    <h3>无感身份链路</h3>
+                    <p>用户已登录和包，无需再次输入手机号。一次性 Ticket 只用于换取稳定用户身份，后续业务改用觉观自己的登录会话。</p>
+                    <div class="rail-card__flow" aria-label="身份链路流程">
+                        <span>和包原生扫码</span>
+                        <span>一次性 Ticket</span>
+                        <span>JINKE + userNo</span>
+                        <span>觉观 JWT</span>
+                    </div>
+                </article>
+                <article class="rail-card">
+                    <span class="rail-card__index">B / BENEFIT</span>
+                    <h3>会员权益链路</h3>
+                    <p>和包会员商品映射觉观权益产品。购买成功后整包原子下发折扣卡与抵扣券，避免出现“部分到账、页面却显示开通成功”。</p>
+                    <div class="rail-card__flow" aria-label="权益链路流程">
+                        <span>会员购买</span>
+                        <span>权益包映射</span>
+                        <span>原子下发</span>
+                        <span>结算核销</span>
+                    </div>
+                </article>
+                <article class="rail-card">
+                    <span class="rail-card__index">C / TRANSACTION</span>
+                    <h3>充电交易链路</h3>
+                    <p>围绕和包支付与特来电履约建立订单状态机，覆盖预付、自动启充、实时充电、最终账单、退款或补缴。</p>
+                    <div class="rail-card__flow" aria-label="交易链路流程">
+                        <span>扫码预检</span>
+                        <span>预付款</span>
+                        <span>充电履约</span>
+                        <span>资金闭环</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="project-section" aria-labelledby="section-journey">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <span class="section-label">CORE JOURNEY</span>
+                <h2 id="section-journey" class="section-title">从扫码到订单完成</h2>
+            </div>
+            <p class="case-copy">主流程不把“支付成功”直接等同于“充电成功”。每个阶段都有独立事实来源、页面状态和允许操作，用户返回页面时也能从当前权威状态继续。</p>
+
+            <div class="journey-grid" aria-label="充电核心旅程">
+                <article class="journey-step">
+                    <span class="journey-step__num">01</span>
+                    <h3>扫码登录</h3>
+                    <p>和包完成原生扫码，携带二维码原文与一次性 Ticket 进入觉观 H5。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">02</span>
+                    <h3>业务预检</h3>
+                    <p>校验站枪状态、进行中订单、启动失败订单与未支付超时费。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">03</span>
+                    <h3>预付款</h3>
+                    <p>创建订单与和包收银台；页面回跳后重新查询，不能把回跳当成支付成功。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">04</span>
+                    <h3>自动启充</h3>
+                    <p>付款确认后服务端自动启动，依次展示准备启动、正在启动和充电中。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">05</span>
+                    <h3>充电监控</h3>
+                    <p>H5 展示费用、电量、SOC、功率与时长；停止操作需二次确认。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">06</span>
+                    <h3>最终结算</h3>
+                    <p>物理结束后等待最终账单，再结合用户权益计算实际消费。</p>
+                </article>
+                <article class="journey-step">
+                    <span class="journey-step__num">07</span>
+                    <h3>资金闭环</h3>
+                    <p>余额原路退款，不足创建补缴；资金处理完成后订单才进入完成态。</p>
+                </article>
+            </div>
+
+            <div class="truth-grid" aria-label="关键状态语义">
+                <article class="truth-card">
+                    <code>PAYMENT · PAID</code>
+                    <strong>钱已到账</strong>
+                    <p>不代表充电已开始。</p>
+                </article>
+                <article class="truth-card">
+                    <code>ORDER · CHARGING</code>
+                    <strong>物理充电已开始</strong>
+                    <p>只有此时才能展示“充电中”。</p>
+                </article>
+                <article class="truth-card">
+                    <code>ORDER_SETTLED</code>
+                    <strong>最终金额已算清</strong>
+                    <p>仍可能等待退款或补缴。</p>
+                </article>
+                <article class="truth-card">
+                    <code>ORDER · COMPLETED</code>
+                    <strong>整笔订单已闭环</strong>
+                    <p>账单、权益和资金均已处理。</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="project-section" aria-labelledby="section-exception">
             <div class="section-header">
                 <span class="section-number">04</span>
-                <span class="section-label">RESULTS</span>
-                <span class="section-title">成果</span>
+                <span class="section-label">STATE &amp; RECOVERY</span>
+                <h2 id="section-exception" class="section-title">关键设计不在顺利流程，而在结果不确定时</h2>
             </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <span class="result-value">1</span>
-                    <span class="result-label">独家合作充电桩运营商</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">50万+</span>
-                    <span class="result-label">预计覆盖用户</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">+30%</span>
-                    <span class="result-label">权益核销率预计提升</span>
-                </div>
-            </div>
-        </div>
+            <p class="case-lede">跨系统链路一定会遇到延迟、乱序和未知结果。产品规则必须先回答：<em>此刻用户能做什么，系统绝不能做什么。</em></p>
 
-        <div class="prototype-section">
-            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                    <a href="https://modao.cc/proto/MIHVmNttbrz9j77mVXVxW/sharing?view_mode=read_only&screen=rbpVE1YUzKQtg3NG2" target="_blank" rel="noopener noreferrer" aria-label="体验用户端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>用户端原型</span>
+            <div class="exception-grid">
+                <article class="exception-card">
+                    <span class="exception-card__status">PAYMENT_UNKNOWN</span>
+                    <h3>支付结果确认中</h3>
+                    <p>继续查询原支付单，页面提示“请勿重复支付”；不能因为回跳或超时直接创建另一笔付款。</p>
+                </article>
+                <article class="exception-card">
+                    <span class="exception-card__status">START_FAILED_WAIT_ACTION</span>
+                    <h3>启动明确失败</h3>
+                    <p>默认 30 分钟内允许重试原枪、换枪或取消；用户无操作后自动取消并发起全额退款。</p>
+                </article>
+                <article class="exception-card">
+                    <span class="exception-card__status">START_UNKNOWN</span>
+                    <h3>启动结果未知</h3>
+                    <p>只查询原启动流水，暂不展示重试、换枪或退款入口，防止一笔预付款启动两把枪。</p>
+                </article>
+                <article class="exception-card">
+                    <span class="exception-card__status">REFUND / SUPPLEMENT</span>
+                    <h3>结算后资金未闭环</h3>
+                    <p>差额退款与全额退款共用原订单；消费超出预付时明确展示“待补缴”，不笼统写成待付款。</p>
+                </article>
+            </div>
+
+            <div class="case-table-wrap" role="region" aria-label="异常状态与页面动作" tabindex="0">
+                <table class="case-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">场景</th>
+                            <th scope="col">用户看到</th>
+                            <th scope="col">允许操作</th>
+                            <th scope="col">系统约束</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>收银台未支付</strong></td>
+                            <td>待支付金额、剩余时间、失效说明</td>
+                            <td>继续支付 / 取消订单</td>
+                            <td>超时后关闭原支付单，不长期停留在待付款</td>
+                        </tr>
+                        <tr>
+                            <td><strong>预付后未启动</strong></td>
+                            <td>等待启动倒计时与退款规则</td>
+                            <td>按状态重试、换枪或取消</td>
+                            <td>超时或用户取消后，全额原路退款</td>
+                        </tr>
+                        <tr>
+                            <td><strong>充电后有余额</strong></td>
+                            <td>实际消费、退款金额与退款路径</td>
+                            <td>查看退款进度 / 联系客服</td>
+                            <td>退款成功后，订单才进入已完成</td>
+                        </tr>
+                        <tr>
+                            <td><strong>最终消费超出预付</strong></td>
+                            <td>待补缴金额与形成原因</td>
+                            <td>完成补缴</td>
+                            <td>不混淆为首次预付款未成功</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="project-section" aria-labelledby="section-decisions">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <span class="section-label">PRODUCT DECISIONS</span>
+                <h2 id="section-decisions" class="section-title">缩短主链路，守住业务边界</h2>
+            </div>
+            <p class="case-lede">技术方案给出系统能力，产品决策决定它如何进入用户流程。每一项取舍都要同时回答：<em>体验是否更短，边界是否更清楚。</em></p>
+            <p class="case-copy">我将影响主链路的关键分歧整理成明确规则，使页面、研发与测试面对同一个业务结果时，能够做出一致判断。</p>
+
+            <div class="decision-grid">
+                <article class="decision-card">
+                    <div class="decision-card__topline">
+                        <span class="decision-card__number">01</span>
+                        <span>PREPAY → START</span>
+                    </div>
+                    <div class="decision-card__body">
+                        <h3>支付确认后自动启充</h3>
+                        <span class="decision-card__principle">不让用户为同一件事确认两次。</span>
+                        <p>预付款到账后由服务端自动发起启动，用户无需再次点击“开始充电”；页面仍严格区分预付款成功、准备启动、正在启动和充电中。</p>
+                    </div>
+                    <div class="decision-card__result">
+                        <span>边界</span>
+                        <strong>PAYMENT PAID 只代表钱已到账，只有订单进入 CHARGING 才表示物理充电开始。</strong>
+                    </div>
+                </article>
+
+                <article class="decision-card">
+                    <div class="decision-card__topline">
+                        <span class="decision-card__number">02</span>
+                        <span>ORDER RECOVERY</span>
+                    </div>
+                    <div class="decision-card__body">
+                        <h3>优先恢复原订单</h3>
+                        <span class="decision-card__principle">再次扫码不是重新建单的理由。</span>
+                        <p>用户返回或再次扫码时，先判断是否存在进行中、启动失败或结果未知的订单，再按状态提供继续查看、重试、换枪或取消。</p>
+                    </div>
+                    <div class="decision-card__result">
+                        <span>结果</span>
+                        <strong>减少重复订单和重复付款；启动结果未知时锁定高风险操作，只查询原启动流水。</strong>
+                    </div>
+                </article>
+
+                <article class="decision-card">
+                    <div class="decision-card__topline">
+                        <span class="decision-card__number">03</span>
+                        <span>REFUND MODEL</span>
+                    </div>
+                    <div class="decision-card__body">
+                        <h3>退款留在原充电订单</h3>
+                        <span class="decision-card__principle">退款是资金过程，不是另一笔用户订单。</span>
+                        <p>充电后的差额退款与未启动的全额退款都写回原订单详情；通过退款原因、金额与状态区分业务结果，不再生成一条独立的用户可见订单。</p>
+                    </div>
+                    <div class="decision-card__result">
+                        <span>结果</span>
+                        <strong>用户能在同一处同时看到预付、实际消费与退款去向，避免把差额退款误解为整单退款。</strong>
+                    </div>
+                </article>
+
+                <article class="decision-card">
+                    <div class="decision-card__topline">
+                        <span class="decision-card__number">04</span>
+                        <span>OVERTIME FEE</span>
+                    </div>
+                    <div class="decision-card__body">
+                        <h3>超时占用费独立成单</h3>
+                        <span class="decision-card__principle">充电消费与占用责任分开表达。</span>
+                        <p>超时占用费不并入原充电订单的实际消费，使用独立订单记录计费、减免与支付状态；存在未支付超时费时，可限制创建新的充电订单。</p>
+                    </div>
+                    <div class="decision-card__result">
+                        <span>结果</span>
+                        <strong>用户明确知道为什么需要再次付款，账单与对账也不会混淆充电费用和占用费用。</strong>
+                    </div>
+                </article>
+
+                <article class="decision-card decision-card--wide">
+                    <div class="decision-card__topline">
+                        <span class="decision-card__number">05</span>
+                        <span>FINAL BILL → SETTLEMENT</span>
+                    </div>
+                    <div class="decision-card__body">
+                        <h3>最终账单才是结算起点</h3>
+                        <div>
+                            <span class="decision-card__principle">实时费用负责感知，最终账单负责交易。</span>
+                            <p>物理充电结束后先进入账单生成中，待特来电最终账单到达再计算权益优惠、实际消费、应退或应补金额。用户可主动确认；长时间未操作时，再由系统按约定规则完成结算。</p>
+                        </div>
+                    </div>
+                    <div class="decision-card__result">
+                        <span>边界</span>
+                        <strong>实时累计费用不能替代最终账单；ORDER_SETTLED 表示金额已算清，退款或补缴完成后订单才进入 COMPLETED。</strong>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="project-section" aria-labelledby="section-consistency">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <span class="section-label">CONSISTENCY</span>
+                <h2 id="section-consistency" class="section-title">事件负责及时，查询负责权威</h2>
+            </div>
+            <p class="case-lede">多方系统不追求“永不延迟”，而是建立一套<em>不重复、不倒退、可补偿</em>的恢复机制。</p>
+
+            <div class="consistency-loop">
+                <article class="consistency-card">
+                    <span class="consistency-card__tag">Event</span>
+                    <h3>通知刚刚发生了什么</h3>
+                    <p>订单、支付、结算、退款和超时费通过统一事件同步，帮助和包及时更新订单镜像。</p>
+                </article>
+                <article class="consistency-card">
+                    <span class="consistency-card__tag">Query</span>
+                    <h3>查询现在到底是什么</h3>
+                    <p>页面打开、通知丢失或结果有疑问时，主动查询订单、支付或退款详情，以当前结果为准。</p>
+                </article>
+                <article class="consistency-card">
+                    <span class="consistency-card__tag">Recovery</span>
+                    <h3>用唯一标识处理重复和乱序</h3>
+                    <p>同一事件只处理一次，资源版本只向前更新；未知结果始终查询原流水，不另起一笔交易。</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="project-section" aria-labelledby="section-delivery">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <span class="section-label">DELIVERY</span>
+                <h2 id="section-delivery" class="section-title">把技术契约翻译成可执行的产品规则</h2>
+            </div>
+            <p class="case-copy">本阶段的交付重点不是包装结果数字，而是将多方接口约束转化为研发、设计和测试能够共同使用的业务语言。</p>
+
+            <div class="delivery-grid">
+                <article class="delivery-card">
+                    <span class="delivery-card__index">01</span>
+                    <h3>全链路流程</h3>
+                    <p>覆盖扫码、预付、自动启充、充电、结算、退款补缴与订单恢复。</p>
+                </article>
+                <article class="delivery-card">
+                    <span class="delivery-card__index">02</span>
+                    <h3>状态与动作矩阵</h3>
+                    <p>明确每个订单、支付和退款状态的页面文案、用户动作与系统禁区。</p>
+                </article>
+                <article class="delivery-card">
+                    <span class="delivery-card__index">03</span>
+                    <h3>页面字段规范</h3>
+                    <p>统一待支付、充电中、支付成功、账单详情与退款页的金额和时间层级。</p>
+                </article>
+                <article class="delivery-card">
+                    <span class="delivery-card__index">04</span>
+                    <h3>对接与联调清单</h3>
+                    <p>沉淀三方职责、接口调用时机、异常恢复与待确认项，支撑后续联调。</p>
+                </article>
+            </div>
+
+            <aside class="case-note">
+                <strong>项目状态说明</strong>
+                <p>当前材料为方案设计与联调前对齐版本，正式域名、部分接口开放时间及个别协议细节仍以双方联调结论为准。页面不使用未经验证的覆盖人数、转化率或业务增长指标。</p>
+            </aside>
+        </section>
+
+        <section class="prototype-section" aria-labelledby="prototype-title">
+            <div class="prototype-section__head">
+                <div>
+                    <span class="case-eyebrow">PROTOTYPES</span>
+                    <h2 id="prototype-title">查看交互原型</h2>
+                    <p>直接在页面中体验用户端完整充电流程，或在新窗口打开；后台管理原型用于查看权益配置与运营管理。</p>
+                </div>
+            </div>
+            <div class="prototype-embed">
+                <div class="prototype-embed__bar">
+                    <span class="prototype-embed__label">和包出行 · 充电</span>
+                    <span class="prototype-embed__hint">可点击、滚动并切换完整流程</span>
+                </div>
+                <iframe src="./prototypes/chuxing-equity/carlife/index.html#/map-list" title="和包出行充电服务交互原型" loading="lazy"></iframe>
+            </div>
+            <div class="prototype-links">
+                <a href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener noreferrer" aria-label="体验用户端原型（在新窗口打开）" class="prototype-link">
+                    <span aria-hidden="true">→</span>
+                    <span>新窗口体验用户端</span>
                 </a>
-                    <a href="../teld/jincke-teld-rights.html" target="_blank" rel="noopener noreferrer" aria-label="体验管理端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
+                <a href="./prototypes/chuxing-equity/teld/jincke-teld-rights.html" target="_blank" rel="noopener noreferrer" aria-label="体验管理端原型（在新窗口打开）" class="prototype-link">
+                    <span aria-hidden="true">→</span>
                     <span>后台管理原型</span>
                 </a>
             </div>
-        </div>
+        </section>
 
         <div class="next-project">
             <a href="multi-tenant-mall.html" class="prev-project">
@@ -442,7 +1298,7 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../assets/scripts/site.js"></script>
     <script>
         document.body.style.opacity = '1';
     </script>

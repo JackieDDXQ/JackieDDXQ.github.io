@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../shared/admin-ui.css">
+    <title>后台管理系统 - 套餐配置</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* 左侧导航栏 */
+        .sidebar {
+            width: 250px;
+            background-color: #001529;
+            color: #fff;
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #002140;
+        }
+        
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1890ff;
+        }
+        
+        .menu-list {
+            margin-top: 20px;
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-item:hover {
+            background-color: #002140;
+        }
+        
+        .menu-item.active {
+            background-color: #1890ff;
+        }
+        
+        .menu-icon {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            height: 64px;
+            background-color: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info {
+            margin-right: 20px;
+        }
+        
+        .logout-btn {
+            padding: 6px 12px;
+            background-color: #ff4d4f;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .logout-btn:hover {
+            background-color: #ff7875;
+        }
+        
+        /* 内容区 */
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        /* 表单容器 */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #1890ff;
+        }
+        
+        /* 表单行 */
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .form-col {
+            flex: 1;
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .form-col:last-child {
+            margin-right: 0;
+        }
+        
+        .form-col.full-width {
+            flex: 100%;
+            margin-right: 0;
+        }
+        
+        /* 表单标签 */
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .form-label .required {
+            color: #ff4d4f;
+            margin-left: 4px;
+        }
+        
+        /* 表单控件 */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        
+        .form-control.error {
+            border-color: #ff4d4f;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* 错误提示 */
+        .error-message {
+            color: #ff4d4f;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        /* 复选框和单选框 */
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+        
+        .checkbox-item,
+        .radio-item {
+            margin-right: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input,
+        .radio-item input {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+        
+        /* 开关组件样式 */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        
+        .toggle-input {
+            display: none;
+        }
+        
+        .toggle-label {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #d9d9d9;
+            border-radius: 24px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .toggle-label::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        
+        .toggle-input:checked + .toggle-label .toggle-inner {
+            background-color: #52c41a;
+        }
+        
+        .toggle-input:checked + .toggle-label::before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .toggle-text .toggle-status-online {
+            color: #52c41a;
+            background-color: transparent;
+        }
+        
+        .toggle-text .toggle-status-offline {
+            color: #999;
+            background-color: transparent;
+            display: none;
+        }
+        
+        .toggle-input:checked + .toggle-label + .toggle-text .toggle-status-online {
+            display: inline;
+        }
+        
+        .toggle-input:checked + .toggle-label + .toggle-text .toggle-status-offline {
+            display: none;
+        }
+        
+        .toggle-input:not(:checked) + .toggle-label + .toggle-text .toggle-status-online {
+            display: none;
+        }
+        
+        .toggle-input:not(:checked) + .toggle-label + .toggle-text .toggle-status-offline {
+            display: inline;
+        }
+        
+        /* 应用管理样式 */
+        .channel-management {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 8px 0;
+        }
+        
+        .channel-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        
+        .channel-item input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .channel-item label {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .channel-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .channel-status-btn {
+            padding: 4px 12px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .status-online {
+            background-color: #52c41a;
+            color: white;
+        }
+        
+        .status-online:hover {
+            background-color: #73d13d;
+        }
+        
+        .status-offline {
+            background-color: #ff7875;
+            color: white;
+        }
+        
+        .status-offline:hover {
+            background-color: #ff4d4f;
+        }
+        
+        /* 按钮 */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #1890ff;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #40a9ff;
+        }
+        
+        .btn-primary:disabled {
+            background-color: #a0cfff;
+            cursor: not-allowed;
+        }
+        
+        .btn-default {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #d9d9d9;
+        }
+        
+        .btn-default:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* 提交按钮区域 */
+        .submit-section {
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+            text-align: right;
+        }
+        
+        /* 提示信息 */
+        .success-message {
+            color: #52c41a;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f6ffed;
+            border: 1px solid #b7eb8f;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+    <script>
+                // 定义全局变量来存储选择的权益
+                var selectedBenefits = [];
+                
+                // 页面加载完成后执行
+                document.addEventListener('DOMContentLoaded', function() {
+                    // 隐藏成功提示信息
+                    document.getElementById('successMessage').style.display = 'none';
+                    
+                    // 价格输入限制
+                    document.getElementById('price').addEventListener('input', function(e) {
+                        // 只允许输入数字和小数点
+                        this.value = this.value.replace(/[^\d.]/g, '');
+                        // 只允许一个小数点
+                        var parts = this.value.split('.');
+                        if (parts.length > 2) {
+                            this.value = parts[0] + '.' + parts[1];
+                        }
+                        // 小数点后最多两位
+                        if (parts.length === 2 && parts[1].length > 2) {
+                            this.value = parts[0] + '.' + parts[1].substring(0, 2);
+                        }
+                    });
+                });
+                
+                // 表单验证函数
+                function validateForm() {
+                    // 获取表单元素
+                    const packageName = document.getElementById('packageName');
+                    const packageCode = document.getElementById('packageCode');
+                    const price = document.getElementById('price');
+                    const contractDuration = document.getElementById('contractDuration');
+                    const billingCycle = document.getElementById('billingCycle');
+                    const orderMethod = document.getElementById('orderMethod');
+                    const effectiveTime = document.getElementById('effectiveTime');
+                    const orderDescription = document.getElementById('orderDesc');
+                    const benefitDescription = document.getElementById('useDesc');
+                    // const benefits = document.querySelectorAll('input[name="benefits"]:checked'); - 不再使用复选框选择权益
+                    const channels = document.querySelectorAll('input[name="channels"]:checked');
+                    const status = document.querySelector('input[name="status"]:checked');
+                    
+                    // 获取错误提示元素
+                    const packageNameError = document.getElementById('packageNameError');
+                    const packageCodeError = document.getElementById('packageCodeError');
+                    const priceError = document.getElementById('priceError');
+                    const priceFormatError = document.getElementById('priceFormatError');
+                    const contractDurationError = document.getElementById('contractDurationError');
+                    const billingCycleError = document.getElementById('billingCycleError');
+                    const orderMethodError = document.getElementById('orderMethodError');
+                    const effectiveTimeError = document.getElementById('effectiveTimeError');
+                    const orderDescriptionError = document.getElementById('orderDescError');
+                    const benefitDescriptionError = document.getElementById('useDescError');
+                    const benefitsError = document.getElementById('benefitsError');
+                    const channelsError = document.getElementById('channelsError');
+                    
+                    // 清除所有错误提示
+                    resetErrors();
+                    
+                    // 验证标志
+                    let isValid = true;
+                    
+                    // 验证套餐名称
+                    if (!packageName.value.trim()) {
+                        packageNameError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证套餐编号
+                    if (!packageCode.value.trim()) {
+                        packageCodeError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证价格
+                    if (!price.value.trim()) {
+                        priceError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        // 验证价格格式
+                        const pricePattern = /^\d+(\.\d{1,2})?$/;
+                        if (!pricePattern.test(price.value)) {
+                            priceFormatError.style.display = 'block';
+                            isValid = false;
+                        }
+                    }
+                    
+                    // 验证合约时长
+                    if (!contractDuration.value.trim()) {
+                        contractDurationError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证计费周期
+                    if (!billingCycle.value) {
+                        billingCycleError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证办理方式
+                    if (!orderMethod.value) {
+                        orderMethodError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证办理后生效时间
+                    if (!effectiveTime.value) {
+                        effectiveTimeError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 订购说明和权益使用说明现在为非必填
+                    // 移除相关验证逻辑
+                    
+                    // 验证权益选择
+                    if (selectedBenefits.length === 0) {
+                        benefitsError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 验证渠道选择
+                    if (channels.length === 0) {
+                        channelsError.style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    // 如果验证通过，提交表单
+                    if (isValid) {
+                        // 显示成功提示
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // 模拟提交延迟
+                        setTimeout(function() {
+                            // 跳转到套餐列表页面
+                            window.location.href = 'packages.html';
+                        }, 2000);
+                    }
+                }
+                
+                // 重置所有错误提示
+                function resetErrors() {
+                    const errors = document.querySelectorAll('.error-message');
+                    errors.forEach(error => {
+                        error.style.display = 'none';
+                    });
+                }
+                
+                // 图片上传预览功能
+                document.addEventListener('DOMContentLoaded', function() {
+                    const fileInput = document.getElementById('packageImages');
+                    const imagePreview = document.getElementById('imagePreview');
+                    const uploadArea = document.getElementById('uploadArea');
+                    
+                    // 点击上传区域触发文件选择
+                    if (uploadArea && fileInput) {
+                        uploadArea.addEventListener('click', function() {
+                            fileInput.click();
+                        });
+                    }
+                    
+                    if (fileInput && imagePreview) {
+                        fileInput.addEventListener('change', function(e) {
+                            // 清空预览区域
+                            imagePreview.innerHTML = '';
+                            
+                            const files = e.target.files;
+                            if (files.length > 0) {
+                                for (let i = 0; i < files.length; i++) {
+                                    const file = files[i];
+                                    // 检查文件类型
+                                    if (file.type.startsWith('image/')) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(event) {
+                                            // 创建预览图片元素
+                                            const imgContainer = document.createElement('div');
+                                            imgContainer.style.position = 'relative';
+                                            imgContainer.style.width = '120px';
+                                            imgContainer.style.height = '120px';
+                                            imgContainer.style.border = '1px solid #e8e8e8';
+                                            imgContainer.style.borderRadius = '4px';
+                                            imgContainer.style.overflow = 'hidden';
+                                            
+                                            const img = document.createElement('img');
+                                            img.src = event.target.result;
+                                            img.style.width = '100%';
+                                            img.style.height = '100%';
+                                            img.style.objectFit = 'cover';
+                                            
+                                            // 创建删除按钮
+                                             const deleteBtn = document.createElement('button');
+                                             deleteBtn.innerHTML = '&times;';
+                                             deleteBtn.style.position = 'absolute';
+                                             deleteBtn.style.top = '5px';
+                                             deleteBtn.style.right = '5px';
+                                             deleteBtn.style.backgroundColor = 'rgba(255, 77, 79, 0.8)';
+                                             deleteBtn.style.color = 'white';
+                                             deleteBtn.style.border = 'none';
+                                             deleteBtn.style.borderRadius = '50%';
+                                             deleteBtn.style.width = '20px';
+                                             deleteBtn.style.height = '20px';
+                                             deleteBtn.style.fontSize = '14px';
+                                             deleteBtn.style.cursor = 'pointer';
+                                             deleteBtn.style.display = 'flex';
+                                             deleteBtn.style.alignItems = 'center';
+                                             deleteBtn.style.justifyContent = 'center';
+                                            
+                                            deleteBtn.onclick = function() {
+                                                imgContainer.remove();
+                                            };
+                                            
+                                            imgContainer.appendChild(img);
+                                            imgContainer.appendChild(deleteBtn);
+                                            imagePreview.appendChild(imgContainer);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">后台管理系统</div>
+            </div>
+            
+            <div class="menu-list">
+                <div class="menu-item active" onclick="window.location.href='packages.html'">
+                    <div class="menu-icon">📦</div>
+                    <div>套餐管理</div>
+                </div>
+                <div class="menu-item" onclick="window.location.href='orders.html'">
+                    <div class="menu-icon">📋</div>
+                    <div>订购管理</div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 顶部导航栏 -->
+            <div class="top-nav">
+                <div class="nav-left">
+                    <div class="back-btn" onclick="window.location.href='packages.html'">←</div>
+                    <h2>套餐配置</h2>
+                </div>
+                <div class="nav-right">
+                    <div class="user-info">管理员</div>
+                    <button class="logout-btn" onclick="window.location.href='../../../../multi-tenant-mall.html'">退出</button>
+                </div>
+            </div>
+            
+            <!-- 内容区 -->
+            <div class="content">
+                <div class="page-title">新建套餐</div>
+                
+                <!-- 表单容器 -->
+                <div class="form-container">
+                    <!-- 成功提示信息 -->
+                    <div class="success-message" id="successMessage">
+                        套餐保存成功，正在返回套餐列表...
+                    </div>
+                    
+                    <!-- 基本信息 -->
+                    <div class="form-section">
+                        <div class="section-title">基本信息</div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label class="form-label">产品状态</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="productStatus" class="toggle-input" checked>
+                                    <label class="toggle-label" for="productStatus">
+                                        <span class="toggle-inner"></span>
+                                        <span class="toggle-switch"></span>
+                                    </label>
+                                    <span class="toggle-text">
+                                        <span class="toggle-status-online">已上架</span>
+                                        <span class="toggle-status-offline">已下架</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label class="form-label">套餐名称 <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="packageName" placeholder="请输入套餐名称">
+                                <div class="error-message" id="packageNameError">请输入套餐名称</div>
+                            </div>
+                            <div class="form-col">
+                                <label class="form-label">套餐编号 <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="packageCode" placeholder="请输入套餐编号">
+                                <div class="error-message" id="packageCodeError">请输入套餐编号</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">价格 <span class="required">*</span></label>
+                            <input type="text" class="form-control" id="price" placeholder="请输入价格">
+                            <div class="error-message" id="priceError">请输入价格</div>
+                            <div class="error-message" id="priceFormatError">请输入有效的价格</div>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">划线价</label>
+                            <input type="text" class="form-control" id="originalPrice" placeholder="请输入划线价">
+                            <div class="error-message" id="originalPriceFormatError">请输入有效的划线价</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">计费周期 <span class="required">*</span></label>
+                            <select class="form-control" id="billingCycle">
+                                <option value="">请选择计费周期</option>
+                                <option value="monthly">月付</option>
+                                <option value="quarterly">季付</option>
+                                <option value="yearly">年付</option>
+                            </select>
+                            <div class="error-message" id="billingCycleError">请选择计费周期</div>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">合约时长 <span class="required">*</span></label>
+                            <div style="display: flex; align-items: center;">
+                                <input type="text" class="form-control" id="contractDuration" placeholder="请输入合约时长（如：12）" style="margin-right: 8px;">
+                                <span style="font-size: 14px; color: #666;">月</span>
+                            </div>
+                            <div class="error-message" id="contractDurationError">请输入合约时长</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">办理方式 <span class="required">*</span></label>
+                            <select class="form-control" id="orderMethod" name="orderMethod">
+                                <option value="">请选择办理方式</option>
+                                <option value="wechat">微信</option>
+                                <option value="alipay">支付宝</option>
+                                <option value="operator">运营商</option>
+                                <option value="unionpay">银联</option>
+                            </select>
+                            <div class="error-message" id="orderMethodError">请选择办理方式</div>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">办理后生效时间 <span class="required">*</span></label>
+                            <select class="form-control" id="effectiveTime">
+                                <option value="">请选择办理后生效时间</option>
+                                <option value="immediate">立即生效</option>
+                                <option value="next_month">次月生效</option>
+                            </select>
+                            <div class="error-message" id="effectiveTimeError">请选择办理后生效时间</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">生效时间范围</label>
+                            <div style="display: flex; gap: 10px; align-items: flex-start;">
+                                <div style="flex: 1;">
+                                    <input type="datetime-local" class="form-control" id="startTime">
+                                </div>
+                                <div style="margin: 10px 0 0; font-size: 16px; color: #999;">至</div>
+                                <div style="flex: 1;">
+                                    <input type="datetime-local" class="form-control" id="endTime">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <!-- 上架应用 -->
+                    <div class="form-section">
+                        <div class="section-title">上架应用</div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <div class="channel-management">
+                                    <div class="channel-item">
+                                        <input type="checkbox" id="channel1" name="channels" value="h5" checked>
+                                        <label for="channel1">H5</label>
+                                        <div class="channel-status">
+                                            <span class="status-text">已上架</span>
+                                            <button class="channel-status-btn status-offline" onclick="toggleChannelStatus(this, 'h5')">下架</button>
+                                        </div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <input type="checkbox" id="channel2" name="channels" value="alipay_mini">
+                                        <label for="channel2">支付宝小程序</label>
+                                        <div class="channel-status">
+                                            <span class="status-text">已下架</span>
+                                            <button class="channel-status-btn status-online" onclick="toggleChannelStatus(this, 'alipay_mini')">上架</button>
+                                        </div>
+                                    </div>
+                                    <div class="channel-item">
+                                        <input type="checkbox" id="channel3" name="channels" value="wechat_mini" checked>
+                                        <label for="channel3">微信小程序</label>
+                                        <div class="channel-status">
+                                            <span class="status-text">已上架</span>
+                                            <button class="channel-status-btn status-offline" onclick="toggleChannelStatus(this, 'wechat_mini')">下架</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message" id="channelsError">请至少选择一个渠道</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 权益关联 -->
+                    <div class="form-section">
+                        <div class="section-title">权益关联</div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div id="benefitDisplay">未关联任何权益</div>
+                                    <button class="btn btn-primary" onclick="openBenefitModal()">关联权益</button>
+                                </div>
+                                <div class="error-message" id="benefitsError">请至少关联一项权益</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 短信配置 -->
+                    <div class="form-section">
+                        <div class="section-title">短信配置</div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="display: flex; align-items: center;">
+                                        <label class="form-label" style="margin-right: 15px;">订购短信</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="smsEnabled" class="toggle-input">
+                                            <label class="toggle-label" for="smsEnabled">
+                                                <span class="toggle-inner"></span>
+                                                <span class="toggle-switch"></span>
+                                            </label>
+                                            <span class="toggle-text">
+                                                <span class="toggle-status-online">开启</span>
+                                                <span class="toggle-status-offline">关闭</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary">关联短信</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 套餐说明 -->
+                    <div class="form-section">
+                        <div class="section-title">套餐说明</div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <label class="form-label">权益介绍</label>
+                                <textarea class="form-control form-textarea" id="orderDesc" placeholder="请输入订购说明"></textarea>
+                                <div class="error-message" id="orderDescError">请输入订购说明</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <label class="form-label">使用说明</label>
+                                <textarea class="form-control form-textarea" id="useDesc" placeholder="请输入权益使用说明"></textarea>
+                                <div class="error-message" id="useDescError">请输入权益使用说明</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col full-width">
+                                <label class="form-label">套餐详情图</label>
+                                <!-- 点击上传区域 -->
+                                <div style="margin-top: 8px;">
+                                    <span class="hint-text" style="display: block; font-size: 12px; color: #999; margin-bottom: 8px;">格式为JPG、PNG</span>
+                                    <div id="uploadArea" style="width: 150px; height: 150px; border: 1px dashed #d9d9d9; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; background-color: #fafafa;">
+                                        <span style="font-size: 14px; color: #999;">点击上传</span>
+                                    </div>
+                                    <!-- 隐藏的文件输入框 -->
+                                    <input type="file" id="packageImages" accept="image/*" multiple style="display: none;">
+                                </div>
+                                <!-- 图片预览区域 -->
+                                <div id="imagePreview" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 提交按钮区域 -->
+                    <div class="submit-section">
+                        <button class="btn btn-default" onclick="window.location.href='packages.html'">取消</button>
+                        <button class="btn btn-primary" onclick="validateForm()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 权益配置列表弹出层 -->
+    <div id="benefitModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>权益配置</h3>
+                <span class="close" onclick="closeBenefitModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- 搜索区域 -->
+                <div class="search-section" style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label>权益配置ID</label>
+                        <input type="text" placeholder="请输入权益配置ID" style="padding: 6px 12px; border: 1px solid #d9d9d9; border-radius: 4px;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label>权益配置名称</label>
+                        <input type="text" placeholder="请输入权益配置名称" style="padding: 6px 12px; border: 1px solid #d9d9d9; border-radius: 4px;">
+                    </div>
+                    <button class="btn btn-primary" style="background-color: #52c41a;">搜索</button>
+                    <button class="btn btn-default">重置</button>
+                </div>
+                
+                <!-- 权益列表表格 -->
+                <table class="table" style="margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>配置编码</th>
+                            <th>配置名称</th>
+                            <th>状态</th>
+                            <th>原子权益</th>
+                            <th>发放数量</th>
+                            <th>附赠权益</th>
+                        </tr>
+                    </thead>
+                    <tbody id="benefitsTableBody">
+                        <!-- 权益配置数据 -->
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RSXBWCJIMJQ99" data-name="霸王茶姬9.9元满减券（陕西）"></td>
+                            <td>RSXBWCJIMJQ99</td>
+                            <td>霸王茶姬9.9元满减券（陕西）</td>
+                            <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                            <td>是</td>
+                            <td>1</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RNXMTTGDJQ20x2" data-name="美团网购20元代金券"></td>
+                            <td>RNXMTTGDJQ20x2</td>
+                            <td>美团网购20元代金券</td>
+                            <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                            <td>是</td>
+                            <td>2</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RNXMTTB71" data-name="美团71元券包"></td>
+                            <td>RNXMTTB71</td>
+                            <td>美团71元券包</td>
+                            <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                            <td>否</td>
+                            <td>1</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RSHHTTMSCQB145" data-name="天猫145元商城券包"></td>
+                            <td>RSHHTTMSCQB145</td>
+                            <td>天猫145元商城券包</td>
+                            <td><span class="status-tag offline" style="background-color: #fff1f0; color: #ff4d4f; border: 1px solid #ffccc7; padding: 2px 8px; border-radius: 4px; font-size: 12px;">下线</span></td>
+                            <td>否</td>
+                            <td>1</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RNXCTWG29915" data-name="宠物团购满299-15元券"></td>
+                            <td>RNXCTWG29915</td>
+                            <td>宠物团购满299-15元券</td>
+                            <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                            <td>是</td>
+                            <td>1</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="benefitCheckbox" data-id="RNXCTWG16906" data-name="宠物团购满169-6元券"></td>
+                            <td>RNXCTWG16906</td>
+                            <td>宠物团购满169-6元券</td>
+                            <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                            <td>是</td>
+                            <td>1</td>
+                            <td>否</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- 分页区域 -->
+                <div class="pagination" style="text-align: right; margin-bottom: 20px;">
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">‹</button>
+                    <button class="page-btn active" style="padding: 6px 12px; border: 1px solid #1890ff; background-color: #1890ff; color: #fff; border-radius: 4px; margin-right: 5px;">1</button>
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">2</button>
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">3</button>
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">4</button>
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">5</button>
+                    <button class="page-btn" style="padding: 6px 12px; border: 1px solid #d9d9d9; background-color: #fff; border-radius: 4px; margin-right: 5px;">›</button>
+                </div>
+                
+                <!-- 已选权益区域 -->
+                <div class="selected-benefits" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e8e8e8;">
+                    <div style="margin-bottom: 15px; font-weight: 500;">已选择 5 项</div>
+                    
+                    <table class="table" style="margin-bottom: 0;">
+                        <thead>
+                            <tr>
+                                <th>配置编码</th>
+                            <th>配置名称</th>
+                            <th>原子权益</th>
+                            <th>权益状态</th>
+                            <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RNXCTWG19910</td>
+                                <td>宠物团购满199-10元券</td>
+                                <td>是</td>
+                                <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                                <td><a href="#" style="color: #ff4d4f;">移除</a></td>
+                            </tr>
+                            <tr>
+                                <td>RNXCTWG16906</td>
+                                <td>宠物团购满169-6元券</td>
+                                <td>是</td>
+                                <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                                <td><a href="#" style="color: #ff4d4f;">移除</a></td>
+                            </tr>
+                            <tr>
+                                <td>RNXCTWG29915</td>
+                                <td>宠物团购满299-15元券</td>
+                                <td>是</td>
+                                <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                                <td><a href="#" style="color: #ff4d4f;">移除</a></td>
+                            </tr>
+                            <tr>
+                                <td>RNXMTTGDJQ20x2</td>
+                                <td>美团网购20元代金券</td>
+                                <td>是</td>
+                                <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                                <td><a href="#" style="color: #ff4d4f;">移除</a></td>
+                            </tr>
+                            <tr>
+                                <td>RSXBWCJIMJQ99</td>
+                                <td>霸王茶姬9.9元满减券（陕西）</td>
+                                <td>是</td>
+                                <td><span class="status-tag online" style="background-color: #f6ffed; color: #52c41a; border: 1px solid #b7eb8f; padding: 2px 8px; border-radius: 4px; font-size: 12px;">上线</span></td>
+                                <td><a href="#" style="color: #ff4d4f;">移除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" onclick="closeBenefitModal()">取消</button>
+                <button class="btn btn-primary" onclick="confirmBenefitSelection()">确认关联</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 弹出层相关变量
+        
+        // 打开权益配置列表弹出层
+        function openBenefitModal() {
+            document.getElementById('benefitModal').style.display = 'block';
+        }
+        
+        // 关闭权益配置列表弹出层
+        function closeBenefitModal() {
+            document.getElementById('benefitModal').style.display = 'none';
+        }
+        
+        // 确认选择的权益配置
+        function confirmBenefitSelection() {
+            var checkboxes = document.getElementsByClassName('benefitCheckbox');
+            selectedBenefits = [];
+            
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selectedBenefits.push({
+                        id: checkboxes[i].dataset.id,
+                        name: checkboxes[i].dataset.name
+                    });
+                }
+            }
+            
+            // 更新选择的权益显示
+            updateSelectedBenefitsDisplay();
+            
+            // 关闭弹出层
+            closeBenefitModal();
+        }
+        
+        // 更新选择的权益显示
+        function updateSelectedBenefitsDisplay() {
+            var displayDiv = document.getElementById('selectedBenefits');
+            if (selectedBenefits.length === 0) {
+                displayDiv.innerHTML = '未关联任何权益';
+            } else {
+                var names = selectedBenefits.map(function(benefit) {
+                    return benefit.name;
+                });
+                displayDiv.innerHTML = names.join(', ');
+            }
+        }
+        
+        // 表单验证函数 - 确保关联了至少一项权益
+        function validateBenefits() {
+            if (selectedBenefits.length === 0) {
+                document.getElementById('benefitsError').style.display = 'block';
+                return false;
+            } else {
+                document.getElementById('benefitsError').style.display = 'none';
+                return true;
+            }
+        }
+        
+        // 点击模态框外部关闭模态框
+        window.onclick = function(event) {
+            var modal = document.getElementById('benefitModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // 应用管理相关功能
+        function toggleChannelStatus(button, channelValue) {
+            // 获取当前渠道项
+            const channelItem = button.closest('.channel-item');
+            const statusText = channelItem.querySelector('.status-text');
+            const checkbox = channelItem.querySelector('input[type="checkbox"]');
+            
+            // 获取当前状态
+            const isOnline = button.textContent === '下架';
+            
+            // 切换状态
+            if (isOnline) {
+                // 改为下架状态
+                statusText.textContent = '已下架';
+                statusText.style.color = '#999';
+                button.textContent = '上架';
+                button.className = 'channel-status-btn status-offline';
+                checkbox.checked = false;
+            } else {
+                // 改为上架状态
+                statusText.textContent = '已上架';
+                statusText.style.color = '#52c41a';
+                button.textContent = '下架';
+                button.className = 'channel-status-btn status-online';
+                checkbox.checked = true;
+            }
+        }
+    </script>
+    
+    <style>
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .modal-header {
+            padding: 16px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .close {
+            color: #999;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover, .close:focus {
+            color: #000;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 16px 20px;
+            background-color: #fff;
+            border-top: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* 表格样式调整 */
+        .modal-body .table {
+            margin-bottom: 0;
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .modal-body .table th,
+        .modal-body .table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .modal-body .table th {
+            background-color: #fafafa;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .modal-body .table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* 状态标签样式 */
+        .status-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-tag.online {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        
+        .status-tag.offline {
+            background-color: #fff1f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+    </style>
+</body>
+</html>

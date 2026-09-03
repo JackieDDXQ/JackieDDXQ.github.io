@@ -1,0 +1,1095 @@
+   <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../shared/admin-ui.css">
+    <title>管理后台 - 充电权益详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 180px;
+            background-color: #fff;
+            color: #333;
+            border-right: 1px solid #e0e0e0;
+        }
+        .logo {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+        .menu {
+            list-style: none;
+        }
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .menu-item:hover {
+            background-color: #f5f7fa;
+        }
+        .menu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .submenu {
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .submenu.show {
+            display: block;
+        }
+        .submenu-item {
+            padding: 10px 20px 10px 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .submenu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .submenu-item.active {
+            background-color: #e6f7ee;
+            border-left-color: #52c41a;
+            color: #1890ff;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: white;
+            padding: 0 20px;
+            height: 64px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .breadcrumb {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #1890ff;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-actions span {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .header-actions span:hover {
+            background-color: #f0f0f0;
+        }
+        .content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .form-section {
+            margin-bottom: 32px;
+        }
+        .form-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        .form-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 240px;
+            max-width: 400px;
+            flex: 1;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 8px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            background-color: #fafafa;
+        }
+        .form-group input[readonly],
+        .form-group select[readonly],
+        .form-group textarea[readonly] {
+            cursor: not-allowed;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .radio-item input {
+            margin: 0;
+        }
+        .card-container {
+            margin-bottom: 16px;
+        }
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+            background-color: #fafafa;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .card-actions .btn {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+        .card-remove {
+            background: none;
+            border: none;
+            color: #ff4d4f;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .card-remove:hover {
+            background-color: #fff2f0;
+        }
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .card-body .form-group {
+            min-width: 200px;
+            flex: 1;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-primary {
+            background-color: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+        .btn-primary:hover {
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #1890ff;
+            border-color: #d9d9d9;
+            outline: none;
+        }
+        .btn-secondary:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+            outline: none;
+        }
+        .btn-secondary:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .btn-success {
+            background-color: #52c41a;
+            color: white;
+            border-color: #52c41a;
+        }
+        .btn-success:hover {
+            background-color: #73d13d;
+            border-color: #73d13d;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .price-input {
+            position: relative;
+        }
+        .price-input input {
+            padding-right: 30px;
+        }
+        .price-input .unit {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 14px;
+        }
+        /* 富文本编辑器样式 */
+        .rich-text-editor {
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .editor-toolbar {
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #d9d9d9;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .toolbar-select {
+            padding: 2px 6px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+        }
+        .toolbar-separator {
+            width: 1px;
+            height: 16px;
+            background-color: #d9d9d9;
+            margin: 0 4px;
+        }
+        .toolbar-btn {
+            padding: 4px 6px;
+            border: 1px solid #d9d9d9;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            min-width: 24px;
+            text-align: center;
+        }
+        .toolbar-btn:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .editor-content {
+            min-height: 150px;
+            padding: 12px;
+            outline: none;
+            font-size: 14px;
+            line-height: 1.5;
+            border-top: 1px solid #d9d9d9;
+            background-color: white;
+        }
+        .info-view {
+            padding: 16px 0;
+        }
+        .info-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            min-width: 240px;
+            flex: 1;
+        }
+        .info-item label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 100px;
+        }
+        .info-item span,
+        .info-item div {
+            font-size: 14px;
+            color: #333;
+            flex: 1;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20system%20logo%20with%20blue%20and%20green%20colors&image_size=square" alt="管理后台">
+                <span>管理后台</span>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active">
+                    示例-充电品牌
+                    <ul class="submenu show">
+                        <li class="submenu-item active">权益管理</li>
+                        <li class="submenu-item">订购管理</li>
+                        <li class="submenu-item">订单管理</li>
+                        <li class="submenu-item">站点管理</li>
+                        <li class="submenu-item">用户管理</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="breadcrumb">
+                    首页 / 示例-充电品牌 / 权益管理 / 充电权益详情
+                </div>
+                <div class="header-actions">
+                    <span>🔍</span>
+                    <span>📝</span>
+                    <span>🔔</span>
+                    <span>👤</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">充电权益详情</div>
+                </div>
+                <div class="form-container">
+                    <!-- 基本信息 -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>基本信息</span>
+                        </div>
+                        <div id="basic-info-view" class="info-view">
+                            <div class="info-row">
+                                <div class="info-item">
+                                    <label>权益名称：</label>
+                                    <span>特来电满20元减10元充电权益</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>权益编码：</label>
+                                    <span>TEL-2026-001</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>状态：</label>
+                                    <span>上线</span>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-item">
+                                    <label>生效时间：</label>
+                                    <span>自然月</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>售卖价格：</label>
+                                    <span>9.9元</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>有效期：</label>
+                                    <span>每月1日至月末</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="basic-info-edit" class="info-edit" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>权益名称</label>
+                                    <input type="text" value="特来电满20元减10元充电权益">
+                                </div>
+                                <div class="form-group">
+                                    <label>权益编码</label>
+                                    <input type="text" value="TEL-2026-001">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>生效时间</label>
+                                    <div class="radio-group" style="display: flex; gap: 24px; align-items: center; white-space: nowrap;">
+                                        <div class="radio-item" style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                                            <input type="radio" name="validity" id="validity-month" checked onchange="toggleValidityConfig()">
+                                            <label for="validity-month" style="white-space: nowrap;">自然月</label>
+                                        </div>
+                                        <div class="radio-item" style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                                            <input type="radio" name="validity" id="validity-date" onchange="toggleValidityConfig()">
+                                            <label for="validity-date" style="white-space: nowrap;">办理日</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>售卖价格</label>
+                                    <div class="price-input">
+                                        <input type="number" value="9.9" step="0.01" min="0">
+                                        <span class="unit">元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" id="validity-config" style="display: none;">
+                                <div class="form-group">
+                                    <label>有效期</label>
+                                    <div class="radio-group" style="display: flex; gap: 24px; align-items: center; white-space: nowrap;">
+                                        <div class="radio-item" style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                                            <input type="radio" name="validity-type" id="validity-fixed" checked>
+                                            <label for="validity-fixed" style="white-space: nowrap;">固定天数</label>
+                                        </div>
+                                        <div class="radio-item" style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                                            <input type="radio" name="validity-type" id="validity-adaptive">
+                                            <label for="validity-adaptive" style="white-space: nowrap;">适配每月天数</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="fixed-days-config">
+                                    <label>固定天数</label>
+                                    <div class="price-input">
+                                        <input type="number" value="30" min="1" step="1">
+                                        <span class="unit">天</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <select>
+                                        <option>上线</option>
+                                        <option>下线</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                <button class="btn btn-secondary" onclick="toggleEdit('basic-info')">取消</button>
+                                <button class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 折扣卡配置 -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>折扣卡配置</span>
+                        </div>
+                        <div id="discount-card-view" class="info-view">
+                            <div class="card" id="discount-card-1">
+                                <div class="card-header">
+                                    <div class="card-title">折扣卡 1</div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-danger" onclick="deleteDiscountCard(1)">删除</button>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="discount-card-1-view">
+                                    <div class="info-row">
+                                        <div class="info-item">
+                                            <label>折扣卡名称：</label>
+                                            <span>95折电费折扣卡</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>抵扣范围：</label>
+                                            <span>仅电费抵扣</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>折扣比例：</label>
+                                            <span>95%</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-item" style="min-width: 100%;">
+                                            <label>抵扣上限设置：</label>
+                                            <div style="margin-left: 100px;">
+                                                <div style="margin-bottom: 8px;">单笔订单：50元</div>
+                                                <div>单月累计：200元</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="discount-card-1-edit" style="display: none;">
+                                    <div class="form-group">
+                                        <label>折扣卡名称</label>
+                                        <input type="text" value="95折电费折扣卡">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>抵扣范围</label>
+                                        <select>
+                                            <option>整单抵扣</option>
+                                            <option selected>仅电费抵扣</option>
+                                            <option>仅服务费抵扣</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>折扣比例</label>
+                                        <div class="price-input">
+                                            <input type="number" value="95" step="0.1" min="1" max="99.9">
+                                            <span class="unit">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="min-width: 100%;">
+                                        <label>抵扣上限设置</label>
+                                        <div class="limit-rules-container">
+                                            <div class="limit-rule">
+                                                <div class="form-row" style="margin-bottom: 8px; align-items: flex-end;">
+                                                    <div class="form-group">
+                                                        <label>上限类型</label>
+                                                        <select>
+                                                            <option selected>单笔订单</option>
+                                                            <option>单日累计</option>
+                                                            <option>单月累计</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>上限金额</label>
+                                                        <div class="price-input">
+                                                            <input type="number" value="50" step="0.01" min="0">
+                                                            <span class="unit">元</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="limit-rule">
+                                                <div class="form-row" style="margin-bottom: 8px; align-items: flex-end;">
+                                                    <div class="form-group">
+                                                        <label>上限类型</label>
+                                                        <select>
+                                                            <option>单笔订单</option>
+                                                            <option>单日累计</option>
+                                                            <option selected>单月累计</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>上限金额</label>
+                                                        <div class="price-input">
+                                                            <input type="number" value="200" step="0.01" min="0">
+                                                            <span class="unit">元</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                        <button class="btn btn-secondary" onclick="cancelEditDiscountCard(1)">取消</button>
+                                        <button class="btn btn-primary">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="discount-card-add-form" style="display: none; margin-top: 16px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">新增折扣卡</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>折扣卡名称</label>
+                                        <input type="text" placeholder="请输入折扣卡名称">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>抵扣范围</label>
+                                        <select>
+                                            <option value="">请选择</option>
+                                            <option>整单抵扣</option>
+                                            <option>仅电费抵扣</option>
+                                            <option>仅服务费抵扣</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>折扣比例</label>
+                                        <div class="price-input">
+                                            <input type="number" placeholder="请输入折扣比例" step="0.1" min="1" max="99.9">
+                                            <span class="unit">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="min-width: 100%;">
+                                        <label>抵扣上限设置</label>
+                                        <div class="limit-rules-container">
+                                            <div class="limit-rule">
+                                                <div class="form-row" style="margin-bottom: 8px; align-items: flex-end;">
+                                                    <div class="form-group">
+                                                        <label>上限类型</label>
+                                                        <select>
+                                                            <option value="">请选择</option>
+                                                            <option>单笔订单</option>
+                                                            <option>单日累计</option>
+                                                            <option>单月累计</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>上限金额</label>
+                                                        <div class="price-input">
+                                                            <input type="number" placeholder="请输入上限数值" step="0.01" min="0">
+                                                            <span class="unit">元</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                    <button class="btn btn-secondary" onclick="cancelAddDiscountCard()">取消</button>
+                                    <button class="btn btn-primary">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 抵扣券配置 -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>抵扣券配置</span>
+                        </div>
+                        <div class="rule-info">
+                            <p><strong>配置规则：</strong></p>
+                            <ul>
+                                <li>同一抵扣范围的抵扣券，单笔订单最多使用 1 张</li>
+                                <li>整单抵扣券与仅电费 / 仅服务费抵扣券不可同时使用</li>
+                                <li>单笔订单使用的抵扣券总数量，不超过系统设置的每单抵扣券使用上限</li>
+                            </ul>
+                        </div>
+                        <div class="info-row" style="margin-bottom: 16px;">
+                            <div class="info-item">
+                                <label>每单抵扣券使用上限：</label>
+                                <span>2张</span>
+                            </div>
+                        </div>
+                        <div id="discount-coupon-view" class="info-view">
+                            <div class="card" id="discount-coupon-1">
+                                <div class="card-header">
+                                    <div class="card-title">抵扣券 1</div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-danger" onclick="deleteDiscountCoupon(1)">删除</button>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="discount-coupon-1-view">
+                                    <div class="info-row">
+                                        <div class="info-item">
+                                            <label>抵扣券名称：</label>
+                                            <span>满20减10元整单优惠券</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>抵扣范围：</label>
+                                            <span>整单抵扣</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-item">
+                                            <label>满减设置：</label>
+                                            <span>满20元减10元</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>单权益发放数量：</label>
+                                            <span>1</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>有效期：</label>
+                                            <span>30天</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="discount-coupon-1-edit" style="display: none;">
+                                    <div class="form-group">
+                                        <label>抵扣券名称</label>
+                                        <input type="text" value="满20减10元整单优惠券">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>抵扣范围</label>
+                                        <select>
+                                            <option selected>整单抵扣</option>
+                                            <option>仅电费抵扣</option>
+                                            <option>仅服务费抵扣</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row" style="min-width: 100%; gap: 8px;">
+                                        <div class="form-group" style="min-width: 100px; max-width: 200px;">
+                                            <label>满</label>
+                                            <div class="price-input">
+                                                <input type="number" value="20" step="0.01" min="0">
+                                                <span class="unit">元</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="min-width: 100px; max-width: 200px;">
+                                            <label>减</label>
+                                            <div class="price-input">
+                                                <input type="number" value="10" step="0.01" min="0">
+                                                <span class="unit">元</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>单权益发放数量</label>
+                                        <input type="number" value="1" min="1" step="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>有效期</label>
+                                        <div class="price-input">
+                                            <input type="number" value="30" min="1" step="1">
+                                            <span class="unit">天</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                        <button class="btn btn-secondary" onclick="cancelEditDiscountCoupon(1)">取消</button>
+                                        <button class="btn btn-primary">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="discount-coupon-add-form" style="display: none; margin-top: 16px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">新增抵扣券</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>抵扣券名称</label>
+                                        <input type="text" placeholder="请输入抵扣券名称">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>抵扣范围</label>
+                                        <select>
+                                            <option value="">请选择</option>
+                                            <option>整单抵扣</option>
+                                            <option>仅电费抵扣</option>
+                                            <option>仅服务费抵扣</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row" style="min-width: 100%; gap: 8px;">
+                                        <div class="form-group" style="min-width: 100px; max-width: 200px;">
+                                            <label>满</label>
+                                            <div class="price-input">
+                                                <input type="number" placeholder="请输入满额" step="0.01" min="0">
+                                                <span class="unit">元</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="min-width: 100px; max-width: 200px;">
+                                            <label>减</label>
+                                            <div class="price-input">
+                                                <input type="number" placeholder="请输入减额" step="0.01" min="0">
+                                                <span class="unit">元</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>单权益发放数量</label>
+                                        <input type="number" placeholder="请输入发放数量" min="1" step="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>有效期</label>
+                                        <div class="price-input">
+                                            <input type="number" placeholder="请输入有效期天数" min="1" step="1">
+                                            <span class="unit">天</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                    <button class="btn btn-secondary" onclick="cancelAddDiscountCoupon()">取消</button>
+                                    <button class="btn btn-primary">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 详细信息 -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>详细信息</span>
+                        </div>
+                        <div id="details-view" class="info-view">
+                            <div class="info-row">
+                                <div class="info-item" style="min-width: 100%;">
+                                    <label>权益介绍：</label>
+                                    <div style="margin-left: 100px; white-space: pre-wrap;">充电品牌满20元减10元充电权益，适用于所有充电品牌充电站点，为用户提供优惠的充电服务。</div>
+                                </div>
+                            </div>
+                            <div class="info-row" style="margin-top: 16px;">
+                                <div class="info-item" style="min-width: 100%;">
+                                    <label>使用说明：</label>
+                                    <div style="margin-left: 100px;">
+                                        <p>1. 本权益适用于所有特来电充电站点</p>
+                                        <p>2. 每次充电满20元可享受10元优惠</p>
+                                        <p>3. 权益有效期为自然月，当月有效</p>
+                                        <p>4. 每个用户每月最多可使用5次</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="details-edit" class="info-edit" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group" style="min-width: 100%; max-width: none;">
+                                    <label>权益介绍</label>
+                                    <textarea>特来电满20元减10元充电权益，适用于所有特来电充电站点，为用户提供优惠的充电服务。</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group" style="min-width: 100%; max-width: none;">
+                                    <label>使用说明</label>
+                                    <div class="rich-text-editor">
+                                        <div class="editor-content" contenteditable="true">
+                                            <p>1. 本权益适用于所有特来电充电站点</p>
+                                            <p>2. 每次充电满20元可享受10元优惠</p>
+                                            <p>3. 权益有效期为自然月，当月有效</p>
+                                            <p>4. 每个用户每月最多可使用5次</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="justify-content: flex-end; margin-top: 16px; padding-top: 16px;">
+                                <button class="btn btn-secondary" onclick="toggleEdit('details')">取消</button>
+                                <button class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 表单操作 -->
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="window.location.href='jincke-teld-rights.html'">返回</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                Copyright © 2024 管理后台 All rights reserved.
+            </div>
+        </div>
+    </div>
+    <script>
+        // 菜单展开/折叠功能
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const submenu = this.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('show');
+                }
+            });
+        });
+        
+        // 菜单点击事件处理
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有菜单项的active类
+                document.querySelectorAll('.menu-item, .submenu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+                // 添加当前菜单项的active类
+                this.classList.add('active');
+                this.closest('.menu-item').classList.add('active');
+                
+                // 处理页面跳转
+                const menuText = this.textContent.trim();
+                if (menuText === '权益管理') {
+                    window.location.href = 'jincke-teld-rights.html';
+                } else if (menuText === '订购管理') {
+                    window.location.href = 'order-management.html';
+                } else if (menuText === '订单管理') {
+                    window.location.href = 'order-management-charging.html';
+                } else if (menuText === '站点管理') {
+                    window.location.href = 'station-management.html';
+                } else if (menuText === '用户管理') {
+                    window.location.href = 'user-management.html';
+                }
+            });
+        });
+        
+        // 切换编辑状态
+        function toggleEdit(section) {
+            const viewElement = document.getElementById(`${section}-view`);
+            const editElement = document.getElementById(`${section}-edit`);
+            
+            if (viewElement.style.display !== 'none') {
+                viewElement.style.display = 'none';
+                editElement.style.display = 'block';
+            } else {
+                viewElement.style.display = 'block';
+                editElement.style.display = 'none';
+            }
+        }
+        
+        // 显示新增折扣卡表单
+        function addDiscountCardForm() {
+            document.getElementById('discount-card-add-form').style.display = 'block';
+        }
+        
+        // 取消新增折扣卡
+        function cancelAddDiscountCard() {
+            document.getElementById('discount-card-add-form').style.display = 'none';
+        }
+        
+        // 编辑折扣卡
+        function editDiscountCard(id) {
+            document.getElementById(`discount-card-${id}-view`).style.display = 'none';
+            document.getElementById(`discount-card-${id}-edit`).style.display = 'block';
+        }
+        
+        // 取消编辑折扣卡
+        function cancelEditDiscountCard(id) {
+            document.getElementById(`discount-card-${id}-edit`).style.display = 'none';
+            document.getElementById(`discount-card-${id}-view`).style.display = 'block';
+        }
+        
+        // 删除折扣卡
+        function deleteDiscountCard(id) {
+            if (confirm(`确定要删除折扣卡 ${id} 吗？`)) {
+                // 这里可以实现具体的删除逻辑
+                alert(`删除折扣卡 ${id}`);
+            }
+        }
+        
+        // 显示新增抵扣券表单
+        function addDiscountCouponForm() {
+            document.getElementById('discount-coupon-add-form').style.display = 'block';
+        }
+        
+        // 取消新增抵扣券
+        function cancelAddDiscountCoupon() {
+            document.getElementById('discount-coupon-add-form').style.display = 'none';
+        }
+        
+        // 编辑抵扣券
+        function editDiscountCoupon(id) {
+            document.getElementById(`discount-coupon-${id}-view`).style.display = 'none';
+            document.getElementById(`discount-coupon-${id}-edit`).style.display = 'block';
+        }
+        
+        // 取消编辑抵扣券
+        function cancelEditDiscountCoupon(id) {
+            document.getElementById(`discount-coupon-${id}-edit`).style.display = 'none';
+            document.getElementById(`discount-coupon-${id}-view`).style.display = 'block';
+        }
+        
+        // 删除抵扣券
+        function deleteDiscountCoupon(id) {
+            if (confirm(`确定要删除抵扣券 ${id} 吗？`)) {
+                // 这里可以实现具体的删除逻辑
+                alert(`删除抵扣券 ${id}`);
+            }
+        }
+        
+        // 切换有效期配置显示
+        function toggleValidityConfig() {
+            const validityMonth = document.getElementById('validity-month');
+            const validityConfig = document.getElementById('validity-config');
+            
+            if (validityMonth.checked) {
+                validityConfig.style.display = 'none';
+            } else {
+                validityConfig.style.display = 'flex';
+                toggleFixedDaysConfig(); // 初始化固定天数配置显示
+            }
+        }
+        
+        // 切换固定天数配置显示
+        function toggleFixedDaysConfig() {
+            const validityFixed = document.getElementById('validity-fixed');
+            const fixedDaysConfig = document.getElementById('fixed-days-config');
+            
+            if (validityFixed.checked) {
+                fixedDaysConfig.style.display = 'block';
+            } else {
+                fixedDaysConfig.style.display = 'none';
+            }
+        }
+        
+        // 为有效期类型单选按钮添加事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            const validityTypeRadios = document.querySelectorAll('input[name="validity-type"]');
+            validityTypeRadios.forEach(radio => {
+                radio.addEventListener('change', toggleFixedDaysConfig);
+            });
+        });
+    </script>
+</body>
+</html>

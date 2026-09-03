@@ -5,7 +5,8 @@
   "scripts": {
     "start": "python -m http.server 8080",
     "deploy": "gh-pages -d .",
-    "build": "echo 'No build required for static site'"
+    "build": "echo 'No build required for static site'",
+    "generate:redirects": "node scripts/generate-legacy-redirects.mjs"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"

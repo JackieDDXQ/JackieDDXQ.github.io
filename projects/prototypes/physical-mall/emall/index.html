@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../shared/admin-ui.css">
+    <title>万象系统 - 实物商城</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #2c3e50;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar-header img {
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        .menu-item a:hover {
+            background-color: #34495e;
+            color: #fff;
+        }
+
+        .menu-item.active > a {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .menu-item.active > a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #2ecc71;
+        }
+
+        .menu-item.has-submenu > a::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            width: 0;
+            height: 0;
+            border-left: 5px solid #bdc3c7;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .menu-item.has-submenu.open > a::after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .submenu {
+            list-style: none;
+            background-color: #1a252f;
+            display: none;
+        }
+
+        .submenu.open {
+            display: block;
+        }
+
+        .submenu-item a {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        .submenu-item.active a {
+            background-color: #2c3e50;
+            color: #3498db;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            height: 60px;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-btn, .fullscreen-btn, .settings-btn, .user-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 16px;
+            color: #666;
+            position: relative;
+        }
+
+        .search-btn::after {
+            content: 'Ctrl+K';
+            position: absolute;
+            right: -40px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .user-btn img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #3498db;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .search-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .search-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-group label {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .search-group input,
+        .search-group select {
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        .search-group input:focus,
+        .search-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .date-range span {
+            color: #999;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #666;
+        }
+
+        .table-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header-left {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #fafafa;
+            font-weight: 600;
+            color: #666;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-online {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .status-offline {
+            background-color: #fdecea;
+            color: #e74c3c;
+        }
+
+        .btn-detail {
+            background-color: #fff;
+            color: #3498db;
+            border: 1px solid #3498db;
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-release {
+            background-color: #27ae60;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .pagination {
+            padding: 15px 20px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pagination-info {
+            color: #999;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pagination select {
+            padding: 4px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .pagination button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #e0e0e0;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #f0f0f0;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button.active {
+            background-color: #3498db;
+            color: #fff;
+            border-color: #3498db;
+        }
+
+        .footer {
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            background-color: #fff;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .icon {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .btn-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 4px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background-color: #fff;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: #f0f0f0;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .import-area {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .import-area:hover {
+            border-color: #3498db;
+        }
+
+        .import-area.dragover {
+            border-color: #3498db;
+            background-color: #f8fcfe;
+        }
+
+        .import-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            opacity: 0.5;
+        }
+
+        .import-text {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .import-hint {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .import-hint a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .import-tips {
+            background-color: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .import-tips ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .import-tips li {
+            margin-bottom: 4px;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233498db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="Logo">
+                <h1>万象</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="#首页">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>首页
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#权益管理">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>权益管理
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#全部订单">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>全部订单
+                    </a>
+                </li>
+                <li class="menu-item has-submenu active open">
+                    <a href="#实物商城">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>实物商城
+                    </a>
+                    <ul class="submenu open">
+                        <li class="submenu-item active">
+                            <a href="index.html">上架管理</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="order-manage.html">订单管理</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="address-manage.html">地址管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#短信模板">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>短信模板
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#应用管理">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        </svg>应用管理
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#系统设置">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>系统设置
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="toggle-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb">
+                        <a href="#首页">首页</a>
+                        <span>/</span>
+                        <a href="#实物商城">实物商城</a>
+                        <span>/</span>
+                        <span>上架管理</span>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <button class="search-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    <button class="fullscreen-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 3 21 3 21 9"/>
+                            <polyline points="9 21 3 21 3 15"/>
+                            <line x1="21" y1="3" x2="14" y2="10"/>
+                            <line x1="3" y1="21" x2="10" y2="14"/>
+                        </svg>
+                    </button>
+                    <button class="settings-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </button>
+                    <button class="user-btn">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E" alt="User">
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">上架管理</h1>
+                </div>
+
+                <div class="search-panel">
+                    <div class="search-row">
+                        <div class="search-group">
+                            <label>商品名称</label>
+                            <input type="text" placeholder="请输入商品名称">
+                        </div>
+                        <div class="search-group">
+                            <label>商品编码</label>
+                            <input type="text" placeholder="请输入商品编码">
+                        </div>
+                        <div class="search-group">
+                            <label>状态</label>
+                            <select>
+                                <option value="">请选择状态</option>
+                                <option value="online">上架</option>
+                                <option value="offline">下架</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <label>分类</label>
+                            <select>
+                                <option value="">请选择分类</option>
+                                <option value="electronics">电子产品</option>
+                                <option value="clothing">服装配饰</option>
+                                <option value="food">食品饮料</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <label>所属品牌</label>
+                            <select>
+                                <option value="">请选择品牌</option>
+                                <option value="brand001">万象电子科技</option>
+                                <option value="brand002">智能科技集团</option>
+                                <option value="brand003">创新电子</option>
+                                <option value="brand004">环球智能科技</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="search-row">
+                        <div class="search-group">
+                            <label>创建时间</label>
+                            <div class="date-range">
+                                <input type="datetime-local" placeholder="开始日期时间">
+                                <span>→</span>
+                                <input type="datetime-local" placeholder="结束日期时间">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-actions">
+                        <button class="btn btn-primary">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            搜索
+                        </button>
+                        <button class="btn btn-secondary">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <polyline points="1 20 1 14 7 14"/>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                            </svg>
+                            重置
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-panel">
+                    <div class="table-header">
+                        <div class="table-header-left">
+                        <a href="create-product.html" class="btn btn-success">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            新建商品
+                        </a>
+                        <button class="btn btn-primary" onclick="showImportModal()">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            批量导入
+                        </button>
+                    </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>商品编码</th>
+                                    <th>商品名称</th>
+                                    <th>所属品牌</th>
+                                    <th>分类</th>
+                                    <th>状态</th>
+                                    <th>价格</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SP001</td>
+                                    <td>蓝牙耳机 Pro Max</td>
+                                    <td>万象电子科技</td>
+                                    <td>电子产品</td>
+                                    <td><span class="status status-online">上架</span></td>
+                                    <td>¥299.00</td>
+                                    <td>2026-03-09 16:29:46</td>
+                                    <td>2026-03-09 17:00:17</td>
+                                    <td class="btn-group">
+                                        <a href="product-detail.html" class="btn btn-detail">详情</a>
+                                        <button class="btn btn-delete">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SP002</td>
+                                    <td>智能手表 Ultra</td>
+                                    <td>智能科技集团</td>
+                                    <td>电子产品</td>
+                                    <td><span class="status status-online">上架</span></td>
+                                    <td>¥1999.00</td>
+                                    <td>2026-03-08 09:15:32</td>
+                                    <td>2026-03-08 09:15:32</td>
+                                    <td class="btn-group">
+                                        <a href="product-detail.html" class="btn btn-detail">详情</a>
+                                        <button class="btn btn-delete">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SP003</td>
+                                    <td>运动T恤 男款</td>
+                                    <td>创新电子</td>
+                                    <td>服装配饰</td>
+                                    <td><span class="status status-offline">下架</span></td>
+                                    <td>¥199.00</td>
+                                    <td>2026-03-06 13:35:59</td>
+                                    <td>2026-03-09 11:27:34</td>
+                                    <td class="btn-group">
+                                        <a href="product-detail.html" class="btn btn-detail">详情</a>
+                                        <button class="btn btn-delete">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SP004</td>
+                                    <td>坚果礼盒装</td>
+                                    <td>环球智能科技</td>
+                                    <td>食品饮料</td>
+                                    <td><span class="status status-offline">下架</span></td>
+                                    <td>¥158.00</td>
+                                    <td>2026-03-06 11:51:16</td>
+                                    <td>2026-03-06 11:43:42</td>
+                                    <td class="btn-group">
+                                        <a href="product-detail.html" class="btn btn-detail">详情</a>
+                                        <button class="btn btn-delete">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SP005</td>
+                                    <td>保温杯 500ml</td>
+                                    <td>万象电子科技</td>
+                                    <td>生活用品</td>
+                                    <td><span class="status status-online">上架</span></td>
+                                    <td>¥89.00</td>
+                                    <td>2026-03-06 10:43:08</td>
+                                    <td>2026-03-06 11:45:58</td>
+                                    <td class="btn-group">
+                                        <a href="product-detail.html" class="btn btn-detail">详情</a>
+                                        <button class="btn btn-delete">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <div class="pagination-info">从第 0 项开始,共 93 项</div>
+                        <div class="pagination-controls">
+                            <select>
+                                <option>10 / 页</option>
+                                <option>20 / 页</option>
+                                <option>50 / 页</option>
+                                <option>100 / 页</option>
+                            </select>
+                            <button disabled>‹</button>
+                            <button class="active">1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button>5</button>
+                            <button>6</button>
+                            <button>7</button>
+                            <span>...</span>
+                            <button>10</button>
+                            <button>›</button>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    Copyright © 2024 万象 All rights reserved.
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="importModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">批量导入商品</span>
+                <button class="modal-close" onclick="hideImportModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="import-tips">
+                    温馨提示：
+                    <ul>
+                        <li>请确保导入文件格式为 .xlsx 或 .csv</li>
+                        <li>单次导入最多支持 1000 条数据</li>
+                        <li>导入前请下载模板并按照模板格式填写</li>
+                    </ul>
+                </div>
+                <input type="file" id="fileInput" class="file-input" accept=".xlsx,.csv">
+                <div class="import-area" onclick="document.getElementById('fileInput').click()" ondragover="event.preventDefault(); this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault(); this.classList.remove('dragover'); handleFileDrop(event)">
+                    <svg class="import-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <div class="import-text">点击或拖拽文件到此处上传</div>
+                    <div class="import-hint">支持 .xlsx 和 .csv 格式，<a href="#" onclick="downloadTemplate(); return false;">下载导入模板</a></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideImportModal()">取消</button>
+                <button class="btn btn-primary" onclick="submitImport()">开始导入</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.menu-item.has-submenu > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                parent.classList.toggle('open');
+                const submenu = parent.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('open');
+                }
+            });
+        });
+
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.querySelectorAll('.submenu-item').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function showImportModal() {
+            document.getElementById('importModal').classList.add('show');
+        }
+
+        function hideImportModal() {
+            document.getElementById('importModal').classList.remove('show');
+            document.getElementById('fileInput').value = '';
+        }
+
+        function handleFileDrop(event) {
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('fileInput').files = files;
+                alert('文件已选择: ' + files[0].name);
+            }
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if (this.files.length > 0) {
+                alert('文件已选择: ' + this.files[0].name);
+            }
+        });
+
+        function downloadTemplate() {
+            alert('正在下载导入模板...');
+        }
+
+        function submitImport() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('请先选择要导入的文件');
+                return;
+            }
+            alert('正在导入商品数据...\n\n文件: ' + fileInput.files[0].name + '\n\n导入完成！');
+            hideImportModal();
+        }
+
+        document.getElementById('importModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideImportModal();
+            }
+        });
+    </script>
+</body>
+</html>

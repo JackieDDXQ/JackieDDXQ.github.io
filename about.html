@@ -7,8 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="description" content="Jackie Hou 的产品方法、核心能力、AI 实践与教育背景。">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500;600;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/site.css">
+    <link rel="stylesheet" href="assets/styles/redesign.css?v=20260901-1">
 </head>
 <body class="interior-page">
     <div class="grain" aria-hidden="true"></div>
@@ -18,12 +19,12 @@
             <a href="index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span></button>
             <nav id="site-navigation" class="navbar-right" aria-label="主导航">
-                <a href="index.html" class="nav-item">Index</a>
-                <a href="about.html" class="nav-item active">About</a>
-                <a href="experience.html" class="nav-item">Experience</a>
-                <a href="projects.html" class="nav-item">Projects</a>
-                <a href="contact.html" class="nav-item">Contact</a>
-                <span class="nav-location">Based in Beijing</span>
+                <a href="index.html" class="nav-item">首页</a>
+                <a href="projects.html" class="nav-item">项目</a>
+                <a href="experience.html" class="nav-item">经历</a>
+                <a href="about.html" class="nav-item active">关于</a>
+                <a href="contact.html" class="nav-item">联系</a>
+                <span class="nav-location">INDEX / 2026</span>
             </nav>
         </div>
         <span class="site-progress" aria-hidden="true"></span>
@@ -46,9 +47,29 @@
 
         <div class="divider"></div>
 
-        <section class="capability-section">
+        <section class="working-method-section" aria-labelledby="working-method-title">
             <div class="section-header">
                 <span class="section-number">02</span>
+                <h2 id="working-method-title" class="section-title">工作方法</h2>
+                <span class="section-label">WORKING METHOD</span>
+            </div>
+            <div class="working-method-intro">
+                <h3>一项产品，<br>应该被阅读四次。</h3>
+                <p>先理解业务全景，再进入关键决策；既看对象如何连接，也看判断最终留下了什么可验证结果。</p>
+            </div>
+            <ol class="working-method-grid">
+                <li><span>01 / OVERVIEW</span><strong>全景</strong><p>识别参与角色、业务边界与完整链路。</p></li>
+                <li><span>02 / DETAIL</span><strong>局部</strong><p>展开关键规则、异常状态与产品决策。</p></li>
+                <li><span>03 / RELATION</span><strong>关系</strong><p>说明对象、数据和上下游依赖如何连接。</p></li>
+                <li><span>04 / OUTCOME</span><strong>结果</strong><p>回到交付证据、业务反馈与后续验证。</p></li>
+            </ol>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="capability-section">
+            <div class="section-header">
+                <span class="section-number">03</span>
                 <h2 class="section-title">核心能力</h2>
                 <span class="section-label">CAPABILITIES</span>
             </div>
@@ -85,7 +106,7 @@
 
         <section class="capability-section">
             <div class="section-header">
-                <span class="section-number">03</span>
+                <span class="section-number">04</span>
                 <h2 class="section-title">AI实践与探索</h2>
                 <span class="section-label">AI EXPLORATION</span>
             </div>
@@ -132,7 +153,7 @@
 
         <section class="education-section">
             <div class="section-header">
-                <span class="section-number">04</span>
+                <span class="section-number">05</span>
                 <h2 class="section-title">教育背景</h2>
                 <span class="section-label">EDUCATION</span>
             </div>
@@ -163,6 +184,6 @@
             <a href="#main-content">Back to top ↑</a>
         </div>
     </footer>
-    <script src="script.js" defer></script>
+    <script src="assets/scripts/site.js" defer></script>
 </body>
 </html>
