@@ -624,6 +624,58 @@
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
+            margin-top: 20px;
+        }
+
+        .prototype-embed {
+            overflow: hidden;
+            border: 1px solid var(--demo-line);
+            background: #eef2f6;
+        }
+
+        .prototype-embed__bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 52px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--demo-line);
+            background: var(--demo-surface-soft);
+        }
+
+        .prototype-embed__label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--demo-white);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .prototype-embed__label::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--demo-accent);
+            box-shadow: 0 0 0 5px var(--demo-accent-soft);
+        }
+
+        .prototype-embed__hint {
+            color: var(--demo-muted);
+            font-size: 0.72rem;
+        }
+
+        .prototype-embed iframe {
+            display: block;
+            width: 100%;
+            height: min(900px, 82vh);
+            min-height: 720px;
+            border: 0;
+            background: #eef2f6;
         }
 
         .prototype-link {
@@ -734,6 +786,17 @@
             .case-note,
             .prototype-section__head {
                 grid-template-columns: 1fr;
+            }
+
+            .prototype-embed__bar {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .prototype-embed iframe {
+                height: 812px;
+                min-height: 0;
             }
         }
 
@@ -1193,13 +1256,20 @@
                 <div>
                     <span class="case-eyebrow">PROTOTYPES</span>
                     <h2 id="prototype-title">查看交互原型</h2>
-                    <p>用户端用于体验完整充电流程，后台管理原型用于查看权益配置与运营管理。</p>
+                    <p>直接在页面中体验用户端完整充电流程，或在新窗口打开；后台管理原型用于查看权益配置与运营管理。</p>
                 </div>
             </div>
+            <div class="prototype-embed">
+                <div class="prototype-embed__bar">
+                    <span class="prototype-embed__label">和包出行 · 充电</span>
+                    <span class="prototype-embed__hint">可点击、滚动并切换完整流程</span>
+                </div>
+                <iframe src="./prototypes/chuxing-equity/carlife/index.html#/map-list" title="和包出行充电服务交互原型" loading="lazy"></iframe>
+            </div>
             <div class="prototype-links">
-                <a href="https://modao.cc/proto/MIHVmNttbrz9j77mVXVxW/sharing?view_mode=read_only&amp;screen=rbpVE1YUzKQtg3NG2" target="_blank" rel="noopener noreferrer" aria-label="体验用户端原型（在新窗口打开）" class="prototype-link">
+                <a href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener noreferrer" aria-label="体验用户端原型（在新窗口打开）" class="prototype-link">
                     <span aria-hidden="true">→</span>
-                    <span>用户端原型</span>
+                    <span>新窗口体验用户端</span>
                 </a>
                 <a href="./prototypes/chuxing-equity/teld/jincke-teld-rights.html" target="_blank" rel="noopener noreferrer" aria-label="体验管理端原型（在新窗口打开）" class="prototype-link">
                     <span aria-hidden="true">→</span>
