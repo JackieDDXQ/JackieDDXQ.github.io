@@ -1,0 +1,239 @@
+.prototype-atlas {
+  min-width: 1024px;
+  color: #171715;
+  background: #eee9df;
+}
+
+.prototype-atlas .lab-bar {
+  border-color: #171715;
+}
+
+.atlas {
+  width: min(1600px, calc(100% - 80px));
+  margin: 0 auto;
+}
+
+.atlas-label {
+  margin: 0;
+  color: #245042;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.atlas-hero {
+  position: relative;
+  min-height: 73vh;
+  padding: 7vh 0 6vh;
+  border-bottom: 1px solid #171715;
+}
+
+.atlas-hero__edition {
+  position: absolute;
+  top: 9vh;
+  right: 0;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.13em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.atlas-hero h1 {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(130px, 18vw, 290px);
+  font-weight: 400;
+  line-height: 0.7;
+  letter-spacing: -0.08em;
+}
+
+.atlas-hero h1 span:last-child {
+  align-self: flex-end;
+  margin-right: 7vw;
+  color: #245042;
+  font-style: italic;
+}
+
+.atlas-hero__cn {
+  position: absolute;
+  right: 1vw;
+  bottom: 6.5vh;
+  margin: 0;
+  font-family: "Songti SC", SimSun, serif;
+  font-size: clamp(30px, 3vw, 48px);
+  letter-spacing: 0.16em;
+}
+
+.atlas-hero__role {
+  position: absolute;
+  bottom: 7vh;
+  left: 0;
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.atlas-index {
+  display: grid;
+  grid-template-columns: 4fr 3fr 2fr;
+  gap: 5vw;
+  min-height: 62vh;
+  padding: 9vh 0;
+  border-bottom: 1px solid #171715;
+}
+
+.atlas-index h2 {
+  margin: 28px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(50px, 5vw, 82px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.atlas-index ol {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #171715;
+  list-style: none;
+}
+
+.atlas-index li {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(23, 23, 21, 0.3);
+  font-family: Georgia, serif;
+  font-size: 23px;
+}
+
+.atlas-index li span {
+  align-self: center;
+  color: #245042;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+.atlas-index aside {
+  align-self: end;
+  padding-top: 12px;
+  border-top: 1px solid #245042;
+}
+
+.atlas-index aside span {
+  color: #245042;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.atlas-index aside p {
+  margin: 16px 0 0;
+  font-family: "Songti SC", SimSun, serif;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.atlas-case {
+  display: grid;
+  grid-template-columns: 1fr 4fr 3fr;
+  gap: 3vw;
+  min-height: 72vh;
+  padding: 9vh 0;
+  border-bottom: 1px solid #171715;
+}
+
+.atlas-case__number {
+  color: #245042;
+  font-family: Georgia, serif;
+  font-size: clamp(74px, 9vw, 150px);
+  line-height: 0.7;
+}
+
+.atlas-case__title h2 {
+  margin: 32px 0 0;
+  font-family: "Songti SC", SimSun, Georgia, serif;
+  font-size: clamp(48px, 5.5vw, 88px);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.055em;
+}
+
+.atlas-case__diagram {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  gap: 13px 18px;
+  padding-top: 4px;
+  font-size: 14px;
+}
+
+.atlas-case__diagram i {
+  align-self: center;
+  height: 1px;
+  background: #245042;
+}
+
+.atlas-case__diagram small {
+  grid-column: 2;
+  margin-top: 12px;
+  color: #686861;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.atlas-case__note {
+  grid-column: 3;
+  align-self: end;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.atlas-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 7vh 0 11vh;
+}
+
+.atlas-metrics article {
+  padding-top: 16px;
+  border-top: 1px solid #171715;
+}
+
+.atlas-metrics strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: clamp(64px, 7vw, 110px);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+}
+
+.atlas-metrics sup {
+  color: #245042;
+  font-size: 0.34em;
+}
+
+.atlas-metrics article span {
+  color: #66665f;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.atlas-metrics > p {
+  grid-column: 1 / -1;
+  margin: 42px 0 0;
+  color: #66665f;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

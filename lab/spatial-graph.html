@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Spatial Graph design probe for Jackie Hou's portfolio.">
+  <title>A — Spatial Graph · Jackie Hou Lab</title>
+  <link rel="stylesheet" href="assets/common.css">
+  <link rel="stylesheet" href="assets/spatial-graph.css">
+  <script src="assets/interactions.js" defer></script>
+</head>
+<body class="prototype prototype-graph">
+  <a class="skip-link" href="#graph">跳转到关系图</a>
+  <header class="lab-bar lab-bar--overlay">
+    <a class="lab-mark" href="./">JH / LAB</a>
+    <nav class="lab-switcher" aria-label="Prototype 切换">
+      <a class="is-active" href="spatial-graph.html" aria-current="page">A</a>
+      <a href="editorial-atlas.html">B</a>
+      <a href="spatial-canvas.html">C</a>
+    </nav>
+    <p>Spatial Graph</p>
+  </header>
+
+  <main class="graph" id="graph" data-graph>
+    <div class="graph__caption">
+      <span>Prototype A / 关系作为空间</span>
+      <p>Hover or focus a word to read its immediate relationships.</p>
+    </div>
+
+    <svg class="graph__lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+      <line data-edge="jackie-product" x1="715" y1="430" x2="258" y2="330" />
+      <line data-edge="jackie-systems" x1="715" y1="430" x2="535" y2="210" />
+      <line data-edge="jackie-mechanism" x1="715" y1="430" x2="1010" y2="240" />
+      <line data-edge="jackie-experience" x1="715" y1="430" x2="480" y2="650" />
+      <line data-edge="jackie-research" x1="715" y1="430" x2="935" y2="680" />
+      <line data-edge="systems-architecture" x1="535" y1="210" x2="1210" y2="455" />
+      <line data-edge="mechanism-architecture" x1="1010" y1="240" x2="1210" y2="455" />
+      <line data-edge="research-notes" x1="935" y1="680" x2="205" y2="715" />
+      <line data-edge="product-project" x1="258" y1="330" x2="1135" y2="735" />
+      <line data-edge="systems-project" x1="535" y1="210" x2="1135" y2="735" />
+      <line data-edge="mechanism-project" x1="1010" y1="240" x2="1135" y2="735" />
+    </svg>
+
+    <button class="graph-node graph-node--identity" type="button" data-node="jackie">
+      <span>Jackie Hou</span>
+      <small>侯嘉琪</small>
+    </button>
+    <button class="graph-node graph-node--product" type="button" data-node="product">Product</button>
+    <button class="graph-node graph-node--systems" type="button" data-node="systems">Systems</button>
+    <button class="graph-node graph-node--mechanism" type="button" data-node="mechanism">Mechanism</button>
+    <button class="graph-node graph-node--experience" type="button" data-node="experience">Experience</button>
+    <button class="graph-node graph-node--research" type="button" data-node="research">Research</button>
+    <button class="graph-node graph-node--architecture" type="button" data-node="architecture">Architecture</button>
+    <button class="graph-node graph-node--notes" type="button" data-node="notes">Notes</button>
+
+    <article class="graph-project" data-node="project" tabindex="0">
+      <p>Selected project / 01</p>
+      <h1>运营商权益<br>全链路管理系统</h1>
+      <ul aria-label="辅助数据">
+        <li><strong>30% → 90%</strong></li>
+        <li><strong>10M+</strong></li>
+        <li><strong>-70%</strong></li>
+      </ul>
+    </article>
+
+  </main>
+</body>
+</html>

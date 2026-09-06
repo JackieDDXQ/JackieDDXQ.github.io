@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从项目、工作活动与证据之间的真实关系，探索 Jackie Hou 的作品网络。">
+  <title>Connected Practice · Jackie Hou</title>
+  <link rel="stylesheet" href="assets/network-atlas.css">
+  <script type="module" src="assets/network-atlas.js"></script>
+</head>
+<body>
+  <a class="skip" href="#network">进入关系网络</a>
+  <header class="topbar"><a href="./" class="wordmark">JH<span>Jackie Hou / 侯嘉琪</span></a><span class="edition">CONNECTED PRACTICE / 03</span><a href="spatial-system.html" class="previous">上一轮示例 ↗</a></header>
+  <main class="workspace">
+    <section class="explorer" aria-label="项目与工作方式的网络">
+      <div class="viewbar"><button type="button" class="home-button" disabled>◎ 作品全景</button><div class="camera-options" aria-label="观察视角"></div><span class="example-tag">DESIGN STUDY</span></div>
+      <div class="map-heading"><span class="eyebrow">WORK, CONNECTED.</span><h1>项目之间，<br>还有什么？</h1><p>沿着工作活动，发现共同的方法和证据。</p></div>
+      <div class="viewport" id="network" tabindex="0" aria-label="关系画布，可拖动或使用方向键平移。节点可用 Tab 键选择。">
+        <div class="world"><svg class="edges" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L8 4L0 8"/></marker></defs><g class="edge-layer"></g></svg><div class="lane-labels" aria-hidden="true"></div><div class="node-layer"></div></div>
+        <p class="map-message" role="status">正在读取作品网络…</p>
+      </div>
+      <div class="map-footer"><span class="relation-preview" aria-live="polite">选择节点，读懂它与周围的关系。</span><div class="map-tools"><button type="button" data-zoom="out" aria-label="缩小画布" disabled>−</button><button type="button" data-fit disabled>适应画布</button><button type="button" data-zoom="in" aria-label="放大画布" disabled>+</button></div></div>
+    </section>
+    <aside class="inspector" aria-label="当前节点与关系">
+      <div class="inspector-scroll"><span class="eyebrow panel-eyebrow">AN ATLAS OF WORK & THINKING</span><h2 class="focus-title" tabindex="-1">从一项工作，<br>走向另一项。</h2><p class="focus-summary">同一个项目连接能力、工作活动、系统和产物。选择任一节点，可以沿关系继续探索。</p><div class="focus-facts"></div><a class="source-link" hidden>打开案例或原型 ↗</a>
+        <section class="home-guide"><h3>试着沿这条线走</h3><div class="guided-path"><button data-jump="project:rights-management" disabled><span>01</span>运营商权益</button><i>↓ 开展工作</i><button data-jump="activity:prototype-design" disabled><span>02</span>原型设计与实现</button><i>↑ AI 辅助 · ↓ 产出</i><button data-jump="ai:rapid-prototyping" disabled><span>03</span>Rapid prototyping</button></div><p>也可以从共享活动，横向进入其他项目。</p></section>
+        <section class="connections-panel" hidden><div class="section-label"><h3>直接关系</h3><span class="relation-count"></span></div><p class="relation-explainer">箭头保留关系方向，两端均可继续探索。</p><div class="relationship-list"></div></section>
+        <div class="legend"><span><i class="solid"></i>内容有依据</span><span><i class="dotted"></i>待确认 / 探索</span><span><i class="dashed"></i>待证据 / 预测</span></div>
+      </div>
+      <div class="data-note"><span class="data-version">PORTFOLIO NETWORK</span><a href="data/portfolio-network.json">查看源数据 ↗</a></div>
+    </aside>
+  </main>
+  <footer class="journey-bar"><span>本次探索</span><nav class="breadcrumbs" aria-label="探索路径"></nav><span class="graph-count"></span></footer>
+  <noscript><section class="fallback"><h2>静态项目入口</h2><p>交互网络需要 JavaScript。你仍可直接阅读这些案例。</p><a href="../projects/rights-management.html">运营商权益全链路管理系统</a><a href="../projects/zhishu-platform.html">命题智能协同平台</a><a href="../projects/chuxing-equity.html">和包 APP 出行权益生态</a><a href="../projects/multi-tenant-mall.html">多租户会员订阅商城</a><a href="../projects/physical-mall.html">实物商城产品</a></section></noscript>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从项目、工作活动与证据之间的真实关系，探索 Jackie Hou 的作品网络。">
+  <title>Connected Practice · Jackie Hou</title>
+  <link rel="stylesheet" href="assets/network-atlas.css">
+  <link rel="stylesheet" href="assets/network-orbit.css">
+  <script type="module" src="assets/network-orbit.js"></script>
+</head>
+<body>
+  <a class="skip" href="#network">进入关系网络</a>
+  <header class="topbar"><a href="./" class="wordmark">JH<span>Jackie Hou / 侯嘉琪</span></a><span class="edition">CONSTELLATION / 04</span><a href="network-atlas-flat.html" class="previous">对比平面版本 ↗</a></header>
+  <main class="workspace">
+    <section class="explorer" aria-label="项目与工作方式的网络">
+      <div class="viewbar"><button type="button" class="home-button" disabled>◎ 全景</button><div class="camera-options" aria-label="聚簇视角"><button data-camera="projectAnatomy" disabled>项目聚簇</button><button data-camera="capabilityEvidence" disabled>能力关联</button><button data-camera="augmentedPractice" disabled>AI 与工作流</button></div><span class="example-tag">3D KNOWLEDGE GRAPH</span></div>
+      <div class="map-heading"><span class="eyebrow">WORK, IN CONSTELLATION.</span><h1>每一项工作，<br>都有引力。</h1><p>项目 · 能力 · 共同的工作方式</p></div>
+      <div class="viewport" id="network" tabindex="0" aria-label="3D 关系图。拖动或使用方向键旋转，Tab 选择节点，Enter 展开。">
+        <canvas class="space-canvas" aria-hidden="true"></canvas><div class="node-layer"></div>
+        <p class="map-message" role="status">正在读取作品网络…</p>
+        <div class="space-caption" aria-hidden="true"><span>SPATIAL RELATIONSHIPS</span><span class="orientation">Y 0° / X 0°</span></div>
+      </div>
+      <div class="cluster-legend" aria-label="聚簇颜色"></div>
+      <div class="map-footer"><span class="relation-preview" aria-live="polite">拖动旋转，点击节点聚焦。</span><div class="map-tools"><button class="orbit-toggle" aria-pressed="false" disabled>▷ 自动环绕</button><button data-turn="-0.25" aria-label="向左旋转" disabled>↶</button><button data-turn="0.25" aria-label="向右旋转" disabled>↷</button><button type="button" data-zoom="out" aria-label="缩小画布" disabled>−</button><button type="button" data-fit disabled>重置</button><button type="button" data-zoom="in" aria-label="放大画布" disabled>+</button></div></div>
+    </section>
+    <aside class="inspector" aria-label="当前节点与关系">
+      <div class="search-box"><label for="node-search">⌕ <span class="sr-only">查找节点</span></label><input id="node-search" class="node-search" type="search" placeholder="查找项目、能力、产物…" autocomplete="off"><div class="search-results" aria-live="polite"></div></div>
+      <div class="inspector-scroll"><span class="eyebrow panel-eyebrow">AN ATLAS OF WORK & THINKING</span><h2 class="focus-title" tabindex="-1">从一项工作，<br>走向另一项。</h2><p class="focus-summary">同一个项目连接能力、工作活动、系统和产物。选择任一节点，可以沿关系继续探索。</p><div class="focus-facts"></div><a class="source-link" hidden>打开案例或原型 ↗</a>
+        <section class="home-guide"><h3>试着沿这条线走</h3><div class="guided-path"><button data-jump="project:rights-management" disabled><span>01</span>运营商权益</button><i>↓ 开展工作</i><button data-jump="activity:prototype-design" disabled><span>02</span>原型设计与实现</button><i>↑ AI 辅助 · ↓ 产出</i><button data-jump="ai:rapid-prototyping" disabled><span>03</span>Rapid prototyping</button></div><p>也可以从共享活动，横向进入其他项目。</p></section>
+        <section class="connections-panel" hidden><div class="section-label"><h3>直接关系</h3><span class="relation-count"></span></div><p class="relation-explainer">箭头保留关系方向，两端均可继续探索。</p><div class="relationship-list"></div></section>
+        <div class="legend"><span><i class="solid"></i>内容有依据</span><span><i class="dotted"></i>待确认 / 探索</span><span><i class="dashed"></i>待证据 / 预测</span></div><p class="layout-note">空间距离用于组织阅读，不代表量化的相似度或项目成果。</p>
+      </div>
+      <div class="data-note"><span class="data-version">PORTFOLIO NETWORK</span><a href="data/portfolio-network.json">查看源数据 ↗</a></div>
+    </aside>
+  </main>
+  <footer class="journey-bar"><span>本次探索</span><nav class="breadcrumbs" aria-label="探索路径"></nav><span class="graph-count"></span></footer>
+  <noscript><section class="fallback"><h2>静态项目入口</h2><p>交互网络需要 JavaScript。你仍可直接阅读这些案例。</p><a href="../projects/rights-management.html">运营商权益全链路管理系统</a><a href="../projects/zhishu-platform.html">命题智能协同平台</a><a href="../projects/chuxing-equity.html">和包 APP 出行权益生态</a><a href="../projects/multi-tenant-mall.html">多租户会员订阅商城</a><a href="../projects/physical-mall.html">实物商城产品</a></section></noscript>
+</body>
+</html>

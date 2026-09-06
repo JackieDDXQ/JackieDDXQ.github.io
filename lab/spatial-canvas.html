@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Spatial Canvas design probe for Jackie Hou's portfolio.">
+  <title>C — Spatial Canvas · Jackie Hou Lab</title>
+  <link rel="stylesheet" href="assets/common.css">
+  <link rel="stylesheet" href="assets/spatial-canvas.css">
+  <script src="assets/interactions.js" defer></script>
+</head>
+<body class="prototype prototype-canvas">
+  <a class="skip-link" href="#canvas">跳转到空间画布</a>
+  <header class="lab-bar lab-bar--canvas">
+    <a class="lab-mark" href="./">JH / LAB</a>
+    <nav class="lab-switcher" aria-label="Prototype 切换">
+      <a href="spatial-graph.html">A</a>
+      <a href="editorial-atlas.html">B</a>
+      <a class="is-active" href="spatial-canvas.html" aria-current="page">C</a>
+    </nav>
+    <p>Spatial Canvas</p>
+  </header>
+
+  <main class="canvas-viewport" id="canvas" data-canvas tabindex="0" aria-label="可平移的信息画布。拖动或使用方向键探索。">
+    <div class="canvas-controls">
+      <p><span aria-hidden="true">↔</span> Drag to explore / Arrow keys</p>
+      <button type="button" data-canvas-reset>Reset view</button>
+    </div>
+
+    <div class="canvas-stage" data-canvas-stage>
+      <section class="canvas-region canvas-region--identity" tabindex="0" data-region data-depth="0.02">
+        <p>Identity / 00</p>
+        <h1>Jackie Hou</h1>
+        <strong>侯嘉琪</strong>
+      </section>
+
+      <section class="canvas-region canvas-region--topics" tabindex="0" data-region data-depth="0.035">
+        <p>Fields / 01</p>
+        <ul>
+          <li>Product</li>
+          <li>Systems</li>
+          <li>Mechanism</li>
+          <li>Experience</li>
+          <li>Research</li>
+        </ul>
+      </section>
+
+      <section class="canvas-region canvas-region--project" tabindex="0" data-region data-depth="0.015">
+        <p>Selected project / 02</p>
+        <h2>运营商权益<br>全链路管理系统</h2>
+        <span>Open region ↗</span>
+      </section>
+
+      <section class="canvas-region canvas-region--metrics" tabindex="0" data-region data-depth="0.04" aria-label="辅助数据">
+        <p>Signals / 03</p>
+        <div><strong>30% → 90%</strong><strong>10M+</strong><strong>-70%</strong></div>
+      </section>
+
+      <section class="canvas-region canvas-region--notes" tabindex="0" data-region data-depth="0.055">
+        <p>Notes / 04</p>
+        <h2>Notes</h2>
+      </section>
+
+      <section class="canvas-region canvas-region--architecture" tabindex="0" data-region data-depth="0.025">
+        <p>Structure / 05</p>
+        <h2>Architecture</h2>
+        <div aria-hidden="true"><span>Product</span><i></i><span>System</span><i></i><span>Experience</span></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

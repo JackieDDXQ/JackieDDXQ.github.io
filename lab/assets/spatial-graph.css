@@ -1,0 +1,180 @@
+.prototype-graph {
+  min-width: 1024px;
+  min-height: 100vh;
+  color: #17221e;
+  background: #f0f2ec;
+}
+
+.prototype-graph .lab-bar {
+  color: #28332f;
+  border-color: rgba(23, 34, 30, 0.24);
+}
+
+.graph {
+  position: relative;
+  min-height: 900px;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgba(23, 34, 30, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 34, 30, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.graph__caption {
+  position: absolute;
+  z-index: 2;
+  top: 94px;
+  left: 4.2vw;
+  display: flex;
+  align-items: baseline;
+  gap: 34px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.graph__caption p {
+  margin: 0;
+  color: #74807b;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.graph__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.graph__lines line {
+  stroke: rgba(23, 34, 30, 0.22);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
+}
+
+.graph.has-active .graph__lines line {
+  opacity: 0.12;
+}
+
+.graph.has-active .graph__lines line.is-related {
+  opacity: 1;
+  stroke: #1d6950;
+  stroke-width: 1.5;
+}
+
+.graph-node {
+  position: absolute;
+  z-index: 3;
+  padding: 4px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  cursor: default;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: clamp(17px, 1.55vw, 25px);
+  letter-spacing: -0.03em;
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.graph.has-active .graph-node,
+.graph.has-active .graph-project {
+  opacity: 0.24;
+}
+
+.graph.has-active .graph-node.is-related,
+.graph.has-active .graph-node.is-active,
+.graph.has-active .graph-project.is-related,
+.graph.has-active .graph-project.is-active {
+  opacity: 1;
+}
+
+.graph-node:hover,
+.graph-node:focus-visible,
+.graph-node.is-active {
+  color: #126246;
+  border-color: currentColor;
+  transform: translateY(-3px);
+}
+
+.graph-node--identity {
+  top: 42%;
+  left: 44%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 0;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: clamp(58px, 6vw, 92px);
+  font-weight: 400;
+  line-height: 0.85;
+  text-align: left;
+}
+
+.graph-node--identity small {
+  margin-top: 22px;
+  font-family: Arial, "PingFang SC", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+}
+
+.graph-node--product { top: 34%; left: 15%; }
+.graph-node--systems { top: 20%; left: 35%; font-size: clamp(24px, 2.3vw, 38px); }
+.graph-node--mechanism { top: 22%; left: 68%; }
+.graph-node--experience { top: 70%; left: 30%; font-size: clamp(22px, 2vw, 34px); }
+.graph-node--research { top: 73%; left: 62%; }
+.graph-node--architecture { top: 49%; left: 82%; font-size: clamp(20px, 1.9vw, 32px); }
+.graph-node--notes { top: 77%; left: 12%; font-family: Georgia, serif; font-style: italic; }
+
+.graph-project {
+  position: absolute;
+  z-index: 4;
+  right: 5.2vw;
+  bottom: 6vh;
+  width: min(33vw, 470px);
+  padding-top: 14px;
+  border-top: 1px solid #17221e;
+  background: rgba(240, 242, 236, 0.88);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.graph-project:hover,
+.graph-project:focus-visible,
+.graph-project.is-active {
+  transform: translateY(-4px);
+}
+
+.graph-project > p {
+  margin: 0 0 14px;
+  color: #66736e;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.graph-project h1 {
+  margin: 0;
+  font-family: "Songti SC", SimSun, Georgia, serif;
+  font-size: clamp(28px, 2.75vw, 44px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.graph-project ul {
+  display: flex;
+  gap: 32px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.graph-project strong {
+  color: #126246;
+  font-size: 16px;
+  font-weight: 500;
+}
