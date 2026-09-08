@@ -1,5 +1,14 @@
 # Portfolio redesign plan
 
+## Collection homepage and rights case — 2026-09-08
+
+- Rebuilt the homepage and rights-management case around the latest co-created collection design: gray canvas, pastel semantic colors, thematic folders and linked reading materials.
+- The homepage offers project and question entry points. The rights page retains 12 source-qualified materials and three reading perspectives, with guided routes, related content, real prototype links, keyboard navigation and static text fallback.
+- Preserved public page paths and eight legacy case fragments. Other pages, prototype sources and tracked dist output remain unchanged.
+- The user explicitly authorized this work on the current `codex/codexthreads01a0702d6ff57da2860a5cc9a939a78e-ac` branch, overriding the usual redesign/v2 rule for this task. Pulled that branch before edits; no production or deployment changes.
+- Desktop and 390px checks covered navigation, modal reading, view changes, history, Escape and focus restoration. Static checks covered 10 HTTP routes, local references, complete perspective membership and relationship targets. Reduced motion was inspected in source; no browser media emulation. A script-free temporary copy verified text fallback.
+- See [design, evidence boundaries and maintenance notes](plans/2026-09-08-collection-home-and-rights-design.md). Changes are uncommitted and unpublished.
+
 ## Objective
 
 Evolve the current portfolio into a clearer, more credible product-management case archive while keeping the existing production site available throughout the work.

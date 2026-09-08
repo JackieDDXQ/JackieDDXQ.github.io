@@ -27,6 +27,19 @@ python -m http.server 8080
 
 Then open `http://localhost:8080/`.
 
+The September 8 collection redesign is available at `/` and
+`/projects/rights-management.html`. The homepage offers project and question
+entries. The rights collection supports three reading perspectives, expandable
+folders, related materials and guided reading. Drag empty desktop canvas space
+or focus the canvas and use arrow keys; press Escape to close an article.
+Mobile uses a vertical layout. Complete text remains available without
+JavaScript through native expandable articles below the collection.
+
+See [the collection design and maintenance notes](docs/plans/2026-09-08-collection-home-and-rights-design.md).
+Case content lives in `assets/scripts/cases/rights-collection.js`; when editing
+it, also update the static text in `projects/rights-management.html` and the
+source snapshot `docs/RIGHTS_COLLECTION_CONTENT.json`.
+
 The isolated design experiments are available at `http://localhost:8080/lab/`.
 The single-project nested canvas is `http://localhost:8080/lab/rights-workspace.html`.
 Click a miniature board to enter systems, decisions, artifacts or activities. Click
