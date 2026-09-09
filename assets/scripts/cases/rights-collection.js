@@ -154,7 +154,17 @@ function fitFolderWorld(){
  const mobile=matchMedia('(max-width:700px)').matches;
  const contentTop=Math.max(535,overview.offsetTop+overview.offsetHeight+100,intro.offsetTop+intro.offsetHeight+100);
  folderCaption.style.top=mobile?'':(contentTop-75)+'px';
- let x=65,y=contentTop,rowHeight=0;
+ // Pack folders against the actual canvas width, then center each row.
+ const availableWidth=world.clientWidth-130;
+ let y=contentTop,rowHeight=0,rowWidth=0,row=[];
+ function placeRow(){
+  let x=(world.clientWidth-rowWidth)/2;
+  for(const {folder,width,height} of row){
+   folder.style.left=x+'px';folder.style.top=y+'px';folder.style.height=height+'px';
+   x+=width+50;
+  }
+  y+=rowHeight+100;row=[];rowWidth=0;rowHeight=0;
+ }
  grid.querySelectorAll('.topic-folder').forEach(folder=>{
   const open=expandedFolders.has(Number(folder.dataset.folder));
   folder.classList.toggle('is-open',open);
@@ -170,12 +180,13 @@ function fitFolderWorld(){
   });
   body.style.height=(floor+45)+'px';
   const width=open?1340:420,height=open?Math.max(floor+45,400):folder.querySelector('.folder-cover').offsetHeight;
-  if(x+width>1460&&x>65){x=65;y+=rowHeight+100;rowHeight=0;}
-  folder.style.left=x+'px';folder.style.top=y+'px';folder.style.height=height+'px';
-  x+=width+50;rowHeight=Math.max(rowHeight,height);
+  if(row.length&&rowWidth+50+width>availableWidth)placeRow();
+  rowWidth+=(row.length?50:0)+width;row.push({folder,width,height});
+  rowHeight=Math.max(rowHeight,height);
   if(open)drawFolderLinks(body,cards);
  });
- world.style.height=mobile?'':Math.max(1050,y+rowHeight+100)+'px';
+ if(row.length)placeRow();
+ world.style.height=mobile?'':Math.max(1050,y)+'px';
 }
 function drawFolderLinks(body,cards){
  body.querySelector('.network-links')?.remove();
@@ -229,6 +240,13 @@ overview.addEventListener('click',e=>{const b=e.target.closest('[data-overview-v
 grid.addEventListener('click',e=>{const b=e.target.closest('[data-folder-toggle]');if(b){const n=Number(b.dataset.folderToggle);setFolderOpen(n,!expandedFolders.has(n))}});
 // Cards retain their identity while articles and browser history change.
 window.addEventListener('resize',fitFolderWorld);
+// Also respond when an app pane changes width without a window resize.
+let lastCanvasWidth=0;
+const canvasResize=new ResizeObserver(()=>{
+ const width=viewport.clientWidth;
+ if(width!==lastCanvasWidth){lastCanvasWidth=width;fitFolderWorld();}
+});
+canvasResize.observe(viewport);
 document.fonts.ready.then(fitFolderWorld);
 renderFolders();
 
