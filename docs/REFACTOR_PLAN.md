@@ -1,5 +1,12 @@
 # Portfolio redesign plan
 
+## Homepage network opening — 2026-09-08
+
+- Replaced the split homepage opening with a spatial relationship map based on the user-selected `lab/spatial-system.html` reference. Retained its centered identity, pastel topic nodes and thin connections, with new reading topics grounded in existing project material.
+- Six topics expand into a question and two real material destinations. The rights collection remains a clear project entry; the existing lower homepage and rights case are unchanged.
+- Added isolated home-atlas CSS/JS, responsive line geometry, text masking, focus handling and static link fallback. Editorial links are not business-flow or capability-validation claims.
+- See [the network refinement notes](plans/2026-09-08-home-network-refinement.md). Current-branch work remains uncommitted and unpublished.
+
 ## Collection homepage and rights case — 2026-09-08
 
 - Rebuilt the homepage and rights-management case around the latest co-created collection design: gray canvas, pastel semantic colors, thematic folders and linked reading materials.
@@ -189,3 +196,16 @@ Follow-up navigation review removed the Omni write-off menu and the CEL member a
 - Scoped content comes from explicit rights-project scope; work activities come from the project's outgoing has-activity edges. Reading dialogs retain direct relationship names, directions and confirmation states. Original prototype links are preserved. This is a read-only canvas, not a whiteboard editor.
 - Added zoom-style entry, pan, zoom/fit, sidebar/breadcrumb navigation, hash/history states, native dialog focus restoration, Escape return, reduced-motion handling and a static case fallback. Preserved all previous examples and public pages.
 - Verified desktop overview, system board, material dialog, Escape closure/focus return and overview return. JavaScript syntax passed; redirect generator ran. Changes remain uncommitted and unpublished.
+
+## 首页内容补充 — 2026-09-09
+
+- 首屏重复项目卡改为个人路径入口，新增教育与工作路径、四个阅读视角、AI 实践和邮件联系。来源和验证记录见 docs/plans/2026-09-08-home-content-expansion.md。
+- 保留静态架构与既有链接；桌面、390px 和 320px 布局及主题交互已检查。按用户授权在当前分支修改，远端同步网络失败，尚未提交或发布。
+
+## 出行项目收藏页 — 2026-09-09
+
+- 将原深色线性案例重组为与新版首页、权益项目一致的浅色收藏体系，采用项目专属的路线、站点、状态和资金轨迹语言。
+- 提供“跟随一次充电”“理解产品决策”“看三方如何协作”三条路线及 13 份材料；详情阅读器保留来源边界与关联阅读。
+- 内容来自原出行页面及本站既有原型，明确标注为方案设计与联调前对齐，不使用未验证的上线结果或业务指标。
+- 保留页面 URL、原型链接、旧 fragment 入口和无 JavaScript 文字材料。修改留在当前分支，尚未提交或发布。
+- 后续按用户指定的权益项目页对齐：直接复用其画布、总览、文件夹、卡片与阅读器样式，替换出行页的纵向列表；13 份出行材料与三条叙事路线保留。权益页面未改动。

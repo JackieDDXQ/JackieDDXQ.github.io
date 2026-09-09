@@ -29,7 +29,7 @@ Then open `http://localhost:8080/`.
 
 The September 8 collection redesign is available at `/` and
 `/projects/rights-management.html`. The homepage offers project and question
-entries. The rights collection supports three reading perspectives, expandable
+entries. Its opening network offers six work themes; select a theme to reveal related material, and press Escape to return to the overview. The rights collection supports three reading perspectives, expandable
 folders, related materials and guided reading. Drag empty desktop canvas space
 or focus the canvas and use arrow keys; press Escape to close an article.
 Mobile uses a vertical layout. Complete text remains available without
@@ -114,3 +114,7 @@ Run this after adding or renaming a pure-HTML prototype page. Do not hand-edit f
 On either computer, pull before starting work and push all work that must be available on the other computer. Do not work on the same unpushed branch from both computers at the same time.
 
 See `AGENTS.md` for repository rules and `docs/REFACTOR_PLAN.md` for the redesign plan.
+
+The homepage's personal-path, working-method and AI-practice sections are static content in `index.html`, styled by `assets/styles/home-content.css`. Their source notes are in `docs/plans/2026-09-08-home-content-expansion.md`.
+
+The travel charging case at `projects/chuxing-equity.html` reuses the rights collection styles and shell, with travel-specific previews and a dedicated script under `assets/styles/cases/` and `assets/scripts/cases/`. Its content and evidence boundaries are recorded in `docs/plans/2026-09-09-chuxing-collection-design.md`.

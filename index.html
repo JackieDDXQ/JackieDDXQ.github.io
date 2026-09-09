@@ -5,7 +5,8 @@
   <title>Jackie Hou · 工作与思考</title>
   <meta name="description" content="Jackie Hou 的产品工作与思考。从具体项目、业务判断和实践材料，探索复杂系统里的角色、规则与关系。">
   <meta name="theme-color" content="#edf0f4"><meta property="og:title" content="Jackie Hou · 工作与思考"><meta property="og:description" content="从一件具体的事，开始理解一个系统。"><meta property="og:type" content="website">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/styles/collection.css"><script src="assets/scripts/collection.js" defer></script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/styles/collection.css"><link rel="stylesheet" href="assets/styles/home-atlas.css"><script src="assets/scripts/collection.js" defer></script><script src="assets/scripts/home-atlas.js" defer></script>
+  <link rel="stylesheet" href="assets/styles/home-content.css">
 </head>
 <body class="collection-home">
 <a class="skip-link" href="#main-content">跳转到主要内容</a>
@@ -15,20 +16,21 @@
   <nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="index.html" aria-current="page">首页</a><a href="projects.html">项目</a><a href="experience.html">经历</a><a href="about.html">关于</a><a class="contact-link" href="contact.html">联系我 ↗</a></nav>
 </header>
 <main id="main-content" class="home-shell">
-  <section class="home-intro" aria-labelledby="intro-title">
-    <div class="intro-copy">
-      <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> JACKIE HOU · PRODUCT MANAGER</p>
-      <h1 id="intro-title">把复杂的事，<br>连成<em>可以理解的整体。</em></h1>
-      <p>我是 Jackie，一名产品经理。<br>我关注业务里的角色、规则与关系，<br>也关注一个想法如何成为人们可以使用的产品。</p>
-      <div class="intro-links"><a class="soft-link" href="#collections">从项目开始 <span aria-hidden="true">↘</span></a><a class="under-link" href="about.html">关于我的路径 ↗</a></div>
-    </div>
-    <div class="intro-field" aria-label="从三个问题进入权益项目">
-      <span class="field-label">A FEW CONNECTED THINGS</span>
-      <a class="field-card field-structure" href="projects/rights-management.html#project/map"><small>01 / 结构 <span aria-hidden="true">↗</span></small><strong>先看见关系，<br>再理解系统。</strong><div class="mini-model" aria-hidden="true"><span>供给</span><i>→</i><span>权益</span><i>→</i><span>用户</span></div></a>
-      <a class="field-card field-decision" href="projects/rights-management.html#project/manual"><small>02 / 决策 <span aria-hidden="true">↗</span></small><strong>哪些判断，<br>仍然交给人？</strong><p class="mini-line">从一次实际的供给选择开始。<br>价格、返点、账期与补货时间。</p></a>
-      <a class="field-card field-note" href="projects/rights-management.html#project/thought"><small>03 / 思考 <span aria-hidden="true">↗</span></small><strong>标准化，应该停在哪里？</strong><p>一个还在继续的问题。</p></a>
-      <span class="field-caption">不同入口，同一份思考</span>
-    </div>
+  <section class="home-atlas" id="home-atlas" aria-label="Jackie Hou 的工作与思考地图">
+    <div class="atlas-caption"><p class="eyebrow">00 / WORK &amp; THINKING</p><p>从具体的工作出发，<br>看见问题之间的联系。</p><button class="atlas-reset" type="button" hidden>← 回到全景</button></div>
+    <svg class="atlas-lines" aria-hidden="true"></svg>
+    <div class="atlas-identity" data-atlas-id="identity"><p class="eyebrow">PRODUCT MANAGER</p><h1 id="intro-title">Jackie Hou</h1><p class="atlas-statement">在业务、系统与人之间，整理关系。</p><a href="about.html">关于我的路径 <span aria-hidden="true">↗</span></a></div>
+    <nav class="atlas-topics" aria-label="从工作主题探索内容">
+      <a class="atlas-topic topic-modeling" href="projects/rights-management.html#project/map" data-atlas-id="modeling" data-atlas-topic="modeling"><small>01 / 业务建模 <i aria-hidden="true">↗</i></small><span>Modeling</span></a>
+      <a class="atlas-topic topic-decisions" href="projects/rights-management.html#project/manual" data-atlas-id="decisions" data-atlas-topic="decisions"><small>02 / 规则与取舍 <i aria-hidden="true">↗</i></small><span>Decisions</span></a>
+      <a class="atlas-topic topic-experience" href="projects/chuxing-equity.html" data-atlas-id="experience" data-atlas-topic="experience"><small>03 / 用户体验 <i aria-hidden="true">↗</i></small><span>Experience</span></a>
+      <a class="atlas-topic topic-collaboration" href="projects/zhishu-platform.html" data-atlas-id="collaboration" data-atlas-topic="collaboration"><small>04 / 协作机制 <i aria-hidden="true">↗</i></small><span>Collaboration</span></a>
+      <a class="atlas-topic topic-practice" href="projects/rights-management.html#project/guide" data-atlas-id="practice" data-atlas-topic="practice"><small>05 / 从方案到实践 <i aria-hidden="true">↗</i></small><span>Practice</span></a>
+      <a class="atlas-topic topic-questions" href="projects/rights-management.html#project/thought" data-atlas-id="questions" data-atlas-topic="questions"><small>06 / 开放思考 <i aria-hidden="true">↗</i></small><span>Questions</span></a>
+    </nav>
+    <section class="atlas-detail" id="atlas-detail" aria-labelledby="atlas-detail-title" hidden><p class="eyebrow">FOLLOW THE CONNECTION</p><h2 id="atlas-detail-title"></h2><p class="atlas-detail-description"></p><div class="atlas-detail-links"></div></section>
+    <a class="atlas-profile" data-atlas-id="background" href="#path"><small>A LITTLE ABOUT ME <span aria-hidden="true">↘</span></small><h2>从城乡规划，<br>到产品实践。</h2><p>学习与工作的几个转折，构成了今天的我。</p><span class="atlas-profile-enter">认识侯嘉琪 <b aria-hidden="true">↓</b></span></a>
+    <div class="atlas-bottom"><p class="atlas-hint" aria-live="polite">每个主题，都通向一份具体的材料。</p><a href="#collections">浏览项目收藏 <span aria-hidden="true">↓</span></a></div>
   </section>
   <section id="collections" class="collection-section" aria-labelledby="collections-title">
     <div class="section-bar"><h2 id="collections-title">工作与思考 <small>SELECTED COLLECTIONS</small></h2><div class="view-toggle" data-home-views role="group" aria-label="选择浏览方式" hidden><button type="button" data-home-view="projects" aria-pressed="true" aria-controls="project-collections">按项目浏览</button><button type="button" data-home-view="questions" aria-pressed="false" aria-controls="question-collections">从问题进入</button></div></div>
@@ -55,7 +57,30 @@
       </div><p class="questions-caption">从权益项目开始积累，让一个问题连接多份材料。</p>
     </div>
   </section>
-  <section class="quiet-note" aria-labelledby="note-title"><div><p class="eyebrow">A WORK IN PROGRESS</p><h2 id="note-title">项目会结束，<br>问题还会继续。</h2></div><div><p>这里放着产品工作中的具体材料，也保留判断的来由、实践的边界和未完成的思考。你可以沿一条路线读下去，也可以从一张卡片，走向另一个问题。</p><a class="under-link" href="contact.html">如果这些问题也让你感兴趣，聊聊 ↗</a></div></section>
+  <nav class="home-index" aria-label="继续了解我"><span>项目之外</span><a href="#path">我的路径 ↓</a><a href="#method">工作方法 ↓</a><a href="#ai-practice">AI 实践 ↓</a></nav>
+  <section class="home-chapter home-path" id="path" aria-labelledby="path-title">
+    <div class="chapter-intro"><p class="eyebrow">01 / BACKGROUND</p><h2 id="path-title">你好，我是侯嘉琪。<br>也是 Jackie Hou。</h2><p>我在清华学习城乡规划与工程教育，工作从数字化运营走向平台产品。这里记录着几段不同的学习与实践。</p><a class="under-link" href="experience.html">展开工作经历 ↗</a></div>
+    <ol class="path-stops">
+      <li><span class="path-date">2016 — 2020</span><div><h3>城乡规划</h3><p>清华大学建筑学院 · 工学学士</p><span class="path-tag">学习 / 空间与系统</span></div></li>
+      <li><span class="path-date">2020 — 2023</span><div><h3>工程教育</h3><p>清华大学教育学院 · 教育学硕士</p><span class="path-tag">学习 / 教育与工程</span></div></li>
+      <li><span class="path-date">2023 — 2024</span><div><h3>数字化运营</h3><p>招商蛇口北京公司 · 新航程管培生</p><p class="path-description">参与数字化产品运营、流程优化与用户研究。</p></div></li>
+      <li><span class="path-date">2025 年起</span><div><h3>平台产品</h3><p>北京觉观科技有限公司 · 产品经理</p><p class="path-description">围绕权益、商城与协同平台，梳理角色、业务流程和系统规则。</p></div></li>
+    </ol>
+  </section>
+  <section class="home-chapter home-method" id="method" aria-labelledby="method-title">
+    <div class="chapter-intro"><p class="eyebrow">02 / WAYS OF WORKING</p><h2 id="method-title">一项产品，<br>应该被阅读四次。</h2><p>先看全貌，再进入一个具体判断；把局部放回关系里，最后回到交付与使用。这也是我组织项目材料的方式。</p><a class="under-link" href="about.html#working-method-title">更多关于我的工作方式 ↗</a></div>
+    <div class="method-readings">
+      <a href="projects/rights-management.html#project/roles"><span class="reading-number">01</span><div><h3>全景 <small>看清参与者</small></h3><p>谁在使用，谁在协作，业务从哪里开始、在哪里结束？</p><span>阅读角色与业务边界 ↗</span></div></a>
+      <a href="projects/rights-management.html#project/manual"><span class="reading-number">02</span><div><h3>局部 <small>展开一次判断</small></h3><p>面对具体约束，规则怎样制定，又有哪些取舍？</p><span>阅读一次供给选择 ↗</span></div></a>
+      <a href="projects/rights-management.html#project/map"><span class="reading-number">03</span><div><h3>关系 <small>连接对象与流程</small></h3><p>一个变化，会影响哪些对象、数据和上下游环节？</p><span>阅读对象关系图 ↗</span></div></a>
+      <a href="projects/rights-management.html#project/guide"><span class="reading-number">04</span><div><h3>结果 <small>回到交付与使用</small></h3><p>方案怎样进入工作？留下了什么材料，还有什么需要验证？</p><span>阅读交付与操作线索 ↗</span></div></a>
+    </div>
+  </section>
+  <section class="home-ai" id="ai-practice" aria-labelledby="ai-title">
+    <div class="chapter-intro"><p class="eyebrow">03 / LEARNING BY MAKING</p><h2 id="ai-title">把 AI 放进<br>具体的实践里。</h2><p>从材料整理、想法推敲到页面与原型，我在探索 AI 怎样参与产品工作。这个网站本身，就是一次持续修改的实践。</p><a class="soft-link" href="lab/index.html">走进设计实验室 <span aria-hidden="true">↗</span></a></div>
+    <div class="ai-notes"><article><span>INPUT / 材料</span><h3>先整理问题，再生成答案。</h3><p>把项目文档和零散记录组织成结构，区分事实、判断与待验证的问题。</p></article><article><span>MAKE / 原型</span><h3>让想法变得可以操作。</h3><p>用对话推进页面和交互，在具体原型里讨论信息层级、业务流程与使用体验。</p></article><article><span>REFINE / 复用</span><h3>把修改过程，积累成方法。</h3><p>通过实际反馈迭代内容与设计，将可复用的工作步骤整理为 skill，继续用于下一次实践。</p></article><a class="under-link" href="lab/spatial-system.html">看看这版首页的空间网络探索 ↗</a></div>
+  </section>
+  <section class="quiet-note" aria-labelledby="note-title"><div><p class="eyebrow">LET’S TALK</p><h2 id="note-title">项目会结束，<br>问题还会继续。</h2></div><div><p>如果你也在思考复杂业务、产品体验，或者 AI 怎样进入真实工作，欢迎交流。这里的材料与方法，也会随着新的实践继续生长。</p><a class="under-link" href="mailto:Jackiehou2016@outlook.com">给我写信 ↗</a><a class="contact-more" href="contact.html">其他联系方式 →</a></div></section>
 </main>
 <footer class="collection-footer"><span>J·H &nbsp; / &nbsp; Jackie Hou</span><span>工作、关系，与持续生长的思考。</span><a href="#main-content">回到顶部 ↑</a></footer>
 </body></html>

@@ -1,0 +1,14 @@
+/* Reuse the rights collection shell. Only travel material previews differ. */
+.travel-collection .travel-preview{flex:1;display:flex;align-items:center;width:100%;min-height:125px;padding:20px 0}
+.travel-preview .mini-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;width:100%;font-size:15px;line-height:1.8}
+.travel-preview .mini-flow i{font-style:normal;color:#658176}
+.travel-preview .mini-stack{display:grid;gap:0;width:100%}
+.travel-preview .mini-stack span{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #405d5a29;padding:12px 0;font-size:12px}
+.travel-preview .mini-stack b{font-weight:550}
+.travel-preview .mini-status,.travel-preview .mini-quote{font-size:23px;line-height:1.65;letter-spacing:-.03em}
+.travel-preview .mini-status i{display:none}
+.travel-collection .surface.uniform{display:flex;flex-direction:column}
+.travel-collection .preview-label{flex-wrap:wrap;gap:7px}
+.travel-collection .evidence-link{display:inline-block;margin:6px 8px 6px 0;padding:10px 15px;border:1px solid #bfd3c8;border-radius:18px;background:#e2eee8;color:#294b3d;font-size:12px}
+.travel-collection .canvas-world .intro .description{max-width:320px}
+@media(max-width:700px){.travel-preview .mini-status,.travel-preview .mini-quote{font-size:21px}.travel-preview .mini-flow{font-size:13px}.travel-collection .canvas-world .intro .description{max-width:none}}
