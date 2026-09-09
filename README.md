@@ -22,10 +22,10 @@ See [`projects/README.md`](projects/README.md) for the prototype-to-case map. Th
 From the repository root:
 
 ```powershell
-python -m http.server 8080
+python scripts/preview.py
 ```
 
-Then open `http://localhost:8080/`.
+Then open `http://127.0.0.1:8080/index.html`. The preview server disables caching so ordinary navigation always loads the working copy; no preview query parameters are needed. After switching from an older preview server, reload existing browser tabs once.
 
 The September 8 collection redesign is available at `/` and
 `/projects/rights-management.html`. The homepage offers project and question

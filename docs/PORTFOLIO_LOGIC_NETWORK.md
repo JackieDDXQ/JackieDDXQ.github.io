@@ -30,7 +30,7 @@ Individual prototype routes are intentionally collapsed into evidence nodes. The
 
 ```mermaid
 flowchart LR
-    JH["Jackie Hou / 侯嘉琪"] --> ROLE["Product Manager"]
+    JH["Jackie Hou"] --> ROLE["Product Manager"]
     ROLE --> THESIS["让复杂成为可以运行的系统"]
 
     THESIS --> PRODUCT["Product"]
