@@ -1,0 +1,13 @@
+/* Shared collection canvas, folders and reader follow the rights case. */
+.physical-collection .mall-preview{flex:1;display:flex;align-items:center;min-height:120px;padding:16px 0}
+.mall-preview .mini-quote{font-size:23px;line-height:1.8;letter-spacing:-.03em;overflow-wrap:anywhere}
+.physical-collection .surface.uniform{display:flex;flex-direction:column}
+.physical-collection .preview-label{flex-wrap:wrap;gap:7px}
+.physical-collection .evidence-link{display:inline-block;margin:6px 8px 6px 0;padding:10px 15px;border:1px solid #bfd3c8;border-radius:18px;background:#e2eee8;color:#294b3d;font-size:12px}
+.physical-collection .fulfilment-map{display:grid;gap:12px;margin:20px 0}
+.physical-collection .fulfilment-map p{margin:0;padding:16px;background:#e8f0ec;border-radius:12px}
+.physical-collection .fulfilment-map b,.physical-collection .fulfilment-map span{display:block}
+.physical-collection summary:focus-visible{outline:3px solid #527766;outline-offset:5px}
+.physical-collection .canvas-world .intro .description{max-width:320px}
+@media(max-width:700px){.mall-preview .mini-quote{font-size:20px}.physical-collection .canvas-world .intro .description{max-width:none}}
+@media(prefers-reduced-motion:reduce){.physical-collection *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
