@@ -1,5 +1,23 @@
 # Portfolio redesign plan
 
+## 2026-09-11 — 主题岛屿草图
+
+- 用户否定文件夹标签式呈现后，新增 `lab/topic-islands.html` 及配套 CSS/JS，保留上一版。更新 lab 入口与 README。
+- 三组主题错开排列，通过轻背景、主卡与次卡呈现材料集合；跨主题虚线和解释性入口提供阅读线索。主题关系聚焦只改高亮，不移动内容。
+- 复用原卡片与文章滚动恢复；修正关联阅读出发主题取值，使其来自实际点击卡片而不是当前聚焦主题。
+- 已成功拉取 redesign/v2；仅新增实验页和文档，未提交、未发布。
+- 浏览器验证主题聚焦、多步关联阅读、返回上一篇及 Escape；页面 scrollY 410px、原卡片视口顶部 108.984375px 均准确恢复，聚焦状态保留。JS 语法检查通过；390px 与 320px 无横向溢出，390px 排版截图检查通过，控制台无错误或警告。兼容路径生成器已运行并撤回无关变化。
+
+## 2026-09-11 — 主题文件夹与跨主题阅读草图
+
+- 在 redesign/v2 新增独立实验页 `lab/folder-relations.html`，配套同目录 CSS/JS；不改正式项目页。
+- 设计约束：主题入口保持原位，材料通过解释性问题跨主题关联；阅读层不切换背景主题，关闭时恢复原卡片焦点与页面滚动位置，返回上一篇时恢复文章内部滚动位置。
+- 使用六份已有案例材料的摘要演示；关联解释为待确认的组织提案，不代表已经验证的因果或成果。
+- 原生链接及展开正文支持无 JavaScript 阅读；原生 dialog 支持 Escape 和焦点约束，减少动态效果遵循系统设置。
+- 当前分支与 redesign/v2 的远端拉取均在重试后因 GitHub 网络连接失败，基于本地版本制作；未提交、未发布。
+- 已执行兼容跳转生成器；其产生的无关历史路径变化已撤回，lab 页面无需额外兼容路径。
+- 本地浏览器验证桌面、390px、320px 无横向溢出；主题切换、跨主题打开、返回上一篇、Escape 和焦点恢复通过。实测页面滚动 593px 恢复至 593px，文章内部滚动 34px 恢复至 34px。控制台无错误或警告，JS 语法检查通过；无 JS 与 reduced-motion 通过源码检查。
+
 ## Objective
 
 Evolve the current portfolio into a clearer, more credible product-management case archive while keeping the existing production site available throughout the work.
