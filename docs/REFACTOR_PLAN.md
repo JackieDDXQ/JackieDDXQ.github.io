@@ -141,3 +141,12 @@ Follow-up navigation review removed the Omni write-off menu and the CEL member a
 - Added a shared animation-frame loop for smooth desktop scrolling, restrained hero parallax, section heading reveals, and a scroll-linked featured architecture sequence.
 - Kept native touch scrolling on mobile, preserved static content when animation libraries are unavailable, and disabled non-essential motion for `prefers-reduced-motion`.
 - Verified the homepage at desktop and 390 px widths, confirmed mobile menu focus and Escape behavior, checked the representative rights-management case, and confirmed HTTP 200 responses for all ten redesigned portfolio pages and the new motion assets.
+
+## Project reading experiment — 2026-09-12
+
+- Added `/lab/project-reading.html` and an entry on `/lab/`, using the existing rights-management case as the content source. Existing project pages and prototype builds are unchanged.
+- Tested a chapter-based layout with continuous text, a sticky table of contents, supply comparison, object relationships, and source notes. Mobile moves the contents to a horizontal sticky bar and notes below each section.
+- Preserved confirmed practice versus analysis and pending evidence; no new metrics or ownership claims. This is a selected reading path, not a replacement for the complete 12-material collection.
+- HTML contains all text, native anchor navigation and native disclosure controls. JavaScript only tracks the current chapter. Reduced-motion CSS disables smooth scrolling.
+- Verified desktop at 1440 px, mobile at 390 px, and overflow at 320 px; checked chapter navigation, Enter-to-expand disclosure and visible keyboard focus. Browser console showed no warnings or errors. All local links, assets and fragments on the experiment and lab index passed path and HTTP checks; JavaScript syntax and git whitespace checks passed. No-JavaScript and reduced-motion fallbacks were reviewed in source, not browser-emulated.
+- Continue by reviewing this reading direction before applying it to public case pages. Work is on `redesign/v2`, with no publish or deployment changes.

@@ -62,3 +62,5 @@ See `AGENTS.md` for repository rules and `docs/REFACTOR_PLAN.md` for the redesig
 从仓库根目录启动预览后，访问 /lab/folder-relations.html，或通过 /lab/ 进入。草图支持主题切换、跨主题材料阅读、返回上一篇和 Escape 返回原卡片；关闭阅读层会恢复页面位置与焦点。
 
 主题岛屿新版草图：`/lab/topic-islands.html`。上一版文件夹草图保留供对照。
+
+章节式阅读实验：`/lab/project-reading.html`，也可从 `/lab/` 首张卡片进入。以权益项目为样本，尝试连续正文、固定章节目录、条件对照表与来源旁注。移动端使用顶部目录；正文、原型链接和原生折叠材料无需 JavaScript 即可使用。
