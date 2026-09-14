@@ -1,5 +1,18 @@
 # Portfolio redesign plan
 
+## 2026-09-14 — Lab styling and project reading modes
+
+- Unified `/lab/index.html` with the portfolio's shared navigation, font, gray-blue canvas, pastel cards, footer, keyboard focus and reduced-motion rules. Kept all ten experiment destinations intact.
+- Replaced the outer bottom disclosure on five project pages with a text-directory section. A shared progressive script places the directory beside the canvas in reading order and provides “卡片浏览 / 文字目录” controls above both views. Individual articles retain native expand/collapse behavior; the complete text remains available without JavaScript.
+- Removed obsolete outer-disclosure scripts and preserved `#materials`, legacy rights-case anchors and existing article dialogs. All 54 article bodies were compared with HEAD and remain unchanged; local links in the six edited pages resolve and section/disclosure tags balance.
+- Browser-verified all five projects' directory switching, article expansion/collapse and return to cards, with no console warnings/errors. Checked keyboard Enter-to-collapse on the rights case, desktop and mobile visuals, and no horizontal overflow at 320 px for the lab and text directory. No-JavaScript and reduced-motion behavior reviewed in source. JavaScript syntax and Git whitespace checks passed. No commit, push or deployment performed.
+
+## 2026-09-14 — Branch workflow update
+
+- Removed the requirement to develop on `redesign/v2`. Work may proceed on the current branch, including local changes on `main`, unless the user requests another branch.
+- Updated `AGENTS.md`, `README.md`, and the active plan below. Earlier dated progress entries retain their historical branch references and do not define the current workflow.
+- GitHub Pages settings and deployment configuration still require explicit approval to change.
+
 ## 2026-09-11 — 主题岛屿草图
 
 - 用户否定文件夹标签式呈现后，新增 `lab/topic-islands.html` 及配套 CSS/JS，保留上一版。更新 lab 入口与 README。
@@ -39,10 +52,9 @@ The redesign should reuse the strongest editorial qualities of the Chinese serif
 ```text
 main          current production site
 archive/v1    frozen snapshot before redesign
-redesign/v2   active redesign work
 ```
 
-Do not change the GitHub Pages publishing source while the redesign is in progress. Merge to `main` only after the redesigned core pages pass content and visual review.
+Use the current branch unless the user requests another branch; a dedicated redesign branch is not required. Verify content and visuals before release. Do not change the GitHub Pages publishing source without explicit approval.
 
 ## Phase 1: content and evidence audit
 
@@ -61,7 +73,7 @@ Deliverable: a confirmed content matrix and a short list of pages for the first 
 - Maintain accessible navigation, keyboard use, reduced motion, and no-JavaScript readability.
 - Validate desktop and mobile layouts before expanding scope.
 
-Deliverable: homepage, project index, and one complete case on `redesign/v2`.
+Deliverable: homepage, project index, and one complete case on the working branch.
 
 ## Phase 3: migrate remaining material
 
@@ -78,7 +90,7 @@ Deliverable: a coherent portfolio with no knowingly broken public navigation.
 - Test representative desktop, tablet, and mobile widths.
 - Check keyboard navigation, focus, reduced motion, console errors, metadata, and social sharing fields.
 - Review the final diff against `archive/v1`.
-- Merge `redesign/v2` into `main`, verify GitHub Pages, and tag the release.
+- Release verified changes from `main`, merging the working branch first if a separate branch was used; verify GitHub Pages and tag the release.
 
 ## Known risks and decisions still needed
 
@@ -93,7 +105,7 @@ Deliverable: a coherent portfolio with no knowingly broken public navigation.
 - One case study clearly separates business context, product decisions, personal contribution, and verified outcome.
 - All links in the slice resolve locally.
 - The slice works at desktop and mobile widths and remains readable without JavaScript.
-- Changes are committed and pushed to `redesign/v2`; `main` remains untouched until approval.
+- Changes pass content and visual review before release; no particular development branch is required.
 
 ## Progress update — 2026-08-22
 

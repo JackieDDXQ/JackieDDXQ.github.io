@@ -4,34 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>交互实验 · Jackie Hou</title>
-  <link rel="stylesheet" href="folder-relations.css">
-  <style>
-    .lab-entry-list {
-      display: grid;
-      gap: 30px;
-    }
-
-    .lab-archive-section {
-      padding: 12px 0 28px;
-    }
-
-    .lab-archive-section + .lab-archive-section {
-      border-top: 1px solid var(--line);
-      padding-top: 34px;
-    }
-
-    .lab-archive-section .section-heading {
-      margin-bottom: 30px;
-    }
-  </style>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles/collection.css">
+  <link rel="stylesheet" href="../assets/styles/lab.css">
+  <script src="../assets/scripts/collection.js" defer></script>
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="../index.html">J·H <small>工作与思考</small></a>
-    <span>INTERACTION LAB</span>
-  </header>
+<body class="collection-home lab-page">
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="collection-header">
+  <a class="collection-brand" href="../index.html" aria-label="Jackie Hou 首页"><b>J<i>·</i>H</b><span>Jackie Hou / 工作与思考</span></a>
+  <button class="menu-button" aria-expanded="false" aria-controls="collection-navigation" type="button">菜单 ＋</button>
+  <nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
+</header>
 
-  <main>
+  <main id="main-content" class="home-shell">
     <section class="intro">
       <div>
         <p class="eyebrow">DESIGN STUDIES</p>
@@ -118,5 +104,6 @@
       </div>
     </section>
   </main>
+<footer class="collection-footer"><span>Jackie Hou / 交互实验</span><a href="../projects.html">回到项目收藏 ↗</a></footer>
 </body>
 </html>

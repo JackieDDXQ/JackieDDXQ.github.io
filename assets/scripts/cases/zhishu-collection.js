@@ -203,7 +203,7 @@ renderFolders();
 
 
 // Static article text remains available if scripts fail or are disabled.
-document.getElementById('materials').open=false;
+
 // Focused cards must remain in view while tabbing through the spatial layout.
 grid.addEventListener('focusin', event=>{const card=event.target.closest('.card');if(card)card.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});});
 

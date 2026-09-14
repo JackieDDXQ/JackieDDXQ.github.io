@@ -51,13 +51,15 @@ Run this after adding or renaming a pure-HTML prototype page. Do not hand-edit f
 
 - `main`: production site published by GitHub Pages
 - `archive/v1`: snapshot of the site before the new redesign
-- `redesign/v2`: active redesign branch
+- Work on the current branch (including `main`) unless another branch is requested. A dedicated redesign branch is no longer required.
 
 On either computer, pull before starting work and push all work that must be available on the other computer. Do not work on the same unpushed branch from both computers at the same time.
 
 See `AGENTS.md` for repository rules and `docs/REFACTOR_PLAN.md` for the redesign plan.
 
 ## 交互草图
+
+`/lab/` 使用与全站一致的导航和卡片样式，分为当前实验与实验档案。五个项目收藏页提供顶部“卡片浏览 / 文字目录”切换；文字目录中的材料可独立展开、收起，禁用 JavaScript 时仍可直接阅读正文。
 
 从仓库根目录启动预览后，访问 /lab/folder-relations.html，或通过 /lab/ 进入。草图支持主题切换、跨主题材料阅读、返回上一篇和 Escape 返回原卡片；关闭阅读层会恢复页面位置与焦点。
 

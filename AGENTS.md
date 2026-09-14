@@ -3,7 +3,7 @@
 ## Project purpose
 
 - This repository publishes Jackie Hou's portfolio at `jackieddxq.github.io`.
-- Preserve the current public site while the redesign is developed on `redesign/v2`.
+- Preserve existing public URLs and site usability while developing changes.
 - Treat `main` as the production branch and `archive/v1` as the frozen pre-redesign snapshot.
 
 ## Architecture
@@ -22,7 +22,7 @@
 ## Working rules
 
 - Pull the latest branch before making changes on either computer.
-- Make redesign work on `redesign/v2`; do not commit redesign work directly to `main`.
+- Work on the current branch unless the user requests another branch. Redesign work does not require a dedicated branch; local changes on `main` are allowed.
 - Do not change GitHub Pages settings, the repository name, or deployment configuration without explicit approval.
 - Preserve existing public URLs unless a redirect or migration plan is included.
 - Do not invent project metrics, ownership claims, dates, or outcomes. Mark unsupported content for confirmation.

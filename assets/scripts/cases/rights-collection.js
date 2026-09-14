@@ -252,10 +252,10 @@ renderFolders();
 
 
 // Static article text remains available if scripts fail or are disabled.
-document.getElementById('materials').open=false;
+
 // Focused cards must remain in view while tabbing through the spatial layout.
 grid.addEventListener('focusin', event=>{const card=event.target.closest('.card');if(card)card.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});});
 // Fragment destinations from the earlier case are preserved in the text reader.
 const legacyFragments=new Set(['overview','tensions','architecture','supply','service','growth','experience','delivery']);
-function revealLegacyFragment(){const key=location.hash.slice(1);if(!legacyFragments.has(key))return;const target=document.getElementById(key);if(!target)return;document.getElementById('materials').open=true;target.closest('details').open=true;target.scrollIntoView({block:'start'});}
+function revealLegacyFragment(){const key=location.hash.slice(1);if(!legacyFragments.has(key))return;const target=document.getElementById(key);if(!target)return;target.closest('details').open=true;target.scrollIntoView({block:'start'});}
 window.addEventListener('hashchange',revealLegacyFragment);revealLegacyFragment();

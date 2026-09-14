@@ -355,13 +355,7 @@ renderFolders();
 
 
 // Static article text remains available if scripts fail or are disabled.
-document.getElementById('materials').open=false;
-function revealStaticMaterials(){if(location.hash==='#materials')document.getElementById('materials').open=true;}
-window.addEventListener('hashchange',revealStaticMaterials);revealStaticMaterials();
-document.querySelector('a[href="#materials"]').addEventListener('click',()=>{
- document.getElementById('materials').open=true;
- document.querySelector('#materials > summary').focus();
-});
+
 // Focused cards must remain in view while tabbing through the spatial layout.
 grid.addEventListener('focusin', event=>{const card=event.target.closest('.card');if(card)card.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});});
 // Fragment destinations from the earlier case are preserved in the text reader.

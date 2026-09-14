@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#edf0f4"><meta property="og:title" content="一次充电，三方系统 · Jackie Hou"><meta property="og:description" content="从一次扫码出发，理解身份、权益、交易与充电履约怎样连接。"><meta property="og:type" content="article">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles/cases/rights-collection.css"><link rel="stylesheet" href="../assets/styles/collection.css"><link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css"><link rel="stylesheet" href="../assets/styles/cases/chuxing-collection.css">
   <script src="../assets/scripts/collection.js" defer></script><script src="../assets/scripts/cases/chuxing-collection.js" defer></script>
-</head>
+<link rel="stylesheet" href="../assets/styles/cases/materials-view.css"><script src="../assets/scripts/cases/materials-view.js" defer></script></head>
 <body class="case-collection travel-collection">
 <a class="skip-link" href="#main-content">跳转到主要内容</a>
 <header class="collection-header">
@@ -20,7 +20,7 @@
   <section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 02</p><h1 id="title">一次充电，三方系统</h1><p id="description" class="description">从一次扫码出发，阅读三方协作、交易状态、异常恢复与产品判断。打开一份材料，继续探索与它相关的内容。</p></div><aside id="aside">和包 App × 特来电<br>产品经理 · 充电服务接入<span class="project-fact">方案设计 · 联调准备<small>当前材料用于说明方案与原型</small></span></aside></section>
   <div class="collection-bar"><span id="count">13 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
   <section id="grid" class="grid" aria-label="集合内容"></section>
-  <details class="static-materials" id="materials" open><summary>完整文字材料 · 13 份</summary><p>可以在上方探索主题，也可以在这里逐篇阅读。所有流程图、状态图和交互原型都是方案材料，不代表真实运行数据。</p>
+  <section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2><p>可以在上方探索主题，也可以在这里逐篇阅读。所有流程图、状态图和交互原型都是方案材料，不代表真实运行数据。</p>
     <details id="project/roles" data-source="来源：现有项目方案中的三方职责说明；关系图为本次页面整理。"><summary>一次扫码，三方接力</summary><span id="overview"></span><p>和包提供 App 入口、原生扫码、一次性 Ticket、会员销售与和包支付能力；觉观承载充电 H5 与交易中台，编排身份、权益、订单、支付、启停、结算和异常恢复；特来电提供电站与枪口状态、物理启停、实时充电数据和最终账单。</p><h3>三方边界</h3><p>和包不直接创建充电订单或控制充电枪；特来电不处理和包会员、支付与页面逻辑；觉观把分散能力组织成用户可以连续完成的一次服务。</p><p class="source-note">这里说明项目系统的职责，不表示个人独立承担全部三方协作。</p></details>
     <details id="project/rails" data-source="来源：现有项目方案的身份、权益与交易链路说明。"><summary>先拆开三条链路</summary><span id="architecture"></span><h3>身份链路</h3><p>一次性 Ticket 用于换取稳定用户身份，后续业务使用觉观自己的登录会话，避免用户再次输入手机号。</p><h3>权益链路</h3><p>和包会员商品映射觉观权益产品。方案要求购买成功后整包下发折扣卡与抵扣券，避免部分到账却显示完整开通。</p><h3>交易链路</h3><p>围绕和包支付和特来电履约建立订单状态，覆盖预付、自动启充、实时充电、最终账单、退款或补缴。</p></details>
     <details id="project/journey" data-source="来源：现有项目全链路流程；本页重新编排为七个阅读阶段。"><summary>从扫码到订单完成</summary><span id="experience"></span><ol><li><strong>扫码登录：</strong>和包完成原生扫码，携带二维码原文与一次性 Ticket 进入充电 H5。</li><li><strong>业务预检：</strong>校验站枪状态、进行中订单、启动失败订单和未支付超时费。</li><li><strong>预付款：</strong>创建订单并进入和包收银台，回跳后重新查询支付结果。</li><li><strong>自动启充：</strong>付款确认后由服务端发起启动，页面分别表达准备启动、正在启动和充电中。</li><li><strong>充电监控：</strong>展示费用、电量、SOC、功率与时长；停止操作需要二次确认。</li><li><strong>最终结算：</strong>物理结束后等待最终账单，再结合权益计算实际消费。</li><li><strong>资金闭环：</strong>余额原路退款，不足则创建补缴；资金处理完毕后订单进入完成态。</li></ol></details>
@@ -34,7 +34,7 @@
     <details id="project/sync" data-source="来源：现有方案中的事件同步与查询恢复机制；并非联调运行记录。"><summary>事件负责及时，查询负责权威</summary><span id="growth"></span><p>订单、支付、结算、退款和超时费通过事件通知变化，帮助和包及时更新订单镜像。页面打开、通知丢失或结果有疑问时，再主动查询当前详情。</p><h3>面对重复和乱序</h3><p>方案通过唯一标识让同一事件只处理一次，让资源版本只向前更新。未知结果始终查询原流水，不另起一笔交易。</p></details>
     <details id="project/delivery" data-source="来源：现有页面列出的本阶段交付内容；原始交付文件尚未在本站展示。"><summary>把接口约束变成共同语言</summary><span id="delivery"></span><p>本阶段整理的材料包括：覆盖扫码、预付、启充、结算与恢复的全链路流程；将状态、页面文案、用户动作和系统禁区放在一起的矩阵；金额和时间字段规范；三方职责、调用时机、异常恢复与待确认项的联调清单。</p><p class="source-note">这些是交付线索。原始文档、团队分工和联调反馈仍需在脱敏后补充。</p></details>
     <details id="project/prototype" data-source="来源：本站现有用户端与管理端交互原型；原型用于解释方案，不是生产系统。"><summary>把规则放进可操作的页面</summary><p>用户端原型把找站、扫码、预付款、充电监控、异常、账单、补缴和退款串成连续流程；管理端原型展示权益配置和运营操作。</p><p><a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener">体验用户端原型 ↗</a> <a class="evidence-link" href="./prototypes/chuxing-equity/teld/jincke-teld-rights.html" target="_blank" rel="noopener">查看管理端原型 ↗</a></p><p class="source-note">原型中的示例订单、金额、日期与状态用于演示，不作为真实业务数据。</p></details>
-  </details>
+  </section>
 </main>
 <dialog id="reader" aria-labelledby="reader-title"><button class="close" type="button" aria-label="关闭内容">×</button><div class="reader-layout"><article><p class="eyebrow" id="reader-type"></p><h2 id="reader-title"></h2><div id="reader-visual"></div><div id="reader-body"></div></article><aside class="connections"><p class="eyebrow">CONNECTED TO</p><h3>内容标签</h3><p class="hint">业务、主题、方法与材料状态。</p><div id="connections"></div><div class="related"><p class="eyebrow">FOLLOW THE IDEA</p><h3>继续追问</h3><div id="related"></div></div><p class="provenance" id="provenance"></p></aside></div></dialog>
 <footer class="collection-footer"><span>J·H &nbsp; / &nbsp; Jackie Hou</span><span>一次扫码背后的身份、交易与履约。</span><a href="#main-content">回到顶部 ↑</a></footer>
