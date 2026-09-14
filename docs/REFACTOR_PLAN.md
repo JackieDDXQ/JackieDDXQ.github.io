@@ -1,5 +1,12 @@
 # Portfolio redesign plan
 
+## 2026-09-14 — About page visual refinement
+
+- Added an About-specific stylesheet while retaining the shared portfolio navigation, palette and typography. Rebuilt the opening around a personal statement and a four-stage path drawn from the existing education and employment entries.
+- Kept the original biography, experience and results text; separated supporting introduction paragraphs, strengthened the method section and experience timeline, and refined capability and education cards. Existing figures were retained, not newly verified.
+- Linked five project names to their case pages, expanded the native chapter navigation, and added project/lab links at the end. No new JavaScript or dependencies.
+- Browser-reviewed desktop and mobile layouts, including 390 px and 320 px overflow checks, native chapter links and keyboard Enter navigation; console showed no warnings/errors. Verified all local links, fragment destinations, unique IDs and Git whitespace. No-script and reduced-motion behavior use the existing static HTML and shared CSS. No commit or deployment performed.
+
 ## 2026-09-14 — Lab styling and project reading modes
 
 - Unified `/lab/index.html` with the portfolio's shared navigation, font, gray-blue canvas, pastel cards, footer, keyboard focus and reduced-motion rules. Kept all ten experiment destinations intact.

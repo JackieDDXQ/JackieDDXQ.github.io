@@ -1,0 +1,46 @@
+/* About-only composition; shared navigation and palette stay in collection.css. */
+.about-page .about-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:8%;padding:68px 0 48px;align-items:center}
+.about-page .profile-copy h1{font-size:clamp(30px,3.1vw,46px);line-height:1.5;letter-spacing:-.045em;margin:24px 0}
+.about-page .profile-copy h1 span{color:#52796d}
+.about-page .profile-lead{font-size:15px;line-height:2.1;max-width:550px}
+.profile-links{display:flex;flex-wrap:wrap;gap:28px;margin-top:30px}
+.profile-links a{font-size:12px;border-bottom:1px solid #a7bdb5;padding-bottom:6px}.profile-links a span{margin-left:20px}
+.profile-path{position:relative;background:#deebe5;border:1px solid #c8d9d2;border-radius:28px;padding:32px 36px;box-shadow:10px 12px 0 #e0e6ee}
+.about-page .profile-path h2{font-size:26px;line-height:1.6;letter-spacing:-.03em;margin:14px 0 26px}
+.profile-path ol{list-style:none;padding:0;margin:0 0 20px}
+.profile-path li{position:relative;border-left:1px solid #adC4b9;padding:0 0 22px 23px;display:grid;grid-template-columns:1fr auto;gap:2px 12px}
+.profile-path li:last-child{padding-bottom:0}.profile-path li::before{content:'';position:absolute;left:-4px;top:8px;width:7px;height:7px;background:#668c7d;border-radius:50%}
+.profile-path li>span{grid-column:2;grid-row:1;font-size:10px;align-self:center;color:#5b7368;white-space:nowrap}
+.profile-path strong{font-size:14px;font-weight:500}.profile-path small{font-size:11px;color:#5b7368;grid-column:1/-1}
+.profile-path>a{display:block;font-size:11px;padding-top:17px;border-top:1px solid #bdd0c6}
+.profile-notes{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:12px 0 24px}
+.profile-notes section{padding:24px 28px;background:#f6f8fa;border:1px solid #d9e0e5;border-radius:20px}
+.profile-notes h2{font-size:18px;margin-bottom:14px}.profile-notes section>p:last-child{font-size:12px;line-height:2;margin-bottom:0}
+.about-page .about-index{margin:14px 0 54px;gap:10px;border-top:0;padding:0}
+.about-page .about-index a{background:transparent;border-color:#c7d2d7}
+.about-page .section-header{padding-top:0;align-items:center;margin-bottom:32px}.about-page .section-number{display:grid;place-items:center;width:32px;height:32px;border:1px solid #bdcbc9;border-radius:50%;letter-spacing:0;color:#526e63}.about-page .section-title{font-size:23px}
+.about-page .working-method-section{padding:32px;background:#e3e9f0;border-radius:26px}
+.about-page .working-method-intro{gap:32px;align-items:center}.about-page .working-method-intro h3{font-size:30px;margin:0}.about-page .working-method-intro p{font-size:14px;margin:0}
+.about-page .working-method-grid{gap:14px;margin:30px 0 0;counter-reset:method}
+.about-page .working-method-grid li{position:relative;min-height:190px;padding:24px;border-color:#d0dcd9;background:#f7faf9}
+.about-page .working-method-grid li:nth-child(2){background:#dcebe5}.about-page .working-method-grid li:nth-child(3){background:#e8edf6}.about-page .working-method-grid li:nth-child(4){background:#ebe8ef}
+.about-page .working-method-grid strong{font-size:24px}.about-page .working-method-grid li>span{margin-bottom:22px}
+.about-page .experience-timeline{margin-bottom:0}.about-page .experience-item{grid-template-columns:190px 1fr;gap:36px;border-top:0;padding:0 0 40px}
+.about-page .experience-date{position:relative;border-top:1px solid #bbcbd1;padding-top:20px;font-size:12px}
+.about-page .experience-content{max-width:none;border-left:1px solid #c8d5d6;padding-left:36px}
+.about-page .experience-title{font-size:28px}.about-page .experience-company{font-size:13px;margin-bottom:20px}
+.about-page .experience-description{border:1px solid #d7e0e4;padding:28px 32px;border-radius:22px;background:#f7f9fb}
+.about-page .experience-description h4{font-size:13px;color:#52796d;margin:20px 0 8px}
+.about-page .experience-description ul{list-style:none;padding:0}.about-page .experience-description li{padding:15px 0;border-top:1px solid #d7e0e4;line-height:2}.about-page .experience-description li:last-child{padding-bottom:0}
+.experience-project{font-weight:550;color:#263f36}.experience-project span{font-size:12px;color:#52796d}.experience-project:hover{text-decoration:underline;text-underline-offset:4px}
+.about-page .capability-card{border-radius:20px;border:1px solid #ccd9d7;margin-top:0;padding:28px;background:#e0ece6}.about-page .capability-card:before{display:none}
+.about-page .capability-card:nth-child(2){background:#e1e9f4}.about-page .capability-card:nth-child(3){background:#e9e5ed}
+.about-page .capability-title{font-size:18px;padding-bottom:16px;border-bottom:1px solid #18212620}
+.about-page .ai-section{padding-top:42px;border-top:1px solid var(--line)}.about-page .ai-section .capability-card{background:#f6f8fa}.about-page .ai-section>div:last-child:not(.capability-grid){padding:20px 24px;border-left:2px solid #8ca79a;margin-top:24px;background:#e3ebe7;border-radius:0 14px 14px 0}.about-page .ai-section>div:last-child p{margin:0;font-size:12px}
+.about-page .education-item{padding:28px;border:1px solid #cedade;border-radius:20px;background:#f7f9fb}
+.about-page .education-title{font-size:22px}.about-page .education-detail{font-size:13px}
+.about-next{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-top:60px;padding:36px 40px;background:#dcebe5;border:1px solid #c5d8ce;border-radius:24px}
+.about-page .about-next h2{font-size:27px;line-height:1.6;margin:0}.about-next-links{display:grid;gap:12px}.about-next-links a{font-size:13px;padding:12px 20px;border:1px solid #b7ccc1;border-radius:24px;background:#f7faf8}.about-next-links a:hover{background:#fff}
+@media(max-width:1050px){.about-page .about-hero{gap:5%;grid-template-columns:1.1fr 1fr}.profile-path{padding:26px}.profile-path li{grid-template-columns:1fr}.profile-path li>span{grid-column:1;grid-row:auto}.about-page .experience-item{grid-template-columns:150px 1fr;gap:20px}.about-page .experience-content{padding-left:24px}}
+@media(max-width:700px){.about-page .about-hero{grid-template-columns:1fr;gap:30px;padding:36px 0}.about-page .profile-copy h1{font-size:30px}.about-page .profile-lead{font-size:14px}.profile-path{box-shadow:5px 6px 0 #e0e6ee}.profile-path li{grid-template-columns:1fr auto}.profile-path li>span{grid-column:2;grid-row:1}.profile-notes{grid-template-columns:1fr;gap:16px}.profile-notes section{padding:23px}.about-page .about-index{margin-bottom:34px}.about-page .about-index a{padding:8px 12px;font-size:11px}.about-page .section-header{gap:10px}.about-page .section-title{font-size:20px}.about-page .section-label{letter-spacing:.05em}.about-page .working-method-section{padding:24px 18px}.about-page .working-method-intro{gap:14px}.about-page .working-method-intro h3{font-size:26px}.about-page .working-method-intro p{font-size:13px}.about-page .working-method-grid{gap:10px}.about-page .working-method-grid li{padding:18px 14px;min-height:180px}.about-page .working-method-grid li>span{font-size:8px}.about-page .experience-item{grid-template-columns:1fr;gap:16px}.about-page .experience-content{border:0;padding:0}.about-page .experience-description{padding:22px}.about-page .capability-card{padding:24px}.about-next{flex-direction:column;align-items:stretch;padding:26px;margin-top:36px}.about-page .about-next h2{font-size:24px}.about-next-links{grid-template-columns:1fr}.about-page .education-item{padding:24px}}
+@media(max-width:360px){.profile-path li{grid-template-columns:1fr}.profile-path li>span{grid-column:1;grid-row:auto}.about-page .section-label{display:none}}
