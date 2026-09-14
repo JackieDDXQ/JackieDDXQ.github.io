@@ -261,3 +261,4 @@ try{
   $('.focus-summary').textContent='交互示例暂不可用。你可以返回上一轮示例，或查看源数据。';
   console.error('Portfolio network could not load:',error);
 }
+

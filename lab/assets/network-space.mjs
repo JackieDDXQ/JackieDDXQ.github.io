@@ -53,3 +53,4 @@ export function projectPoint(p, view, width, height) {
   const scale=Math.min(width/1040,height/780)*view.zoom*perspective;
   return {x:width/2+rx*scale,y:height/2+ry*scale,z:depth,scale,perspective};
 }
+

@@ -35,3 +35,4 @@ test('camera changes rearrange geometry without changing nodes, edges or statuse
   assert.equal(model.nodes.get('metric:rights-10m').status,'needs-evidence');
   assert.notEqual(model.nodes.get('metric:penetration-30-90').scope,'project:rights-management');
 });
+

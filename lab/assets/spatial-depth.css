@@ -1,10 +1,4 @@
 /* Round 3: reference-led color and surface treatment, separate from layout. */
-@font-face {
-  font-family: Urbanist;
-  src: url('fonts/urbanist-variable.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
 :root,
 .enhanced[data-view=project],
 .enhanced[data-view=reading] {

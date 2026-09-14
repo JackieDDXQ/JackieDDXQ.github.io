@@ -75,3 +75,4 @@ new ResizeObserver(()=>{if(model)fit();}).observe(canvas);reduced.addEventListen
 try{const r=await fetch('data/portfolio-network.json');if(!r.ok)throw Error(r.status);model=createModel(await r.json());const scoped=model.data.nodes.filter(n=>n.scope===root);groups={systems:scoped.filter(n=>n.type==='system'),decisions:scoped.filter(n=>['problem','decision'].includes(n.type)),artifacts:scoped.filter(n=>n.type==='evidence'),work:pairs(root).filter(x=>x.edge.from===root&&x.edge.type==='has-activity').map(x=>x.node)};
  Object.keys(names).forEach((key,i)=>{const b=btn('',()=>show(key));b.dataset.board=key;b.append(el('span',i===0?'▦':'▧'),el('strong',names[key]));$('.board-index').append(b);});$('.message').textContent='';show(location.hash.slice(1)||'home',null,false);
 }catch(e){$('.message').textContent='内容未能载入，请从完整案例入口继续阅读。';console.error(e);}
+

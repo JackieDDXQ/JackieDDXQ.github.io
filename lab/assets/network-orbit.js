@@ -163,3 +163,4 @@ try{
   document.querySelectorAll('button[disabled]').forEach(b=>b.disabled=false);$('.orbit-toggle').disabled=reduced.matches;
   const state=getState();navigate(state.id,state.camera,false);
 }catch(error){$('.map-message').textContent='网络数据未能载入。请使用本地 HTTP 预览，或从下方静态项目入口继续。';console.error(error);}
+

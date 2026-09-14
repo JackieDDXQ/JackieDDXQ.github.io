@@ -69,3 +69,4 @@ export function layout(projection, focus, camera, data) {
   lanes.forEach((lane,col)=>lane.forEach((node,row)=>positions.set(node.id,{x:145+col*299+(row%2?12:-8),y:268+row*87,w:242,h:74})));
   return {positions,width:1190,height,lanes:laneNames[camera].map((name,i)=>({name,x:145+i*299,y:198,count:lanes[i].length}))};
 }
+

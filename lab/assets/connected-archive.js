@@ -82,3 +82,4 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.open&&curre
 matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>animation?.cancel());
 try{const response=await fetch('data/portfolio-network.json');if(!response.ok)throw new Error('HTTP '+response.status);model=createModel(await response.json());navigate(new URLSearchParams(location.hash.slice(1)).get('node'),false);}catch(error){main.replaceChildren(el('p','内容暂未载入。请通过本地 HTTP 预览打开，或从实验室进入现有案例。','loading'));console.error(error);}
 
+
