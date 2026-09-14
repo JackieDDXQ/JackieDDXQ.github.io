@@ -1,449 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>实物商城产品 | Jackie Hou</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/styles/site.css">
-    <style>
-        .project-page {
-            padding-top: 6rem;
-            max-width: 100%;
-            margin: 0 auto;
-            padding-left: 5%;
-            padding-right: 5%;
-        }
-
-        @media (min-width: 640px) {
-            .project-page {
-                max-width: 90%;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .project-page {
-                max-width: 85%;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .project-page {
-                max-width: 1024px;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .project-page {
-                max-width: 1100px;
-            }
-        }
-
-        @media (min-width: 1536px) {
-            .project-page {
-                max-width: 1200px;
-            }
-        }
-
-        .project-header {
-            margin-bottom: 4rem;
-        }
-
-        .project-meta {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-category-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-brown);
-        }
-
-        .project-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--paper-bg-light);
-            border: 1px solid var(--border-ink);
-        }
-
-        .project-title-large {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 3rem;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--ink-black);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-subtitle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .project-subtitle {
-            font-size: 1rem;
-            color: var(--ink-gray);
-            margin: 0;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .project-section {
-            margin-bottom: 4rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid var(--divider-ink);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-        }
-
-        .section-label {
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-light);
-        }
-
-        .section-title {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            margin-left: auto;
-        }
-
-        .project-section p {
-            font-size: 0.9375rem;
-            color: var(--ink-gray);
-            line-height: 1.8;
-            max-width: 600px;
-        }
-
-        .challenge-solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .challenge-item,
-        .solution-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .challenge-number,
-        .solution-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-            margin-bottom: 0.5rem;
-        }
-
-        .challenge-text,
-        .solution-text {
-            font-size: 0.875rem;
-            color: var(--ink-gray);
-            line-height: 1.7;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .result-card {
-            background-color: var(--paper-bg-light);
-            padding: 2rem;
-            border: 1px solid var(--border-ink);
-        }
-
-        .result-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .prototype-section {
-            margin-top: 2rem;
-        }
-
-        .prototype-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--accent-brown);
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--border-ink);
-            transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .prototype-link:hover {
-            border-color: var(--accent-brown);
-            background-color: var(--paper-bg-light);
-        }
-
-        .next-project {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--divider-ink);
-            margin-top: 2rem;
-        }
-
-        .next-project-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-light);
-        }
-
-        .next-project-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .next-project-link:hover {
-            color: var(--accent-brown);
-        }
-
-        .prev-project {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .prev-project:hover {
-            color: var(--accent-brown);
-        }
-
-        @media (max-width: 768px) {
-            .project-title-large {
-                font-size: 2rem;
-            }
-
-            .challenge-solution-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .next-project {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="../assets/styles/redesign.css?v=20260901-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一件商品的两种交付 · Jackie Hou</title>
+<meta name="description" content="实物商城项目收藏。沿商品旅程、运营判断与门店协作，阅读配送和自提的产品设计与原型。">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles/cases/rights-collection.css">
+<link rel="stylesheet" href="../assets/styles/collection.css">
+<link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css">
+<link rel="stylesheet" href="../assets/styles/cases/physical-mall-collection.css">
+<script src="../assets/scripts/collection.js" defer></script>
+<script src="../assets/scripts/cases/physical-mall-collection.js" defer></script>
 </head>
-<body class="interior-page project-detail-page case-physical">
-    <div class="grain" aria-hidden="true"></div>
-    <a href="#main-content" class="skip-link">跳转到主要内容</a>
-    <header class="site-header navbar">
-        <div class="navbar-content">
-            <a href="../index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span></button>
-            <nav id="site-navigation" class="navbar-right" aria-label="主导航">
-                <a href="../index.html" class="nav-item">首页</a>
-                <a href="../projects.html" class="nav-item active">项目</a>
-                <a href="../experience.html" class="nav-item">经历</a>
-                <a href="../about.html" class="nav-item">关于</a>
-                <a href="../contact.html" class="nav-item">联系</a>
-                <span class="nav-location">INDEX / 2026</span>
-            </nav>
-        </div>
-        <span class="site-progress" aria-hidden="true"></span>
-    </header>
+<body class="case-collection physical-collection">
+<a href="#main-content" class="skip-link">跳转到主要内容</a>
+<header class="collection-header">
+<a class="collection-brand" href="../index.html" aria-label="Jackie Hou 首页"><b>J<i>·</i>H</b><span>Jackie Hou / 工作与思考</span></a>
+<button class="menu-button" type="button" aria-expanded="false" aria-controls="collection-navigation">菜单 ＋</button>
+<nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
+</header>
+<main id="main-content">
+<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 05</span><a href="#materials">完整文字材料 ↓</a></div>
+<section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 05</p><h1 id="title">一件商品的两种交付</h1><p class="description" id="description">从权益运营延伸到实物商品，沿商品准备、订单处理与门店交付，阅读结构、判断、实践与思考。</p></div><aside id="aside">实物商城 · 产品与运营<br>配送 × 到店自提<br><a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a><br><a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></aside></section>
+<div class="collection-bar"><span id="count">8 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
+<section class="grid" id="grid" aria-label="集合内容"></section>
+<details class="static-materials" id="materials" open>
+<summary>完整文字材料 · 8 份</summary>
+<p>从商品信息读到订单履约，也可以直接进入原型。每篇末尾标明材料来源与适用边界。</p>
+<details id="project/chain" data-source="旧版项目页；结合现有原型重新整理。">
+<summary>从权益运营走向实物履约</summary>
+<p>原项目页将业务背景描述为：在权益运营中台基础上拓展实物商品销售，服务运营商多元化商品需求。商品管理、订单管理和用户端页面是当前保留下来的设计材料。</p>
+<p>这次扩展涉及的不只有商品展示。配送需要收货地址与发货信息，自提需要门店与核销凭证。这里依据原型梳理两条交付路径；库存扣减与物流接口的实际落地情况仍待补充。</p>
 
-    <main id="main-content" class="main-content project-page">
-        <div class="project-header">
-            <div class="project-meta">
-                <div class="project-category-wrapper">
-                    <span class="project-category">CASE 05</span>
-                    <span class="project-badge">2026.05 - 至今</span>
-                </div>
-            </div>
-            <h1 class="project-title-large">实物商城产品</h1>
-            <div class="project-subtitle-wrapper">
-                <p class="project-subtitle">构建完整的实物商品上架、订单、库存与物流管理能力</p>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a></p>
+<p class="source-note">来源：旧版项目页；结合现有原型重新整理。</p>
+</details>
+<details id="project/catalog" data-source="创建商品、品牌管理原型；描述的是页面设计。">
+<summary>先把商品信息组织起来</summary>
+<p>创建商品原型包含分类等基础信息与线下自提选项；品牌有独立管理入口。商品列表提供筛选和新建入口，帮助运营从列表定位到具体商品。</p>
+<p>把商品信息和履约选择放在一起阅读，可以看出一件商品不仅要说明卖什么，也要说明怎样交付。门店关联按钮仍为开发中提示，因此不将页面上的关联入口写成已完成的接入能力。</p>
 
-        <div class="project-section">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <span class="section-label">CONTEXT</span>
-                <span class="section-title">背景</span>
-            </div>
-            <p>在权益运营中台的基础上，拓展实物商品销售能力，实现权益与实物商品的统一运营管理，满足运营商多元化的商品销售需求。</p>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/create-product.html" target="_blank" rel="noopener">创建商品原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/brand-manage.html" target="_blank" rel="noopener">品牌管理原型（新窗口） ↗</a></p>
+<p class="source-note">来源：创建商品、品牌管理原型；描述的是页面设计。</p>
+</details>
+<details id="project/batch" data-source="商品列表与订单管理原型；容量与处理效果未实测。">
+<summary>批量录入，也需要反馈</summary>
+<p>商品管理的批量导入弹窗写明 .xlsx / .csv 格式，并提示先下载模板、单次最多 1000 条。这是原型中的规则文案，不是已经通过容量验证的产品成果。提交导入在当前原型中仅弹出模拟完成提示。</p>
+<p>订单管理还提供批量发货，以及全部成功、部分成功、失败的结果展示。阅读重点是批量任务如何表达结果；真实解析、错误重试和千级处理能力仍需结合交付记录核对。</p>
 
-        <div class="project-section">
-            <div class="challenge-solution-grid">
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">02</span>
-                        <span class="section-label">CHALLENGE</span>
-                        <span class="section-title">挑战</span>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">原系统仅支持虚拟权益，需扩展实物商品的仓储物流管理能力</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">商品品类众多，需要高效的批量上架和管理工具</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">订单履约流程复杂，涉及库存扣减、发货、物流跟踪等环节</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">03</span>
-                        <span class="section-label">SOLUTION</span>
-                        <span class="section-title">解法</span>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">设计实物商品专用模块，支持品牌、分类、规格等多维度管理</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">提供批量导入功能，支持一次导入千级商品数据</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">构建完整的订单履约流程，对接物流平台实现实时跟踪</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/order-manage.html" target="_blank" rel="noopener">订单管理原型（新窗口） ↗</a></p>
+<p class="source-note">来源：商品列表与订单管理原型；容量与处理效果未实测。</p>
+</details>
+<details id="project/fulfilment" data-source="H5 商品详情、订单确认与凭证页面。">
+<summary>一件商品，两条交付路径</summary>
+<p>H5 在商品详情提供快递配送和线下自提两种方式。确认订单时，配送展示收货地址，自提展示门店；订单中也保留对应的交付信息。</p>
+<p>自提凭证提示用户出示给店员核销，配送订单提供确认收货动作。两条路径可以共享商品与订单入口，但用户下一步要做什么，需要随交付方式改变。以上为原型中的流程表达，并非完整线上状态机。</p>
+<div class="fulfilment-map" aria-label="两条履约路径"><p><b>快递配送</b><span>收货地址 → 发货信息 → 确认收货</span></p><p><b>线下自提</b><span>选择门店 → 出示凭证 → 店员核销</span></p></div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></p>
+<p class="source-note">来源：H5 商品详情、订单确认与凭证页面。</p>
+</details>
+<details id="project/orders" data-source="订单管理与 H5 订单页面；操作结果为演示。">
+<summary>订单状态要指向下一步</summary>
+<p>管理端订单筛选包含待核销、已核销等状态与配送方式。发货弹窗要求快递单号，核销弹窗要求门店；详情按配送或自提展示信息，并提供处理历史。</p>
+<p>用户端有查看详情、确认收货和出示凭证等动作。后台发货、核销使用模拟提示，用户端订单保存在浏览器本地，因此这些材料支持状态与操作设计的讨论，不能证明真实发货或核销已经完成。</p>
 
-        <div class="project-section">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <span class="section-label">RESULTS</span>
-                <span class="section-title">成果</span>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <span class="result-value">500+</span>
-                    <span class="result-label">已上架商品数量</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">99.5%</span>
-                    <span class="result-label">订单履约准确率</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">60%</span>
-                    <span class="result-label">商品上架效率提升</span>
-                </div>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/order-manage.html" target="_blank" rel="noopener">订单管理原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></p>
+<p class="source-note">来源：订单管理与 H5 订单页面；操作结果为演示。</p>
+</details>
+<details id="project/stores" data-source="门店管理、员工管理与 H5 门店核销页面。">
+<summary>到店交付还需要谁参与</summary>
+<p>原型目录保留门店管理与员工管理，H5 还包含门店核销入口、扫码提示和手动输入订单号的核销动作。订单详情展示核销门店与操作记录的示例。</p>
+<p>这些页面提供协作线索：用户需要能出示凭证，店员需要定位订单，运营需要回看处理信息。扫码当前提示需要摄像头 API，手动核销只是模拟成功；员工权限与防止重复核销的执行机制还需要真实规则确认。</p>
 
-        <div class="prototype-section">
-            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                    <a href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener noreferrer" aria-label="体验管理端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>管理后台</span>
-                </a>
-                    <a href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener noreferrer" aria-label="体验移动端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>用户端H5</span>
-                </a>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/store-manage.html" target="_blank" rel="noopener">门店管理原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/staff-manage.html" target="_blank" rel="noopener">员工管理原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></p>
+<p class="source-note">来源：门店管理、员工管理与 H5 门店核销页面。</p>
+</details>
+<details id="project/prototype" data-source="仓库已有原型；非生产系统。">
+<summary>走进管理端与用户端</summary>
+<p>管理端从商品列表进入创建商品、品牌、订单、门店和员工等页面。用户端从商城浏览进入商品详情，选择交付方式，再查看订单与凭证。</p>
+<p>建议先看同一件商品怎样选择配送或自提，再回到订单管理对照发货和核销动作。页面中的价格、数量、人物与订单是示例内容。部分上传、扫码和提交按钮仍为演示提示。</p>
 
-        <div class="next-project">
-            <a href="zhishu-platform.html" class="prev-project">
-                <i style="font-size: 0.875rem;">←</i>
-                <span>命题智能协同平台</span>
-            </a>
-            <span class="next-project-label">下一个项目</span>
-            <a href="rights-management.html" class="next-project-link">
-                <span>运营商权益全链路管理系统</span>
-                <i style="font-size: 0.875rem;">→</i>
-            </a>
-        </div>
-    </main>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></p>
+<p class="source-note">来源：仓库已有原型；非生产系统。</p>
+</details>
+<details id="project/questions" data-source="旧页数字缺少来源；本篇为后续核对方向。">
+<summary>从原型走向可验证的结果</summary>
+<p>旧版页面列出的商品数量、履约准确率和效率提升缺少统计来源，本页移除这些成果数字。项目起止时间、个人职责与实际交付范围也需要补充记录。</p>
+<p>可以继续收集一次真实商品导入和订单履约的脱敏记录：哪些字段校验失败，如何补正，发货或核销结果由谁确认。库存扣减、物流跟踪和批量处理的执行情况，应据此确认，而不由原型按钮推定。</p>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
-            <p class="footer-credit">Designed & Developed by Jackie Hou</p>
-        </div>
-    </footer>
 
-    <script src="../assets/scripts/site.js"></script>
-    <script>
-        document.body.style.opacity = '1';
-    </script>
+<p class="source-note">来源：旧页数字缺少来源；本篇为后续核对方向。</p>
+</details>
+</details>
+<nav class="case-tools" aria-label="其他项目"><a href="zhishu-platform.html">← 命题智能协同平台</a><a href="rights-management.html">运营商权益项目 →</a></nav>
+</main>
+<footer class="collection-footer"><span>每一份材料，都有不止一种读法。</span><a href="../index.html#collections">继续探索其他项目 ↗</a></footer>
+<dialog id="reader" aria-labelledby="reader-title">
+<button class="close" type="button" aria-label="关闭内容">×</button>
+<div class="reader-layout"><article><p class="eyebrow" id="reader-type"></p><h2 id="reader-title"></h2><div id="reader-visual"></div><div id="reader-body"></div></article><aside class="connections"><p class="eyebrow">CONNECTED TO</p><h3>内容标签</h3><div id="connections"></div><div class="related"><p class="eyebrow">FOLLOW THE IDEA</p><h3>继续阅读</h3><div id="related"></div></div><p class="provenance" id="provenance"></p></aside></div>
+</dialog>
 </body>
 </html>

@@ -1,0 +1,16 @@
+/* Reuse the rights collection shell. Only zhishu material previews differ. */
+.zhishu-collection .zhishu-preview{flex:1;display:flex;align-items:center;width:100%;min-height:125px;padding:20px 0}
+.zhishu-preview .mini-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;width:100%;font-size:15px;line-height:1.8}
+.zhishu-preview .mini-flow i{font-style:normal;color:#658176}
+.zhishu-preview .mini-stack{display:grid;gap:0;width:100%}
+.zhishu-preview .mini-stack span{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #405d5a29;padding:12px 0;font-size:12px}
+.zhishu-preview .mini-stack b{font-weight:550}
+.zhishu-preview .mini-status,.zhishu-preview .mini-quote{font-size:23px;line-height:1.65;letter-spacing:-.03em}
+.zhishu-preview .mini-status i{display:none}
+.zhishu-collection .surface.uniform{display:flex;flex-direction:column}
+.zhishu-collection .preview-label{flex-wrap:wrap;gap:7px}
+.zhishu-collection .evidence-link{display:inline-block;margin:6px 8px 6px 0;padding:10px 15px;border:1px solid #bfd3c8;border-radius:18px;background:#e2eee8;color:#294b3d;font-size:12px}
+.zhishu-collection .canvas-world .intro .description{max-width:320px}
+@media(max-width:700px){.zhishu-preview .mini-status,.zhishu-preview .mini-quote{font-size:21px}.zhishu-preview .mini-flow{font-size:13px}.zhishu-collection .canvas-world .intro .description{max-width:none}}
+
+.zhishu-preview .mini-metrics{display:grid;grid-template-columns:1fr 1fr;gap:22px;width:100%}.mini-metrics b{display:block;font-size:30px;font-weight:500;letter-spacing:-.05em}.mini-metrics small{display:block;font-size:11px;margin-top:8px;color:#536570}.zhishu-collection .case-pagination{display:flex;justify-content:space-between;gap:16px;padding:12px 0 35px;font-size:12px;flex-wrap:wrap}.zhishu-collection .case-pagination a{padding:10px 0;border-bottom:1px solid #b7c5cc}.zhishu-collection .case-pagination a:focus-visible{outline:3px solid #527766;outline-offset:5px}.zhishu-collection .source-note{overflow-wrap:anywhere}.zhishu-collection #reader-body .source-note{font-size:12px;color:#657681}.zhishu-collection .canvas-toolbar button{min-height:40px}

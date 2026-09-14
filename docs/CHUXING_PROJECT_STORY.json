@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "project": {
+    "id": "chuxing-charging",
+    "title": "一次充电，三方系统",
+    "audience": "具备产品或技术背景的合作者与面试官",
+    "readerTakeaway": "理解一次和包扫码充电如何连接三方能力，以及方案如何区分状态、恢复异常并完成资金闭环。",
+    "overviewClaimIds": ["claim-role", "claim-stage", "claim-parties", "claim-journey"],
+    "defaultRouteId": "route-journey"
+  },
+  "sources": [
+    {"id":"source-case-v1","kind":"original_artifact","locator":"git f730cb8:projects/chuxing-equity.html","excerpt":"原出行案例页面，包含三方职责、链路、状态、产品决策和交付说明。","scope":"支持页面中记录的方案内容与自述角色；不能证明生产上线、业务成效或团队实际分工。"},
+    {"id":"source-user-prototype","kind":"original_artifact","locator":"projects/prototypes/chuxing-equity/carlife/index.html","excerpt":"用户端充电交互原型。","scope":"支持原型中存在找站、预付、启充、异常、结算和退款演示；不能证明线上实现。"},
+    {"id":"source-admin-prototype","kind":"original_artifact","locator":"projects/prototypes/chuxing-equity/teld/jincke-teld-rights.html","excerpt":"权益配置与运营管理原型。","scope":"支持管理端原型的页面与字段；不能证明真实运营流程。"},
+    {"id":"source-redesign","kind":"derivative","locator":"docs/plans/2026-09-09-chuxing-collection-design.md","excerpt":"本次项目页的内容重组与事实边界。","scope":"说明新的阅读路线与呈现方式，不新增项目历史事实。"}
+  ],
+  "claims": [
+    {"id":"claim-role","text":"现有项目页将 Jackie 的角色记为产品经理。","status":"confirmed","scope":"personal_role","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"职位名称不证明独立负责全部三方协作。"},
+    {"id":"claim-stage","text":"本页材料处于方案设计与联调准备阶段。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"不能写成已上线或已有运行成效。"},
+    {"id":"claim-parties","text":"方案连接和包的入口与支付、觉观的交易编排和特来电的充电履约。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"这是方案职责边界，不是联调运行记录。"},
+    {"id":"claim-rails","text":"方案把身份、会员权益和充电交易拆成三条有关联但不互相替代的链路。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"具体接口开放与协议细节以联调为准。"},
+    {"id":"claim-journey","text":"方案覆盖扫码、预检、预付、自动启充、充电监控、最终结算和资金闭环。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"流程设计不证明每个阶段已生产上线。"},
+    {"id":"claim-states","text":"方案分别表达付款到账、物理充电、金额结算和整单完成。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"页面只展示关键语义，不是完整技术状态机。"},
+    {"id":"claim-recovery","text":"支付或启动结果未知时，方案查询原流水并限制可能造成重复交易的动作。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"具体等待时长与恢复口径仍以联调结论为准。"},
+    {"id":"claim-decisions","text":"现有方案记录了自动启充、恢复原订单、最终账单结算、原订单退款和超时占用费独立成单等产品规则。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"规则的线上表现与用户反馈尚无运行证据。"},
+    {"id":"claim-sync","text":"方案用事件通知变化、用查询确认当前权威结果，并用唯一标识处理重复与乱序。","status":"confirmed","scope":"intended_design","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"是机制设计说明，不是稳定性测试结果。"},
+    {"id":"claim-delivery","text":"现有页面列出全链路流程、状态动作矩阵、字段规范和联调清单四类交付。","status":"confirmed","scope":"delivery_description","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"原始交付文件与团队使用反馈尚未在本站展示。"},
+    {"id":"claim-prototype","text":"本站已有用户端完整流程原型和权益管理端原型。","status":"confirmed","scope":"prototype_artifact","sourceIds":["source-user-prototype","source-admin-prototype"],"basedOnClaimIds":[],"boundary":"原型示例数据不能作为真实业务数据或上线证据。"},
+    {"id":"claim-contribution","text":"原页面自述将影响主链路的关键分歧整理成明确规则。","status":"confirmed","scope":"personal_contribution","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"这是作品集中的本人自述，尚缺原始文档、协作方或运行记录交叉证明。"},
+    {"id":"claim-live-result","text":"项目的实际联调结果、上线状态、覆盖范围与业务成效尚未确认。","status":"unknown","scope":"runtime_result","sourceIds":["source-case-v1"],"basedOnClaimIds":[],"boundary":"公开页面不得补写推测的结果数字。"}
+  ],
+  "nodes": [
+    {"id":"roles","question":"一次扫码背后由谁接力？","answer":"方案由和包提供入口与支付，觉观编排交易，特来电履约充电。","claimIds":["claim-parties"],"sourceIds":["source-case-v1"],"contentType":"structure","format":"relationship_diagram","tags":[{"dimension":"讨论主题","value":"三方边界"}],"caveat":"不表示个人独立承担全部协作。"},
+    {"id":"rails","question":"为什么要拆开身份、权益和交易？","answer":"三条链路相互关联，但各自拥有不同的事实来源和恢复方式。","claimIds":["claim-rails"],"sourceIds":["source-case-v1"],"contentType":"structure","format":"relationship_diagram","tags":[{"dimension":"方法","value":"链路拆分"}],"caveat":"接口细节以联调为准。"},
+    {"id":"journey","question":"一次充电怎样从扫码走到完成？","answer":"方案用七个阶段连接入口、预付、履约、结算和资金处理。","claimIds":["claim-journey"],"sourceIds":["source-case-v1"],"contentType":"practice","format":"process","tags":[{"dimension":"业务环节","value":"核心旅程"}],"caveat":"流程图不是上线记录。"},
+    {"id":"states","question":"付款成功是否等于充电成功？","answer":"不等于；付款、充电、结算与完成分别表达不同事实。","claimIds":["claim-states"],"sourceIds":["source-case-v1"],"contentType":"structure","format":"comparison","tags":[{"dimension":"方法","value":"状态建模"}],"caveat":"只摘取关键语义。"},
+    {"id":"unknown","question":"结果未知时系统应当怎样处理？","answer":"方案查询原流水，并暂时锁定可能产生重复交易的动作。","claimIds":["claim-recovery"],"sourceIds":["source-case-v1"],"contentType":"decision","format":"decision_note","tags":[{"dimension":"讨论主题","value":"未知结果"}],"caveat":"具体时限待联调确认。"},
+    {"id":"recovery","question":"异常之后用户还能做什么？","answer":"页面动作取决于明确失败、结果未知或资金未闭环等不同事实。","claimIds":["claim-recovery"],"sourceIds":["source-case-v1"],"contentType":"practice","format":"comparison","tags":[{"dimension":"讨论主题","value":"异常恢复"}],"caveat":"是方案矩阵，不是线上客服口径。"},
+    {"id":"autostart","question":"付款后为什么自动启充？","answer":"方案减少一次重复确认，同时保留付款与物理启动的边界。","claimIds":["claim-decisions","claim-states"],"sourceIds":["source-case-v1"],"contentType":"decision","format":"decision_note","tags":[{"dimension":"业务环节","value":"预付到启动"}],"caveat":"尚无体验效果数据。"},
+    {"id":"resume","question":"再次扫码为什么不直接重新下单？","answer":"方案先恢复原订单，再按当前状态提供可执行动作。","claimIds":["claim-decisions","claim-recovery"],"sourceIds":["source-case-v1"],"contentType":"decision","format":"decision_note","tags":[{"dimension":"讨论主题","value":"订单恢复"}],"caveat":"尚无重复订单下降数据。"},
+    {"id":"settlement","question":"什么时候才能计算真实消费？","answer":"方案等待最终账单，再结合权益计算应退或应补。","claimIds":["claim-decisions","claim-states"],"sourceIds":["source-case-v1"],"contentType":"decision","format":"decision_note","tags":[{"dimension":"业务环节","value":"结算"}],"caveat":"实时费用只用于感知。"},
+    {"id":"funds","question":"退款与占用费怎样被用户理解？","answer":"方案把退款留在原充电订单，并让占用费独立成单。","claimIds":["claim-decisions"],"sourceIds":["source-case-v1"],"contentType":"practice","format":"comparison","tags":[{"dimension":"讨论主题","value":"资金表达"}],"caveat":"未包含真实客诉或对账反馈。"},
+    {"id":"sync","question":"三方怎样面对同一个当前状态？","answer":"事件负责及时通知，查询负责权威结果，唯一标识帮助处理重复和乱序。","claimIds":["claim-sync"],"sourceIds":["source-case-v1"],"contentType":"structure","format":"relationship_diagram","tags":[{"dimension":"方法","value":"一致性机制"}],"caveat":"未展示联调测试结果。"},
+    {"id":"delivery","question":"接口约束怎样成为团队共同语言？","answer":"现有页面列出流程、矩阵、字段规范和联调清单四类交付线索。","claimIds":["claim-delivery","claim-contribution"],"sourceIds":["source-case-v1"],"contentType":"reflection","format":"evidence_excerpt","tags":[{"dimension":"材料状态","value":"原件待补"}],"caveat":"交付原件和团队反馈尚未展示。"},
+    {"id":"prototype","question":"怎样直接体验这些规则？","answer":"可以操作用户端充电流程原型，也可以查看管理端权益配置原型。","claimIds":["claim-prototype"],"sourceIds":["source-user-prototype","source-admin-prototype"],"contentType":"practice","format":"interactive_demo","tags":[{"dimension":"材料状态","value":"交互原型"}],"caveat":"不是生产系统。"}
+  ],
+  "relations": [
+    {"id":"rel-roles-journey","from":"roles","to":"journey","type":"explains","reason":"知道三方职责后，才能理解每一步由谁提供事实。","claimIds":["claim-parties","claim-journey"]},
+    {"id":"rel-journey-states","from":"journey","to":"states","type":"explains","reason":"旅程阶段需要用不同状态区分真实进展。","claimIds":["claim-journey","claim-states"]},
+    {"id":"rel-states-recovery","from":"states","to":"recovery","type":"supports","reason":"恢复动作取决于当前能确认的业务事实。","claimIds":["claim-states","claim-recovery"]},
+    {"id":"rel-recovery-prototype","from":"recovery","to":"prototype","type":"illustrates","reason":"原型把部分异常状态与用户动作放进可操作页面。","claimIds":["claim-recovery","claim-prototype"]},
+    {"id":"rel-rails-autostart","from":"rails","to":"autostart","type":"explains","reason":"支付链路和履约链路拆开后，自动启充仍需保留状态边界。","claimIds":["claim-rails","claim-decisions"]},
+    {"id":"rel-autostart-resume","from":"autostart","to":"resume","type":"explains","reason":"自动启动出现中断时，需要先恢复原订单。","claimIds":["claim-decisions"]},
+    {"id":"rel-resume-settlement","from":"resume","to":"settlement","type":"explains","reason":"恢复订单后，继续沿原交易等待最终账单。","claimIds":["claim-decisions"]},
+    {"id":"rel-settlement-funds","from":"settlement","to":"funds","type":"explains","reason":"最终账单确定实际金额后，才知道应退、应补或是否产生其他费用。","claimIds":["claim-decisions"]},
+    {"id":"rel-roles-states","from":"roles","to":"states","type":"explains","reason":"不同状态来自不同系统，先要明确职责与权威来源。","claimIds":["claim-parties","claim-states"]},
+    {"id":"rel-states-sync","from":"states","to":"sync","type":"explains","reason":"跨系统状态需要通过通知和查询保持可恢复的一致。","claimIds":["claim-states","claim-sync"]},
+    {"id":"rel-sync-delivery","from":"sync","to":"delivery","type":"supports","reason":"同步与恢复机制需要被整理为研发、设计和测试可共用的规则。","claimIds":["claim-sync","claim-delivery"]}
+  ],
+  "routes": [
+    {"id":"route-journey","title":"跟随一次充电","readerQuestion":"一次扫码怎样走到交易完成？","takeaway":"用户体验的连续性依赖于清晰的系统边界、状态语义与异常恢复。","nodeIds":["roles","journey","states","recovery","prototype"],"transitions":[{"from":"roles","to":"journey","reason":"从职责进入实际旅程。"},{"from":"journey","to":"states","reason":"用状态判断旅程真实进展。"},{"from":"states","to":"recovery","reason":"从可确认事实决定恢复动作。"},{"from":"recovery","to":"prototype","reason":"到原型中查看页面表达。"}],"groups":[{"id":"group-journey","title":"一次完整充电","question":"怎样连续完成服务？","nodeIds":["roles","journey","states","recovery","prototype"]}]},
+    {"id":"route-decisions","title":"理解产品决策","readerQuestion":"哪些选择缩短主链路，同时守住交易边界？","takeaway":"体验优化不能合并不同业务事实，恢复与结算需要沿原交易继续。","nodeIds":["rails","autostart","resume","settlement","funds"],"transitions":[{"from":"rails","to":"autostart","reason":"从链路边界进入启动决策。"},{"from":"autostart","to":"resume","reason":"自动启动也需要中断恢复。"},{"from":"resume","to":"settlement","reason":"恢复后沿原订单继续结算。"},{"from":"settlement","to":"funds","reason":"账单决定后续资金表达。"}],"groups":[{"id":"group-decisions","title":"主链路与资金边界","question":"方案如何兼顾更短体验与更清楚事实？","nodeIds":["rails","autostart","resume","settlement","funds"]}]},
+    {"id":"route-collaboration","title":"看三方如何协作","readerQuestion":"多个系统怎样面对同一个业务结果？","takeaway":"职责、权威状态、同步机制与交付语言共同支撑协作。","nodeIds":["roles","states","sync","delivery"],"transitions":[{"from":"roles","to":"states","reason":"职责决定状态的权威来源。"},{"from":"states","to":"sync","reason":"权威事实需要跨系统同步和查询。"},{"from":"sync","to":"delivery","reason":"机制需要被翻译为共同执行的材料。"}],"groups":[{"id":"group-collaboration","title":"三方对齐","question":"如何对同一个业务结果形成共同判断？","nodeIds":["roles","states","sync","delivery"]}]}
+  ],
+  "capabilities": [
+    {"id":"capability-rules","statement":"候选能力：把跨系统交易中的状态与边界整理为可执行产品规则。","action":"整理影响主链路的关键分歧和状态动作。","attribution":"candidate","claimIds":["claim-contribution","claim-states","claim-recovery"],"nodeIds":["states","recovery","delivery"],"boundary":"当前主要依据作品集自述，仍需原始交付物或协作记录支持。"},
+    {"id":"capability-prototype","statement":"候选能力：把流程规则转化为可操作的用户端与管理端原型。","action":"通过原型表达完整充电流程与权益管理界面。","attribution":"candidate","claimIds":["claim-prototype"],"nodeIds":["prototype"],"boundary":"已有原型文件，但具体个人分工仍需确认。"}
+  ],
+  "questions": [
+    {"id":"question-role","question":"三方对接、产品规则、页面设计和联调分别由谁负责？","whyItMatters":"决定哪些工作可以明确写为个人贡献。","priority":"high","claimIds":["claim-role","claim-contribution"]},
+    {"id":"question-live","question":"项目目前是否完成联调或上线，有哪些可公开的结果？","whyItMatters":"决定页面能否从方案案例升级为运行案例。","priority":"high","claimIds":["claim-stage","claim-live-result"]},
+    {"id":"question-evidence","question":"能否提供脱敏的流程图、状态矩阵或联调记录？","whyItMatters":"可以把交付线索升级为可检查的项目证据。","priority":"medium","claimIds":["claim-delivery","claim-contribution"]}
+  ]
+}

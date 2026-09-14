@@ -1,449 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多租户会员订阅商城 | Jackie Hou</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/styles/site.css">
-    <style>
-        .project-page {
-            padding-top: 6rem;
-            max-width: 100%;
-            margin: 0 auto;
-            padding-left: 5%;
-            padding-right: 5%;
-        }
-
-        @media (min-width: 640px) {
-            .project-page {
-                max-width: 90%;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .project-page {
-                max-width: 85%;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .project-page {
-                max-width: 1024px;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .project-page {
-                max-width: 1100px;
-            }
-        }
-
-        @media (min-width: 1536px) {
-            .project-page {
-                max-width: 1200px;
-            }
-        }
-
-        .project-header {
-            margin-bottom: 4rem;
-        }
-
-        .project-meta {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-category-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-brown);
-        }
-
-        .project-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--paper-bg-light);
-            border: 1px solid var(--border-ink);
-        }
-
-        .project-title-large {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 3rem;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--ink-black);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-subtitle-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .project-subtitle {
-            font-size: 1rem;
-            color: var(--ink-gray);
-            margin: 0;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .project-section {
-            margin-bottom: 4rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid var(--divider-ink);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-        }
-
-        .section-label {
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-light);
-        }
-
-        .section-title {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            margin-left: auto;
-        }
-
-        .project-section p {
-            font-size: 0.9375rem;
-            color: var(--ink-gray);
-            line-height: 1.8;
-            max-width: 600px;
-        }
-
-        .challenge-solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .challenge-item,
-        .solution-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .challenge-number,
-        .solution-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-brown);
-            margin-bottom: 0.5rem;
-        }
-
-        .challenge-text,
-        .solution-text {
-            font-size: 0.875rem;
-            color: var(--ink-gray);
-            line-height: 1.7;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .result-card {
-            background-color: var(--paper-bg-light);
-            padding: 2rem;
-            border: 1px solid var(--border-ink);
-        }
-
-        .result-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .prototype-section {
-            margin-top: 2rem;
-        }
-
-        .prototype-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--accent-brown);
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--border-ink);
-            transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .prototype-link:hover {
-            border-color: var(--accent-brown);
-            background-color: var(--paper-bg-light);
-        }
-
-        .next-project {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--divider-ink);
-            margin-top: 2rem;
-        }
-
-        .next-project-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-light);
-        }
-
-        .next-project-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .next-project-link:hover {
-            color: var(--accent-brown);
-        }
-
-        .prev-project {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .prev-project:hover {
-            color: var(--accent-brown);
-        }
-
-        @media (max-width: 768px) {
-            .project-title-large {
-                font-size: 2rem;
-            }
-
-            .challenge-solution-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .next-project {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="../assets/styles/redesign.css?v=20260901-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一份会员背后的共享与差异 · Jackie Hou</title>
+<meta name="description" content="从一份会员的开通与领取，回看套餐、周期、渠道配置和多租户方案，探索共享能力怎样承接不同运营需求。">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles/cases/rights-collection.css">
+<link rel="stylesheet" href="../assets/styles/collection.css">
+<link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css">
+<link rel="stylesheet" href="../assets/styles/cases/member-collection.css">
+<script src="../assets/scripts/collection.js" defer></script>
+<script src="../assets/scripts/cases/member-collection.js" defer></script>
 </head>
-<body class="interior-page project-detail-page case-multi-tenant">
-    <div class="grain" aria-hidden="true"></div>
-    <a href="#main-content" class="skip-link">跳转到主要内容</a>
-    <header class="site-header navbar">
-        <div class="navbar-content">
-            <a href="../index.html" class="nav-brand" aria-label="Jackie Hou 首页"><span class="nav-monogram">JH</span><span class="nav-name">/ Jackie Hou</span></a>
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span></button>
-            <nav id="site-navigation" class="navbar-right" aria-label="主导航">
-                <a href="../index.html" class="nav-item">首页</a>
-                <a href="../projects.html" class="nav-item active">项目</a>
-                <a href="../experience.html" class="nav-item">经历</a>
-                <a href="../about.html" class="nav-item">关于</a>
-                <a href="../contact.html" class="nav-item">联系</a>
-                <span class="nav-location">INDEX / 2026</span>
-            </nav>
-        </div>
-        <span class="site-progress" aria-hidden="true"></span>
-    </header>
+<body class="case-collection member-collection">
+<a href="#main-content" class="skip-link">跳转到主要内容</a>
+<header class="collection-header">
+<a class="collection-brand" href="../index.html" aria-label="Jackie Hou 首页"><b>J<i>·</i>H</b><span>Jackie Hou / 工作与思考</span></a>
+<button class="menu-button" type="button" aria-expanded="false" aria-controls="collection-navigation">菜单 ＋</button>
+<nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
+</header>
+<main id="main-content">
+<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 04</span><a href="#materials">完整文字材料 ↓</a></div>
+<section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 04</p><h1 id="title">一份会员背后的共享与差异</h1><p class="description" id="description">从一份会员的开通与领取，回看套餐、周期、渠道配置和多租户方案，探索共享能力怎样承接不同运营需求。</p></div><aside id="aside">多租户会员订阅商城<br>共享能力 × 运营配置<span class="project-fact">从套餐配置到权益领取<small>依据现有案例与原型整理</small></span><a href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a><br><a href="./prototypes/multi-tenant-mall/shopping-mall/mobile/index.html" target="_blank" rel="noopener">移动端原型（新窗口） ↗</a></aside></section>
+<div class="collection-bar"><span id="count">9 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
+<section class="grid" id="grid" aria-label="集合内容"></section>
+<details class="static-materials" id="materials" open>
+<summary>完整文字材料 · 9 份</summary>
+<p>从会员开通读到套餐配置，也可以直接进入原型。每篇末尾标明材料来源与适用边界。</p>
+<details id="project/scope" data-source="旧版会员商城案例；架构实现与租户清单待核对。">
+<summary>共享能力，容纳不同运营</summary>
+<p>旧版案例将目标描述为：支持不同子公司独立运营，用一套代码承接多个品牌的会员订阅业务。需求中的共性包括套餐与订阅运营，差异则涉及品牌表达与权限边界。</p>
+<p>页面记录了核心功能统一、差异通过配置实现的方案。这是当前可保留的项目方向；已有原型展示的是套餐和订单等业务页面，尚不足以证明租户隔离机制或真实接入数量。</p>
 
-    <main id="main-content" class="main-content project-page">
-        <div class="project-header">
-            <div class="project-meta">
-                <div class="project-category-wrapper">
-                    <span class="project-category">CASE 02</span>
-                    <span class="project-badge">2025.06 - 08</span>
-                </div>
-            </div>
-            <h1 class="project-title-large">多租户会员订阅商城</h1>
-            <div class="project-subtitle-wrapper">
-                <p class="project-subtitle">一套代码，多租户配置</p>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a></p>
+<p class="source-note">来源：旧版会员商城案例；架构实现与租户清单待核对。</p>
+</details>
+<details id="project/package" data-source="套餐配置原型的基础信息、权益关联和套餐说明区域。">
+<summary>套餐把权益组织成订阅</summary>
+<p>套餐配置页面包含名称、编号、价格、划线价、计费周期与合约时长，并提供权益关联、短信配置和套餐说明等区域。套餐列表可以按编码、名称、上架应用和办理方式筛选。</p>
+<p>这些字段把一份会员方案拆成可维护的信息：用户购买什么、按什么周期付费、关联哪些权益，以及向用户如何说明。权益关联弹窗属于原型入口，选择回显的实现仍存在未完成之处，不能据此声称配置已经完整落库。</p>
 
-        <div class="project-section">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <span class="section-label">CONTEXT</span>
-                <span class="section-title">背景</span>
-            </div>
-            <p>打造多租户会员订阅商城，支持不同子公司独立运营，实现一套代码支撑多个品牌的会员订阅业务。</p>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/package-config.html" target="_blank" rel="noopener">套餐配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a></p>
+<p class="source-note">来源：套餐配置原型的基础信息、权益关联和套餐说明区域。</p>
+</details>
+<details id="project/cycle" data-source="套餐配置原型；具体续费与退订执行规则待补充。">
+<summary>三种时间，不是同一个问题</summary>
+<p>原型将计费周期设为月付、季付、年付；合约时长单独以月填写；办理后生效时间可选择立即生效或次月生效，并另有生效时间范围。</p>
+<p>这些字段分别回答收费节奏、合约长度与开始时间。用户端说明取消续费后，权益在当前周期结束后停止，但现有材料没有说明合约期与取消续费的完整关系。这里保留字段和说明，不推导提前解约、扣费失败或退款政策。</p>
+<dl class="time-map"><div><dt>计费周期</dt><dd>多久付费一次：月付 / 季付 / 年付</dd></div><div><dt>合约时长</dt><dd>合约约定多久：单独按月填写</dd></div><div><dt>办理后生效</dt><dd>何时开始：立即 / 次月</dd></div></dl>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/package-config.html" target="_blank" rel="noopener">套餐配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/package-detail.html" target="_blank" rel="noopener">套餐详情原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/orders.html" target="_blank" rel="noopener">用户订购记录原型（新窗口） ↗</a></p>
+<p class="source-note">来源：套餐配置原型；具体续费与退订执行规则待补充。</p>
+</details>
+<details id="project/channels" data-source="套餐配置与套餐列表原型；应用字段不等于租户边界。">
+<summary>上架到哪里，怎样办理</summary>
+<p>套餐配置将 H5、支付宝小程序和微信小程序放在“上架应用”中，分别展示上下架状态。办理方式则是另一个字段，包含微信、支付宝、运营商、银联等选项。</p>
+<p>这组设计把展示入口与办理路径分开。应用上下架按钮会切换页面状态，但不能证明远端发布已经执行；多应用选择也不能直接作为多租户隔离已实现的证据。</p>
 
-        <div class="project-section">
-            <div class="challenge-solution-grid">
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">02</span>
-                        <span class="section-label">CHALLENGE</span>
-                        <span class="section-title">挑战</span>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">多个子公司需求相似但又各有差异，重复开发成本高</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">品牌调性不同，需要支持差异化定制</p>
-                    </div>
-                    <div class="challenge-item">
-                        <p class="challenge-text">统一运营后台，权限隔离复杂</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="section-header" style="justify-content: flex-start;">
-                        <span class="section-number">03</span>
-                        <span class="section-label">SOLUTION</span>
-                        <span class="section-title">解法</span>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">设计多租户架构，核心功能统一，差异化功能通过配置实现</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">搭建品牌配置中心，支持主题色、Logo、文案等自定义</p>
-                    </div>
-                    <div class="solution-item">
-                        <p class="solution-text">基于RBAC的权限系统，支持租户级和角色级权限控制</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/package-config.html" target="_blank" rel="noopener">套餐配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a></p>
+<p class="source-note">来源：套餐配置与套餐列表原型；应用字段不等于租户边界。</p>
+</details>
+<details id="project/journey" data-source="移动端首页、套餐详情和权益领取详情原型；支付为模拟。">
+<summary>从开通会员，到看见权益</summary>
+<p>移动端从首页进入套餐详情，展示套餐信息与开通入口。“立即开通”在原型中弹出支付成功提示，随后跳转到权益领取详情。</p>
+<p>领取详情展示会员有效期、待领取与已领取权益，并提供领取按钮。这个衔接让读者看到从购买说明走向权益使用的页面设计；它不证明支付、订阅扣费或权益到账已经真实接通。</p>
 
-        <div class="project-section">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <span class="section-label">RESULTS</span>
-                <span class="section-title">成果</span>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <span class="result-value">5+</span>
-                    <span class="result-label">已接入租户数量</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">50万+</span>
-                    <span class="result-label">预计覆盖用户规模</span>
-                </div>
-                <div class="result-card">
-                    <span class="result-value">-70%</span>
-                    <span class="result-label">新租户接入周期缩短</span>
-                </div>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/index.html" target="_blank" rel="noopener">移动端原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/package-detail.html" target="_blank" rel="noopener">套餐详情原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/benefit-detail.html" target="_blank" rel="noopener">权益领取详情原型（新窗口） ↗</a></p>
+<p class="source-note">来源：移动端首页、套餐详情和权益领取详情原型；支付为模拟。</p>
+</details>
+<details id="project/claim" data-source="权益领取详情、单项权益详情原型；状态和日期是示例。">
+<summary>订阅成功之后，还要领取什么</summary>
+<p>权益领取详情按单项权益展示待领取和已领取状态，点击领取进入单项详情。单项页面提供有效期、使用说明与立即领取按钮。</p>
+<p>这说明用户需要区分“已经拥有会员”与“某项权益是否领取”。单项领取按钮当前只是成功提示，示例名称、日期与数量不代表实际发放记录；重复领取、失败恢复等执行规则尚需原始业务材料支持。</p>
 
-        <div class="prototype-section">
-            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-style: normal; font-size: 1.125rem; font-weight: 600; color: var(--ink-black); margin-bottom: 1.5rem;">原型展示</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                    <a href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener noreferrer" aria-label="体验管理端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>管理后台原型</span>
-                </a>
-                    <a href="./prototypes/multi-tenant-mall/shopping-mall/mobile/index.html" target="_blank" rel="noopener noreferrer" aria-label="体验移动端原型（在新窗口打开）" class="prototype-link">
-                    <span>→</span>
-                    <span>移动端原型</span>
-                </a>
-            </div>
-        </div>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/benefit-detail.html" target="_blank" rel="noopener">权益领取详情原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/benefit-item-detail.html" target="_blank" rel="noopener">单项权益原型（新窗口） ↗</a></p>
+<p class="source-note">来源：权益领取详情、单项权益详情原型；状态和日期是示例。</p>
+</details>
+<details id="project/orders" data-source="用户端与管理端订单原型；数据为示例。">
+<summary>从订购记录回看服务状态</summary>
+<p>用户端订购记录同时展示连续包月和已停止续费的示例，提供领取权益和取消订购入口。取消确认文案说明权益到当前周期结束后停止。</p>
+<p>管理端订单详情保留订购信息、领取状态与发放订单查看入口。两端分别帮助用户理解当前权益、帮助运营定位记录；原型中的取消与导出提示不代表生产系统已执行相应操作。</p>
 
-        <div class="next-project">
-            <a href="rights-management.html" class="prev-project">
-                <i style="font-size: 0.875rem;">←</i>
-                <span>运营商权益全链路管理系统</span>
-            </a>
-            <span class="next-project-label">下一个项目</span>
-            <a href="chuxing-equity.html" class="next-project-link">
-                <span>中移金科和包APP出行权益生态</span>
-                <i style="font-size: 0.875rem;">→</i>
-            </a>
-        </div>
-    </main>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/orders.html" target="_blank" rel="noopener">用户订购记录原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/orders.html" target="_blank" rel="noopener">管理端订单原型（新窗口） ↗</a></p>
+<p class="source-note">来源：用户端与管理端订单原型；数据为示例。</p>
+</details>
+<details id="project/prototype" data-source="当前仓库保留的两个原始入口及其关联页面。">
+<summary>把配置与体验放在一起看</summary>
+<p>管理端原始入口是套餐列表，可以继续进入套餐配置和订单管理。用户端原始入口是商城首页，继续进入套餐介绍、权益领取与订购记录。</p>
+<p>建议先看后台的周期、合约、生效时间与权益关联，再对照前台的套餐说明和领取页面。原型包含静态示例、模拟提交和未完成交互，适合阅读页面组织，不是线上商城。</p>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Jackie Hou. All rights reserved.</p>
-            <p class="footer-credit">Designed & Developed by Jackie Hou</p>
-        </div>
-    </footer>
+<p class="reader-evidence"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/index.html" target="_blank" rel="noopener">移动端原型（新窗口） ↗</a></p>
+<p class="source-note">来源：当前仓库保留的两个原始入口及其关联页面。</p>
+</details>
+<details id="project/boundary" data-source="旧版案例与内容审计记录；实施证据待补充。">
+<summary>配置的边界，需要真实记录</summary>
+<p>旧页记录了主题色、Logo、文案配置中心，以及租户级、角色级 RBAC 的设计。现有链接原型没有提供这些能力的完整页面或运行证据，因此保留为方案记录，实施情况待确认。</p>
+<p>旧页的接入租户数、预计用户规模和接入周期缩短比例缺少来源和比较口径，本页移除这些数字。项目时间、个人负责范围、租户隔离验证和接入记录仍需补充；预计覆盖规模也不能转述为已覆盖成果。</p>
 
-    <script src="../assets/scripts/site.js"></script>
-    <script>
-        document.body.style.opacity = '1';
-    </script>
+
+<p class="source-note">来源：旧版案例与内容审计记录；实施证据待补充。</p>
+</details>
+</details>
+<nav class="case-tools" aria-label="其他项目"><a href="rights-management.html">← 运营商权益项目</a><a href="chuxing-equity.html">和包 APP 出行权益生态 →</a></nav>
+</main>
+<footer class="collection-footer"><span>每一份材料，都有不止一种读法。</span><a href="../index.html#collections">继续探索其他项目 ↗</a></footer>
+<dialog id="reader" aria-labelledby="reader-title">
+<button class="close" type="button" aria-label="关闭内容">×</button>
+<div class="reader-layout"><article><p class="eyebrow" id="reader-type"></p><h2 id="reader-title"></h2><div id="reader-visual"></div><div id="reader-body"></div></article><aside class="connections"><p class="eyebrow">CONNECTED TO</p><h3>内容标签</h3><div id="connections"></div><div class="related"><p class="eyebrow">FOLLOW THE IDEA</p><h3>继续阅读</h3><div id="related"></div></div><p class="provenance" id="provenance"></p></aside></div>
+</dialog>
 </body>
 </html>

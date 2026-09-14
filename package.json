@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Jackie Hou's Product Manager Portfolio",
   "scripts": {
-    "start": "python -m http.server 8080",
+    "start": "python scripts/preview.py",
     "deploy": "gh-pages -d .",
     "build": "echo 'No build required for static site'",
     "generate:redirects": "node scripts/generate-legacy-redirects.mjs"

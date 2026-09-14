@@ -1,0 +1,116 @@
+/* Portfolio interiors: the same quiet canvas and folder vocabulary as collection.css.
+   Standalone layout, deliberately independent of the archived editorial styles. */
+body.portfolio-page{margin:0;background:var(--canvas);color:var(--ink);font:13px/1.9 var(--font);--ink-black:#182126;--ink-gray:#5b6871;--accent-brown:#52796d}
+.portfolio-page h1,.portfolio-page h2,.portfolio-page h3,.portfolio-page h4,.portfolio-page p{margin-top:0}
+.portfolio-page h1,.portfolio-page h2,.portfolio-page h3,.portfolio-page h4{font-weight:500}
+.portfolio-page p{color:var(--muted)}
+.portfolio-page .main-content{max-width:1440px;padding:0 5%;margin:auto}
+.page-intro{padding:64px 0 56px;display:grid;grid-template-columns:1.2fr 1fr;align-items:end;gap:80px}
+.page-intro h1{font-size:38px;line-height:1.5;letter-spacing:-.05em;margin:18px 0 0}
+.page-intro>p{max-width:350px;font-size:13px;margin:0 0 8px}
+.catalog-page .collection-section{padding-top:0}
+.catalog-page .featured-folder{min-height:340px}
+.catalog-page .project-grid{margin-bottom:22px}
+.portfolio-page .collection-footer{margin-top:50px}
+.section-header{display:flex;align-items:baseline;gap:14px;margin:0 0 30px}
+.section-number,.section-label{color:#71818a;font-size:9px;letter-spacing:.12em;font-weight:500}
+.section-label{margin-left:auto}
+.section-title{font-size:19px;letter-spacing:-.025em;line-height:1.5;margin:0}
+.portfolio-page section:first-child>.section-header{padding-top:52px}
+.portfolio-page h1.section-title{font-size:34px;font-weight:500}
+.divider{border-top:1px solid var(--line);margin:52px 0 36px}
+/* A personal introduction with one lead and two short supporting notes. */
+.about-content{display:grid;grid-template-columns:1.25fr 1fr;gap:22px 70px;padding:20px 0 8px}
+.about-content p{font-size:13px;line-height:2.15;margin:0}
+.about-content p:first-child{grid-row:span 2;font-size:23px;line-height:1.95;letter-spacing:-.035em;color:var(--ink);padding-right:20px}
+.working-method-intro{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-bottom:28px}
+.working-method-intro h3{font-size:27px;line-height:1.65;letter-spacing:-.04em;margin-bottom:14px}
+.working-method-intro p{max-width:460px}
+.working-method-grid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.working-method-grid li{padding:25px;background:#fafcfd;border:1px solid #fff;border-radius:20px;min-width:0}
+.working-method-grid li:nth-child(2){background:#dcebe5}.working-method-grid li:nth-child(3){background:#e2e8f2}.working-method-grid li:nth-child(4){background:#e5e1eb}
+.working-method-grid li>span{font-size:10px;color:#60766c;display:block;margin-bottom:26px}
+.working-method-grid strong{font-size:19px;font-weight:500;display:block;margin-bottom:12px}
+.working-method-grid p{font-size:12px;margin:0}
+.capability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.capability-card{position:relative;background:#f9fbfc;border:1px solid white;border-radius:0 20px 20px 20px;padding:26px;margin-top:16px}
+.capability-card:before{content:'';position:absolute;top:-13px;left:-1px;width:42%;height:13px;background:inherit;border:1px solid white;border-bottom:0;border-radius:10px 10px 0 0}
+.capability-title{font-size:17px;margin-bottom:20px}
+.capability-list{padding-left:16px;margin:0;color:var(--muted);font-size:12px;line-height:2.1}
+.capability-list li+li{margin-top:9px}
+.capability-list strong{font-weight:500;color:#33464e}
+.capability-section+.capability-section{margin-top:52px}
+.education-timeline{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.education-item{padding:26px 0;border-top:1px solid var(--line)}
+.education-date,.experience-date{font-size:11px;color:#6c7e87}
+.education-title{font-size:18px;margin:16px 0 7px}
+.education-detail{font-size:12px;margin:0}
+/* Work history uses the homepage path rhythm, with the role as the anchor. */
+.experience-timeline{position:relative;margin:30px 0 70px}
+.about-index{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 48px;padding-top:24px;border-top:1px solid var(--line)}
+.about-index a{font-size:12px;padding:9px 16px;border:1px solid #d0dadd;border-radius:22px;background:#f7fafb}
+.about-index a:hover{background:#dcebe5}
+.experience-item{display:grid;grid-template-columns:23% 1fr;gap:36px;padding:34px 0 44px;border-top:1px solid var(--line)}
+.experience-date{padding-top:7px}
+.experience-content{max-width:760px}
+.experience-title{font-size:28px;letter-spacing:-.04em;margin:0 0 6px}
+.experience-company{font-size:12px;margin-bottom:25px}
+.experience-description{background:#f8fafc;border:1px solid white;border-radius:22px;padding:26px 30px;font-size:13px}
+.experience-item:nth-child(2) .experience-description{background:#e1e9f0}
+.experience-description p:last-child{margin-bottom:0}
+.experience-description ul{padding-left:20px;margin:0;color:var(--muted)}
+/* Contact is a quiet conversation, not a promotional banner. */
+.contact-content{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:center;min-height:440px;padding:30px 0 60px}
+.contact-text h3{font-size:clamp(28px,3.4vw,44px);letter-spacing:-.045em;line-height:1.7;margin:0;max-width:500px}
+.contact-info{background:#dcebe5;border:1px solid #fff;border-radius:24px;padding:36px;box-shadow:0 16px 32px #354b6609}
+.contact-info p{font-size:12px;line-height:2.1}
+.contact-email{margin-top:30px;padding-top:20px;border-top:1px solid #bbd0c7}
+.contact-email a{font-size:clamp(15px,1.8vw,22px);overflow-wrap:anywhere;letter-spacing:-.02em}
+/* Case studies: compact overview, then readable source material on white sheets. */
+.case-tools{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);font-size:11px;color:#647780}
+.project-header{padding:44px 0 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:18px 60px;align-items:start}
+.project-meta{grid-column:1/-1;font-size:10px;color:#6b7d86;letter-spacing:.08em}
+.project-category-wrapper{display:flex;gap:24px}
+.project-title-large{font-size:clamp(28px,3.4vw,42px);line-height:1.5;letter-spacing:-.05em;margin:0;max-width:560px}
+.project-subtitle{font-size:14px;line-height:2;max-width:340px;margin:5px 0 0}
+.project-section{margin:0 0 26px;padding:30px 34px;border:1px solid white;border-radius:22px;background:#fafcfd;box-shadow:0 12px 28px #354b6606}
+.project-section>.section-header{margin-bottom:22px;padding:0!important}
+.project-section p{max-width:850px;line-height:2.1}
+.project-section>p:last-child{margin-bottom:0}
+.project-section .section-title{order:1;font-size:20px}.project-section .section-number{order:0}.project-section .section-label{order:2}
+.challenge-solution-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.challenge-solution-grid>div{min-width:0}
+.challenge-solution-grid>div:nth-child(2){background:#e8efdc;border-radius:18px;padding:22px}
+.challenge-solution-grid>div:first-child{padding:22px 0}
+.challenge-item,.solution-item{padding:15px 0;border-top:1px solid #d2dcd9}
+.challenge-text,.solution-text{font-size:13px;color:#50636b;line-height:2}
+.results-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.result-card{background:#e1eaf0;border:1px solid white;border-radius:18px;padding:25px;display:flex;flex-direction:column;gap:14px}
+.result-card:nth-child(2){background:#e6eedc}.result-card:nth-child(3){background:#e6e2ed}
+.result-value{font-size:34px;line-height:1.3;font-weight:500;letter-spacing:-.035em}.result-value.text{font-size:25px}
+.result-label{font-size:11px;color:#60727b}
+.project-section h4{font-size:18px;margin:28px 0 15px}
+.project-section ul{padding-left:20px;color:#5b6871;line-height:2}
+.project-section li+li{margin-top:10px}
+.prototype-section{padding:28px 0 40px}
+.prototype-section h3{font-size:16px;margin-bottom:20px}
+.prototype-section>div{display:flex;flex-wrap:wrap;gap:12px}
+.prototype-link{display:inline-flex;align-items:center;gap:14px;background:#deece6;border:1px solid #c1d5c9;border-radius:24px;padding:11px 20px;font-size:12px;color:#324f45}
+.prototype-link:hover{background:#cfe4d9}
+.next-project{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:25px 0;font-size:12px}
+.next-project-label{font-size:10px;color:#74818a}
+.portfolio-page a:focus-visible{outline:3px solid #527766;outline-offset:5px}
+@media(max-width:1000px){.working-method-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.page-intro{gap:35px}.capability-grid{gap:15px}.capability-card{padding:20px}}
+@media(max-width:700px){
+ .portfolio-page .main-content{padding:0 6%}.page-intro{grid-template-columns:1fr;gap:20px;padding:36px 0 32px}.page-intro h1{font-size:30px}.page-intro>p{max-width:none}
+ .portfolio-page section:first-child>.section-header{padding-top:35px}.portfolio-page h1.section-title{font-size:29px}.section-header{gap:10px}.section-title{font-size:18px}.section-label{font-size:8px}
+ .about-content{grid-template-columns:1fr;gap:20px;padding-top:0}.about-content p:first-child{grid-row:auto;font-size:21px;padding:0}
+ .working-method-intro{grid-template-columns:1fr;gap:0}.working-method-intro h3{font-size:25px}.working-method-grid{gap:14px}.working-method-grid li{padding:20px}.working-method-grid strong{font-size:17px}
+ .capability-grid,.education-timeline{grid-template-columns:1fr;gap:22px}.divider{margin:36px 0 28px}
+ .experience-item{grid-template-columns:1fr;gap:14px;padding:24px 0 32px}.experience-description{padding:22px}.experience-title{font-size:24px}
+ .contact-content{grid-template-columns:1fr;gap:30px;padding:16px 0 30px;min-height:0}.contact-info{padding:27px}.contact-text h3{font-size:30px}
+ .project-header{grid-template-columns:1fr;gap:16px;padding:30px 0}.project-title-large{font-size:30px}.project-subtitle{font-size:13px}.case-tools{font-size:10px}
+ .project-section{padding:24px 20px}.challenge-solution-grid{grid-template-columns:1fr;gap:15px}.challenge-solution-grid>div:first-child{padding:0}.challenge-solution-grid>div:nth-child(2){padding:20px}.results-grid{grid-template-columns:1fr}.result-card{flex-direction:row;align-items:center;justify-content:space-between;padding:22px}.result-value{font-size:29px}.result-value.text{font-size:22px}.result-label{max-width:45%;text-align:right}
+ .next-project{flex-wrap:wrap}.next-project-label{display:none}.next-project a{max-width:100%;overflow-wrap:anywhere}.portfolio-page .collection-footer{margin-top:25px}
+}
+@media(prefers-reduced-motion:reduce){.portfolio-page *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
