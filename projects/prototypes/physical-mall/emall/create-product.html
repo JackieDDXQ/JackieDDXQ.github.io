@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../shared/admin-ui.css">
+    <title>万象系统 - 新建商品</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #2c3e50;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        .menu-item a:hover {
+            background-color: #34495e;
+            color: #fff;
+        }
+
+        .menu-item.active > a {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .menu-item.active > a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #2ecc71;
+        }
+
+        .menu-item.has-submenu > a::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            width: 0;
+            height: 0;
+            border-left: 5px solid #bdc3c7;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .menu-item.has-submenu.open > a::after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .submenu {
+            list-style: none;
+            background-color: #1a252f;
+            display: none;
+        }
+
+        .submenu.open {
+            display: block;
+        }
+
+        .submenu-item a {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        .submenu-item.active a {
+            background-color: #2c3e50;
+            color: #3498db;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            height: 60px;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-btn, .fullscreen-btn, .settings-btn, .user-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 16px;
+            color: #666;
+            position: relative;
+        }
+
+        .search-btn::after {
+            content: 'Ctrl+K';
+            position: absolute;
+            right: -40px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .user-btn img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #3498db;
+        }
+
+        .icon {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .detail-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .panel-content {
+            padding: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .form-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-label.required::after {
+            content: '*';
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            background-color: #fff;
+        }
+
+        .form-check-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-check input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: underline;
+        }
+
+        .btn-sm {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-control::placeholder {
+            color: #999;
+        }
+
+        .select-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .rich-text-editor {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 8px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .toolbar-btn {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .toolbar-btn.active {
+            background-color: #e8f4fd;
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .editor-content {
+            min-height: 150px;
+            padding: 12px;
+            outline: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .editor-content:focus {
+            outline: none;
+        }
+
+        .carousel-manager {
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .carousel-item {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .carousel-item:hover {
+            border-color: #3498db;
+        }
+
+        .carousel-item.image {
+            border-color: #3498db;
+        }
+
+        .carousel-item.upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafafa;
+            border-style: dashed;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .carousel-item:hover .remove-btn {
+            opacity: 1;
+        }
+
+        .carousel-item .remove-btn:hover {
+            background-color: rgba(231, 76, 60, 0.8);
+        }
+
+        .carousel-item .sort-btn {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 12px;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .carousel-item:hover .sort-btn {
+            opacity: 1;
+        }
+
+        .carousel-item .primary-badge {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            padding: 2px 6px;
+            background-color: #3498db;
+            color: #fff;
+            font-size: 10px;
+            border-radius: 3px;
+        }
+
+        .carousel-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .empty-state:hover {
+            border-color: #3498db;
+        }
+
+        .empty-icon {
+            width: 48px;
+            height: 48px;
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #2ecc71;
+        }
+
+        .btn-cancel {
+            background-color: #fff;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .btn-cancel:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>万象系统</h1>
+            </div>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="index.html">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>首页
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#权益管理">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>权益管理
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#全部订单">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>全部订单
+                    </a>
+                </li>
+                <li class="menu-item has-submenu active open">
+                    <a href="#实物商城">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>实物商城
+                    </a>
+                    <ul class="submenu open">
+                        <li class="submenu-item">
+                            <a href="index.html">上架管理</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="order-manage.html">订单管理</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="address-manage.html">地址管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="brand-manage.html">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>品牌管理
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="store-manage.html">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>门店管理
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="toggle-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb">
+                        <a href="index.html">首页</a>
+                        <span>/</span>
+                        <a href="index.html">实物商城</a>
+                        <span>/</span>
+                        <a href="index.html">上架管理</a>
+                        <span>/</span>
+                        <span>新建商品</span>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <button class="search-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    <button class="fullscreen-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 3 21 3 21 9"/>
+                            <polyline points="9 21 3 21 3 15"/>
+                            <polyline points="21 15 21 21 15 21"/>
+                            <polyline points="3 9 3 3 9 3"/>
+                        </svg>
+                    </button>
+                    <button class="settings-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                    <button class="user-btn">
+                        <img src="" alt="用户头像"/>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">新建商品</h1>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="goBack()">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            返回
+                        </button>
+                    </div>
+                </div>
+
+                <div class="detail-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">基本信息</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="form-grid">
+                            <div class="form-item">
+                                <label class="form-label required">商品名称</label>
+                                <input type="text" class="form-control" placeholder="请输入商品名称">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label">商品编码</label>
+                                <input type="text" class="form-control" placeholder="请输入商品编码">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label">分类</label>
+                                <select class="form-control select-control">
+                                    <option value="">请选择分类</option>
+                                    <option value="electronics">电子产品</option>
+                                    <option value="clothing">服装配饰</option>
+                                    <option value="food">食品饮料</option>
+                                    <option value="daily">生活用品</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label">价格</label>
+                                <input type="text" class="form-control" placeholder="请输入商品价格">
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-item">
+                                <label class="form-label">品牌关联</label>
+                                <select class="form-control select-control">
+                                    <option value="">请选择品牌</option>
+                                    <option value="brand1">品牌A</option>
+                                    <option value="brand2">品牌B</option>
+                                    <option value="brand3">品牌C</option>
+                                    <option value="brand4">品牌D</option>
+                                </select>
+                                <span style="font-size: 12px; color: #999; margin-top: 4px; display: block;">(门店随关联品牌同步)</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-item">
+                                <label class="form-label">购买方式 <span style="color: #e74c3c;">*</span></label>
+                                <div class="form-check-group">
+                                    <label class="form-check">
+                                        <input type="checkbox" name="purchaseType" value="payment">
+                                        <span>支付购买</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" name="purchaseType" value="exchange">
+                                        <span>权益兑换</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label">收货方式 <span style="color: #e74c3c;">*</span></label>
+                                <div class="form-check-group">
+                                    <label class="form-check">
+                                        <input type="checkbox" name="deliveryType" value="delivery">
+                                        <span>快递寄送</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" name="deliveryType" value="pickup">
+                                        <span>线下自提</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <div class="detail-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">轮播图管理</span>
+                        <span style="font-size: 12px; color: #999;">(第一张为封面图)</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="carousel-manager">
+                            <div class="carousel-container" id="carouselContainer">
+                                <div class="carousel-item image">
+                                    <img src="https://via.placeholder.com/150" alt="商品图片">
+                                    <button class="sort-btn" title="拖动排序">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="12 19 19 12 12 5"/>
+                                            <polyline points="5 12 12 19 19 12"/>
+                                        </svg>
+                                    </button>
+                                    <button class="remove-btn" onclick="removeImage(this, 'carousel')">×</button>
+                                    <span class="primary-badge">封面</span>
+                                </div>
+                                <div class="carousel-item image">
+                                    <img src="https://via.placeholder.com/150" alt="商品图片">
+                                    <button class="sort-btn" title="拖动排序">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="12 19 19 12 12 5"/>
+                                            <polyline points="5 12 12 19 19 12"/>
+                                        </svg>
+                                    </button>
+                                    <button class="remove-btn" onclick="removeImage(this, 'carousel')">×</button>
+                                </div>
+                                <div class="carousel-item upload" onclick="uploadImage('carousel')">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <span style="font-size: 12px; color: #999; margin-top: 8px;">添加图片</span>
+                                </div>
+                            </div>
+                            <div class="carousel-hint">支持 JPG、PNG 格式，大小不超过 5MB，最多上传9张</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">详情管理</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="form-item" style="margin-bottom: 15px;">
+                            <label class="form-label">商品简介</label>
+                            <input type="text" class="form-control" placeholder="请输入商品简介（简短描述）">
+                        </div>
+                        <div class="form-item" style="margin-bottom: 20px;">
+                            <label class="form-label">商品描述</label>
+                            <div class="rich-text-editor">
+                                <div class="editor-toolbar">
+                                    <button class="toolbar-btn" title="加粗" onclick="formatText('bold')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M6 4h6a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                                            <path d="M6 12h6a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="toolbar-btn" title="斜体" onclick="formatText('italic')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="19" y1="4" x2="10" y2="14"/>
+                                            <line x1="14" y1="20" x2="5" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <button class="toolbar-btn" title="下划线" onclick="formatText('underline')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M6 3v6a6 6 0 0 0 12 0V3"/>
+                                        </svg>
+                                    </button>
+                                    <div style="width: 1px; background-color: #ddd; margin: 0 4px;"></div>
+                                    <button class="toolbar-btn" title="有序列表" onclick="formatText('insertOrderedList')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/>
+                                            <path d="M10 10H6"/>
+                                            <path d="M10 14H6"/>
+                                            <path d="M16 10h-2"/>
+                                            <path d="M16 14h-2"/>
+                                        </svg>
+                                    </button>
+                                    <button class="toolbar-btn" title="无序列表" onclick="formatText('insertUnorderedList')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 4h16"/>
+                                            <path d="M4 12h16"/>
+                                            <path d="M4 20h16"/>
+                                        </svg>
+                                    </button>
+                                    <div style="width: 1px; background-color: #ddd; margin: 0 4px;"></div>
+                                    <button class="toolbar-btn" title="左对齐" onclick="formatText('justifyLeft')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 6h16"/>
+                                            <path d="M4 12h12"/>
+                                            <path d="M4 18h8"/>
+                                        </svg>
+                                    </button>
+                                    <button class="toolbar-btn" title="居中对齐" onclick="formatText('justifyCenter')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 6h16"/>
+                                            <path d="M6 12h12"/>
+                                            <path d="M8 18h8"/>
+                                        </svg>
+                                    </button>
+                                    <button class="toolbar-btn" title="右对齐" onclick="formatText('justifyRight')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 6h16"/>
+                                            <path d="M8 12h12"/>
+                                            <path d="M12 18h8"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="editor-content" contenteditable="true" placeholder="请输入商品描述"></div>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #eee; padding-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span style="font-size: 14px; font-weight: 500;">详情图</span>
+                            </div>
+                            <div class="carousel-manager">
+                                <div class="carousel-container" id="detailContainer">
+                                    <div class="carousel-item image">
+                                        <img src="https://via.placeholder.com/150" alt="详情图片">
+                                        <button class="sort-btn" title="拖动排序">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="12 19 19 12 12 5"/>
+                                                <polyline points="5 12 12 19 19 12"/>
+                                            </svg>
+                                        </button>
+                                        <button class="remove-btn" onclick="removeImage(this, 'detail')">×</button>
+                                    </div>
+                                    <div class="carousel-item image">
+                                        <img src="https://via.placeholder.com/150" alt="详情图片">
+                                        <button class="sort-btn" title="拖动排序">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="12 19 19 12 12 5"/>
+                                                <polyline points="5 12 12 19 19 12"/>
+                                            </svg>
+                                        </button>
+                                        <button class="remove-btn" onclick="removeImage(this, 'detail')">×</button>
+                                    </div>
+                                    <div class="carousel-item upload" onclick="uploadImage('detail')">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                                            <polyline points="21 15 16 10 5 21"/>
+                                        </svg>
+                                        <span style="font-size: 12px; color: #999; margin-top: 8px;">添加图片</span>
+                                    </div>
+                                </div>
+                                <div class="carousel-hint">支持 JPG、PNG 格式，大小不超过 5MB，最多上传20张</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <button class="btn btn-cancel" onclick="goBack()">取消</button>
+                        <button class="btn btn-success">保存</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.menu-item.has-submenu > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                parent.classList.toggle('open');
+                const submenu = parent.querySelector('.submenu');
+                if (submenu) {
+                    submenu.classList.toggle('open');
+                }
+            });
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function formatText(command) {
+            document.execCommand(command, false, null);
+            document.querySelector('.editor-content').focus();
+        }
+
+        function uploadImage(type) {
+            alert(type === 'carousel' ? '轮播图上传功能开发中' : '详情图上传功能开发中');
+        }
+
+        function removeImage(btn, type) {
+            const item = btn.parentElement;
+            const container = document.getElementById(type === 'carousel' ? 'carouselContainer' : 'detailContainer');
+            const images = container.querySelectorAll('.carousel-item.image');
+            
+            if (type === 'carousel') {
+                if (images.length > 1) {
+                    item.remove();
+                    updateCoverBadge();
+                } else {
+                    alert('轮播图至少保留一张图片');
+                }
+            } else {
+                item.remove();
+            }
+        }
+
+        function updateCoverBadge() {
+            const container = document.getElementById('carouselContainer');
+            const images = container.querySelectorAll('.carousel-item.image');
+            images.forEach((img, index) => {
+                const badge = img.querySelector('.primary-badge');
+                if (index === 0) {
+                    if (!badge) {
+                        const newBadge = document.createElement('span');
+                        newBadge.className = 'primary-badge';
+                        newBadge.textContent = '封面';
+                        img.appendChild(newBadge);
+                    }
+                } else {
+                    if (badge) {
+                        badge.remove();
+                    }
+                }
+            });
+        }
+
+        function openStoreModal() {
+            alert('门店关联功能开发中');
+        }
+    </script>
+</body>
+</html>

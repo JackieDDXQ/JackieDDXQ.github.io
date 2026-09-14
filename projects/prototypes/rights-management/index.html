@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="运营商权益管理体系原型目录：云仓、万象与灵霄的完整页面入口。">
+  <title>运营商权益管理体系 · 原型目录</title>
+  <link rel="stylesheet" href="./shared/ui.css">
+  <link rel="stylesheet" href="./shared/hub.css">
+</head>
+<body>
+  <main class="prototype-hub">
+    <nav class="hub-nav" aria-label="原型目录导航">
+      <a class="hub-nav__brand" href="../../rights-management.html"><span class="hub-nav__mark">RM</span><span>权益协同平台</span></a>
+      <a class="hub-back" href="../../rights-management.html">← 返回项目案例</a>
+    </nav>
+
+    <header class="hub-hero">
+      <div>
+        <p class="hub-kicker">Prototype atlas / 2026</p>
+        <h1>从供给到增长，<br>完整原型目录</h1>
+      </div>
+      <p class="hub-hero__copy">统一整理云仓、万象与灵霄的页面入口。三套应用继续保留各自技术栈与业务边界，共享同一套后台视觉语言。</p>
+    </header>
+
+    <section class="hub-summary" aria-label="原型概览">
+      <article class="summary-item"><strong>03</strong><span>业务系统 / SYSTEMS</span></article>
+      <article class="summary-item"><strong>59</strong><span>可达页面 / ROUTES</span></article>
+      <article class="summary-item"><strong>01</strong><span>统一界面规范 / UI SYSTEM</span></article>
+    </section>
+
+    <section class="system-grid" aria-label="系统页面目录">
+      <article class="system-card" id="depot">
+        <header class="system-card__head">
+          <div class="system-card__identity"><span class="system-card__mark">YC</span><div><h2>云仓 · 供给标准化</h2><p>供应商产品 → 标准商品 → 商品规格</p></div></div>
+          <div class="system-card__meta"><span class="meta-tag">React + TypeScript</span><span class="meta-tag">Ant Design</span><span class="meta-tag">13 routes</span></div>
+        </header>
+        <div class="system-card__body">
+          <section class="route-group"><h3>Overview & supply</h3><div class="route-list">
+            <a class="route-link" href="./depot/dist/index.html#/">供给工作台 <code>#/</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/supplier">供应商 <code>#/supplier</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/product">供应商产品 <code>#/product</code></a>
+          </div></section>
+          <section class="route-group"><h3>Catalog</h3><div class="route-list">
+            <a class="route-link" href="./depot/dist/index.html#/brand">品牌管理 <code>#/brand</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/store">门店管理 <code>#/store</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/goods">标准商品 <code>#/goods</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/spec">商品规格 <code>#/spec</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/category">分类管理 <code>#/category</code></a>
+          </div></section>
+          <section class="route-group"><h3>Operations & system</h3><div class="route-list">
+            <a class="route-link" href="./depot/dist/index.html#/order">履约订单 <code>#/order</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/application">应用管理 <code>#/application</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/settings">系统概览 <code>#/settings</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/dictionary">字典设置 <code>#/dictionary</code></a>
+            <a class="route-link" href="./depot/dist/index.html#/export">导出管理 <code>#/export</code></a>
+          </div></section>
+        </div>
+      </article>
+
+      <article class="system-card" id="omni">
+        <header class="system-card__head">
+          <div class="system-card__identity"><span class="system-card__mark">WX</span><div><h2>万象 · 权益服务</h2><p>商品规格 → 权益库存 → 权益配置 → 发放核销</p></div></div>
+          <div class="system-card__meta"><span class="meta-tag">React</span><span class="meta-tag">Ant Design</span><span class="meta-tag">17 routes</span></div>
+        </header>
+        <div class="system-card__body">
+          <section class="route-group"><h3>Overview & benefit</h3><div class="route-list">
+            <a class="route-link" href="./omni/dist/index.html#/">权益服务工作台 <code>#/</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/inventory">权益库存 <code>#/equity/inventory</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/inventory/create">新建权益库存 <code>#/equity/inventory/create</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/inventory/1">权益库存详情 <code>#/.../1</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/config">权益配置 <code>#/equity/config</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/config/create">新建权益配置 <code>#/equity/config/create</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/equity/config/1">权益配置详情 <code>#/.../1</code></a>
+          </div></section>
+          <section class="route-group"><h3>Fulfillment</h3><div class="route-list">
+            <a class="route-link" href="./omni/dist/index.html#/order/list">发放订单 <code>#/order/list</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/order/detail/1">订单详情 <code>#/.../1</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/writeoff/strategy">核销策略 <code>#/writeoff/strategy</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/writeoff/task">核销任务 <code>#/writeoff/task</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/writeoff/callback">结果回传 <code>#/writeoff/callback</code></a>
+          </div></section>
+          <section class="route-group"><h3>Platform</h3><div class="route-list">
+            <a class="route-link" href="./omni/dist/index.html#/sms/template">短信模板 <code>#/sms/template</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/sms/template/create">新建短信模板 <code>#/.../create</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/application/list">应用列表 <code>#/application/list</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/system/dictionary">字典设置 <code>#/system/dictionary</code></a>
+            <a class="route-link" href="./omni/dist/index.html#/system/export">导出设置 <code>#/system/export</code></a>
+          </div></section>
+        </div>
+      </article>
+
+      <article class="system-card" id="cel">
+        <header class="system-card__head">
+          <div class="system-card__identity"><span class="system-card__mark">LX</span><div><h2>灵霄 · 渠道增长</h2><p>运营商策划 → 套餐模板 → 推广产品 → 渠道办理</p></div></div>
+          <div class="system-card__meta"><span class="meta-tag">Vue</span><span class="meta-tag">Element Plus</span><span class="meta-tag">29 routes</span></div>
+        </header>
+        <div class="system-card__body">
+          <section class="route-group"><h3>Plan & package</h3><div class="route-list">
+            <a class="route-link" href="./cel/frontend/dist/index.html#/dashboard">增长工作台 <code>#/dashboard</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/plan">策划管理 <code>#/plan</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/plan/create">新建策划 <code>#/plan/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/plan/edit/1">编辑策划 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/template">套餐模板 <code>#/template</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/template/create">新建套餐模板 <code>#/template/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/template/edit/1">编辑套餐模板 <code>#/.../1</code></a>
+          </div></section>
+          <section class="route-group"><h3>Growth & orders</h3><div class="route-list">
+            <a class="route-link" href="./cel/frontend/dist/index.html#/channel">渠道管理 <code>#/channel</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/channel/create">新建渠道 <code>#/channel/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/channel/edit/1">编辑渠道 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/product">推广产品 <code>#/product</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/product/create">新建推广产品 <code>#/product/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/product/edit/1">编辑推广产品 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/quota">限办策略 <code>#/quota</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/quota/create">新建限办策略 <code>#/quota/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/quota/edit/1">编辑限办策略 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/blacklist">黑名单 <code>#/blacklist</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/blacklist/create">新建黑名单 <code>#/blacklist/create</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/blacklist/edit/1">编辑黑名单 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/blacklist/phones/1">黑名单号码 <code>#/.../phones/1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/order">办理订单 <code>#/order</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/order/detail/1">订单详情 <code>#/.../1</code></a>
+          </div></section>
+          <section class="route-group"><h3>Members & platform</h3><div class="route-list">
+            <a class="route-link" href="./cel/frontend/dist/index.html#/member">会员管理 <code>#/member</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/member/detail/1">会员详情 <code>#/.../1</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/app/list">应用列表 <code>#/app/list</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/app/config">应用配置 <code>#/app/config</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/system/user">用户管理 <code>#/system/user</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/system/role">角色管理 <code>#/system/role</code></a>
+            <a class="route-link" href="./cel/frontend/dist/index.html#/system/log">操作日志 <code>#/system/log</code></a>
+          </div></section>
+        </div>
+      </article>
+    </section>
+
+    <p class="hub-note"><strong>数据说明：</strong>这些页面用于证明对象、字段、规则与状态设计，页面中的示例名称和数值均属于原型演示数据，不应被当作线上业务结果或项目成效。</p>
+    <footer class="hub-footer"><span>Rights Management Prototype Atlas</span><a class="hub-back" href="../../rights-management.html">回到案例叙事 →</a></footer>
+  </main>
+</body>
+</html>

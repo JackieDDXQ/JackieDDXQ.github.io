@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>万象商城</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C8956C;
+            --primary-dark: #A67B5B;
+            --primary-light: #FDF6F0;
+            --secondary: #E8735A;
+            --gradient: linear-gradient(135deg, #C8956C 0%, #E8A87C 100%);
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FBF8F4;
+            --bg-card: #FFFFFF;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --text-muted: #AEAEB2;
+            --border: #E8E4E0;
+            --success: #34C759;
+            --warning: #FF9F0A;
+            --error: #FF3B30;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        .login-page {
+            min-height: 100vh; display: flex; flex-direction: column;
+            background: linear-gradient(160deg, #FDF6F0 0%, #F5E6D3 40%, #C8956C 100%);
+            position: relative; overflow: hidden;
+        }
+        .login-page::before { content: ''; position: absolute; top: -30%; right: -20%; width: 70%; height: 70%; background: radial-gradient(circle, rgba(200,149,108,0.2) 0%, transparent 70%); pointer-events: none; }
+        .login-page::after { content: ''; position: absolute; bottom: -20%; left: -15%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%); pointer-events: none; }
+        .login-header { padding: 70px 32px 50px; text-align: center; position: relative; z-index: 1; }
+        .login-logo { width: 80px; height: 80px; background: rgba(255,255,255,0.4); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.6); border-radius: 24px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+        .login-logo svg { width: 38px; height: 38px; stroke: #1D1D1F; }
+        .login-title { font-size: 26px; font-weight: 700; color: #1D1D1F; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .login-subtitle { font-size: 14px; color: #6E6E73; font-weight: 400; }
+        .identity-switch { position: absolute; top: 20px; right: 20px; font-size: 13px; color: #1D1D1F; cursor: pointer; padding: 8px 16px; background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.6); border-radius: 100px; transition: all 0.3s; font-weight: 500; }
+        .identity-switch:hover { background: rgba(255,255,255,0.7); }
+        .login-form-container { flex: 1; background: rgba(255,255,255,0.88); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.8); border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding: 36px 24px; position: relative; z-index: 1; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .radio-label { display: flex; align-items: center; cursor: pointer; font-size: 14px; color: var(--text-primary); gap: 8px; }
+        .radio-label input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+        .form-input { width: 100%; padding: 16px 18px; border: 1.5px solid var(--border); border-radius: var(--radius-md); font-size: 15px; font-family: inherit; transition: all 0.3s; background: var(--bg-primary); }
+        .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(200,149,108,0.1); }
+        .form-input::placeholder { color: var(--text-muted); }
+        #homePage { padding: 12px 16px; padding-bottom: 80px; }
+        .region-select-group { display: flex; gap: 8px; }
+        .form-select { flex: 1; padding: 14px 12px; border: 1.5px solid var(--border); border-radius: var(--radius-md); font-size: 14px; font-family: inherit; background: var(--bg-primary); cursor: pointer; transition: all 0.3s; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23AEAEB2' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 16px; }
+        .form-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(200,149,108,0.1); }
+        .code-row { display: flex; gap: 12px; }
+        .code-row .form-input { flex: 1; }
+        .btn-code { padding: 16px 20px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s; box-shadow: 0 4px 12px rgba(200,149,108,0.3); }
+        .btn-code:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,149,108,0.4); }
+        .btn-code:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-login { width: 100%; padding: 18px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 12px; transition: all 0.3s; box-shadow: 0 6px 24px rgba(200,149,108,0.35); }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,149,108,0.45); }
+        .btn-login:active { transform: translateY(0); }
+        .main-app { min-height: 100vh; display: none; flex-direction: column; }
+        .main-app.active { display: flex; }
+        .app-header { position: fixed; top: 0; left: 0; right: 0; height: 56px; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .header-back { position: absolute; left: 16px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); font-size: 20px; cursor: pointer; border-radius: 50%; transition: background 0.3s; }
+        .header-back:hover { background: rgba(0,0,0,0.05); }
+        .header-title { color: var(--text-primary); font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
+        .app-content { flex: 1; padding-top: 56px; padding-bottom: 80px; }
+        .page { display: none; animation: slideUp 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 72px; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: space-around; border-top: 1px solid rgba(0,0,0,0.04); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+        .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0; cursor: pointer; transition: all 0.3s; position: relative; }
+        .tab-item::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--gradient); border-radius: 0 0 3px 3px; transition: width 0.3s; }
+        .tab-item.active::before { width: 20px; }
+        .tab-icon { width: 24px; height: 24px; margin-bottom: 4px; transition: all 0.3s; }
+        .tab-item.active .tab-icon { transform: scale(1.08); color: var(--primary); }
+        .tab-text { font-size: 10px; font-weight: 600; color: var(--text-muted); transition: color 0.3s; }
+        .tab-item.active .tab-text { color: var(--primary); }
+        .home-page { padding: 16px; }
+        .banner { position: relative; width: 100%; height: 160px; background: linear-gradient(135deg, #2C3E50 0%, #1D1D1F 100%); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(29,29,31,0.2); margin-top: 8px; }
+        .banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 120%; background: radial-gradient(circle, rgba(200,149,108,0.25) 0%, transparent 70%); }
+        .banner-content { position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
+        .banner-tag { display: inline-block; padding: 4px 12px; background: rgba(200,149,108,0.3); border: 1px solid rgba(200,149,108,0.5); border-radius: 100px; font-size: 11px; font-weight: 600; margin-bottom: 12px; width: fit-content; color: #E8C9A8; }
+        .banner-title { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .banner-desc { font-size: 13px; opacity: 0.7; color: #D4D4D8; }
+        .search-bar { display: flex; align-items: center; background: #F5F2EE; border-radius: 100px; padding: 14px 20px; margin-bottom: 20px; border: none; transition: all 0.3s; }
+        .search-bar:focus-within { background: #fff; box-shadow: 0 0 0 2px rgba(200,149,108,0.2), 0 4px 12px rgba(0,0,0,0.04); }
+        .search-icon { width: 18px; height: 18px; margin-right: 12px; color: var(--text-muted); }
+        .search-input { flex: 1; border: none; outline: none; font-size: 14px; background: transparent; font-family: inherit; }
+        .search-input::placeholder { color: var(--text-muted); }
+        .category-section { background: var(--bg-primary); border-radius: var(--radius-lg); padding: 20px 16px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .category-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; }
+        .category-item:hover { transform: translateY(-3px); }
+        .category-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+        .category-icon svg { width: 24px; height: 24px; }
+        .category-icon.electronics { background: #E8F4FD; }
+        .category-icon.electronics svg { stroke: #4A9ECA; }
+        .category-icon.clothing { background: #FDE8F0; }
+        .category-icon.clothing svg { stroke: #D46B8C; }
+        .category-icon.food { background: #E8FDF0; }
+        .category-icon.food svg { stroke: #4ABEA0; }
+        .category-icon.home { background: #F0E8FD; }
+        .category-icon.home svg { stroke: #8B6CC8; }
+        .category-name { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .section-title { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+        .section-more { font-size: 13px; color: var(--primary); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background: var(--bg-primary); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.3s; animation: slideUp 0.5s ease both; }
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+        .product-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-md); }
+        .product-image { width: 100%; height: 150px; background: #F8F5F1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .product-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.02) 100%); }
+        .product-image svg { width: 56px; height: 56px; color: #D4CFC8; opacity: 0.6; }
+        .product-info { padding: 14px; }
+        .product-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+        .product-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+        .product-price { font-size: 18px; font-weight: 800; color: var(--secondary); font-family: 'DM Sans', sans-serif; }
+        .product-tag { display: inline-block; padding: 2px 8px; background: var(--primary-light); color: var(--primary); border-radius: 100px; font-size: 10px; font-weight: 600; font-style: normal; margin-right: 4px; margin-top: 6px; }
+        .cart-page { padding: 16px; }
+        .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
+        .cart-empty-icon { width: 80px; height: 80px; background: var(--bg-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .cart-empty-icon svg { width: 36px; height: 36px; color: var(--text-muted); }
+        .cart-empty-text { font-size: 15px; color: var(--text-secondary); margin-bottom: 20px; }
+        .cart-empty-btn { padding: 12px 32px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .cart-item { background: var(--bg-primary); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); display: flex; gap: 12px; }
+        .cart-item-image { width: 80px; height: 80px; background: #F8F5F1; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .cart-item-image svg { width: 36px; height: 36px; color: var(--text-muted); }
+        .cart-item-info { flex: 1; display: flex; flex-direction: column; }
+        .cart-item-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .cart-item-desc { font-size: 12px; color: var(--text-muted); margin-bottom: auto; }
+        .cart-item-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+        .cart-item-price { font-size: 16px; font-weight: 700; color: var(--secondary); }
+        .quantity-control { display: flex; align-items: center; gap: 12px; }
+        .qty-btn { width: 30px; height: 30px; border: 1.5px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--text-secondary); background: var(--bg-primary); transition: all 0.3s; }
+        .qty-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+        .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .qty-value { font-size: 15px; font-weight: 700; min-width: 24px; text-align: center; }
+        .cart-footer { position: fixed; bottom: 80px; left: 0; right: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); padding: 16px; border-top: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; }
+        .cart-total { font-size: 13px; color: var(--text-secondary); }
+        .cart-total-price { font-size: 22px; font-weight: 800; color: var(--secondary); }
+        .cart-total-price::before { content: '\00A5'; font-size: 15px; }
+        .btn-checkout { padding: 14px 32px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 16px rgba(200,149,108,0.3); }
+        .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(200,149,108,0.4); }
+        .orders-page { padding: 16px; }
+        .order-card { background: var(--bg-primary); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .order-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+        .order-id { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+        .order-status { font-size: 12px; font-weight: 600; }
+        .order-status.pending { color: var(--primary); }
+        .order-status.shipping { color: var(--warning); }
+        .order-status.completed { color: var(--success); }
+        .order-items { padding: 12px 16px; }
+        .order-item { display: flex; gap: 12px; padding: 8px 0; }
+        .order-item-image { width: 56px; height: 56px; background: #F8F5F1; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .order-item-image svg { width: 28px; height: 28px; color: var(--text-muted); }
+        .order-item-info { flex: 1; }
+        .order-item-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .order-item-price { font-size: 14px; font-weight: 600; color: var(--secondary); }
+        .order-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-secondary); }
+        .order-total { font-size: 13px; color: var(--text-secondary); }
+        .order-total-price { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+        .order-action { padding: 8px 16px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .order-meta { display: flex; gap: 24px; padding: 12px 16px; background: var(--bg-secondary); border-top: 1px solid var(--border); }
+        .order-meta-item { display: flex; align-items: center; gap: 8px; }
+        .order-meta-label { font-size: 12px; color: var(--text-muted); }
+        .order-meta-value { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+        .store-modal-content { background: var(--bg-primary); border-radius: var(--radius-xl) var(--radius-xl) 0 0; width: 100%; max-width: 400px; max-height: 70vh; display: flex; flex-direction: column; overflow: hidden; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .store-modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: center; align-items: center; position: relative; }
+        .store-modal-header h3 { font-size: 17px; font-weight: 700; }
+        .store-modal-close { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border: none; background: var(--bg-secondary); border-radius: 50%; font-size: 20px; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .store-modal-body { flex: 1; padding: 16px; overflow-y: auto; }
+        .pickup-store-list { display: flex; flex-direction: column; gap: 12px; }
+        .pickup-store-item { padding: 16px; background: var(--bg-secondary); border-radius: var(--radius-md); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+        .pickup-store-item:hover { background: var(--primary-light); }
+        .pickup-store-item.selected { border-color: var(--primary); background: var(--primary-light); }
+        .pickup-store-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .pickup-store-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+        .pickup-store-distance { font-size: 13px; color: var(--primary); font-weight: 600; }
+        .pickup-store-address { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+        .pickup-store-time { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+        .store-filter-tags { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .store-filter-tag { padding: 6px 14px; background: var(--bg-secondary); color: var(--text-secondary); border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .store-filter-tag.active { background: var(--gradient); color: #fff; }
+        .store-search-bar { display: flex; align-items: center; background: var(--bg-secondary); border-radius: 100px; padding: 10px 14px; margin-bottom: 12px; }
+        .store-search-icon { width: 18px; height: 18px; color: var(--text-muted); margin-right: 10px; flex-shrink: 0; }
+        .store-search-input { flex: 1; border: none; outline: none; background: transparent; font-size: 14px; font-family: inherit; }
+        .store-search-input::placeholder { color: var(--text-muted); }
+        .btn-pickup-stores { width: 100%; padding: 12px; margin-top: 12px; background: var(--primary-light); color: var(--primary); border: none; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-pickup-stores:hover { background: var(--primary); color: #fff; }
+        .pickup-store-row { align-items: center; }
+        .btn-view-stores { padding: 6px 14px; background: var(--primary-light); color: var(--primary); border: none; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-view-stores:hover { background: var(--primary); color: #fff; }
+        .order-card-new { background: var(--bg-primary); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary); }
+        .order-card-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+        .order-card-orderNo { font-size: 12px; color: var(--text-muted); }
+        .order-card-top { padding: 16px; }
+        .order-card-product { display: flex; align-items: flex-start; gap: 12px; }
+        .order-card-image { width: 64px; height: 64px; background: #F8F5F1; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .order-card-image svg { width: 32px; height: 32px; color: var(--text-muted); }
+        .order-card-info { flex: 1; min-width: 0; }
+        .order-card-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .order-card-detail { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); }
+        .order-card-qty { color: var(--text-muted); }
+        .order-card-status { font-size: 13px; font-weight: 600; flex-shrink: 0; color: var(--primary); }
+        .order-card-status.completed { color: var(--text-muted); }
+        .order-card-bottom { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-top: 1px solid var(--border); }
+        .order-card-total { display: flex; flex-direction: column; }
+        .order-card-total-label { font-size: 12px; color: var(--text-muted); }
+        .order-card-total-price { font-size: 18px; font-weight: 700; color: var(--secondary); font-family: 'DM Sans', sans-serif; }
+        .order-card-actions { display: flex; gap: 8px; }
+        .order-card-btn { padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s; }
+        .order-card-btn.secondary { background: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--border); }
+        .order-card-btn.secondary:hover { border-color: var(--primary); color: var(--primary); }
+        .order-card-btn.primary { background: var(--gradient); color: #fff; box-shadow: 0 2px 8px rgba(200,149,108,0.3); }
+        .order-card-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,149,108,0.4); }
+        .sub-page { min-height: 100vh; background: var(--bg-secondary); }
+        .sub-page-header { position: sticky; top: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); height: 56px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 10; }
+        .sub-page-content { padding: 16px; padding-bottom: 100px; }
+        .sub-page-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 16px; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-top: 1px solid rgba(0,0,0,0.04); }
+        .voucher-card { background: var(--bg-primary); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .voucher-card-header { background: var(--gradient); padding: 16px; color: #fff; display: flex; justify-content: space-between; align-items: flex-start; }
+        .voucher-card-left { display: flex; flex-direction: column; gap: 4px; }
+        .voucher-card-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .voucher-card-value { font-size: 24px; font-weight: 800; font-family: 'DM Sans', sans-serif; }
+        .voucher-card-body { padding: 16px; }
+        .voucher-card-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .voucher-card-row:last-child { margin-bottom: 0; }
+        .voucher-card-label { color: var(--text-muted); }
+        .voucher-card-value-text { color: var(--text-primary); font-weight: 600; }
+        .voucher-card-status { display: inline-block; font-size: 12px; font-weight: 600; color: #fff; opacity: 0.9; }
+        .voucher-card-row-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .voucher-card-info { flex: 1; }
+        .voucher-card-row-left { display: flex; flex-direction: column; margin-bottom: 8px; font-size: 14px; }
+        .voucher-card-row-left:last-child { margin-bottom: 0; }
+        .voucher-use-btn { padding: 8px 16px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex-shrink: 0; box-shadow: 0 2px 8px rgba(200,149,108,0.3); }
+        .voucher-use-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,149,108,0.4); }
+        .store-modal-footer { padding: 16px; border-top: 1px solid var(--border); }
+        .btn-store-confirm { width: 100%; padding: 14px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; }
+        .order-detail-page { padding: 0; padding-bottom: 100px; }
+        .order-detail-header { background: linear-gradient(135deg, #2C3E50 0%, #1D1D1F 100%); padding: 20px; color: #fff; }
+        .order-detail-status { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .order-detail-id { font-size: 13px; opacity: 0.7; }
+        .order-detail-section { background: var(--bg-primary); margin: 12px 16px; border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); }
+        .order-detail-section-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+        .order-detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .order-detail-row:last-child { border-bottom: none; }
+        .order-detail-label { font-size: 14px; color: var(--text-secondary); }
+        .order-detail-value { font-size: 14px; color: var(--text-primary); text-align: right; max-width: 60%; }
+        .order-detail-product { display: flex; gap: 12px; padding: 12px 0; }
+        .order-detail-product-image { width: 80px; height: 80px; background: #F8F5F1; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .order-detail-product-image svg { width: 40px; height: 40px; color: var(--text-muted); }
+        .order-detail-product-info { flex: 1; }
+        .order-detail-product-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .order-detail-product-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+        .order-detail-product-price { font-size: 16px; font-weight: 700; color: var(--secondary); }
+        .order-detail-product-qty { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .order-detail-footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); padding: 12px 16px; border-top: 1px solid rgba(0,0,0,0.04); display: flex; gap: 12px; }
+        .btn-detail-action { flex: 1; padding: 14px; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; border: none; transition: all 0.3s; }
+        .btn-detail-primary { background: var(--gradient); color: #fff; box-shadow: 0 4px 16px rgba(200,149,108,0.3); }
+        .btn-detail-secondary { background: var(--bg-secondary); color: var(--primary); border: 2px solid var(--primary); }
+        .voucher-modal-content { background: var(--bg-primary); border-radius: var(--radius-xl); width: 100%; max-width: 360px; max-height: 80vh; display: flex; flex-direction: column; overflow: hidden; }
+        .voucher-qr { width: 200px; height: 200px; background: var(--bg-secondary); margin: 0 auto 16px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; border: 2px dashed var(--border); }
+        .voucher-qr svg { width: 100px; height: 100px; color: var(--text-muted); }
+        .voucher-code-text { text-align: center; font-size: 18px; font-weight: 700; color: var(--text-primary); letter-spacing: 2px; margin-bottom: 8px; }
+        .voucher-tip { text-align: center; font-size: 13px; color: var(--text-muted); }
+        .profile-page { padding: 16px; }
+        .user-card { background: linear-gradient(135deg, #2C3E50 0%, #1D1D1F 100%); border-radius: var(--radius-lg); padding: 24px 20px; color: #fff; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .user-card::before { content: ''; position: absolute; top: -50%; right: -30%; width: 60%; height: 100%; background: radial-gradient(circle, rgba(200,149,108,0.2) 0%, transparent 70%); }
+        .user-info { display: flex; align-items: center; gap: 16px; position: relative; z-index: 1; }
+        .user-avatar { width: 52px; height: 52px; background: rgba(200,149,108,0.3); border: 2px solid rgba(200,149,108,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .user-avatar svg { width: 26px; height: 26px; }
+        .user-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .user-phone { font-size: 14px; opacity: 0.7; }
+        .menu-section { background: var(--bg-primary); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+        .menu-item { display: flex; align-items: center; padding: 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.3s; }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item:hover { background: var(--bg-secondary); }
+        .menu-icon { width: 40px; height: 40px; background: var(--primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+        .menu-icon svg { width: 20px; height: 20px; color: var(--primary); }
+        .menu-text { flex: 1; font-size: 15px; font-weight: 600; color: var(--text-primary); }
+        .menu-arrow { width: 20px; height: 20px; color: var(--text-muted); }
+        .btn-logout { width: 100%; padding: 16px; background: var(--bg-primary); color: var(--error); border: 1.5px solid var(--error); border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .btn-logout:hover { background: var(--error); color: #fff; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(6px); }
+        .modal-overlay.show { display: flex; }
+        .modal-content { background: var(--bg-primary); border-radius: var(--radius-xl); width: 100%; max-width: 360px; max-height: 85vh; overflow: hidden; animation: modalIn 0.35s ease; }
+        .modal-content.delivery-info { max-width: 380px; max-height: 90vh; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-header { display: flex; justify-content: center; align-items: center; padding: 20px; border-bottom: 1px solid var(--border); position: relative; }
+        .modal-title { font-size: 17px; font-weight: 700; }
+        .modal-close { position: absolute; left: 16px; width: 32px; height: 32px; background: var(--bg-secondary); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-secondary); transition: all 0.3s; }
+        .modal-close:hover { background: var(--border); }
+        .modal-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+        .btn-modal { width: 100%; padding: 16px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(200,149,108,0.3); }
+        .address-item { background: var(--bg-primary); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+        .address-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .address-user { display: flex; align-items: center; gap: 12px; }
+        .address-name { font-size: 16px; font-weight: 700; }
+        .address-phone { font-size: 14px; color: var(--text-secondary); }
+        .address-tag { padding: 4px 10px; background: var(--primary-light); color: var(--primary); border-radius: 100px; font-size: 12px; font-weight: 600; }
+        .address-detail { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+        .address-actions { display: flex; gap: 8px; justify-content: flex-end; }
+        .address-btn { padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s; }
+        .address-btn.edit { background: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--border); }
+        .address-btn.delete { background: #FEE2E2; color: var(--error); }
+        .address-btn:hover { transform: translateY(-1px); }
+        .btn-add-address { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--bg-primary); border: 2px dashed var(--border); border-radius: 100px; color: var(--primary); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-add-address:hover { border-color: var(--primary); background: var(--primary-light); }
+        .success-modal { text-align: center; padding: 40px 20px; }
+        .success-icon { width: 72px; height: 72px; background: linear-gradient(135deg, #34C759 0%, #28A745 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .success-icon svg { width: 36px; height: 36px; color: #fff; }
+        .success-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .success-desc { font-size: 14px; color: var(--text-secondary); }
+        .clerk-page { min-height: 100vh; display: none; flex-direction: column; }
+        .clerk-page.active { display: flex; }
+        .clerk-header { position: fixed; top: 0; left: 0; right: 0; height: 70px; background: linear-gradient(135deg, #7A1F1F 0%, #3D0F0F 100%); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 100; }
+        .clerk-header-left { display: flex; align-items: center; gap: 12px; }
+        .clerk-avatar { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        .clerk-avatar svg { width: 24px; height: 24px; }
+        .clerk-info { display: flex; flex-direction: column; gap: 2px; }
+        .clerk-name { font-size: 15px; font-weight: 600; color: white; }
+        .clerk-store { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .clerk-logout-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 100px; font-size: 14px; font-weight: 500; cursor: pointer; }
+        .clerk-content { flex: 1; padding-top: 70px; padding-bottom: 80px; }
+        .clerk-tab-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg-primary); display: flex; box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 100; }
+        .clerk-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); transition: all 0.3s; }
+        .clerk-tab.active { color: #7A1F1F; }
+        .scan-section { padding: 20px; }
+        .scan-area { width: 200px; height: 200px; margin: 0 auto; border: 3px dashed var(--border); border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; background: var(--bg-secondary); }
+        .scan-area:hover { border-color: #7A1F1F; background: #FDF2F2; }
+        .scan-icon { margin-bottom: 12px; }
+        .scan-icon svg { width: 48px; height: 48px; color: var(--text-muted); }
+        .scan-text { font-size: 14px; color: var(--text-secondary); font-weight: 600; }
+        .verify-section { padding: 20px; }
+        .verify-input { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: var(--radius-md); font-size: 18px; text-align: center; letter-spacing: 4px; font-family: inherit; }
+        .verify-input:focus { outline: none; border-color: #7A1F1F; }
+        .btn-verify { width: 100%; padding: 16px; background: linear-gradient(135deg, #7A1F1F 0%, #3D0F0F 100%); color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+        .clerk-orders-page { padding: 16px; }
+        .filter-tags { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+        .filter-tag { padding: 8px 16px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--text-secondary); cursor: pointer; white-space: nowrap; transition: all 0.3s; }
+        .filter-tag.active { background: linear-gradient(135deg, #7A1F1F 0%, #3D0F0F 100%); color: #fff; border-color: transparent; }
+        .filter-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius-md); margin: 12px 0; }
+        .filter-label { font-size: 13px; color: var(--text-muted); }
+        .filter-clear { margin-left: auto; padding: 6px 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; color: var(--text-secondary); cursor: pointer; transition: all 0.3s; }
+        .filter-clear:hover { background: var(--border); }
+        .clerk-order-card { background: var(--bg-primary); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); position: relative; }
+        .clerk-order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .clerk-order-id { font-size: 15px; font-weight: 700; }
+        .clerk-order-price { font-size: 16px; font-weight: 700; color: #7A1F1F; }
+        .clerk-order-time { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+        .clerk-order-product { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+        .clerk-header-title-section { padding: 12px 20px; background: var(--bg-primary); border-radius: var(--radius-lg); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm); }
+        .clerk-role-badge { background: linear-gradient(135deg, #7A1F1F 0%, #3D0F0F 100%); color: white; padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+        .clerk-store-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .clerk-info-section { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; margin-top: 8px; border-top: 1px solid var(--border); }
+        .clerk-info-label { font-size: 13px; color: var(--text-muted); }
+        .clerk-info-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .clerk-order-status { position: absolute; bottom: 16px; right: 16px; display: inline-block; padding: 4px 12px; background: #DCFCE7; color: #16A34A; border-radius: 100px; font-size: 12px; font-weight: 600; margin-top: 8px; }
+        .product-detail-page { padding: 0; padding-bottom: 80px; }
+        .product-carousel { position: relative; width: 100%; background: #F8F5F1; overflow: hidden; }
+        .carousel-container { width: 100%; overflow: hidden; }
+        .carousel-track { display: flex; transition: transform 0.3s ease; }
+        .carousel-slide { flex: 0 0 100%; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); background: #F8F5F1; }
+        .carousel-slide svg { width: 120px; height: 120px; color: #D4CFC8; }
+        .carousel-indicators { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+        .indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.15); cursor: pointer; transition: all 0.3s; }
+        .indicator.active { width: 24px; border-radius: 4px; background: var(--primary); }
+        .carousel-prev, .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); color: var(--text-primary); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: var(--shadow-sm); }
+        .carousel-prev:hover, .carousel-next:hover { background: rgba(255,255,255,0.95); }
+        .carousel-prev { left: 12px; }
+        .carousel-next { right: 12px; }
+        .product-detail-image { width: 100%; height: 280px; background: #F8F5F1; display: flex; align-items: center; justify-content: center; }
+        .product-detail-image svg { width: 100px; height: 100px; color: var(--text-muted); opacity: 0.5; }
+        .product-detail-info { padding: 20px; background: var(--bg-primary); }
+        .product-detail-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+        .product-detail-price { font-size: 28px; font-weight: 800; color: var(--secondary); font-family: 'DM Sans', sans-serif; }
+        .product-detail-original { font-size: 14px; color: var(--text-muted); text-decoration: line-through; }
+        .product-detail-name { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4; }
+        .product-detail-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6; }
+        .product-detail-content { padding: 20px; background: var(--bg-primary); margin-top: 12px; }
+        .product-detail-content .section-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .product-detail-images { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .product-detail-description { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+        .product-detail-description p { margin-bottom: 12px; }
+        .product-tags { display: flex; gap: 8px; margin-bottom: 20px; }
+        .product-specs { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 16px; margin-top: 16px; }
+        .spec-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-label { font-size: 14px; color: var(--text-secondary); }
+        .spec-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .delivery-options { display: flex; gap: 12px; margin-top: 16px; }
+        .delivery-option { flex: 1; padding: 16px; border: 1.5px solid var(--border); border-radius: var(--radius-md); text-align: center; cursor: pointer; transition: all 0.3s; background: var(--bg-primary); }
+        .delivery-option:hover { border-color: var(--primary); }
+        .delivery-option.active { border-color: var(--primary); background: var(--primary-light); }
+        .delivery-option-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .delivery-option-desc { font-size: 12px; color: var(--text-muted); }
+        .delivery-option.active .delivery-option-title { color: var(--primary); }
+        .purchase-options { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+        .purchase-option { display: flex; align-items: center; padding: 16px; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.3s; background: var(--bg-primary); }
+        .purchase-option:hover { border-color: var(--primary); }
+        .purchase-option.active { border-color: var(--primary); background: var(--primary-light); }
+        .purchase-icon { width: 44px; height: 44px; background: var(--bg-secondary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-right: 14px; }
+        .purchase-option.active .purchase-icon { background: var(--primary); }
+        .purchase-icon svg { width: 24px; height: 24px; color: var(--primary); }
+        .purchase-option.active .purchase-icon svg { color: #fff; }
+        .purchase-info { flex: 1; }
+        .purchase-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .purchase-desc { font-size: 12px; color: var(--text-muted); }
+        .section-title-sm { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; margin-top: 20px; }
+        .pickup-store-link { display: none; margin-top: 12px; padding: 12px; background: var(--primary-light); border-radius: var(--radius-md); font-size: 14px; color: var(--primary); text-align: center; cursor: pointer; font-weight: 600; }
+        .product-detail-footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); padding: 12px 16px; border-top: 1px solid rgba(0,0,0,0.04); z-index: 100; }
+        .btn-submit-order { width: 100%; padding: 16px; background: var(--gradient); color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(200,149,108,0.3); }
+        .quantity-section { background: var(--bg-primary); padding: 16px 20px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .quantity-label { font-size: 15px; font-weight: 600; }
+        .confirm-product { display: flex; align-items: center; padding: 16px; background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: 20px; }
+        .confirm-product-info { flex: 1; }
+        .confirm-product-name { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .confirm-product-desc { font-size: 13px; color: var(--text-muted); }
+        .confirm-product-price { font-size: 18px; font-weight: 700; color: var(--secondary); }
+        .confirm-section { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .confirm-section:last-of-type { border-bottom: none; }
+        .confirm-label { font-size: 14px; color: var(--text-secondary); }
+        .confirm-value { font-size: 14px; font-weight: 600; color: var(--text-primary); white-space: pre-line; text-align: right; }
+        .confirm-total { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; margin-top: 12px; }
+        .confirm-total-label { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+        .confirm-total-price { font-size: 22px; font-weight: 800; color: var(--secondary); font-family: 'DM Sans', sans-serif; }
+        .btn-secondary { background: var(--bg-secondary); color: var(--text-secondary); }
+        .order-confirm-modal .modal-footer { display: flex; gap: 12px; }
+        .order-confirm-modal .btn-modal { flex: 1; width: auto; }
+    </style>
+</style>
+</head>
+<body>
+    <div class="login-page" id="loginPage">
+        <div class="login-header">
+            <div class="login-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+            </div>
+            <div class="login-title">万象商城</div>
+            <div class="login-subtitle">精选好物，品质生活</div>
+            <div class="identity-switch" onclick="showClerkLogin()">店员入口</div>
+        </div>
+        <div class="login-form-container">
+            <div class="form-group">
+                <label class="form-label">手机号</label>
+                <input type="tel" class="form-input" id="loginPhone" placeholder="请输入手机号">
+            </div>
+            <div class="form-group">
+                <label class="form-label">验证码</label>
+                <div class="code-row">
+                    <input type="text" class="form-input" id="loginCode" placeholder="请输入验证码">
+                    <button class="btn-code" id="sendCodeBtn" onclick="sendCode()">获取验证码</button>
+                </div>
+            </div>
+            <button class="btn-login" onclick="handleUserLogin()">登 录</button>
+        </div>
+    </div>
+
+    <div class="login-page" id="clerkLoginPage" style="display:none; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);">
+        <div class="login-header">
+            <div class="login-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <div class="login-title">门店核销</div>
+            <div class="login-subtitle">店员工作台</div>
+            <div class="identity-switch" onclick="showUserLogin()">用户登录</div>
+        </div>
+        <div class="login-form-container">
+            <div class="form-group">
+                <label class="form-label">账号</label>
+                <input type="text" class="form-input" id="clerkAccount" placeholder="请输入账号">
+            </div>
+            <div class="form-group">
+                <label class="form-label">密码</label>
+                <input type="password" class="form-input" id="clerkPassword" placeholder="请输入密码">
+            </div>
+            <button class="btn-login" onclick="handleClerkLogin()" style="background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);">登 录</button>
+        </div>
+    </div>
+
+    <div class="main-app" id="mainApp">
+        <header class="app-header">
+            <div class="header-back" id="headerBack" style="display:none;" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </div>
+            <div class="header-title" id="headerTitle">万象商城</div>
+        </header>
+
+        <main class="app-content">
+            <div class="page active" id="homePage">
+                <div class="banner">
+                    <div class="banner-content">
+                        <span class="banner-tag">限时活动</span>
+                        <div class="banner-title">新品首发</div>
+                        <div class="banner-desc">全场商品低至5折起</div>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" class="search-input" placeholder="搜索商品、品牌">
+                </div>
+
+                <div class="category-section">
+                    <div class="category-grid">
+                        <div class="category-item" onclick="openProductList('数码电子')">
+                            <div class="category-icon electronics">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <rect x="5" y="2" width="14" height="20" rx="2"/>
+                                    <line x1="12" y1="18" x2="12" y2="18"/>
+                                </svg>
+                            </div>
+                            <span class="category-name">数码电子</span>
+                        </div>
+                        <div class="category-item" onclick="openProductList('服装配饰')">
+                            <div class="category-icon clothing">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <span class="category-name">服装配饰</span>
+                        </div>
+                        <div class="category-item" onclick="openProductList('食品饮料')">
+                            <div class="category-icon food">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                                    <line x1="6" y1="1" x2="6" y2="4"/>
+                                    <line x1="10" y1="1" x2="10" y2="4"/>
+                                    <line x1="14" y1="1" x2="14" y2="4"/>
+                                </svg>
+                            </div>
+                            <span class="category-name">食品饮料</span>
+                        </div>
+                        <div class="category-item" onclick="openProductList('家居生活')">
+                            <div class="category-icon home">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                            <span class="category-name">家居生活</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <span class="section-title">热门推荐</span>
+                    <span class="section-more" onclick="openProductList('')">
+                        查看更多
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="product-grid" id="productGrid"></div>
+            </div>
+
+            <div class="page" id="productListPage">
+                <div style="padding: 16px;">
+                    <div class="search-bar">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" class="search-input" placeholder="搜索商品">
+                    </div>
+                    <div class="filter-bar" id="filterBar" style="display: none;">
+                        <span class="filter-label">筛选：</span>
+                        <span class="filter-tag active" id="currentFilter"></span>
+                        <button class="filter-clear" onclick="clearCategoryFilter()">清除筛选</button>
+                    </div>
+                    <div class="product-grid" id="allProductGrid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="productDetailPage">
+                <div class="product-detail-page">
+                    <div class="product-carousel" id="productCarousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track" id="carouselTrack">
+                                <div class="carousel-slide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    </svg>
+                                </div>
+                                <div class="carousel-slide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    </svg>
+                                </div>
+                                <div class="carousel-slide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-indicators" id="carouselIndicators">
+                            <span class="indicator active"></span>
+                            <span class="indicator"></span>
+                            <span class="indicator"></span>
+                        </div>
+                        <button class="carousel-prev" onclick="prevSlide()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="carousel-next" onclick="nextSlide()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-detail-info">
+                        <div class="product-detail-price" id="detailPrice">¥0</div>
+                        <h1 class="product-detail-name" id="detailName">商品名称</h1>
+                        <p class="product-detail-desc" id="detailDesc">商品描述</p>
+                        
+                        <div class="quantity-section">
+                            <span class="quantity-label">购买数量</span>
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="updateDetailQty(-1)">-</button>
+                                <span class="qty-value" id="detailQty">1</span>
+                                <button class="qty-btn" onclick="updateDetailQty(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="section-title-sm">配送方式</div>
+                        <div class="delivery-options">
+                            <div class="delivery-option active" id="deliveryExpress" onclick="selectDelivery('express')">
+                                <div class="delivery-option-title">快递配送</div>
+                                <div class="delivery-option-desc">1-3个工作日送达</div>
+                            </div>
+                            <div class="delivery-option" id="deliveryPickup" onclick="selectDelivery('pickup')">
+                                <div class="delivery-option-title">线下自提</div>
+                                <div class="delivery-option-desc">到店自提免运费</div>
+                            </div>
+                        </div>
+                        <div class="pickup-store-link" id="pickupStoreLink" onclick="showPickupStores()">
+                            查看自提门店列表
+                        </div>
+
+                        <div class="section-title-sm">购买方式</div>
+                        <div class="purchase-options">
+                            <div class="purchase-option active" id="purchasePay" onclick="selectPurchaseMethod('pay')">
+                                <div class="purchase-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="1" y="4" width="22" height="16" rx="2"/>
+                                        <line x1="1" y1="10" x2="23" y2="10"/>
+                                    </svg>
+                                </div>
+                                <div class="purchase-info">
+                                    <div class="purchase-title">付费购买</div>
+                                    <div class="purchase-desc">在线支付完成购买</div>
+                                </div>
+                            </div>
+                            <div class="purchase-option" id="purchaseCode" onclick="selectPurchaseMethod('code')">
+                                <div class="purchase-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </div>
+                                <div class="purchase-info">
+                                    <div class="purchase-title">权益兑换</div>
+                                    <div class="purchase-desc">使用兑换券兑换商品</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-detail-content">
+                        <div class="section-title">商品详情</div>
+                        <div class="product-detail-images" id="detailImages"></div>
+                        <div class="product-detail-description" id="detailDescription"></div>
+                    </div>
+                </div>
+                <div class="product-detail-footer">
+                    <button class="btn-submit-order" onclick="buyNow()">提交订单</button>
+                </div>
+            </div>
+
+            <div class="page" id="ordersPage">
+                <div class="orders-page" id="ordersContent"></div>
+            </div>
+
+            <div class="page" id="profilePage">
+                <div class="profile-page">
+                    <div class="user-card">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="user-name" id="userPhone">未登录</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-section">
+                        <div class="menu-item" onclick="switchPage('address')">
+                            <div class="menu-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <span class="menu-text">收货地址</span>
+                            <svg class="menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                        <div class="menu-item" onclick="switchPage('orders')">
+                            <div class="menu-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </div>
+                            <span class="menu-text">我的订单</span>
+                            <svg class="menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                        <div class="menu-item" onclick="switchPage('voucher')">
+                            <div class="menu-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <span class="menu-text">我的兑换券</span>
+                            <svg class="menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                        <div class="menu-item" onclick="showDeliveryInfo()">
+                            <div class="menu-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13" rx="2"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                            </div>
+                            <span class="menu-text">发货说明</span>
+                            <svg class="menu-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <button class="btn-logout" onclick="handleLogout()">退出登录</button>
+                </div>
+            </div>
+
+            <div class="page" id="addressPage" style="background: var(--bg-secondary); min-height: 100vh; padding-bottom: 90px;">
+                <div class="sub-page-content" id="addressList"></div>
+                <div style="padding: 16px; position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-primary); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 50;">
+                    <button class="btn-add-address" onclick="showAddAddress()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        添加新地址
+                    </button>
+                </div>
+            </div>
+
+            <div class="page" id="voucherPage">
+                <div class="sub-page-content" id="voucherListPage"></div>
+            </div>
+        </main>
+
+        <nav class="tab-bar">
+            <div class="tab-item active" data-page="home" onclick="switchPage('home')">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span class="tab-text">首页</span>
+            </div>
+            <div class="tab-item" data-page="orders" onclick="switchPage('orders')">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+                <span class="tab-text">订单</span>
+            </div>
+            <div class="tab-item" data-page="profile" onclick="switchPage('profile')">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span class="tab-text">我的</span>
+            </div>
+        </nav>
+    </div>
+
+    <div class="clerk-page" id="clerkApp">
+        <header class="clerk-header">
+            <div class="clerk-header-left">
+                <div class="clerk-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <div class="clerk-info">
+                    <div class="clerk-name" id="clerkName">张三</div>
+                    <div class="clerk-store">北京中关村店</div>
+                </div>
+            </div>
+            <button class="clerk-logout-btn" onclick="clerkLogout()">退出</button>
+        </header>
+
+        <main class="clerk-content">
+            <div class="page active" id="clerkHomePage">
+                <div class="scan-section">
+                    <div class="scan-area" onclick="startScan()">
+                        <div class="scan-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                <circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </div>
+                        <span class="scan-text">点击扫码核销</span>
+                    </div>
+                </div>
+
+                <div class="verify-section">
+                    <input type="text" class="verify-input" id="verifyOrderId" placeholder="输入订单号">
+                    <button class="btn-verify" onclick="verifyOrder()">手动核销</button>
+                </div>
+            </div>
+
+            <div class="page" id="clerkOrdersPage">
+                <div class="clerk-orders-page">
+                    <div class="clerk-header-title-section">
+                    <div class="clerk-role-badge">店长视图</div>
+                    <div class="clerk-store-name">北京中关村店</div>
+                </div>
+                    <div class="filter-tags">
+                        <span class="filter-tag active">全部</span>
+                        <span class="filter-tag">待核销</span>
+                        <span class="filter-tag">已完成</span>
+                    </div>
+                    <div id="clerkOrdersContent"></div>
+                </div>
+            </div>
+
+            <div class="page" id="clerkProfilePage">
+                <div class="profile-page">
+                    <div class="user-card" style="background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="user-name" id="clerkName">店员</div>
+                                <div class="user-phone">门店工作人员</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-logout" onclick="clerkLogout()" style="border-color: #DC2626; color: #DC2626;">退出登录</button>
+                </div>
+            </div>
+        </main>
+
+        <nav class="clerk-tab-bar">
+            <div class="clerk-tab active" data-page="home" onclick="clerkSwitchPage('home')">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span class="tab-text">核销</span>
+            </div>
+            <div class="clerk-tab" data-page="orders" onclick="clerkSwitchPage('orders')">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span class="tab-text">订单</span>
+            </div>
+
+        </nav>
+    </div>
+
+    <div class="modal-overlay" id="addressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('addressModal')">×</button>
+                <h3 class="modal-title">收货地址</h3>
+            </div>
+            <div class="modal-body" id="addressList"></div>
+            <div class="modal-footer">
+                <button class="btn-add-address" onclick="showAddAddress()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    添加新地址
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="addAddressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('addAddressModal')">×</button>
+                <h3 class="modal-title">添加地址</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">收货人</label>
+                    <input type="text" class="form-input" id="addName" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">手机号</label>
+                    <input type="tel" class="form-input" id="addPhone" placeholder="请输入手机号">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">所在地区</label>
+                    <div class="region-select-group">
+                        <select class="form-select" id="addProvince" onchange="onProvinceChange()">
+                            <option value="">请选择省</option>
+                        </select>
+                        <select class="form-select" id="addCity" onchange="onCityChange()">
+                            <option value="">请选择市</option>
+                        </select>
+                        <select class="form-select" id="addDistrict">
+                            <option value="">请选择区</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">详细地址</label>
+                    <input type="text" class="form-input" id="addDetail" placeholder="请输入详细地址">
+                </div>
+                <div class="form-group">
+                    <label class="radio-label">
+                        <input type="checkbox" id="addIsDefault" value="1">
+                        <span>设为默认地址</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal" onclick="confirmAddAddress()">保存地址</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="editAddressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('editAddressModal')">×</button>
+                <h3 class="modal-title">编辑地址</h3>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editAddressId">
+                <div class="form-group">
+                    <label class="form-label">收货人</label>
+                    <input type="text" class="form-input" id="editName" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">手机号</label>
+                    <input type="tel" class="form-input" id="editPhone" placeholder="请输入手机号">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">所在地区</label>
+                    <div class="region-select-group">
+                        <select class="form-select" id="editProvince" onchange="onEditProvinceChange()">
+                            <option value="">请选择省</option>
+                        </select>
+                        <select class="form-select" id="editCity" onchange="onEditCityChange()">
+                            <option value="">请选择市</option>
+                        </select>
+                        <select class="form-select" id="editDistrict">
+                            <option value="">请选择区</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">详细地址</label>
+                    <input type="text" class="form-input" id="editDetail" placeholder="请输入详细地址">
+                </div>
+                <div class="form-group">
+                    <label class="radio-label">
+                        <input type="checkbox" id="editIsDefault" value="1">
+                        <span>设为默认地址</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal" onclick="confirmEditAddress()">保存地址</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmOrderModal">
+        <div class="modal-content">
+            <div class="order-confirm-modal">
+                <div class="modal-header">
+                    <h3>确认订单</h3>
+                    <button class="modal-close" onclick="closeModal('confirmOrderModal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="confirm-section">
+                        <div class="confirm-label">商品</div>
+                        <div style="flex: 1; text-align: right;">
+                            <div class="confirm-product-name" id="confirmProductName" style="font-size: 14px; font-weight: 600; color: var(--text-primary);"></div>
+                            <div class="confirm-product-price" id="confirmProductPrice" style="font-size: 14px; font-weight: 700; color: var(--secondary); margin-top: 4px;"></div>
+                        </div>
+                    </div>
+                    <div class="confirm-section">
+                        <div class="confirm-label">购买数量</div>
+                        <div class="confirm-value" id="confirmQuantity"></div>
+                    </div>
+                    <div class="confirm-section">
+                        <div class="confirm-label">配送方式</div>
+                        <div class="confirm-value" id="confirmDelivery"></div>
+                    </div>
+                    <div class="confirm-section" id="confirmStoreSection" style="display: none;">
+                        <div class="confirm-label">自提门店</div>
+                        <div class="confirm-value" id="confirmStore"></div>
+                    </div>
+                    <div class="confirm-section" id="confirmAddressSection" style="display: none;">
+                        <div class="confirm-label">收货地址</div>
+                        <div class="confirm-value" id="confirmAddress"></div>
+                    </div>
+                    <div class="confirm-section">
+                        <div class="confirm-label">购买方式</div>
+                        <div class="confirm-value" id="confirmPurchase"></div>
+                    </div>
+                    <div class="confirm-total">
+                        <div class="confirm-total-label">合计</div>
+                        <div class="confirm-total-price" id="confirmTotal"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-modal btn-secondary" onclick="closeModal('confirmOrderModal')">取消</button>
+                    <button class="btn-modal" onclick="submitOrder()">确认下单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="success-modal">
+                <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                    <button class="modal-close" onclick="closeModal('successModal')">×</button>
+                </div>
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <h3 class="success-title">下单成功</h3>
+                <p class="success-desc">您的订单已提交，请等待配送</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal" onclick="closeSuccessModal()">查看订单</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="pickupStoreModal">
+        <div class="store-modal-content">
+            <div class="store-modal-header">
+                <button class="store-modal-close" onclick="closeModal('pickupStoreModal')">×</button>
+                <h3>自提门店列表</h3>
+            </div>
+            <div class="store-modal-body">
+                <div class="store-search-bar">
+                    <svg class="store-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" class="store-search-input" id="storeSearchInput" placeholder="搜索门店名称或地址" oninput="searchStores()">
+                </div>
+                <div class="store-filter-tags">
+                    <span class="store-filter-tag active" onclick="filterStores('all')">全部</span>
+                    <span class="store-filter-tag" onclick="filterStores('beijing')">北京</span>
+                    <span class="store-filter-tag" onclick="filterStores('shanghai')">上海</span>
+                    <span class="store-filter-tag" onclick="filterStores('guangzhou')">广州</span>
+                </div>
+                <div class="pickup-store-list" id="storeList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="voucherModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('voucherModal')">×</button>
+                <h3 class="modal-title">我的兑换券</h3>
+            </div>
+            <div class="modal-body" id="voucherList">
+                <div class="order-card" style="margin-bottom: 12px;">
+                    <div style="padding: 16px;">
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">蓝牙耳机兑换券</div>
+                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">有效期至 2025-12-31</div>
+                        <div style="font-size: 13px; color: var(--success);">可使用</div>
+                    </div>
+                </div>
+                <div class="order-card" style="margin-bottom: 12px;">
+                    <div style="padding: 16px;">
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">运动T恤兑换券</div>
+                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">有效期至 2025-06-30</div>
+                        <div style="font-size: 13px; color: var(--text-muted);">已使用</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="deliveryInfoModal">
+        <div class="modal-content delivery-info">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('deliveryInfoModal')">×</button>
+                <h3 class="modal-title">发货说明</h3>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 16px;">
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">快递配送</h4>
+                    <div style="background: var(--primary-light); padding: 12px; border-radius: var(--radius-md);">
+                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+                            下单后我们将在1-3个工作日内安排发货，偏远地区可能需要额外1-2天送达。发货后您可以在订单详情中查看物流信息。
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">线下自提</h4>
+                    <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-md);">
+                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+                            选择门店自提后，您可以查看该商品可自提的门店列表，并凭订单凭证到店取货。自提订单无需支付运费。
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">注意事项</h4>
+                    <ul style="font-size: 13px; color: var(--text-secondary); line-height: 1.7; padding-left: 18px; margin: 0;">
+                        <li>请确保收货地址准确无误</li>
+                        <li>自提订单请在7天内到店取货</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">联系客服</h4>
+                    <div style="background: var(--primary-light); padding: 12px; border-radius: var(--radius-md);">
+                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+                            如有任何疑问，请拨打客服热线：<span style="font-weight: 600; color: var(--primary);">400-808-2835</span>
+                        </p>
+                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                            服务时间：<span style="font-weight: 600;">9:00-21:00</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="voucherQrModal">
+        <div class="voucher-modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('voucherQrModal')">×</button>
+                <h3 class="modal-title">取货凭证</h3>
+            </div>
+            <div class="modal-body" style="padding: 30px 20px;">
+                <div class="voucher-qr">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                        <rect x="14" y="14" width="3" height="3"/>
+                        <rect x="18" y="14" width="3" height="3"/>
+                        <rect x="14" y="18" width="3" height="3"/>
+                    </svg>
+                </div>
+                <div class="voucher-code-text" id="voucherCode">ORD20250525001</div>
+                <div class="voucher-tip">请出示此凭证给店员核销</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="orderDetailPage" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-secondary); z-index: 150; overflow-y: auto; display: none;">
+        <header class="app-header">
+            <div class="header-back" onclick="closeOrderDetail()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </div>
+            <div class="header-title">订单详情</div>
+        </header>
+        <div class="order-detail-page" style="padding-top: 56px;">
+            <div class="order-detail-header">
+                <div class="order-detail-status" id="detailStatus">待收货</div>
+                <div class="order-detail-id" id="detailOrderId">订单号: ORD20250525001</div>
+            </div>
+            
+            <div class="order-detail-section">
+                <div class="order-detail-section-title">基本信息</div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">订单号</span>
+                    <span class="order-detail-value" id="detailOrderNo">ORD20250525001</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">下单时间</span>
+                    <span class="order-detail-value" id="detailTime">2025-05-25 10:30:22</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">订单状态</span>
+                    <span class="order-detail-value" id="detailStatusText">待收货</span>
+                </div>
+            </div>
+            
+            <div class="order-detail-section">
+                <div class="order-detail-section-title">商品信息</div>
+                <div class="order-detail-product" id="detailProduct"></div>
+            </div>
+
+            <div class="order-detail-section" id="deliverySection">
+                <div class="order-detail-section-title">配送信息</div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">配送方式</span>
+                    <span class="order-detail-value" id="detailDelivery">快递配送</span>
+                </div>
+                <div id="expressInfo">
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">收货人</span>
+                        <span class="order-detail-value" id="detailReceiver"></span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">手机号</span>
+                        <span class="order-detail-value" id="detailReceiverPhone"></span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">收货地址</span>
+                        <span class="order-detail-value" id="detailAddress"></span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">物流公司</span>
+                        <span class="order-detail-value" id="detailLogistics">顺丰速运</span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">物流单号</span>
+                        <span class="order-detail-value" id="detailTrackingNo">SF1234567890</span>
+                    </div>
+                </div>
+                <div id="pickupInfo" style="display: none;">
+                    <div class="order-detail-row pickup-store-row">
+                        <span class="order-detail-label">自提门店</span>
+                        <button class="btn-view-stores" onclick="showPickupStoresFromDetail()">查看自提门店列表</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-detail-section">
+                <div class="order-detail-section-title">支付信息</div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">购买方式</span>
+                    <span class="order-detail-value" id="detailPurchase">付费购买</span>
+                </div>
+                <div id="payInfo">
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">支付方式</span>
+                        <span class="order-detail-value">在线支付</span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">支付金额</span>
+                        <span class="order-detail-value" id="detailAmount" style="color: var(--secondary); font-weight: 700;">¥299</span>
+                    </div>
+                </div>
+                <div id="codeInfo" style="display: none;">
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">使用兑换券</span>
+                        <span class="order-detail-value" id="detailVoucher">商品兑换券</span>
+                    </div>
+                    <div class="order-detail-row">
+                        <span class="order-detail-label">兑换金额</span>
+                        <span class="order-detail-value" id="detailCodeAmount" style="color: var(--success); font-weight: 700;">¥299</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-detail-footer" id="detailFooter"></div>
+    </div>
+
+    <script>
+        const products = [
+            { 
+                id: 'SP001', 
+                name: '蓝牙耳机 Pro Max', 
+                desc: '蓝牙5.3 · 主动降噪 · 40小时续航', 
+                price: 299, 
+                originalPrice: 399, 
+                category: '数码电子', 
+                tags: ['热销', '新品'],
+                detail: '<p>采用先进的蓝牙5.3技术，连接更稳定，功耗更低。</p><p>支持主动降噪功能，在嘈杂环境中也能享受纯净音质。</p><p>电池续航长达40小时，满足您的日常使用需求。</p><p>人体工学设计，佩戴舒适，长时间使用也不会感到不适。</p>',
+                imageCount: 3
+            },
+            { 
+                id: 'SP002', 
+                name: '智能手表 Ultra', 
+                desc: '健康监测 · 50米防水 · GPS定位', 
+                price: 1999, 
+                originalPrice: 2499, 
+                category: '数码电子', 
+                tags: ['限量'],
+                detail: '<p>全天候健康监测，实时关注您的心率、血氧、睡眠质量。</p><p>支持50米防水，游泳、洗手无需摘下。</p><p>内置GPS模块，精准定位，记录您的运动轨迹。</p><p>超长续航，一次充电可使用7天。</p>',
+                imageCount: 4
+            },
+            { 
+                id: 'SP003', 
+                name: '运动T恤 男款', 
+                desc: '透气速干 · 吸汗排湿 · 舒适贴身', 
+                price: 199, 
+                originalPrice: 259, 
+                category: '服装配饰', 
+                tags: ['热销'],
+                detail: '<p>采用速干面料，快速排汗透气，保持干爽舒适。</p><p>弹力面料，贴合身体，运动更自在。</p><p>简约设计，时尚百搭，日常穿着也很合适。</p><p>多色可选，满足不同需求。</p>',
+                imageCount: 2
+            },
+            { 
+                id: 'SP004', 
+                name: '坚果礼盒装', 
+                desc: '精选坚果 · 送礼佳品 · 健康美味', 
+                price: 158, 
+                originalPrice: 198, 
+                category: '食品饮料', 
+                tags: ['礼盒'],
+                detail: '<p>精选6种优质坚果，营养丰富。</p><p>精美礼盒包装，送礼倍有面子。</p><p>新鲜生产，品质保证。</p><p>独立小包装，方便携带和分享。</p>',
+                imageCount: 3
+            },
+            { 
+                id: 'SP005', 
+                name: '便携充电宝', 
+                desc: '20000mAh · 22.5W快充 · 小巧便携', 
+                price: 129, 
+                originalPrice: 169, 
+                category: '数码电子', 
+                tags: ['热销'],
+                detail: '<p>20000mAh大容量，满足多次充电。</p><p>支持22.5W快充，充电速度快。</p><p>小巧便携，出门无忧。</p><p>多重安全保护，使用更安心。</p>',
+                imageCount: 2
+            },
+            { 
+                id: 'SP006', 
+                name: '笔记本电脑包', 
+                desc: '15.6寸 · 防水面料 · 多层收纳', 
+                price: 169, 
+                originalPrice: 219, 
+                category: '家居生活', 
+                tags: ['新品'],
+                detail: '<p>适用于15.6寸及以下笔记本电脑。</p><p>防水面料，保护您的设备免受水溅。</p><p>多层收纳设计，有序存放配件。</p><p>舒适提手，携带方便。</p>',
+                imageCount: 3
+            }
+        ];
+
+        const mockOrders = [
+            {
+                id: 'ORD20250525001',
+                product: { id: 'SP001', name: '蓝牙耳机 Pro Max', price: 299 },
+                quantity: 1,
+                total: 299,
+                status: 'pending',
+                deliveryType: 'express',
+                deliveryText: '快递配送',
+                address: { name: '张三', phone: '13812348888', region: '北京市海淀区', detail: '中关村大街1号科技大厦A座1201室' },
+                logistics: { company: '顺丰速运', trackingNo: 'SF1234567890' },
+                purchaseMethod: 'pay',
+                purchaseText: '付费购买',
+                createTime: '2025-05-25 10:30:22'
+            },
+            {
+                id: 'ORD20250524002',
+                product: { id: 'SP002', name: '智能手表 Ultra', price: 1999 },
+                quantity: 1,
+                total: 1999,
+                status: 'shipping',
+                deliveryType: 'express',
+                deliveryText: '快递配送',
+                address: { name: '李四', phone: '13966666666', region: '上海市浦东新区', detail: '陆家嘴环路1000号恒生银行大厦20层' },
+                logistics: { company: '京东物流', trackingNo: 'JD9876543210' },
+                purchaseMethod: 'pay',
+                purchaseText: '付费购买',
+                createTime: '2025-05-24 15:20:10'
+            },
+            {
+                id: 'ORD20250523003',
+                product: { id: 'SP003', name: '运动T恤 男款', price: 199 },
+                quantity: 2,
+                total: 398,
+                status: 'pending',
+                deliveryType: 'pickup',
+                deliveryText: '线下自提',
+                pickupStore: { name: '北京中关村店', address: '北京市海淀区中关村大街1号科技大厦1层', time: '09:00-21:00' },
+                purchaseMethod: 'code',
+                purchaseText: '权益兑换',
+                voucher: '运动T恤兑换券',
+                createTime: '2025-05-23 09:15:33'
+            },
+            {
+                id: 'ORD20250522004',
+                product: { id: 'SP006', name: '笔记本电脑包', price: 169 },
+                quantity: 1,
+                total: 169,
+                status: 'completed',
+                deliveryType: 'express',
+                deliveryText: '快递配送',
+                address: { name: '张三', phone: '13812348888', region: '北京市海淀区', detail: '中关村大街1号科技大厦A座1201室' },
+                logistics: { company: '中通快递', trackingNo: 'ZT7654321098' },
+                purchaseMethod: 'pay',
+                purchaseText: '付费购买',
+                createTime: '2025-05-22 14:45:00'
+            },
+            {
+                id: 'ORD20250521005',
+                product: { id: 'SP004', name: '坚果礼盒装', price: 158 },
+                quantity: 1,
+                total: 158,
+                status: 'completed',
+                deliveryType: 'pickup',
+                deliveryText: '线下自提',
+                pickupStore: { name: '上海南京路店', address: '上海市黄浦区南京东路100号', time: '10:00-22:00' },
+                purchaseMethod: 'pay',
+                purchaseText: '付费购买',
+                createTime: '2025-05-21 11:20:45'
+            }
+        ];
+
+        let orders = JSON.parse(localStorage.getItem('orders') || 'null') || mockOrders;
+        let userData = JSON.parse(localStorage.getItem('userData') || 'null') || {"isLoggedIn":false,"phone":"","addresses":[{"id":"addr001","name":"张三","phone":"13812348888","region":"北京市海淀区","detail":"中关村大街1号科技大厦A座1201室","isDefault":true},{"id":"addr002","name":"李四","phone":"13966666666","region":"上海市浦东新区","detail":"陆家嘴环路1000号恒生银行大厦20层","isDefault":false}]};
+        if (userData.addresses && userData.addresses.length === 0) {
+            userData.addresses = [
+                {"id":"addr001","name":"张三","phone":"13812348888","region":"北京市海淀区","detail":"中关村大街1号科技大厦A座1201室","isDefault":true},
+                {"id":"addr002","name":"李四","phone":"13966666666","region":"上海市浦东新区","detail":"陆家嘴环路1000号恒生银行大厦20层","isDefault":false}
+            ];
+        }
+        let clerkData = JSON.parse(localStorage.getItem('clerkData') || '{"isLoggedIn":false,"username":""}');
+        let currentPage = 'home';
+        let pageHistory = ['home'];
+        let currentProduct = null;
+        let detailQty = 1;
+        let deliveryType = 'express';
+        let purchaseMethod = 'pay';
+        let selectedStore = '';
+        let currentOrderDetail = null;
+        let currentStoreFilter = 'all';
+
+        const regionData = {
+            "北京": {
+                "北京市": ["东城区", "西城区", "朝阳区", "海淀区", "丰台区", "石景山区", "通州区", "顺义区"]
+            },
+            "上海": {
+                "上海市": ["黄浦区", "徐汇区", "长宁区", "静安区", "普陀区", "虹口区", "杨浦区", "浦东新区"]
+            },
+            "广东": {
+                "广州市": ["天河区", "越秀区", "白云区", "海珠区", "番禺区", "花都区", "南沙区", "黄埔区"],
+                "深圳市": ["福田区", "罗湖区", "南山区", "宝安区", "龙岗区", "龙华区", "光明区", "坪山区"],
+                "东莞市": ["莞城区", "南城区", "东城区", "万江区", "虎门镇", "长安镇", "厚街镇", "大朗镇"]
+            },
+            "浙江": {
+                "杭州市": ["上城区", "下城区", "西湖区", "滨江区", "萧山区", "余杭区", "富阳区", "临安区"],
+                "宁波市": ["海曙区", "江北区", "北仑区", "镇海区", "鄞州区", "奉化区", "余姚市", "慈溪市"],
+                "温州市": ["鹿城区", "龙湾区", "瓯海区", "洞头区", "瑞安市", "乐清市", "永嘉县", "平阳县"]
+            },
+            "江苏": {
+                "南京市": ["玄武区", "秦淮区", "鼓楼区", "建邺区", "栖霞区", "雨花台区", "江宁区", "浦口区"],
+                "苏州市": ["姑苏区", "虎丘区", "吴中区", "相城区", "吴江区", "昆山市", "常熟市", "张家港市"],
+                "无锡市": ["梁溪区", "锡山区", "惠山区", "滨湖区", "新吴区", "江阴市", "宜兴市"]
+            },
+            "四川": {
+                "成都市": ["锦江区", "青羊区", "金牛区", "武侯区", "成华区", "龙泉驿区", "青白江区", "新都区"],
+                "绵阳市": ["涪城区", "游仙区", "安州区", "江油市", "三台县", "盐亭县", "梓潼县", "北川羌族自治县"]
+            },
+            "湖北": {
+                "武汉市": ["江岸区", "江汉区", "硚口区", "汉阳区", "武昌区", "青山区", "洪山区", "东西湖区"],
+                "宜昌市": ["西陵区", "伍家岗区", "点军区", "猇亭区", "夷陵区", "宜都市", "当阳市", "枝江市"]
+            },
+            "陕西": {
+                "西安市": ["新城区", "碑林区", "莲湖区", "灞桥区", "未央区", "雁塔区", "阎良区", "临潼区"],
+                "宝鸡市": ["渭滨区", "金台区", "陈仓区", "凤翔区", "岐山县", "扶风县", "眉县", "陇县"]
+            }
+        };
+
+        const storeList = [
+            { name: '北京中关村店', city: 'beijing', distance: 1.2, address: '北京市海淀区中关村大街1号科技大厦1层', time: '09:00-21:00' },
+            { name: '北京国贸店', city: 'beijing', distance: 5.8, address: '北京市朝阳区建国路88号SOHO现代城', time: '09:00-21:00' },
+            { name: '广州天河店', city: 'guangzhou', distance: 2.1, address: '广州市天河区天河路200号', time: '09:30-21:30' },
+            { name: '上海南京路店', city: 'shanghai', distance: 3.2, address: '上海市黄浦区南京东路100号', time: '10:00-22:00' },
+            { name: '上海徐家汇店', city: 'shanghai', distance: 6.5, address: '上海市徐汇区漕溪北路88号', time: '10:00-22:00' }
+        ];
+
+        function init() {
+            if (userData.isLoggedIn) {
+                showMainApp();
+            } else if (clerkData.isLoggedIn) {
+                showClerkApp();
+            }
+            renderProducts();
+            renderOrders();
+            updateUserInfo();
+        }
+
+        function showClerkLogin() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('clerkLoginPage').style.display = 'flex';
+        }
+
+        function showUserLogin() {
+            document.getElementById('clerkLoginPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function sendCode() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            if (!phone || phone.length !== 11) {
+                alert('请输入正确的手机号');
+                return;
+            }
+            let countdown = 60;
+            const btn = document.getElementById('sendCodeBtn');
+            btn.disabled = true;
+            btn.textContent = countdown + 's';
+            const timer = setInterval(() => {
+                countdown--;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.textContent = '获取验证码';
+                } else {
+                    btn.textContent = countdown + 's';
+                }
+            }, 1000);
+        }
+
+        function handleUserLogin() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const code = document.getElementById('loginCode').value.trim();
+            if (!phone || phone.length !== 11) {
+                alert('请输入正确的手机号');
+                return;
+            }
+            if (!code || code.length !== 6) {
+                alert('请输入6位验证码');
+                return;
+            }
+            userData.isLoggedIn = true;
+            userData.phone = phone;
+            localStorage.setItem('userData', JSON.stringify(userData));
+            showMainApp();
+            updateUserInfo();
+            alert('登录成功');
+        }
+
+        function handleClerkLogin() {
+            const account = document.getElementById('clerkAccount').value.trim();
+            const password = document.getElementById('clerkPassword').value.trim();
+            if (!account || !password) {
+                alert('请输入账号和密码');
+                return;
+            }
+            clerkData.isLoggedIn = true;
+            clerkData.username = account;
+            localStorage.setItem('clerkData', JSON.stringify(clerkData));
+            showClerkApp();
+            alert('登录成功');
+        }
+
+        function showMainApp() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('clerkLoginPage').style.display = 'none';
+            document.getElementById('mainApp').classList.add('active');
+            document.getElementById('clerkApp').classList.remove('active');
+        }
+
+        function showClerkApp() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('clerkLoginPage').style.display = 'none';
+            document.getElementById('mainApp').classList.remove('active');
+            document.getElementById('clerkApp').classList.add('active');
+            renderClerkOrders();
+        }
+
+        function handleLogout() {
+            userData.isLoggedIn = false;
+            userData.phone = '';
+            localStorage.setItem('userData', JSON.stringify(userData));
+            document.getElementById('mainApp').classList.remove('active');
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function clerkLogout() {
+            clerkData.isLoggedIn = false;
+            clerkData.username = '';
+            localStorage.setItem('clerkData', JSON.stringify(clerkData));
+            document.getElementById('clerkApp').classList.remove('active');
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function switchPage(page) {
+            const isSubPage = page === 'address' || page === 'voucher' || page === 'productList' || page === 'productDetail';
+            if (!isSubPage) {
+                document.querySelector('.tab-bar').style.display = 'flex';
+            }
+
+            if (page === 'productList') {
+                document.getElementById('headerBack').style.display = 'flex';
+                document.getElementById('headerTitle').textContent = '商品列表';
+                pageHistory.push('productList');
+            } else if (page === 'productDetail') {
+                document.getElementById('headerBack').style.display = 'flex';
+                document.getElementById('headerTitle').textContent = '商品详情';
+                document.querySelector('.tab-bar').style.display = 'none';
+                pageHistory.push('productDetail');
+            } else if (page === 'orders') {
+                document.getElementById('headerBack').style.display = 'none';
+                document.getElementById('headerTitle').textContent = '我的订单';
+                renderOrders();
+            } else if (page === 'profile') {
+                document.getElementById('headerBack').style.display = 'none';
+                document.getElementById('headerTitle').textContent = '个人中心';
+            } else if (page === 'address') {
+                document.getElementById('headerBack').style.display = 'flex';
+                document.getElementById('headerTitle').textContent = '收货地址';
+                document.querySelector('.tab-bar').style.display = 'none';
+                renderAddressList();
+            } else if (page === 'voucher') {
+                document.getElementById('headerBack').style.display = 'flex';
+                document.getElementById('headerTitle').textContent = '我的兑换券';
+                document.querySelector('.tab-bar').style.display = 'none';
+                renderVoucherList();
+            } else {
+                document.getElementById('headerBack').style.display = 'none';
+                document.getElementById('headerTitle').textContent = '万象商城';
+            }
+
+            document.querySelectorAll('.main-app .page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + 'Page').classList.add('active');
+
+            document.querySelectorAll('.tab-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === page);
+            });
+
+            currentPage = page;
+        }
+
+        let currentCategory = '';
+
+        function openProductList(category) {
+            currentCategory = category;
+            document.getElementById('headerBack').style.display = 'flex';
+            document.getElementById('headerTitle').textContent = category ? category : '全部商品';
+            pageHistory.push('productList');
+            
+            const filterBar = document.getElementById('filterBar');
+            const currentFilter = document.getElementById('currentFilter');
+            
+            if (category) {
+                filterBar.style.display = 'flex';
+                currentFilter.textContent = category;
+            } else {
+                filterBar.style.display = 'none';
+            }
+            
+            renderProductList(category);
+            
+            document.querySelectorAll('.main-app .page').forEach(p => p.classList.remove('active'));
+            document.getElementById('productListPage').classList.add('active');
+            document.querySelector('.tab-bar').style.display = 'none';
+            currentPage = 'productList';
+        }
+
+        function clearCategoryFilter() {
+            openProductList('');
+        }
+
+        function renderProductList(category) {
+            const grid = document.getElementById('allProductGrid');
+            const filteredProducts = category 
+                ? products.filter(p => p.category === category)
+                : products;
+            
+            grid.innerHTML = filteredProducts.map(p => `
+                <div class="product-card" onclick="openProductDetail('${p.id}')">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="product-price">¥${p.price}</div>
+                        ${p.tags.length > 0 ? p.tags.map(t => `<i class="product-tag">${t}</i>`).join('') : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function goBack() {
+            pageHistory.pop();
+            const prevPage = pageHistory[pageHistory.length - 1] || 'home';
+            switchPage(prevPage);
+        }
+
+        function clerkSwitchPage(page) {
+            document.querySelectorAll('.clerk-page .page').forEach(p => p.classList.remove('active'));
+            document.getElementById('clerk' + page.charAt(0).toUpperCase() + page.slice(1) + 'Page').classList.add('active');
+
+            document.querySelectorAll('.clerk-tab').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === page);
+            });
+
+            if (page === 'orders') {
+                renderClerkOrders();
+            }
+        }
+
+        function renderProducts() {
+            const html = products.map(p => `
+                <div class="product-card" onclick="openProductDetail('${p.id}')">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="product-price">¥${p.price}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('productGrid').innerHTML = html;
+        }
+
+        let currentSlide = 0;
+
+        function prevSlide() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.querySelectorAll('.indicator');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel(track, indicators, currentSlide);
+        }
+
+        function nextSlide() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.querySelectorAll('.indicator');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel(track, indicators, currentSlide);
+        }
+
+        function updateCarousel(track, indicators, slideIndex) {
+            const slideWidth = track.offsetWidth;
+            track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === slideIndex);
+            });
+        }
+
+        function openProductDetail(id) {
+            currentProduct = products.find(p => p.id === id);
+            if (!currentProduct) return;
+            
+            detailQty = 1;
+            deliveryType = 'express';
+            purchaseMethod = 'pay';
+            selectedStore = '';
+            
+            document.getElementById('detailPrice').textContent = '¥' + currentProduct.price;
+            document.getElementById('detailName').textContent = currentProduct.name;
+            document.getElementById('detailDesc').textContent = currentProduct.desc;
+            document.getElementById('detailQty').textContent = detailQty;
+            
+            // 渲染商品详情图
+            const hasImages = currentProduct.imageCount && currentProduct.imageCount > 0;
+            if (hasImages) {
+                const imagesHtml = Array.from({ length: currentProduct.imageCount }, (_, i) => `
+                    <div class="product-detail-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <circle cx="8.5" cy="8.5" r="2" fill="currentColor"/>
+                            <path d="M20 16l-5-5-4 4-3-3-5 5"/>
+                        </svg>
+                    </div>
+                `).join('');
+                document.getElementById('detailImages').innerHTML = imagesHtml;
+                document.getElementById('detailDescription').innerHTML = '';
+            } else {
+                document.getElementById('detailImages').innerHTML = '';
+                // 渲染商品详情描述
+                document.getElementById('detailDescription').innerHTML = currentProduct.detail || '<p>暂无商品详情</p>';
+            }
+            
+            document.getElementById('deliveryExpress').classList.add('active');
+            document.getElementById('deliveryPickup').classList.remove('active');
+            document.getElementById('purchasePay').classList.add('active');
+            document.getElementById('purchaseCode').classList.remove('active');
+            document.getElementById('pickupStoreLink').style.display = 'none';
+            
+            switchPage('productDetail');
+        }
+
+        function selectDelivery(type) {
+            deliveryType = type;
+            document.getElementById('deliveryExpress').classList.toggle('active', type === 'express');
+            document.getElementById('deliveryPickup').classList.toggle('active', type === 'pickup');
+            document.getElementById('pickupStoreLink').style.display = type === 'pickup' ? 'block' : 'none';
+        }
+
+        function selectPurchaseMethod(method) {
+            purchaseMethod = method;
+            document.getElementById('purchasePay').classList.toggle('active', method === 'pay');
+            document.getElementById('purchaseCode').classList.toggle('active', method === 'code');
+        }
+
+        function showPickupStores() {
+            alert('自提门店列表：\n\n1. 万象商城-朝阳店\n   地址：北京市朝阳区建国路88号\n   营业时间：09:00-21:00\n\n2. 万象商城-海淀店\n   地址：北京市海淀区中关村大街66号\n   营业时间：09:00-21:00');
+        }
+
+        function updateDetailQty(delta) {
+            detailQty = Math.max(1, detailQty + delta);
+            document.getElementById('detailQty').textContent = detailQty;
+        }
+
+        function buyNow() {
+            if (!currentProduct) return;
+            
+            // 验证自提门店
+            if (deliveryType === 'pickup' && !selectedStore) {
+                alert('请先选择自提门店');
+                return;
+            }
+            
+            // 验证收货地址
+            if (deliveryType === 'express' && userData.addresses.length === 0) {
+                alert('请先添加收货地址');
+                switchPage('address');
+                return;
+            }
+            
+            const deliveryText = deliveryType === 'express' ? '快递配送' : '线下自提';
+            const purchaseText = purchaseMethod === 'pay' ? '付费购买' : '权益兑换';
+            
+            // 填充订单确认弹窗
+            document.getElementById('confirmProductName').textContent = currentProduct.name;
+            document.getElementById('confirmProductPrice').textContent = '¥' + currentProduct.price;
+            document.getElementById('confirmQuantity').textContent = detailQty;
+            document.getElementById('confirmDelivery').textContent = deliveryText;
+            document.getElementById('confirmPurchase').textContent = purchaseText;
+            document.getElementById('confirmTotal').textContent = '¥' + (currentProduct.price * detailQty);
+            
+            // 显示自提门店或收货地址
+            if (deliveryType === 'pickup') {
+                document.getElementById('confirmStoreSection').style.display = 'flex';
+                document.getElementById('confirmAddressSection').style.display = 'none';
+                document.getElementById('confirmStore').textContent = selectedStore;
+            } else {
+                document.getElementById('confirmStoreSection').style.display = 'none';
+                document.getElementById('confirmAddressSection').style.display = 'flex';
+                const defaultAddress = userData.addresses.find(a => a.isDefault) || userData.addresses[0];
+                document.getElementById('confirmAddress').textContent = defaultAddress.name + ' ' + defaultAddress.phone + '\n' + defaultAddress.region + defaultAddress.detail;
+            }
+            
+            document.getElementById('confirmOrderModal').classList.add('show');
+        }
+
+        function submitOrder() {
+            if (!currentProduct) return;
+            
+            const deliveryText = deliveryType === 'express' ? '快递配送' : '线下自提';
+            const purchaseText = purchaseMethod === 'pay' ? '付费购买' : '权益兑换';
+            
+            const order = {
+                id: 'ORD' + Date.now(),
+                product: { 
+                    id: currentProduct.id, 
+                    name: currentProduct.name, 
+                    price: currentProduct.price 
+                },
+                quantity: detailQty,
+                total: currentProduct.price * detailQty,
+                status: 'pending',
+                deliveryType: deliveryType,
+                deliveryText: deliveryText,
+                purchaseMethod: purchaseMethod,
+                purchaseText: purchaseText,
+                createTime: new Date().toLocaleString()
+            };
+            
+            if (deliveryType === 'pickup' && selectedStore) {
+                const storeData = {
+                    '北京中关村店': { name: '北京中关村店', address: '北京市海淀区中关村大街1号科技大厦1层', time: '09:00-21:00' },
+                    '北京国贸店': { name: '北京国贸店', address: '北京市朝阳区建国路88号SOHO现代城', time: '09:00-21:00' },
+                    '上海南京路店': { name: '上海南京路店', address: '上海市黄浦区南京东路100号', time: '10:00-22:00' },
+                    '上海徐家汇店': { name: '上海徐家汇店', address: '上海市徐汇区漕溪北路88号', time: '10:00-22:00' },
+                    '广州天河店': { name: '广州天河店', address: '广州市天河区天河路200号', time: '09:30-21:30' }
+                };
+                order.pickupStore = storeData[selectedStore] || { name: selectedStore, address: '-', time: '-' };
+            }
+            
+            if (deliveryType === 'express') {
+                const defaultAddress = userData.addresses.find(a => a.isDefault) || userData.addresses[0];
+                order.address = defaultAddress;
+                order.logistics = { company: '待发货', trackingNo: '-' };
+            }
+            
+            if (purchaseMethod === 'code') {
+                order.voucher = currentProduct.name + '兑换券';
+            }
+            
+            orders.unshift(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            closeModal('confirmOrderModal');
+            document.getElementById('successModal').classList.add('show');
+            renderOrders();
+        }
+
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            const cartItem = userData.cart.find(item => item.productId === currentProduct.id);
+            if (cartItem) {
+                cartItem.quantity += detailQty;
+            } else {
+                userData.cart.push({
+                    productId: currentProduct.id,
+                    name: currentProduct.name,
+                    price: currentProduct.price,
+                    quantity: detailQty
+                });
+            }
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+            alert('已加入购物车！');
+        }
+
+        function showPickupStores() {
+            currentStoreFilter = 'all';
+            document.getElementById('storeSearchInput').value = '';
+            document.querySelectorAll('.store-filter-tag').forEach(tag => {
+                tag.classList.toggle('active', tag.textContent.includes('全部'));
+            });
+            renderStoreList();
+            document.getElementById('pickupStoreModal').classList.add('show');
+        }
+
+        function showPickupStoresFromDetail() {
+            showPickupStores();
+        }
+
+        function renderStoreList() {
+            const keyword = document.getElementById('storeSearchInput').value.trim().toLowerCase();
+            let filteredStores = storeList.filter(store => {
+                const matchCity = currentStoreFilter === 'all' || store.city === currentStoreFilter;
+                const matchKeyword = !keyword || store.name.toLowerCase().includes(keyword) || store.address.toLowerCase().includes(keyword);
+                return matchCity && matchKeyword;
+            });
+            
+            filteredStores.sort((a, b) => a.distance - b.distance);
+            
+            const container = document.getElementById('storeList');
+            if (filteredStores.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px 0; color: var(--text-muted);">暂无匹配的门店</div>';
+                return;
+            }
+            
+            container.innerHTML = filteredStores.map(store => `
+                <div class="pickup-store-item ${selectedStore === store.name ? 'selected' : ''}" data-city="${store.city}" onclick="selectStore(this, '${store.name}')">
+                    <div class="pickup-store-header">
+                        <div class="pickup-store-name">${store.name}</div>
+                        <div class="pickup-store-distance">${store.distance}km</div>
+                    </div>
+                    <div class="pickup-store-address">${store.address}</div>
+                    <div class="pickup-store-time">营业时间：${store.time}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchStores() {
+            renderStoreList();
+        }
+
+        function filterStores(city) {
+            currentStoreFilter = city;
+            document.querySelectorAll('.store-filter-tag').forEach(tag => {
+                tag.classList.toggle('active', tag.textContent.includes(city === 'all' ? '全部' : city));
+            });
+            renderStoreList();
+        }
+
+        function selectStore(element, storeName) {
+            document.querySelectorAll('.pickup-store-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedStore = storeName;
+        }
+
+        function confirmStore() {
+            if (!selectedStore) {
+                alert('请选择一个门店');
+                return;
+            }
+            closeModal('pickupStoreModal');
+            alert('已选择门店：' + selectedStore);
+        }
+
+        function showVoucherModal() {
+            document.getElementById('voucherModal').classList.add('show');
+        }
+
+        function renderAddressList() {
+            const container = document.getElementById('addressList');
+            if (userData.addresses.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="cart-empty-text">暂无收货地址</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userData.addresses.map(addr => `
+                <div class="address-item">
+                    <div class="address-header">
+                        <div class="address-user">
+                            <span class="address-name">${addr.name}</span>
+                            <span class="address-phone">${addr.phone}</span>
+                        </div>
+                        ${addr.isDefault ? '<span class="address-tag">默认</span>' : ''}
+                    </div>
+                    <div class="address-detail">${addr.region} ${addr.detail}</div>
+                    <div class="address-actions">
+                        <button class="address-btn edit" onclick="editAddress('${addr.id}')">编辑</button>
+                        <button class="address-btn delete" onclick="deleteAddress('${addr.id}')">删除</button>
+                        ${!addr.isDefault ? `<button class="address-btn" style="background: var(--primary-light); color: var(--primary);" onclick="setDefaultAddress('${addr.id}')">设为默认</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderVoucherList() {
+            const container = document.getElementById('voucherListPage');
+            const vouchers = [
+                { id: 'V001', name: '蓝牙耳机兑换券', value: 299, product: '蓝牙耳机 Pro Max', expire: '2025-12-31', status: 'available' },
+                { id: 'V002', name: '运动T恤兑换券', value: 199, product: '运动T恤 男款', expire: '2025-06-30', status: 'used' },
+                { id: 'V003', name: '智能手表兑换券', value: 1999, product: '智能手表 Ultra', expire: '2025-08-15', status: 'available' },
+                { id: 'V004', name: '坚果礼盒兑换券', value: 158, product: '坚果礼盒装', expire: '2025-04-01', status: 'expired' }
+            ];
+
+            if (vouchers.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <div class="cart-empty-text">暂无兑换券</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const statusText = { available: '可使用', used: '已使用', expired: '已过期' };
+
+            const productNameToId = {
+                '蓝牙耳机 Pro Max': 'SP001',
+                '智能手表 Ultra': 'SP002',
+                '运动T恤 男款': 'SP003',
+                '坚果礼盒装': 'SP004',
+                '便携充电宝': 'SP005'
+            };
+
+            container.innerHTML = vouchers.map(v => `
+                <div class="voucher-card">
+                    <div class="voucher-card-header">
+                        <div class="voucher-card-left">
+                            <div class="voucher-card-name">${v.name}</div>
+                            <div class="voucher-card-value">¥${v.value}</div>
+                        </div>
+                        <span class="voucher-card-status ${v.status}">${statusText[v.status]}</span>
+                    </div>
+                    <div class="voucher-card-body">
+                        <div class="voucher-card-row-flex">
+                            <div class="voucher-card-info">
+                                <div class="voucher-card-row-left">
+                                    <span class="voucher-card-label">适用商品</span>
+                                    <span class="voucher-card-value-text">${v.product}</span>
+                                </div>
+                                <div class="voucher-card-row-left">
+                                    <span class="voucher-card-label">有效期至</span>
+                                    <span class="voucher-card-value-text">${v.expire}</span>
+                                </div>
+                            </div>
+                            ${v.status === 'available' ? `
+                            <button class="voucher-use-btn" onclick="useVoucher('${v.product}')">去使用</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function useVoucher(productName) {
+            const productNameToId = {
+                '蓝牙耳机 Pro Max': 'SP001',
+                '智能手表 Ultra': 'SP002',
+                '运动T恤 男款': 'SP003',
+                '坚果礼盒装': 'SP004',
+                '便携充电宝': 'SP005'
+            };
+            const id = productNameToId[productName];
+            if (id) {
+                document.getElementById('voucherPage').classList.remove('active');
+                document.getElementById('homePage').classList.remove('active');
+                openProductDetail(id);
+            }
+        }
+
+        function showDeliveryInfo() {
+            document.getElementById('deliveryInfoModal').classList.add('show');
+        }
+
+        function openOrderDetail(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+            
+            currentOrderDetail = order;
+            
+            document.getElementById('detailStatus').textContent = getStatusText(order.status);
+            document.getElementById('detailOrderId').textContent = '订单号: ' + order.id;
+            
+            document.getElementById('detailOrderNo').textContent = order.id;
+            document.getElementById('detailTime').textContent = order.createTime;
+            document.getElementById('detailStatusText').textContent = getStatusText(order.status);
+            
+            const quantity = order.quantity || 1;
+            document.getElementById('detailProduct').innerHTML = `
+                <div class="order-detail-product-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                </div>
+                <div class="order-detail-product-info">
+                    <div class="order-detail-product-name">${order.product.name}</div>
+                    <div class="order-detail-product-qty">购买数量: ${quantity}</div>
+                    <div class="order-detail-product-price">¥${order.product.price}</div>
+                </div>
+            `;
+            
+            const isPickup = order.deliveryType === 'pickup';
+            document.getElementById('detailDelivery').textContent = order.deliveryText || '快递配送';
+            
+            if (isPickup) {
+                document.getElementById('expressInfo').style.display = 'none';
+                document.getElementById('pickupInfo').style.display = 'block';
+            } else {
+                document.getElementById('expressInfo').style.display = 'block';
+                document.getElementById('pickupInfo').style.display = 'none';
+                const logistics = order.logistics || { company: '-', trackingNo: '-' };
+                document.getElementById('detailLogistics').textContent = logistics.company;
+                document.getElementById('detailTrackingNo').textContent = logistics.trackingNo;
+                
+                // 显示收货地址信息
+                if (order.address) {
+                    document.getElementById('detailReceiver').textContent = order.address.name || '-';
+                    document.getElementById('detailReceiverPhone').textContent = order.address.phone || '-';
+                    document.getElementById('detailAddress').textContent = (order.address.region || '') + (order.address.detail || '');
+                } else {
+                    document.getElementById('detailReceiver').textContent = '-';
+                    document.getElementById('detailReceiverPhone').textContent = '-';
+                    document.getElementById('detailAddress').textContent = '-';
+                }
+            }
+            
+            const isCode = order.purchaseMethod === 'code';
+            document.getElementById('detailPurchase').textContent = order.purchaseText || '付费购买';
+            
+            if (isCode) {
+                document.getElementById('payInfo').style.display = 'none';
+                document.getElementById('codeInfo').style.display = 'block';
+                document.getElementById('detailVoucher').textContent = order.voucher || '商品兑换券';
+                document.getElementById('detailCodeAmount').textContent = '¥' + order.total.toFixed(2);
+            } else {
+                document.getElementById('payInfo').style.display = 'block';
+                document.getElementById('codeInfo').style.display = 'none';
+                document.getElementById('detailAmount').textContent = '¥' + order.total.toFixed(2);
+            }
+            
+            const showConfirmBtn = order.status === 'pending' && !isPickup;
+            const showVoucherBtn = order.status === 'pending' && isPickup;
+            
+            let footerHtml = '<button class="btn-detail-secondary btn-detail-action" onclick="closeOrderDetail()">返回</button>';
+            if (showConfirmBtn) {
+                footerHtml += '<button class="btn-detail-primary btn-detail-action" onclick="confirmReceiptFromDetail()">确认收货</button>';
+            }
+            if (showVoucherBtn) {
+                footerHtml += '<button class="btn-detail-primary btn-detail-action" onclick="showVoucherQrFromDetail()">出示凭证</button>';
+            }
+            
+            document.getElementById('detailFooter').innerHTML = footerHtml;
+            document.getElementById('orderDetailPage').style.display = 'block';
+        }
+
+        function closeOrderDetail() {
+            document.getElementById('orderDetailPage').style.display = 'none';
+        }
+
+        function confirmReceiptFromDetail() {
+            if (currentOrderDetail) {
+                currentOrderDetail.status = 'completed';
+                localStorage.setItem('orders', JSON.stringify(orders));
+                closeOrderDetail();
+                renderOrders();
+                alert('确认收货成功');
+            }
+        }
+
+        function showVoucherQr(orderId) {
+            document.getElementById('voucherCode').textContent = orderId;
+            document.getElementById('voucherQrModal').classList.add('show');
+        }
+
+        function showVoucherQrFromDetail() {
+            if (currentOrderDetail) {
+                showVoucherQr(currentOrderDetail.id);
+            }
+        }
+
+        function renderOrders() {
+            const container = document.getElementById('ordersContent');
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <div class="cart-empty-text">暂无订单</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = orders.map(order => {
+                const isPickup = order.deliveryType === 'pickup';
+                const showConfirmBtn = order.status === 'pending' && !isPickup;
+                const showVoucherBtn = order.status === 'pending' && isPickup;
+                const quantity = order.quantity || 1;
+                
+                return `
+                <div class="order-card-new">
+                    <div class="order-card-header">
+                        <span class="order-card-orderNo">订单号：${order.id}</span>
+                        <span class="order-card-status ${order.status}">${getStatusText(order.status)}</span>
+                    </div>
+                    <div class="order-card-top">
+                        <div class="order-card-product">
+                            <div class="order-card-image">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                </svg>
+                            </div>
+                            <div class="order-card-info">
+                                <div class="order-card-name">${order.product.name}</div>
+                                <div class="order-card-detail">
+                                    <span>¥${order.product.price}</span>
+                                    <span class="order-card-qty">x${quantity}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-card-bottom">
+                        <div class="order-card-total">
+                            <span class="order-card-total-label">合计</span>
+                            <span class="order-card-total-price">¥${order.total.toFixed(2)}</span>
+                        </div>
+                        <div class="order-card-actions">
+                            <button class="order-card-btn secondary" onclick="openOrderDetail('${order.id}')">查看详情</button>
+                            ${showConfirmBtn ? `<button class="order-card-btn primary" onclick="confirmReceipt('${order.id}')">确认收货</button>` : ''}
+                            ${showVoucherBtn ? `<button class="order-card-btn primary" onclick="showVoucherQr('${order.id}')">出示凭证</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function getStatusText(status) {
+            const map = { pending: '待收货', shipping: '配送中', completed: '已完成' };
+            return map[status] || status;
+        }
+
+        function confirmReceipt(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = 'completed';
+                localStorage.setItem('orders', JSON.stringify(orders));
+                renderOrders();
+            }
+        }
+
+        function closeSuccessModal() {
+            closeModal('successModal');
+            switchPage('orders');
+        }
+
+        function updateUserInfo() {
+            document.getElementById('userPhone').textContent = userData.isLoggedIn ? userData.phone : '未登录';
+            document.getElementById('clerkName').textContent = clerkData.isLoggedIn ? clerkData.username : '店员';
+        }
+
+        function showAddressModal() {
+            renderAddresses();
+            document.getElementById('addressModal').classList.add('show');
+        }
+
+        function renderAddresses() {
+            const container = document.getElementById('addressList');
+            if (userData.addresses.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px 0; color: var(--text-muted);">暂无收货地址</div>';
+                return;
+            }
+            container.innerHTML = userData.addresses.map(addr => `
+                <div class="address-item">
+                    <div class="address-header">
+                        <div class="address-user">
+                            <span class="address-name">${addr.name}</span>
+                            <span class="address-phone">${addr.phone}</span>
+                        </div>
+                        ${addr.isDefault ? '<span class="address-tag">默认</span>' : ''}
+                    </div>
+                    <div class="address-detail">${addr.region} ${addr.detail}</div>
+                    <div class="address-actions">
+                        <button class="address-btn edit" onclick="editAddress('${addr.id}')">编辑</button>
+                        <button class="address-btn delete" onclick="deleteAddress('${addr.id}')">删除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showAddAddress() {
+            document.getElementById('addName').value = '';
+            document.getElementById('addPhone').value = '';
+            document.getElementById('addDetail').value = '';
+            document.getElementById('addIsDefault').checked = false;
+            initProvinceSelect();
+            document.getElementById('addAddressModal').classList.add('show');
+        }
+
+        function initProvinceSelect() {
+            const provinceSelect = document.getElementById('addProvince');
+            const citySelect = document.getElementById('addCity');
+            const districtSelect = document.getElementById('addDistrict');
+            
+            provinceSelect.innerHTML = '<option value="">请选择省</option>';
+            citySelect.innerHTML = '<option value="">请选择市</option>';
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            Object.keys(regionData).forEach(province => {
+                const option = document.createElement('option');
+                option.value = province;
+                option.textContent = province;
+                provinceSelect.appendChild(option);
+            });
+        }
+
+        function initEditProvinceSelect() {
+            const provinceSelect = document.getElementById('editProvince');
+            const citySelect = document.getElementById('editCity');
+            const districtSelect = document.getElementById('editDistrict');
+            
+            provinceSelect.innerHTML = '<option value="">请选择省</option>';
+            citySelect.innerHTML = '<option value="">请选择市</option>';
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            Object.keys(regionData).forEach(province => {
+                const option = document.createElement('option');
+                option.value = province;
+                option.textContent = province;
+                provinceSelect.appendChild(option);
+            });
+        }
+
+        function onEditProvinceChange() {
+            const province = document.getElementById('editProvince').value;
+            const citySelect = document.getElementById('editCity');
+            const districtSelect = document.getElementById('editDistrict');
+            
+            citySelect.innerHTML = '<option value="">请选择市</option>';
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            if (province && regionData[province]) {
+                Object.keys(regionData[province]).forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        }
+
+        function onEditCityChange() {
+            const province = document.getElementById('editProvince').value;
+            const city = document.getElementById('editCity').value;
+            const districtSelect = document.getElementById('editDistrict');
+            
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            if (province && city && regionData[province] && regionData[province][city]) {
+                regionData[province][city].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        function confirmAddAddress() {
+            const name = document.getElementById('addName').value.trim();
+            const phone = document.getElementById('addPhone').value.trim();
+            const province = document.getElementById('addProvince').value;
+            const city = document.getElementById('addCity').value;
+            const district = document.getElementById('addDistrict').value;
+            const detail = document.getElementById('addDetail').value.trim();
+            const isDefault = document.getElementById('addIsDefault').checked;
+            
+            if (!name || !phone) {
+                alert('请填写姓名和手机号');
+                return;
+            }
+            
+            if (!province || !city) {
+                alert('请选择省和市');
+                return;
+            }
+            
+            const region = province + city + (district ? district : '');
+            
+            if (isDefault) {
+                userData.addresses.forEach(addr => addr.isDefault = false);
+            }
+            
+            const newAddress = {
+                id: Date.now().toString(),
+                name, phone, region, detail,
+                isDefault: isDefault || userData.addresses.length === 0
+            };
+            userData.addresses.push(newAddress);
+            localStorage.setItem('userData', JSON.stringify(userData));
+            closeModal('addAddressModal');
+            renderAddressList();
+        }
+
+        function editAddress(id) {
+            const addr = userData.addresses.find(a => a.id === id);
+            if (!addr) return;
+            
+            document.getElementById('editAddressId').value = id;
+            document.getElementById('editName').value = addr.name;
+            document.getElementById('editPhone').value = addr.phone;
+            document.getElementById('editDetail').value = addr.detail;
+            document.getElementById('editIsDefault').checked = addr.isDefault;
+            
+            initEditProvinceSelect();
+            
+            const provinces = Object.keys(regionData);
+            let matchedProvince = '';
+            let matchedCity = '';
+            let matchedDistrict = '';
+            
+            for (const province of provinces) {
+                if (addr.region.startsWith(province)) {
+                    matchedProvince = province;
+                    document.getElementById('editProvince').value = province;
+                    onEditProvinceChange();
+                    
+                    if (regionData[province]) {
+                        for (const city of Object.keys(regionData[province])) {
+                            const cityPart = addr.region.substring(province.length, province.length + city.length);
+                            if (cityPart === city) {
+                                matchedCity = city;
+                                document.getElementById('editCity').value = city;
+                                onEditCityChange();
+                                
+                                const districtPart = addr.region.substring(province.length + city.length);
+                                if (regionData[province][city] && regionData[province][city].includes(districtPart)) {
+                                    matchedDistrict = districtPart;
+                                    document.getElementById('editDistrict').value = districtPart;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            
+            document.getElementById('editAddressModal').classList.add('show');
+        }
+
+        function confirmEditAddress() {
+            const id = document.getElementById('editAddressId').value;
+            const name = document.getElementById('editName').value.trim();
+            const phone = document.getElementById('editPhone').value.trim();
+            const province = document.getElementById('editProvince').value;
+            const city = document.getElementById('editCity').value;
+            const district = document.getElementById('editDistrict').value;
+            const detail = document.getElementById('editDetail').value.trim();
+            const isDefault = document.getElementById('editIsDefault').checked;
+            
+            if (!name || !phone) {
+                alert('请填写姓名和手机号');
+                return;
+            }
+            
+            if (!province || !city) {
+                alert('请选择省和市');
+                return;
+            }
+            
+            const region = province + city + (district ? district : '');
+            
+            if (isDefault) {
+                userData.addresses.forEach(addr => addr.isDefault = false);
+            }
+            
+            const addrIndex = userData.addresses.findIndex(a => a.id === id);
+            if (addrIndex !== -1) {
+                userData.addresses[addrIndex] = {
+                    ...userData.addresses[addrIndex],
+                    name, phone, region, detail,
+                    isDefault: isDefault
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+                closeModal('editAddressModal');
+                renderAddressList();
+            }
+        }
+
+        function clearAddressForm() {
+            document.getElementById('addName').value = '';
+            document.getElementById('addPhone').value = '';
+            document.getElementById('addProvince').value = '';
+            document.getElementById('addCity').innerHTML = '<option value="">请选择市</option>';
+            document.getElementById('addDistrict').innerHTML = '<option value="">请选择区</option>';
+            document.getElementById('addDetail').value = '';
+        }
+
+        function onProvinceChange() {
+            const province = document.getElementById('addProvince').value;
+            const citySelect = document.getElementById('addCity');
+            const districtSelect = document.getElementById('addDistrict');
+            
+            citySelect.innerHTML = '<option value="">请选择市</option>';
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            if (province && regionData[province]) {
+                Object.keys(regionData[province]).forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        }
+
+        function onCityChange() {
+            const province = document.getElementById('addProvince').value;
+            const city = document.getElementById('addCity').value;
+            const districtSelect = document.getElementById('addDistrict');
+            
+            districtSelect.innerHTML = '<option value="">请选择区</option>';
+            
+            if (province && city && regionData[province] && regionData[province][city]) {
+                regionData[province][city].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        function deleteAddress(id) {
+            if (confirm('确定删除该地址？')) {
+                userData.addresses = userData.addresses.filter(a => a.id !== id);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                renderAddressList();
+            }
+        }
+
+        function setDefaultAddress(id) {
+            userData.addresses.forEach(a => a.isDefault = a.id === id);
+            localStorage.setItem('userData', JSON.stringify(userData));
+            renderAddressList();
+        }
+
+        function editAddress(id) {
+            alert('编辑地址功能开发中');
+        }
+
+        function showRegionSelect() {
+            const regions = ['北京市', '上海市', '广州市', '深圳市', '杭州市', '成都市', '武汉市', '南京市'];
+            const selected = prompt('选择城市:\n' + regions.map((r, i) => (i + 1) + '. ' + r).join('\n'));
+            if (selected && regions[parseInt(selected) - 1]) {
+                document.getElementById('addRegion').value = regions[parseInt(selected) - 1];
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function startScan() {
+            alert('扫码功能需要调用摄像头API');
+        }
+
+        function verifyOrder() {
+            const orderId = document.getElementById('verifyOrderId').value.trim();
+            if (!orderId) {
+                alert('请输入订单号');
+                return;
+            }
+            alert('订单 ' + orderId + ' 核销成功');
+        }
+
+        function renderClerkOrders() {
+            const container = document.getElementById('clerkOrdersContent');
+            if (orders.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px 0; color: var(--text-muted);">暂无订单</div>';
+                return;
+            }
+            const mockClerkNames = ['张三', '李四', '王五', '赵六'];
+            container.innerHTML = orders.map((order, index) => {
+                const clerkName = mockClerkNames[index % mockClerkNames.length];
+                return `
+                <div class="clerk-order-card manager-view">
+                    <div class="clerk-order-header">
+                        <span class="clerk-order-id">${order.id}</span>
+                        <span class="clerk-order-price">¥${order.total.toFixed(2)}</span>
+                    </div>
+                    <div class="clerk-order-time">${order.createTime}</div>
+                    <div class="clerk-order-product">${order.product ? order.product.name : '商品'}</div>
+                    <div class="clerk-info-section" style="padding-bottom: 30px;">
+                        <div class="clerk-info-label">核销店员</div>
+                        <div class="clerk-info-value">${clerkName}</div>
+                    </div>
+                    <span class="clerk-order-status">已完成</span>
+                </div>
+            `}).join('');
+        }
+
+        init();
+    </script>
+</body>
+</html>
