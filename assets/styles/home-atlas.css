@@ -57,6 +57,16 @@
   .atlas-topics{order:3}.home-atlas .atlas-route{order:4;top:auto;width:100%}.home-atlas .atlas-detail{order:5;top:auto}
   .home-atlas .atlas-identity h1{font-size:38px}.atlas-bottom{order:6}
 }
+@media(min-width:720px) and (max-width:1000px){
+  .home-atlas{display:grid;grid-template-columns:minmax(0,1fr) 250px;column-gap:clamp(36px,7vw,70px)}
+  .atlas-caption{grid-column:1/-1;grid-row:1}
+  .atlas-intro{grid-column:1;grid-row:2;align-self:start;margin:46px 0 50px}
+  .home-atlas .atlas-identity,.home-atlas.has-topic .atlas-identity{grid-column:2;grid-row:2;align-self:start;justify-self:end;margin:46px 0 50px}
+  .atlas-topics{grid-column:1/-1;grid-row:3}
+  .home-atlas .atlas-route{grid-column:1/-1;grid-row:4}
+  .home-atlas .atlas-detail{grid-column:1/-1;grid-row:5}
+  .atlas-bottom{grid-column:1/-1;grid-row:6}
+}
 
 /* An inset signature with a quiet interactive rule. */
 @media(min-width:1001px){.home-atlas .atlas-identity,.home-atlas.has-topic .atlas-identity{right:4%;bottom:112px}}

@@ -1,5 +1,9 @@
 # Portfolio redesign plan
 
+## 2026-09-15 — Tablet Hero heading row
+
+- At 720–1000px, placed the central introductory heading and author signature in one aligned row, followed by the full-width topic grid. Phones retain the stacked reading order and desktop retains the spatial map.
+
 ## 2026-09-15 — Mobile Hero reading order
 
 - Moved the author signature above the six topic cards at widths up to 1000px, following the central introductory statement. Shifted the circular backdrop down with the topic grid; desktop composition and interaction order remain unchanged.
