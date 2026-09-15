@@ -44,3 +44,48 @@
 @media(max-width:1050px){.about-page .about-hero{gap:5%;grid-template-columns:1.1fr 1fr}.profile-path{padding:26px}.profile-path li{grid-template-columns:1fr}.profile-path li>span{grid-column:1;grid-row:auto}.about-page .experience-item{grid-template-columns:150px 1fr;gap:20px}.about-page .experience-content{padding-left:24px}}
 @media(max-width:700px){.about-page .about-hero{grid-template-columns:1fr;gap:30px;padding:36px 0}.about-page .profile-copy h1{font-size:30px}.about-page .profile-lead{font-size:14px}.profile-path{box-shadow:5px 6px 0 #e0e6ee}.profile-path li{grid-template-columns:1fr auto}.profile-path li>span{grid-column:2;grid-row:1}.profile-notes{grid-template-columns:1fr;gap:16px}.profile-notes section{padding:23px}.about-page .about-index{margin-bottom:34px}.about-page .about-index a{padding:8px 12px;font-size:11px}.about-page .section-header{gap:10px}.about-page .section-title{font-size:20px}.about-page .section-label{letter-spacing:.05em}.about-page .working-method-section{padding:24px 18px}.about-page .working-method-intro{gap:14px}.about-page .working-method-intro h3{font-size:26px}.about-page .working-method-intro p{font-size:13px}.about-page .working-method-grid{gap:10px}.about-page .working-method-grid li{padding:18px 14px;min-height:180px}.about-page .working-method-grid li>span{font-size:8px}.about-page .experience-item{grid-template-columns:1fr;gap:16px}.about-page .experience-content{border:0;padding:0}.about-page .experience-description{padding:22px}.about-page .capability-card{padding:24px}.about-next{flex-direction:column;align-items:stretch;padding:26px;margin-top:36px}.about-page .about-next h2{font-size:24px}.about-next-links{grid-template-columns:1fr}.about-page .education-item{padding:24px}}
 @media(max-width:360px){.profile-path li{grid-template-columns:1fr}.profile-path li>span{grid-column:1;grid-row:auto}.about-page .section-label{display:none}}
+
+/* Method folders share the project collection's tabs and layered paper. */
+.about-page .working-method-section{padding:20px 0 12px;background:transparent;border-radius:0}
+.about-page .method-folders{gap:24px;margin-top:66px;align-items:start}
+.about-page .method-folders>li{padding:0;min-height:0;background:transparent!important;border:0}
+.method-folder{--folder-color:#c5e6de;position:relative;isolation:isolate;background:var(--folder-color);border:1px solid #fff;border-radius:0 22px 22px 22px;padding:22px;box-shadow:0 12px 25px #354b6610}
+.method-folder::before{content:'';position:absolute;inset:8px -5px -7px 7px;z-index:-1;border:1px solid #fff;border-radius:20px;background:#f8fafb;transform:rotate(2deg)}
+.method-folders>li:nth-child(2) .method-folder{--folder-color:#d8e4f5}.method-folders>li:nth-child(3) .method-folder{--folder-color:#dedbe8}.method-folders>li:nth-child(4) .method-folder{--folder-color:#e5ebd4}
+.method-folder summary{cursor:pointer;list-style:none}.method-folder summary::-webkit-details-marker{display:none}
+.method-tab{position:absolute;bottom:calc(100% - 1px);left:-1px;border:1px solid #fff;border-bottom:0;border-radius:13px 16px 0 0;padding:9px 17px 7px;background:var(--folder-color);font-size:9px;color:#52666b;letter-spacing:.04em;white-space:nowrap}
+.about-page .method-folder strong{font-size:26px;margin:0 0 18px;font-weight:500}
+.method-action{display:block;font-size:10px;color:#52666b;padding-bottom:4px}
+.method-folder[open] .when-closed,.method-folder:not([open]) .when-open{display:none}
+.method-paper{background:#f9fbfbe8;border:1px solid #fff;border-radius:4px 12px 12px 12px;padding:18px 16px;margin-top:18px;min-height:100px}
+.about-page .method-paper p{font-size:12px;line-height:1.9}
+.method-folder summary:focus-visible{outline:3px solid #527766;outline-offset:7px;border-radius:3px}
+
+/* Capabilities form one indexed record, instead of three identical tiles. */
+.about-page .capability-ledger{display:block;border-top:1px solid #bdcfca}
+.about-page .capability-ledger .capability-card{display:grid;grid-template-columns:34% 1fr;gap:30px;background:transparent;border:0;border-bottom:1px solid #c9d5d7;border-radius:0;padding:28px 0}
+.about-page .capability-ledger .capability-title{display:flex;gap:22px;align-items:center;padding:0;border:0;margin:0}
+.capability-index{font-size:38px;line-height:1;color:#77988a;font-weight:450;letter-spacing:-.07em}
+.about-page .capability-ledger h3{font-size:20px;line-height:1.5;margin:0}
+.about-page .capability-ledger .capability-list{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;list-style:none;background:#deebe5;border:1px solid #c9dcd2;border-radius:4px 18px 18px 18px;padding:24px 28px}
+.about-page .capability-ledger .capability-list li{margin:0;padding-left:15px;position:relative}
+.capability-ledger li::before{content:'↗';position:absolute;left:0;color:#749085;font-size:10px}
+.about-page .capability-ledger .capability-card:nth-child(2) .capability-list{background:#e1e9f4;border-color:#cdd8e8}
+.about-page .capability-ledger .capability-card:nth-child(3) .capability-list{background:#e8e4ed;border-color:#d8d2e0}
+
+/* AI practice: a tool inventory, a working sheet and a smaller note. */
+.about-page .ai-desk{grid-template-columns:1.1fr 1.1fr .85fr;gap:28px;align-items:start;padding-top:12px}
+.about-page .ai-desk .ai-sheet{position:relative;border-radius:3px 3px 16px 16px;padding:28px 26px;background:#f9fbfc;box-shadow:0 9px 20px #354b6609;border:1px solid #d1dbdf}
+.about-page .ai-desk .capability-title{font-size:20px;line-height:1.6;border:0;margin-bottom:22px;padding:0}
+.about-page .ai-desk .capability-list{list-style:none;padding:0}
+.about-page .ai-desk .capability-list li{margin:0;padding:13px 0;border-top:1px solid #d5dee0;line-height:1.9}
+.about-page .ai-desk .capability-list strong{display:block;font-size:12px;margin-bottom:5px}
+.about-page .ai-desk .ai-sheet-1{border-top:4px solid #96b9aa}
+.about-page .ai-desk .ai-sheet-2{margin-top:24px;background:#e0e9f5;border-color:#c7d6e8;border-radius:0 18px 18px 18px}
+.ai-sheet-2::after{content:'';position:absolute;bottom:100%;left:-1px;width:100px;height:15px;background:#e0e9f5;border:1px solid #c7d6e8;border-bottom:0;border-radius:10px 14px 0 0}
+.about-page .ai-desk .ai-sheet-3{margin-top:50px;background:#e8e4ed;border-color:#d4cedd;border-radius:2px 2px 24px 2px}
+.ai-sheet-3::after{content:'';position:absolute;top:-9px;left:calc(50% - 32px);width:64px;height:18px;background:#c8d7ccbb;transform:rotate(-4deg)}
+.about-page .ai-desk .ai-sheet-3 .capability-list li{border-color:#d4cedd}
+@media(max-width:1000px){.about-page .method-folders{gap:56px 24px}.about-page .capability-ledger .capability-card{grid-template-columns:30% 1fr;gap:20px}.about-page .capability-ledger .capability-title{gap:14px}.about-page .ai-desk{grid-template-columns:1fr 1fr}.about-page .ai-desk .ai-sheet-3{grid-column:1/-1;margin-top:0}.about-page .ai-sheet-3 .capability-list{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}}
+@media(max-width:700px){.about-page .working-method-section{padding:12px 0}.about-page .method-folders{gap:52px 20px;margin-top:58px}.method-folder{padding:18px 14px}.method-tab{padding:8px 11px;font-size:8px}.method-paper{padding:14px 12px;min-height:115px}.about-page .method-folder strong{font-size:24px}.about-page .capability-ledger .capability-card{grid-template-columns:1fr;gap:18px;padding:24px 0}.capability-index{font-size:30px}.about-page .capability-ledger h3{font-size:18px}.about-page .capability-ledger .capability-list{padding:20px;gap:12px;grid-template-columns:1fr}.about-page .ai-desk{grid-template-columns:1fr;gap:32px}.about-page .ai-desk .ai-sheet-2,.about-page .ai-desk .ai-sheet-3{margin-top:0}.about-page .ai-sheet-3 .capability-list{display:block}}
+@media(max-width:360px){.about-page .method-folders{grid-template-columns:1fr}.method-paper{min-height:0}}

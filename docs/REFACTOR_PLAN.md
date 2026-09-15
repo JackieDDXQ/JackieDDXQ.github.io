@@ -1,5 +1,50 @@
 # Portfolio redesign plan
 
+## 2026-09-15 — Varied card composition and inset signature
+
+- Reworked the desktop map into an asymmetric ring: larger modeling and decisions cards above, a smaller collaboration card on the right, and open questions drawn inward below. Card widths scale with the viewport; the existing mobile grid is preserved.
+- Inset the author signature 4% from the right and lifted it 35px. Added staggered signature entrance after the cards begin opening, plus a fine rule that extends and a small name movement on hover/keyboard focus. Existing animation cancellation, pause and reduced-motion controls apply.
+- Reviewed the desktop composition and checked open material geometry at 1001, 1287, 1680 and 390px: no card/signature/panel overlap or horizontal overflow. Verified paused name translation and zero rule transition, clean console, script syntax and whitespace. Changes remain local.
+
+## 2026-09-15 — Balance the Hero's right side
+
+- Moved the collaboration card into the middle-right gap above the signature, moved open questions to the lower centre and slightly lowered the experience card. Preserved the background, signature and mobile grid; relationship paths follow the existing geometry observer.
+- Reviewed the updated composition and checked 1001, 1287, 1680 and 390px layouts with a material disclosure open: no card/panel/signature overlap or document overflow. Changes remain local.
+
+## 2026-09-15 — Lower-right signature and homepage continuity
+
+- Restored the circular Hero backdrop as requested and placed the smaller name at the lower right. The relationship map now connects to the central introductory statement; material disclosures replace that statement while the author signature stays visible. On smaller screens, the signature follows the topic/material area in normal flow.
+- Extended the approved UI work below the Hero: layered featured-project previews, two-column project cards with decorative diagrams, a timeline board, four pastel method cards, staggered AI notes and a soft contact panel. Moved the existing background introduction into the timeline section; retained project links and existing claims.
+- Added progressive, one-time viewport entrances with cancellation on focus, hidden tabs and reduced motion. The existing pause control now controls the whole homepage. Static content stays visible without animation support or JavaScript. No dependencies or deployment changes.
+- Checked 320, 390, 768, 1001, 1054 and 1440px widths: no document/card overflow or topic overlap with the signature/material panel. Reviewed desktop and mobile screenshots and verified the shared motion switch. Existing unrelated About-page changes remain intact; this is a local trial.
+- Rechecked all six topic disclosures (two material links each) and Escape, homepage local references/fragment targets and unique IDs, both scripts' syntax and Git whitespace. Browser console remained clear. System reduced-motion handling was reviewed in CSS/JavaScript; manual motion-off/on was verified in the browser.
+
+## 2026-09-15 — Hero composition after reducing the name
+
+- Rebalanced the composition around the smaller, left-aligned identity. Removed the large circular backdrop, tightened identity spacing and fitted its width to its content so SVG endpoints follow the actual text group. Identity, reading caption and material panel now share a left edge.
+- Reduced the desktop minimum Hero height from 800px to 760px, softened card rotations and lowered the default opacity of cross-topic paths. Adjusted the upper modeling card on wide screens to keep it clear of the selected identity; retained the existing small name size and interactions.
+- Browser-verified 320px, 390px, 1001px, 1440px and 1680px: no document overflow or topic overlap with identity/material panel, matching left edges, working disclosure/Escape and no console errors/warnings. Reviewed mobile and desktop screenshots; JavaScript syntax and whitespace checks passed. Local trial only.
+
+## 2026-09-15 — Hero identity typography follow-up
+
+- Applied the browser annotation: left-aligned the identity, role label and introduction link; reduced the name to 48–62px on desktop (50px at the annotated width) and 44–52px on smaller screens. Removed the separate selected-state font size so opening materials does not enlarge the name.
+- Checked the rendered desktop identity and material panel; confirmed computed left alignment, 50px desktop / 44px phone title sizes and no document overflow at 390px. This is a CSS-only adjustment to the existing Hero trial.
+
+## 2026-09-15 — Homepage relationship Hero trial
+
+- Added a finite, approximately 1.5-second opening sequence, shallow pointer depth and one-shot signals along selected reading paths. Chinese topic names lead the cards; English labels remain secondary. Kept the pastel palette and static site architecture.
+- Topic hover/focus highlights an editorial reading association and shows its question. Native disclosure buttons progressively replace fallback links; activation opens existing project materials, retains the identity above the panel and supports Close/Escape with focus restoration. These associations are proposed reading routes, not claims of measured business causality.
+- Added a persistent motion pause control, live reduced-motion preference handling and suspension outside the viewport / in hidden tabs. The animation loop stops when motion settles. At 1000px and below, topics use two columns and the panel stays in document flow.
+- Browser-checked 320px, 390px, 768px, 1000px, 1001px, 1024px and 1440px layouts. Verified all six disclosures and two material links each, Enter/Space/Escape, focus restoration, pause/resume persistence and clean homepage console. Fixed tablet and 1001px panel collisions. A sandboxed iframe confirmed native links, visible content/navigation and hidden motion controls without scripts; reviewed reduced-motion CSS and the live preference/cancellation code in source.
+- Checked 57 homepage/script link references for local targets, unique IDs, JavaScript syntax and Git whitespace. Confirmed that all homepage content from the project collections onward is unchanged. Existing unrelated About-page and plan edits were preserved. No dependencies, commit, push or deployment.
+- Implementation notes: `docs/plans/2026-09-15-home-hero-motion.md`.
+
+## 2026-09-14 — About page annotation follow-up
+
+- Replaced the working-method tiles with four native disclosure folders, using the project collection's tab silhouettes and layered paper. Methods are initially open and can be collapsed/reopened by mouse or keyboard without JavaScript.
+- Reorganized core capabilities into three numbered rows with their associated lists. Differentiated AI content as a tool inventory, a tabbed practice sheet and a taped note, retaining the shared pastel palette and existing content.
+- Reviewed the three revised areas in desktop and mobile previews. Verified folder click/Enter behavior, 390 px and 320 px document overflow, and a clean browser console. Existing shared no-script and reduced-motion behavior is retained; no new JavaScript, dependencies, commit or deployment.
+
 ## 2026-09-14 — About page visual refinement
 
 - Added an About-specific stylesheet while retaining the shared portfolio navigation, palette and typography. Rebuilt the opening around a personal statement and a four-stage path drawn from the existing education and employment entries.

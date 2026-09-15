@@ -27,6 +27,8 @@ python -m http.server 8080
 
 Then open `http://localhost:8080/`.
 
+The homepage Hero opens as a relationship map, with a circular backdrop and a compact author signature at the lower right. Hover or keyboard-focus a topic to see a reading association; click or press Enter/Space to open its materials, and use Close or Escape to return. Projects, the background timeline, working methods and AI notes share the soft paper styling and reveal once when entering view. The top-right motion control governs the whole homepage and remembers your preference in this browser; the system's reduced-motion setting takes priority. At widths up to 1000px, topics use a two-column layout with materials and the right-aligned signature below. With JavaScript disabled, all content remains visible and topics remain direct project links.
+
 The root build command is intentionally a no-op:
 
 ```powershell

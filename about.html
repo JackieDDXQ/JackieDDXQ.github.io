@@ -53,11 +53,11 @@
                 <h3>一项产品，<br>应该被阅读四次。</h3>
                 <p>先理解业务全景，再进入关键决策；既看对象如何连接，也看判断最终留下了什么可验证结果。</p>
             </div>
-            <ol class="working-method-grid">
-                <li><span>01 / OVERVIEW</span><strong>全景</strong><p>识别参与角色、业务边界与完整链路。</p></li>
-                <li><span>02 / DETAIL</span><strong>局部</strong><p>展开关键规则、异常状态与产品决策。</p></li>
-                <li><span>03 / RELATION</span><strong>关系</strong><p>说明对象、数据和上下游依赖如何连接。</p></li>
-                <li><span>04 / OUTCOME</span><strong>结果</strong><p>回到交付证据、业务反馈与后续验证。</p></li>
+            <ol class="working-method-grid method-folders">
+                <li><details class="method-folder" open><summary><span class="method-tab">01 / OVERVIEW</span><strong>全景</strong><span class="method-action"><span class="when-closed">展开方法 ↗</span><span class="when-open">收起方法 −</span></span></summary><div class="method-paper"><p>识别参与角色、业务边界与完整链路。</p></div></details></li>
+                <li><details class="method-folder" open><summary><span class="method-tab">02 / DETAIL</span><strong>局部</strong><span class="method-action"><span class="when-closed">展开方法 ↗</span><span class="when-open">收起方法 −</span></span></summary><div class="method-paper"><p>展开关键规则、异常状态与产品决策。</p></div></details></li>
+                <li><details class="method-folder" open><summary><span class="method-tab">03 / RELATION</span><strong>关系</strong><span class="method-action"><span class="when-closed">展开方法 ↗</span><span class="when-open">收起方法 −</span></span></summary><div class="method-paper"><p>说明对象、数据和上下游依赖如何连接。</p></div></details></li>
+                <li><details class="method-folder" open><summary><span class="method-tab">04 / OUTCOME</span><strong>结果</strong><span class="method-action"><span class="when-closed">展开方法 ↗</span><span class="when-open">收起方法 −</span></span></summary><div class="method-paper"><p>回到交付证据、业务反馈与后续验证。</p></div></details></li>
             </ol>
         </section>
 <div class="divider"></div>
@@ -116,9 +116,9 @@
                 <span class="section-label">CAPABILITIES</span>
             </div>
 
-            <div class="capability-grid">
+            <div class="capability-grid capability-ledger">
                 <div class="capability-card">
-                    <div class="capability-title">战略与架构层</div>
+                    <div class="capability-title"><span class="capability-index">01</span><h3>战略与架构层</h3></div>
                     <ul class="capability-list">
                         <li>复杂业务抽象与系统化架构设计</li>
                         <li>平台生态机制规划</li>
@@ -127,7 +127,7 @@
                     </ul>
                 </div>
                 <div class="capability-card">
-                    <div class="capability-title">思维与方法层</div>
+                    <div class="capability-title"><span class="capability-index">02</span><h3>思维与方法层</h3></div>
                     <ul class="capability-list">
                         <li>闭环思维与数据驱动决策</li>
                         <li>极致的产品化与复用思维</li>
@@ -136,7 +136,7 @@
                     </ul>
                 </div>
                 <div class="capability-card">
-                    <div class="capability-title">执行与落地层</div>
+                    <div class="capability-title"><span class="capability-index">03</span><h3>执行与落地层</h3></div>
                     <ul class="capability-list">
                         <li>全生命周期产品管理</li>
                         <li>精细化的运营闭环构建</li>
@@ -153,32 +153,32 @@
                 <span class="section-label">AI EXPLORATION</span>
             </div>
 
-            <div class="capability-grid">
-                <div class="capability-card">
+            <div class="capability-grid ai-desk">
+                <div class="capability-card ai-sheet ai-sheet-1"><p class="eyebrow">TOOLS / 日常工具</p>
                     <div class="capability-title">日常AI工具链</div>
                     <ul class="capability-list">
-                        <li><strong>Cursor/Claude/ChatGPT</strong>：需求文档撰写、竞品分析、代码生成</li>
-                        <li><strong>AI设计工具</strong>：界面草图生成、组件变体设计、视觉风格探索</li>
-                        <li><strong>Prompt工程</strong>：结构化输出、上下文管理、多轮对话优化</li>
-                        <li><strong>数据分析工具</strong>：自然语言查询、图表生成、洞察提炼</li>
+                        <li><strong>Cursor/Claude/ChatGPT</strong>需求文档撰写、竞品分析、代码生成</li>
+                        <li><strong>AI设计工具</strong>界面草图生成、组件变体设计、视觉风格探索</li>
+                        <li><strong>Prompt工程</strong>结构化输出、上下文管理、多轮对话优化</li>
+                        <li><strong>数据分析工具</strong>自然语言查询、图表生成、洞察提炼</li>
                     </ul>
                 </div>
-                <div class="capability-card">
+                <div class="capability-card ai-sheet ai-sheet-2"><p class="eyebrow">BUILD / 实践记录</p>
                     <div class="capability-title">Vibe Coding实践</div>
                     <ul class="capability-list">
-                        <li><strong>对话式开发</strong>：通过自然语言描述需求，AI生成完整代码</li>
-                        <li><strong>实时迭代</strong>：即时反馈、快速修改、边聊边建</li>
-                        <li><strong>本Portfolio案例</strong>：从设计到实现完全通过Vibe Coding完成</li>
-                        <li><strong>效率提升</strong>：开发周期缩短60%+，专注创意与策略</li>
+                        <li><strong>对话式开发</strong>通过自然语言描述需求，AI生成完整代码</li>
+                        <li><strong>实时迭代</strong>即时反馈、快速修改、边聊边建</li>
+                        <li><strong>本Portfolio案例</strong>从设计到实现完全通过Vibe Coding完成</li>
+                        <li><strong>效率提升</strong>开发周期缩短60%+，专注创意与策略</li>
                     </ul>
                 </div>
-                <div class="capability-card">
+                <div class="capability-card ai-sheet ai-sheet-3"><p class="eyebrow">NOTES / 持续思考</p>
                     <div class="capability-title">AI时代产品人思考</div>
                     <ul class="capability-list">
-                        <li><strong>人机协同</strong>：AI是放大器而非替代品</li>
-                        <li><strong>创意前置</strong>：将精力从执行转向洞察与策略</li>
-                        <li><strong>持续学习</strong>：快速掌握新工具与方法论</li>
-                        <li><strong>价值重构</strong>：重新定义产品经理的核心竞争力</li>
+                        <li><strong>人机协同</strong>AI是放大器而非替代品</li>
+                        <li><strong>创意前置</strong>将精力从执行转向洞察与策略</li>
+                        <li><strong>持续学习</strong>快速掌握新工具与方法论</li>
+                        <li><strong>价值重构</strong>重新定义产品经理的核心竞争力</li>
                     </ul>
                 </div>
             </div>
