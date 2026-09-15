@@ -50,11 +50,11 @@
 .home-atlas .atlas-route{top:57%;width:310px}
 @media(min-width:1001px) and (max-width:1100px){.atlas-intro{width:290px}.atlas-intro h2{font-size:24px}.home-atlas .atlas-identity{width:235px}.home-atlas .atlas-statement{font-size:10px}}
 @media(max-width:1000px){
-  .home-atlas:after{width:340px;height:340px;left:49%;top:330px;box-shadow:0 0 0 55px #c6d6d50b}
+  .home-atlas:after{width:340px;height:340px;left:49%;top:500px;box-shadow:0 0 0 55px #c6d6d50b}
   .atlas-caption{order:0}.atlas-intro{order:1;position:relative;top:auto;left:auto;transform:none;width:100%;margin:30px 0 28px}.atlas-intro h2{font-size:clamp(24px,4vw,30px)}
   .home-atlas.has-topic .atlas-intro{opacity:1;visibility:visible}
-  .atlas-topics{order:2}.home-atlas .atlas-route{order:3;top:auto;width:100%}.home-atlas .atlas-detail{order:4;top:auto}
-  .home-atlas .atlas-identity,.home-atlas.has-topic .atlas-identity{order:5;position:relative;left:auto;right:auto;top:auto;bottom:auto;align-self:flex-end;width:250px;max-width:100%;margin:35px 0 25px;padding-top:16px}
+  .home-atlas .atlas-identity,.home-atlas.has-topic .atlas-identity{order:2;position:relative;left:auto;right:auto;top:auto;bottom:auto;align-self:flex-end;width:250px;max-width:100%;margin:2px 0 36px;padding-top:16px}
+  .atlas-topics{order:3}.home-atlas .atlas-route{order:4;top:auto;width:100%}.home-atlas .atlas-detail{order:5;top:auto}
   .home-atlas .atlas-identity h1{font-size:38px}.atlas-bottom{order:6}
 }
 

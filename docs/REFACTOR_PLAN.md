@@ -1,5 +1,9 @@
 # Portfolio redesign plan
 
+## 2026-09-15 — Mobile Hero reading order
+
+- Moved the author signature above the six topic cards at widths up to 1000px, following the central introductory statement. Shifted the circular backdrop down with the topic grid; desktop composition and interaction order remain unchanged.
+
 ## 2026-09-15 — Varied card composition and inset signature
 
 - Reworked the desktop map into an asymmetric ring: larger modeling and decisions cards above, a smaller collaboration card on the right, and open questions drawn inward below. Card widths scale with the viewport; the existing mobile grid is preserved.
