@@ -67,4 +67,12 @@ See `AGENTS.md` for repository rules and `docs/REFACTOR_PLAN.md` for the redesig
 
 主题岛屿新版草图：`/lab/topic-islands.html`。上一版文件夹草图保留供对照。
 
-章节式阅读实验：`/lab/project-reading.html`，也可从 `/lab/` 首张卡片进入。以权益项目为样本，尝试连续正文、固定章节目录、条件对照表与来源旁注。移动端使用顶部目录；正文、原型链接和原生折叠材料无需 JavaScript 即可使用。
+文件夹阅读合并版：`/lab/folder-focus.html`。沿用项目字体与配色，展开文件夹后先突出核心判断，再展示依据、实践与追问；材料可独立展开并强调相关区域。原生折叠支持无 JavaScript 阅读，减少动态效果偏好下关闭动画。
+
+两种视觉方向：`/lab/visual-directions.html`。顶部切换“展开的资料夹”和“轻量观点图谱”，使用同一组内容比较材质、排版与关系呈现。此页仅为静态视觉稿，材料与文件夹暂不提供展开交互；禁用 JavaScript 时两稿连续显示。
+
+章节式阅读实验：`/lab/project-reading.html`，也可从 `/lab/` 进入。以权益项目为样本，尝试连续正文、固定章节目录、条件对照表与来源旁注。移动端使用顶部目录；正文、原型链接和原生折叠材料无需 JavaScript 即可使用。
+
+文件夹论证图实验：`/lab/argument-folders.html`。点击卡片聚焦直接联系，点击“查看材料”打开来源摘录；虚线入口可跨文件夹并返回，浏览器前进后退与深链接保留聚焦状态。手机将关系转换为卡片旁的文字线索。此页为独立实验，正式项目页不受影响。
+
+可选交互验证：预览服务运行于 8080 后，在已有 Playwright 与 Microsoft Edge 的环境中运行 `node lab/tests/argument-folders-check.cjs`。Playwright 非本地依赖时用 `PLAYWRIGHT_PATH` 指定模块路径；截图默认写入系统临时目录，也可用 `SNAPSHOT_DIR` 指定现有目录。
