@@ -225,6 +225,8 @@ Follow-up navigation review removed the Omni write-off menu and the CEL member a
 
 ## Folder focus refinement — 2026-09-16
 
+- Supply detail pilot: replaced the repeated cover preview with a concrete scenario, qualitative supplier comparison, manual selection steps, evidence boundaries and contextual prototype/model links. Shared this content with enhanced text/article reading while retaining the native fallback and legacy supply anchor.
+- Added an article-reading mode to the five folder-based project pages through the shared materials switch. It reuses existing source sections with continuous chapters and a linked contents list, accessible through `#article`. This is an initial continuous presentation of existing material, not a fully rewritten project narrative. All five mode switches and direct article links passed in Edge; supply detail desktop/mobile screenshots were inspected. Versioned changed assets to avoid the previously observed stale browser scripts.
 - Revised interaction per user clarification: opening now docks the folder cover 32 px from the canvas left edge, preserving vertical context and animating the transition for 380 ms. Closing restores the pre-open title position. Mobile retains vertical anchoring; reduced-motion skips the pan animation. Bumped the script version and verified in the user's actual tab: the middle supply folder moved from title x=580.94 to cover x=31.94, with material cards visible on its right. Updated regression expectations from fixed horizontal coordinates to docking and return behavior.
 - In-app verification found the user's existing tab still executing the old unversioned script even after a reload: the folder grid never received the new anchor transform, and the title jumped 460 px horizontally. Added an explicit version query to the case script in `projects/rights-management.html`, reloaded the same user tab, and verified the new transform appeared. Repeated opening and closing of the supply folder then preserved the title at x=580.9375, y=400. An initial 13 px outer-page scroll adjustment was also observed; the prior headless-only zero-drift claim did not cover this live browser state.
 - Anchor correction after user retest: scroll compensation alone was clamped at canvas edges, allowing large horizontal jumps. Repacking now reserves temporary canvas space and translates the folder layer when needed before scrolling, preserving the title on both axes. Real pointer-click checks at 1440/1024/768/390 px showed zero-pixel drift across repeated open/close cycles. Added `lab/tests/rights-folder-anchor-check.cjs` for keyboard regression coverage. Branch synchronization was attempted but GitHub reset the network connection; work remains local.
@@ -249,3 +251,77 @@ Follow-up navigation review removed the Omni write-off menu and the CEL member a
 - Mobile stacks cards and includes textual relationship captions. Static folders and source links remain usable without JavaScript. Reduced motion disables animations/transitions; focus is restored on dialog dismissal.
 - Verified using headless Edge: selection and clearing, expanded neighborhoods, cross-folder return, browser Back, deep links, Escape and focus return, widths 1440/1024/768/390/320, no horizontal or graph-node vertical overflow, reduced motion, no-JavaScript source access, and relevant HTTP links. No page script errors. Inspected desktop, focused, and mobile screenshots; adjusted labels and removed node fade-in to keep text stable.
 - This remains a reading experiment for user review. The connection labels are editorial interpretations grounded in existing materials, not new claims of project results. No publish or commit.
+## Project article rewrite — 2026-09-16
+
+- Added persistent full-article links and authored five continuous narratives in the featured project pages, replacing runtime concatenation of card content. Kept folder browsing, native disclosures, chapter fragments and public URLs.
+- Read relevant product requirements and operating manuals in the user-provided source directory without editing it. Source selection and version boundaries are recorded in `docs/PROJECT_ARTICLE_SOURCES.md`.
+- Calibrated redemption-only physical-mall phase, subscription versus payment versus delivery records, changing review workflows, manual payout export, and charging-flow version differences. No new performance metrics or ownership claims.
+- Articles include native linked contents, source notes and a return to folder browsing. Shared assets are versioned to avoid stale browser code.
+- Verified all five pages at 1440 px and 390 px with reduced motion: keyboard entry, five chapters, contents navigation, return to cards, text/article switching, legacy chapter anchors, duplicate IDs and horizontal overflow. No page errors during those checks. Verified native articles without JavaScript and HTTP availability of their evidence links. Inspected desktop/mobile screenshots, corrected inherited global header/navigation styles, and refreshed the existing in-app tab to confirm the new article title and contents.
+## Contextual prototype links — 2026-09-17
+
+- Added prototype links beside the corresponding chapters in all five authored articles. Rights-platform links open exact hash routes for supplier products, specifications, inventory, equity configuration, orders and SMS templates; other cases link to the matching configuration, fulfilment, billing and operations pages.
+- Links open in new tabs to preserve the article reading position. Zhishu keeps the existing external management prototype entry and labels the pricing prototype as a separate exploration; no unsupported deep routes were invented.
+- Branch pull was attempted but the remote connection reset; continued with the current local working tree without changing unrelated work.
+## Folder reading position across projects — 2026-09-17
+
+- Applied the existing rights-project folder anchor correction to charging, membership, physical mall and Zhishu pages. Opening docks the cover 32 px from the canvas left edge while preserving vertical reading position; closing restores the previous title position. Mobile preserves the reading position vertically, and reduced-motion skips the pan animation.
+- Reset temporary canvas dimensions before each layout and versioned all four case scripts to prevent stale cached behavior.
+- Expanded the existing folder regression check to all five cases at 1440, 1024, 768 and 390 px, covering repeated opening/closing and keyboard focus. All combinations passed without page errors. Pointer checks also passed with reduced motion on all four changed cases. In the user's current charging tab, opening the middle folder gave a measured 32 px left inset with its cards visible.
+## Homepage contact correction — 2026-09-17
+
+- Removed the misleading “其他联系方式” link from the homepage contact section: the contact page only lists the same email address. Kept the direct email action and the existing navigation to the contact page.
+## Question-led project index — 2026-09-17
+
+- Replaced the three rights-only question cards on `projects.html` with four cross-project reading routes: system boundaries, status and user actions, operational collaboration, and human judgment.
+- Retained the site's soft folder palette and typography. A question index opens an editorial reading panel containing a concrete relationship/sequence/comparison, one suggested starting chapter, two comparative cases, and a follow-up question. All five featured projects are represented; links target authored article chapters.
+- Added scoped CSS and progressive tab enhancement. Without JavaScript all four routes and their links remain readable. Tabs support arrows, Home/End and Space; URL fragments restore the selected question. Switching from a scrolled panel returns its opening to view. Reduced-motion skips the transition. Existing project browsing and the homepage remain unchanged.
+- Verified 1133/768/390 px layouts, all four tabs, keyboard selection, reload state, parent-view switching, no horizontal overflow and no page errors. Checked no-JavaScript content and every target chapter. Inspected desktop/mobile screenshots.
+## Concrete examples in question routes — 2026-09-17
+
+- Expanded each of the four question routes into three project examples (12 total). Each names the business situation, documented handling and design focus, followed by a cross-project comparison and a chapter link.
+- Examples cover supplier association, channel-specific sales suspension, shipping/pickup, unknown charging results, subscription/payment/delivery records, claiming rules, review-list context, onboarding dependencies, store verification, commercial selection, quality-pricing exploration, and cancellation/refund distinctions.
+- Source-type labels distinguish manual requirements, current proposals, confirmed practice and later exploration. Scenario walkthroughs do not claim measured incidents or outcomes. Original source files remain untouched.
+- Verified all four routes at 1133 and 390 px, 12 examples, chapter destinations, horizontal overflow and page errors; inspected the desktop example layout.
+## Equal-weight project examples — 2026-09-17
+
+- Removed the featured-first example treatment. All three examples in each question now use the same full-width card, border, background, title size and internal structure. Desktop places situation and handling side by side within every card; narrow screens stack those fields uniformly. Text and chapter links are preserved.
+## Shared collection design and motion — 2026-09-17
+
+- Unified question browsing with project browsing through protruding folder tabs, the same mint/blue/lime/lilac cover palette, white paper inserts, rounded corners, light shadows and pill-shaped reading links. All examples retain equal visual weight and identical structure.
+- Added staggered title/diagram entry, viewport-triggered example reveals, folder hover lift and link-arrow feedback. Animation is cancellable during rapid switching and disabled under reduced-motion; content remains visible without animation or JavaScript. Reading layout does not depend on animation completion.
+- Corrected hash restoration order so external question-fragment navigation retains the intended tab. Checked entry animation, rapid switching, keyboard, direct links, project-view switching, mobile overflow, equal example styles and zero animations under reduced-motion. Inspected desktop, example and mobile screenshots.
+## Contextual reading button colors — 2026-09-17
+
+- Updated all 12 question-example reading actions to use the surrounding folder palette, including background, text, border, hover and keyboard focus. Blue, olive and lilac topics no longer inherit the mint action color. Applied a consistent 12 px corner radius and 42 px minimum target height while preserving links and reduced-motion behavior.
+## Underlined reading links — 2026-09-17
+
+- Replaced filled reading actions with underlined text links across question examples and case-study prototype/reading links. Removed backgrounds and enclosing borders, retained theme-aware text and visible keyboard focus, and spaced adjacent article links for wrapping on mobile. Verified all five article pages and question-link hover styles.
+## About-page motion — 2026-09-17
+
+- Added staggered first-view text and timeline entry, one-time viewport reveals for existing sections/cards, method-paper opening motion and restrained hover feedback on interactive folders and links. Content, layout and links are unchanged.
+- Content stays visible without JavaScript. Live reduced-motion changes cancel running animations and disconnect reveals; subsequent folder toggles remain immediate. No continuous animation or scroll interception.
+- Verified entrance/scroll motion, keyboard disclosure, live reduced-motion cancellation, mobile overflow, no-JavaScript readability and absence of page errors.
+## Featured project hover — 2026-09-17
+
+- Added whole-folder hover lift and shadow feedback to the featured project on the project index, with a slight coordinated spread of its two preview sheets. Individual sheet hover retains its stronger lift. Effects are scoped to fine-pointer hover devices; reduced-motion removes transforms and transitions. Existing links and hit areas are preserved.
+## Question-folder selected colors — 2026-09-17
+
+- Matched each question folder's selected inset marker, text and keyboard focus to its mint, blue, olive or lilac palette. Hover preserves the selected marker.
+## Complete question text palettes — 2026-09-17
+
+- Extended each dossier's theme to instance labels, body copy, field labels, source notes, diagram captions, highlighted conclusions and supporting rules. Replaced residual fixed green text in blue, olive and lilac modules while retaining neutral headings and existing reading-link styling.
+## About profile folder styling — 2026-09-17
+
+- Restyled the profile timeline and two introductory notes using shared folder tabs, white paper inserts, light shadows and mint/blue/lilac covers. The two notes remain equal peers; their labels follow their cover colors. Kept content and existing entrance motion unchanged, and retained an underlined timeline link.
+- Verified 1241/848/390 px layouts with no horizontal overflow or page errors; inspected timeline and note screenshots. Remote pull was attempted but GitHub connection failed; changes use the existing local checkout.
+## About-page card hover coverage — 2026-09-17
+
+- Unified hover lift and shadow across profile, introductory notes, method folders, experience descriptions, capability sheets, AI sheets/callout, education cards and the closing panel. Capability-row hover animates its colored sheet. Limited hover motion to fine pointers and removed displacement/transitions under reduced-motion; informational cards retain their normal cursor.
+## Homepage AI practice motion — 2026-09-17
+
+- Added whole-module hover lift/shadow, subtle background-circle movement, individual note hover and link-arrow feedback to the homepage AI practice section. Intro and notes reveal once as they enter view, with a short stagger when visible together.
+- Preserved content and normal visibility without JavaScript. Reduced-motion cancels active reveals and suppresses hover displacement; touch devices do not receive hover effects.
+## Lab introduction — 2026-09-17
+
+- Expanded the lab's introductory paragraph to explain the exploratory purpose of its interactive drafts and invite visitors to compare versions. Existing structure and links are unchanged.

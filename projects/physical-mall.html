@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css">
 <link rel="stylesheet" href="../assets/styles/cases/physical-mall-collection.css">
 <script src="../assets/scripts/collection.js" defer></script>
-<script src="../assets/scripts/cases/physical-mall-collection.js" defer></script>
-<link rel="stylesheet" href="../assets/styles/cases/materials-view.css"><script src="../assets/scripts/cases/materials-view.js" defer></script></head>
+<script src="../assets/scripts/cases/physical-mall-collection.js?v=20260917-folder-anchor-1" defer></script>
+<link rel="stylesheet" href="../assets/styles/cases/materials-view.css?v=20260917-links-1"><script src="../assets/scripts/cases/materials-view.js?v=20260916-story-2" defer></script></head>
 <body class="case-collection physical-collection">
 <a href="#main-content" class="skip-link">跳转到主要内容</a>
 <header class="collection-header">
@@ -21,10 +21,59 @@
 <nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
 </header>
 <main id="main-content">
-<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 05</span><a href="#materials">文字目录 ↗</a></div>
+<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 05</span><a href="#materials">文字目录 ↗</a><a class="article-entry" href="#article">阅读全文 ↗</a></div>
 <section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 05</p><h1 id="title">一件商品的两种交付</h1><p class="description" id="description">从权益运营延伸到实物商品，沿商品准备、订单处理与门店交付，阅读结构、判断、实践与思考。</p></div><aside id="aside">实物商城 · 产品与运营<br>配送 × 到店自提<br><a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a><br><a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">用户端 H5原型（新窗口） ↗</a></aside></section>
 <div class="collection-bar"><span id="count">8 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
 <section class="grid" id="grid" aria-label="集合内容"></section>
+<article id="project-article" class="project-article" aria-labelledby="article-title">
+<header id="article"><p class="eyebrow">PROJECT STORY / 项目完整阅读</p><h2 id="article-title">从权益兑换，到一件商品的实际交付</h2><p class="article-introduction">实物商城把原有权益业务延伸到商品履约。首期用户通过权益码兑换商品，随后选择配送或到店自提。项目需要解决的，是让商品、兑换资格、交付方式与操作记录共同构成一次完整服务。</p></header>
+<nav class="article-contents" aria-label="文章章节">
+<a href="#article-section-1"><span>01</span>先确定首期到底在卖什么</a>
+<a href="#article-section-2"><span>02</span>运营准备的不只是商品名称和图片</a>
+<a href="#article-section-3"><span>03</span>兑换之后，按交付方式分成两条路径</a>
+<a href="#article-section-4"><span>04</span>到店交付把店员也纳入服务流程</a>
+<a href="#article-section-5"><span>05</span>用可回查的过程衡量履约是否完整</a>
+</nav>
+<section id="article-section-1" aria-labelledby="article-heading-1">
+
+<p class="article-chapter">第 01 章</p><h3 id="article-heading-1">先确定首期到底在卖什么</h3>
+<p>原始需求和操作说明给出了一个重要边界：首期开放权益码兑换，支付购买是预留能力。用户拿到兑换资格后完成选品与履约，不应被写成已经建立完整的在线支付商城。</p>
+<p>这一区别影响整个流程。订单成立前需要校验兑换码与商品的关系、有效期及使用情况；配送地址或自提门店决定后续怎样交付。项目的主线因此从“展示更多商品”转向“把一份权益变成一次可完成的交付”。</p>
+</section>
+<section id="article-section-2" aria-labelledby="article-heading-2">
+
+<p class="article-chapter">第 02 章</p><h3 id="article-heading-2">运营准备的不只是商品名称和图片</h3>
+<p>商品上线前，要准备品牌、门店、商品信息和对应权益配置。操作说明中，云仓提供品牌与门店基础，万象承接商城商品和订单。商品创建后默认下架，运营完成配置再开放兑换。</p>
+<p>商品需要指定可用的兑换关系、交付方式和启用门店。用户看到同一件商品，后台却要知道哪些权益码可用、到哪里取，以及是否支持寄送。将这些条件准备好，才能避免用户完成兑换后才发现无法交付。</p>
+<p>批量操作也沿用同样规则。导入模板约束编码、品牌引用和必填内容；校验失败的记录需要明确反馈，支持导出、修正后重试。批量录入的价值在于能发现和处理错误，不能只用一个“导入完成”概括。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/physical-mall/emall/create-product.html" target="_blank" rel="noopener noreferrer">商品与交付方式配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/index.html" target="_blank" rel="noopener noreferrer">商品列表与批量导入原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-3" aria-labelledby="article-heading-3">
+
+<p class="article-chapter">第 03 章</p><h3 id="article-heading-3">兑换之后，按交付方式分成两条路径</h3>
+<p>用户确认兑换时，系统检查兑换码是否匹配商品、是否过期或已使用。首期数量规则为单次一件，兑换过程不经过支付。确认页面随后收集对应交付信息：配送需要收货地址，自提需要可用门店。</p>
+<p>配送路径沿地址、发货和物流信息继续；自提路径沿门店、凭证和现场核销继续。门店选择支持就近查找，也要照顾拒绝定位的情况，通过城市筛选继续选择。两条路径共享商品与订单入口，但下一步提示必须各自清楚。</p>
+<p>对读者来说，关键不是记住全部订单状态，而是看见每次状态变化对应谁来做什么：用户提供信息，运营发货，或者用户到店出示凭证、店员完成核销。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener noreferrer">兑换、配送与自提流程原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-4" aria-labelledby="article-heading-4">
+<span id="article-section-6" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 04 章</p><h3 id="article-heading-4">到店交付把店员也纳入服务流程</h3>
+<p>用户端自提订单提供核销凭证，店员据此查找订单；操作说明还保留手动输入订单号的方式。现场交付需要把凭证、商品和门店对应起来，再形成可回查的核销记录。</p>
+<p>手册区分了店员与店长的查询范围：店员查看自己核销的订单，店长查看所在门店的核销记录。这是明确的角色规则；本站原型用于展示相关操作，不等同于已经验证实际权限执行。</p>
+<p>订单详情保留处理时间、操作人及门店等信息。配送订单对应物流单号，自提订单对应核销门店。同一张订单页因此既帮助用户确认进度，也帮助运营回答“这件商品在哪一步、由谁处理”。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/physical-mall/emall/staff-manage.html" target="_blank" rel="noopener noreferrer">门店员工管理原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/physical-mall/emall/order-manage.html" target="_blank" rel="noopener noreferrer">订单与核销记录原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-5" aria-labelledby="article-heading-5">
+<span id="article-section-7" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-8" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 05 章</p><h3 id="article-heading-5">用可回查的过程衡量履约是否完整</h3>
+<p>后台还需要批量发货及成功、失败结果反馈。单次操作失败时，运营要能找到具体记录继续处理，而不是重新操作整个批次。订单历史把这些动作串起来，才能支撑后续查询。</p>
+<p>本文据需求与使用说明重建首期兑换路径，并保留配送、自提和批量处理的设计重点。支付购买、实际物流接入与规模化处理效果各有自己的验证范围，不能由页面中存在入口推定已经完成。</p>
+<p>项目的完整性最终应由具体订单来检验：资格是否正确消耗，商品是否送达或被正确领取，异常是否能定位到责任环节。这比把商品、订单、门店分别列成几个功能模块，更接近用户获得服务的实际过程。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/physical-mall/emall/order-manage.html" target="_blank" rel="noopener noreferrer">订单处理与批量发货原型（新窗口） ↗</a></p>
+</section>
+<footer class="article-end"><p class="source-note"><strong>本文依据</strong> 实物商城需求文档；实物商城操作使用说明。结合本站管理端、用户端与门店核销原型。</p><p class="source-note">需求与手册用于说明设计规则；原型用于体验方案，不作为上线效果或个人贡献的证明。</p><a class="evidence-link" href="./prototypes/physical-mall/emall/h5-new.html" target="_blank" rel="noopener">查看兑换与交付原型（新窗口） ↗</a><a href="#project" data-article-return>返回文件夹浏览 ↑</a></footer>
+</article>
 <section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2>
 <p>从商品信息读到订单履约，也可以直接进入原型。每篇末尾标明材料来源与适用边界。</p>
 <details id="project/chain" data-source="旧版项目页；结合现有原型重新整理。">

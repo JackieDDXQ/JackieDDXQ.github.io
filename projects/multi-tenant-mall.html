@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css">
 <link rel="stylesheet" href="../assets/styles/cases/member-collection.css">
 <script src="../assets/scripts/collection.js" defer></script>
-<script src="../assets/scripts/cases/member-collection.js" defer></script>
-<link rel="stylesheet" href="../assets/styles/cases/materials-view.css"><script src="../assets/scripts/cases/materials-view.js" defer></script></head>
+<script src="../assets/scripts/cases/member-collection.js?v=20260917-folder-anchor-1" defer></script>
+<link rel="stylesheet" href="../assets/styles/cases/materials-view.css?v=20260917-links-1"><script src="../assets/scripts/cases/materials-view.js?v=20260916-story-2" defer></script></head>
 <body class="case-collection member-collection">
 <a href="#main-content" class="skip-link">跳转到主要内容</a>
 <header class="collection-header">
@@ -21,10 +21,59 @@
 <nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
 </header>
 <main id="main-content">
-<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 04</span><a href="#materials">文字目录 ↗</a></div>
+<div class="case-tools"><a href="../projects.html">← 项目收藏</a><span>PROJECT COLLECTION / 04</span><a href="#materials">文字目录 ↗</a><a class="article-entry" href="#article">阅读全文 ↗</a></div>
 <section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 04</p><h1 id="title">一份会员背后的共享与差异</h1><p class="description" id="description">从一份会员的开通与领取，回看套餐、周期、渠道配置和多租户方案，探索共享能力怎样承接不同运营需求。</p></div><aside id="aside">多租户会员订阅商城<br>共享能力 × 运营配置<span class="project-fact">从套餐配置到权益领取<small>依据现有案例与原型整理</small></span><a href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">管理后台原型（新窗口） ↗</a><br><a href="./prototypes/multi-tenant-mall/shopping-mall/mobile/index.html" target="_blank" rel="noopener">移动端原型（新窗口） ↗</a></aside></section>
 <div class="collection-bar"><span id="count">9 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
 <section class="grid" id="grid" aria-label="集合内容"></section>
+<article id="project-article" class="project-article" aria-labelledby="article-title">
+<header id="article"><p class="eyebrow">PROJECT STORY / 项目完整阅读</p><h2 id="article-title">会员订阅，如何从一次购买延续成持续服务</h2><p class="article-introduction">会员商城销售的是一段持续服务：用户订购套餐，系统按周期收款、发放权益，客服处理后续查询、退订与退款。多品牌复用的项目背景之下，真正需要讲清楚的是这段关系怎样建立、持续和结束。</p></header>
+<nav class="article-contents" aria-label="文章章节">
+<a href="#article-section-1"><span>01</span>套餐先定义一份可以履行的约定</a>
+<a href="#article-section-2"><span>02</span>共用商品规则，同时保留入口的开关</a>
+<a href="#article-section-3"><span>03</span>用三类记录连接整个订阅周期</a>
+<a href="#article-section-4"><span>04</span>退订和退款，要回到不同的业务记录</a>
+<a href="#article-section-5"><span>05</span>从销售页面走向持续运营</a>
+</nav>
+<section id="article-section-1" aria-labelledby="article-heading-1">
+
+<p class="article-chapter">第 01 章</p><h3 id="article-heading-1">套餐先定义一份可以履行的约定</h3>
+<p>会员套餐不是一张价格卡片。管理后台操作手册把价格、扣费周期、合约月数、有效时间、权益内容和说明放在同一套配置里。这些信息共同约定了用户支付什么、何时再次扣费，以及每个周期获得什么。</p>
+<p>运营先建立套餐并关联权益与通知内容，再配置开放的销售入口。套餐编码全局唯一且不可随意修改，承担了后续记录之间的识别关系。对用户而言，页面应先讲清服务期限、周期费用和领取方式；对运营而言，这些承诺必须能被配置和查询。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/package-config.html" target="_blank" rel="noopener noreferrer">套餐配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/package-detail.html" target="_blank" rel="noopener noreferrer">用户套餐详情原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-2" aria-labelledby="article-heading-2">
+
+<p class="article-chapter">第 02 章</p><h3 id="article-heading-2">共用商品规则，同时保留入口的开关</h3>
+<p>产品需要支持不同品牌与入口的经营方式。现有手册明确了全局与渠道两层上下架：全局下架会关闭所有渠道，全局上架后，各渠道仍可以独立决定是否销售。这个依赖关系让运营既能统一停止某项套餐，也能只调整局部入口。</p>
+<p>H5、支付宝、微信等入口描述的是渠道，不能直接当成不同租户。本文保留多品牌复用的业务背景，具体展开有手册支持的套餐与渠道规则；租户之间的数据隔离、权限配置和真实接入规模，需要另外的交付材料证明。</p>
+<p>从阅读顺序看，应先理解共享的套餐约定，再理解各入口如何展示和销售。这样，“可配置”才对应具体业务变化，而不是一个笼统的平台能力标签。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener noreferrer">套餐上下架原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-3" aria-labelledby="article-heading-3">
+
+<p class="article-chapter">第 03 章</p><h3 id="article-heading-3">用三类记录连接整个订阅周期</h3>
+<p>用户订购之后，业务会留下三类相关但不同的记录：订阅关系记录合约是否有效；支付记录说明某个周期的钱是否收到；权益发放记录说明相应服务是否交付。手册在订阅详情中关联支付与权益信息，让运营能够沿同一位用户的服务过程查看。</p>
+<p>这一区分决定了页面不能只给出一个“订单成功”。订阅仍有效，某次扣费可能尚未完成；钱已付，权益也可能仍在处理中。把三个状态合成一个结果，会让用户不知道要继续付款、等待到账，还是联系支持。</p>
+<p>因此，一次查看应该从当前服务状态进入，再逐项展开对应周期、支付和权益记录。用户无需理解后台全部对象，但应能回答：这次付了多少钱，本期能用什么，还有哪一步没完成。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/orders.html" target="_blank" rel="noopener noreferrer">订阅订单与详情原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/mobile/benefit-detail.html" target="_blank" rel="noopener noreferrer">用户权益领取原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-4" aria-labelledby="article-heading-4">
+
+<p class="article-chapter">第 04 章</p><h3 id="article-heading-4">退订和退款，要回到不同的业务记录</h3>
+<p>客诉手册把查询放在处理之前：先确认订阅、扣费、发放和实际领取情况，再判断适用动作。退订结束的是后续订阅关系，不自动撤销已经发生的付款；退款对应具体的一笔支付记录，也不能抹去已经使用权益的事实。</p>
+<p>现有操作说明以单笔支付处理退款，不提供批量退款。这个限制使处理对象保持明确：客服知道本次操作对应哪期费用，也能说明此前发生了什么。具体是否可退、退多少，应按适用规则与权益使用情况判断。</p>
+<p>用户侧的表达也应延续这条逻辑。退订结果说明未来扣费如何变化，退款结果说明本次资金处理进度，权益详情说明既有权益状态。三个入口可以相互关联，但不应给出互相替代的承诺。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/orders.html" target="_blank" rel="noopener noreferrer">订单查询与订阅记录原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-5" aria-labelledby="article-heading-5">
+<span id="article-section-6" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-7" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-8" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-9" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 05 章</p><h3 id="article-heading-5">从销售页面走向持续运营</h3>
+<p>这份案例的核心，是把一次成交扩展为能持续查询和处理的服务过程。套餐定义约定，订阅维护关系，支付与权益记录履行情况，客服操作处理后续变化。前台的简洁需要依靠后台清晰的对象关系。</p>
+<p>需求文档、会员商城管理后台操作手册与客诉手册共同补足了这条主线；原型用来查看这些关系如何呈现在页面上。现有材料不足以确认接入规模、效率提升和租户隔离实现，因此本文不使用这些数字或技术结论作为成果。</p>
+<p>后续评估应落在具体任务上：运营能否准确定位某一周期的异常，客服能否解释一次退订与退款的区别，用户能否确认自己仍可使用哪些权益。</p>
+</section>
+<footer class="article-end"><p class="source-note"><strong>本文依据</strong> 会员商城需求文档；会员商城管理后台操作手册；三方支付（会员商城）客诉处理后台操作手册。结合本站套餐、订阅与领取原型。</p><p class="source-note">需求与手册用于说明设计规则；原型用于体验方案，不作为上线效果或个人贡献的证明。</p><a class="evidence-link" href="./prototypes/multi-tenant-mall/shopping-mall/admin/packages.html" target="_blank" rel="noopener">查看套餐与订阅管理原型（新窗口） ↗</a><a href="#project" data-article-return>返回文件夹浏览 ↑</a></footer>
+</article>
 <section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2>
 <p>从会员开通读到套餐配置，也可以直接进入原型。每篇末尾标明材料来源与适用边界。</p>
 <details id="project/scope" data-source="旧版会员商城案例；架构实现与租户清单待核对。">

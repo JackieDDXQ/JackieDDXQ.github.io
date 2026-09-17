@@ -6,8 +6,8 @@
   <meta name="description" content="和包 App 接入特来电充电服务的项目收藏。从一次扫码出发，阅读三方协作、交易状态、异常恢复与产品决策。">
   <meta name="theme-color" content="#edf0f4"><meta property="og:title" content="一次充电，三方系统 · Jackie Hou"><meta property="og:description" content="从一次扫码出发，理解身份、权益、交易与充电履约怎样连接。"><meta property="og:type" content="article">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles/cases/rights-collection.css"><link rel="stylesheet" href="../assets/styles/collection.css"><link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css"><link rel="stylesheet" href="../assets/styles/cases/chuxing-collection.css">
-  <script src="../assets/scripts/collection.js" defer></script><script src="../assets/scripts/cases/chuxing-collection.js" defer></script>
-<link rel="stylesheet" href="../assets/styles/cases/materials-view.css"><script src="../assets/scripts/cases/materials-view.js" defer></script></head>
+  <script src="../assets/scripts/collection.js" defer></script><script src="../assets/scripts/cases/chuxing-collection.js?v=20260917-folder-anchor-1" defer></script>
+<link rel="stylesheet" href="../assets/styles/cases/materials-view.css?v=20260917-links-1"><script src="../assets/scripts/cases/materials-view.js?v=20260916-story-2" defer></script></head>
 <body class="case-collection travel-collection">
 <a class="skip-link" href="#main-content">跳转到主要内容</a>
 <header class="collection-header">
@@ -16,11 +16,60 @@
   <nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a class="contact-link" href="../contact.html">联系我 ↗</a></nav>
 </header>
 <main id="main-content" class="case-main">
-  <div class="case-tools"><a href="../index.html#collections">← 回到工作与思考</a><span>PROJECT COLLECTION / 02</span><a href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener">体验用户端原型 ↗</a></div>
+  <div class="case-tools"><a href="../index.html#collections">← 回到工作与思考</a><span>PROJECT COLLECTION / 02</span><a href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener">体验用户端原型 ↗</a><a class="article-entry" href="#article">阅读全文 ↗</a></div>
   <section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 02</p><h1 id="title">一次充电，三方系统</h1><p id="description" class="description">从一次扫码出发，阅读三方协作、交易状态、异常恢复与产品判断。打开一份材料，继续探索与它相关的内容。</p></div><aside id="aside">和包 App × 特来电<br>产品经理 · 充电服务接入<span class="project-fact">方案设计 · 联调准备<small>当前材料用于说明方案与原型</small></span></aside></section>
   <div class="collection-bar"><span id="count">13 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div>
   <section id="grid" class="grid" aria-label="集合内容"></section>
-  <section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2><p>可以在上方探索主题，也可以在这里逐篇阅读。所有流程图、状态图和交互原型都是方案材料，不代表真实运行数据。</p>
+  <article id="project-article" class="project-article" aria-labelledby="article-title">
+<header id="article"><p class="eyebrow">PROJECT STORY / 项目完整阅读</p><h2 id="article-title">一次充电，如何连接权益、设备与资金</h2><p class="article-introduction">用户在和包内找到电站、扫码并完成充电，背后却需要入口、交易服务与充电设备协同。项目围绕同一笔订单连接身份、会员权益、启停和结算，让用户能够理解当前进度，并在异常后继续原来的服务。</p></header>
+<nav class="article-contents" aria-label="文章章节">
+<a href="#article-section-1"><span>01</span>用户的一次操作，需要三方接力</a>
+<a href="#article-section-2"><span>02</span>沿一笔订单走过扫码、预付和启充</a>
+<a href="#article-section-3"><span>03</span>结果未知时，页面需要帮助用户等待确认</a>
+<a href="#article-section-4"><span>04</span>权益优惠与资金处理要能逐项解释</a>
+<a href="#article-section-5"><span>05</span>把方案边界带入联调与验证</a>
+</nav>
+<section id="article-section-1" aria-labelledby="article-heading-1">
+
+<p class="article-chapter">第 01 章</p><h3 id="article-heading-1">用户的一次操作，需要三方接力</h3>
+<p>和包提供用户入口与支付能力，觉观组织充电 H5、权益和交易过程，特来电提供站点设备、充电执行与账单数据。用户不需要理解这些分工，页面却必须准确表达来自不同系统的事实。</p>
+<p>资料存在阶段差异：阶段 0 对接参考保留早期启充与支付讨论，后台充电订单说明包含用户发起结算，本站当前方案则采用预付款确认后自动启充、等待最终账单的主线。本文按当前案例解释用户旅程，并用后台手册补充权益及查询规则，不将几版方案视为同一上线流程。</p>
+</section>
+<section id="article-section-2" aria-labelledby="article-heading-2">
+<span id="article-section-7" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-8" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 02 章</p><h3 id="article-heading-2">沿一笔订单走过扫码、预付和启充</h3>
+<p>当前方案先从扫码进入并建立用户会话，检查枪口和已有订单，再创建预付款。收银台返回后重新查询支付结果；确认到账后，由服务端发起启动，页面依次说明准备启动、正在启动和充电中。</p>
+<p>这里最重要的区别是：付款成功表示资金到账，设备确认启动才表示正在充电。如果页面在收到付款结果时直接显示充电中，用户可能误以为车辆已经获得服务。</p>
+<p>再次扫码或返回页面时，方案优先恢复已有订单，再判断是否允许重试、换枪或取消。入口重新打开不代表上一笔业务已经结束，用户应从已有进度继续。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/recharge" target="_blank" rel="noopener noreferrer">预付款原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/charging" target="_blank" rel="noopener noreferrer">充电中原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-3" aria-labelledby="article-heading-3">
+<span id="article-section-6" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-9" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 03 章</p><h3 id="article-heading-3">结果未知时，页面需要帮助用户等待确认</h3>
+<p>跨系统请求超时，只能说明暂时没有拿到结果。支付未知时查询原支付单，启动未知时查询原启动流水，避免把等待误判为失败后产生另一笔交易。</p>
+<p>因此，“明确失败”和“结果未知”需要不同动作。明确启动失败后，方案可以提供对应的重试或取消路径；未知状态下则保持查询，暂不开放可能造成重复操作的入口。提示语也应说明正在确认什么，而不是只展示一个没有解释的加载动画。</p>
+<p>充电中的实时费用帮助用户了解过程，最终消费仍以供应方最终账单为起点。物理充电结束、金额结清、退款或补缴完成，是不同阶段，页面应逐段给出进度。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/bill" target="_blank" rel="noopener noreferrer">结算账单原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/refund-processing" target="_blank" rel="noopener noreferrer">退款进度原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-4" aria-labelledby="article-heading-4">
+<span id="article-section-10" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 04 章</p><h3 id="article-heading-4">权益优惠与资金处理要能逐项解释</h3>
+<p>后台手册补足了优惠如何进入账单：折扣卡可作用于电费、服务费或整体费用，作用范围之间有使用限制，折扣与抵扣券有计算顺序。配置修改针对后续领取，停止新增发放也不等于撤销用户已经获得的有效权益。</p>
+<p>这些规则要求运营能从权益记录查到可用范围、剩余次数或券的使用情况，再关联到具体充电订单。优惠没有按预期出现时，查询依据应是那次领取和使用记录，而非仅查看当前配置。</p>
+<p>订单明细则区分电费、服务费、优惠、预付与退款。超时占用费独立记录，并关联原充电订单，说明占用时长、减免及计费情况。用户最终需要看清实际消费与资金去向，不能只看到一个合并后的金额。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/chuxing-equity/teld/create-charging-rights.html" target="_blank" rel="noopener noreferrer">充电权益配置原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/chuxing-equity/teld/order-detail-occupation.html" target="_blank" rel="noopener noreferrer">超时占用费订单原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-5" aria-labelledby="article-heading-5">
+<span id="article-section-11" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-12" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-13" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 05 章</p><h3 id="article-heading-5">把方案边界带入联调与验证</h3>
+<p>管理后台提供站点、设备、权益和订单查询，让运营能沿用户的同一次服务定位问题。它与用户端共同承担解释进度的责任，但不能仅凭页面演示确认供应方回调、支付或设备控制已经真实接通。</p>
+<p>当前案例仍以方案与对接准备为主要范围。后续验证需要围绕一笔订单覆盖正常充电、启动未知、最终账单延迟、退款与补缴，并核对用户页面和后台记录是否一致。</p>
+<p>这份案例的重点，是用清楚的业务状态连接多方服务。资料中的旧流程帮助理解演进，当前方案解释预期行为，原型帮助体验页面；三者都不能替代实际联调结果或上线成效。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/chuxing-equity/teld/order-management-charging.html" target="_blank" rel="noopener noreferrer">充电订单查询原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/chuxing-equity/teld/station-management.html" target="_blank" rel="noopener noreferrer">站点查询原型（新窗口） ↗</a></p>
+</section>
+<footer class="article-end"><p class="source-note"><strong>本文依据</strong> 阶段 0 对接方案参考；金科－特来电管理后台操作手册；充电订单详细说明；充电权益管理单元；本站当前全链路方案。不同阶段的启动与结算规则分别保留。</p><p class="source-note">需求与手册用于说明设计规则；原型用于体验方案，不作为上线效果或个人贡献的证明。</p><a class="evidence-link" href="./prototypes/chuxing-equity/carlife/index.html#/map-list" target="_blank" rel="noopener">体验充电流程原型（新窗口） ↗</a><a href="#project" data-article-return>返回文件夹浏览 ↑</a></footer>
+</article>
+<section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2><p>可以在上方探索主题，也可以在这里逐篇阅读。所有流程图、状态图和交互原型都是方案材料，不代表真实运行数据。</p>
     <details id="project/roles" data-source="来源：现有项目方案中的三方职责说明；关系图为本次页面整理。"><summary>一次扫码，三方接力</summary><span id="overview"></span><p>和包提供 App 入口、原生扫码、一次性 Ticket、会员销售与和包支付能力；觉观承载充电 H5 与交易中台，编排身份、权益、订单、支付、启停、结算和异常恢复；特来电提供电站与枪口状态、物理启停、实时充电数据和最终账单。</p><h3>三方边界</h3><p>和包不直接创建充电订单或控制充电枪；特来电不处理和包会员、支付与页面逻辑；觉观把分散能力组织成用户可以连续完成的一次服务。</p><p class="source-note">这里说明项目系统的职责，不表示个人独立承担全部三方协作。</p></details>
     <details id="project/rails" data-source="来源：现有项目方案的身份、权益与交易链路说明。"><summary>先拆开三条链路</summary><span id="architecture"></span><h3>身份链路</h3><p>一次性 Ticket 用于换取稳定用户身份，后续业务使用觉观自己的登录会话，避免用户再次输入手机号。</p><h3>权益链路</h3><p>和包会员商品映射觉观权益产品。方案要求购买成功后整包下发折扣卡与抵扣券，避免部分到账却显示完整开通。</p><h3>交易链路</h3><p>围绕和包支付和特来电履约建立订单状态，覆盖预付、自动启充、实时充电、最终账单、退款或补缴。</p></details>
     <details id="project/journey" data-source="来源：现有项目全链路流程；本页重新编排为七个阅读阶段。"><summary>从扫码到订单完成</summary><span id="experience"></span><ol><li><strong>扫码登录：</strong>和包完成原生扫码，携带二维码原文与一次性 Ticket 进入充电 H5。</li><li><strong>业务预检：</strong>校验站枪状态、进行中订单、启动失败订单和未支付超时费。</li><li><strong>预付款：</strong>创建订单并进入和包收银台，回跳后重新查询支付结果。</li><li><strong>自动启充：</strong>付款确认后由服务端发起启动，页面分别表达准备启动、正在启动和充电中。</li><li><strong>充电监控：</strong>展示费用、电量、SOC、功率与时长；停止操作需要二次确认。</li><li><strong>最终结算：</strong>物理结束后等待最终账单，再结合权益计算实际消费。</li><li><strong>资金闭环：</strong>余额原路退款，不足则创建补缴；资金处理完毕后订单进入完成态。</li></ol></details>

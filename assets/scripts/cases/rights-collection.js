@@ -42,6 +42,27 @@ items.find(item=>item.id==="map").body += "<p class=\"reader-evidence\"><a href=
 items.find(item=>item.id==="supply").body += "<p class=\"reader-evidence\"><a href=\"./prototypes/rights-management/depot/dist/index.html\" target=\"_blank\" rel=\"noopener\">查看云仓供给原型 ↗</a></p>";
 items.find(item=>item.id==="packaging").body += "<p class=\"reader-evidence\"><a href=\"./prototypes/rights-management/omni/dist/index.html\" target=\"_blank\" rel=\"noopener\">查看万象权益原型 ↗</a></p>";
 items.find(item=>item.id==="policy").body += "<p class=\"reader-evidence\"><a href=\"./prototypes/rights-management/cel/frontend/dist/index.html\" target=\"_blank\" rel=\"noopener\">查看灵霄策略原型 ↗</a></p>";
+// A case detail adds evidence and context instead of repeating its cover.
+visuals.supply='';
+items.find(item=>item.id==='supply').body=`
+<div class="supply-case">
+ <p class="case-lead">同一种优酷月会员，供给选择不只取决于当下的报价。</p>
+ <p>官方与第三方产品同时接入。价格之外，还需要比较补货时间、付款安排和一段时间内的销量政策。</p>
+ <section><p class="case-kicker">01 / 把条件放在一起看</p><h3>便宜、及时和付款灵活，未必来自同一个来源。</h3>
+ <div class="supply-comparison"><table><caption>已确认的供给条件 · 定性对照</caption><thead><tr><th scope="col">比较维度</th><th scope="col">官方供给</th><th scope="col">第三方供给</th></tr></thead><tbody>
+ <tr><th scope="row">当期价格</th><td>需要结合当期报价比较</td><td>有时价格更低</td></tr>
+ <tr><th scope="row">补货</th><td>补货可能需要时间</td><td>官方补货不及时，可接续供给</td></tr>
+ <tr><th scope="row">付款安排</th><td>具体条款待补充</td><td>部分支持后付款</td></tr>
+ <tr><th scope="row">销量政策</th><td>达到一定销量后可能获得返点</td><td>具体政策待补充</td></tr>
+ </tbody></table></div><p class="case-footnote">来自已确认的业务实践；这些条件有适用范围，不代表所有供应商始终如此。</p></section>
+ <section><p class="case-kicker">02 / 当前怎样执行</p><h3>人比较经营条件，再调整供给配置。</h3>
+ <ol class="supply-steps"><li><strong>比较条件</strong><span>综合报价、补货情况、付款条件与销量政策。</span></li><li><strong>选择供给</strong><span>由人工作出选择，必要时接续其他来源。</span></li><li><strong>调整配置</strong><span>手动调整供给选择，具体操作记录仍待补充。</span></li></ol>
+ <aside class="case-boundary"><strong>已知的做法，和仍待回答的问题</strong><p>人工选择供给是已确认事实。为什么当时保留人工、切换具体影响哪些上层对象，现有材料还不能完整解释。</p></aside></section>
+ <section><p class="case-kicker">03 / 对照系统里的位置</p><h3>这些来源，如何关联到内部对象？</h3><p>供应商产品保留外部来源信息，标准商品规格提供内部引用对象。能否替代一个来源，仍需核对会员类型、适用账号、有效期与履约条件。</p>
+ <div class="case-links"><a href="#project/map">继续看：从供给到业务表达 →</a><a href="./prototypes/rights-management/depot/dist/index.html" target="_blank" rel="noopener">对照云仓供给原型 ↗</a></div><p class="case-footnote">原型用于理解界面与对象，不作为上述商务实践或线上执行结果的证明。</p></section>
+</div>`;
+const supplyText=document.querySelector('.static-materials details[id="project/supply"]');
+if(supplyText){const summary=supplyText.querySelector('summary'),source=supplyText.querySelector('.source-note'),legacy=supplyText.querySelector('#supply');supplyText.replaceChildren(summary);if(legacy)supplyText.append(legacy);supplyText.insertAdjacentHTML('beforeend',items.find(item=>item.id==='supply').body);if(source)supplyText.append(source);}
 // Native fragments lead to static details without JS; enhanced reading owns these fragments.
 document.querySelectorAll('.static-materials details[id]').forEach(detail=>{detail.dataset.articleId=detail.id;detail.removeAttribute('id');});
 const $=id=>document.getElementById(id);let current='project',opener=null;const reader=$('reader');

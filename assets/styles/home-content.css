@@ -102,3 +102,19 @@
 @media(max-width:460px){.home-shell .project-grid{grid-template-columns:1fr}.home-shell .project-folder{min-height:230px}.project-glyph{position:absolute;right:23px;top:66px;width:85px;height:75px;margin:0}.home-shell .project-folder p{max-width:70%}.method-readings{gap:13px}.method-readings>a{padding:19px 15px}.home-shell .featured-meta{font-size:9px}}
 @media(max-width:360px){.method-readings{grid-template-columns:1fr}.method-readings>a{min-height:0;padding:22px}.path-stops{padding:20px 14px}.path-stops li{grid-template-columns:68px 1fr;gap:20px}.path-stops li:before{left:76px}.path-stops li:after{left:73px}.path-date{font-size:9px}.home-shell .featured-preview{padding-left:17px;padding-right:17px}.home-shell .quiet-note{padding:25px 21px}}
 @media(prefers-reduced-motion:reduce){.home-shell .preview-sheet:hover,.home-shell .project-folder:hover,.method-readings>a:hover{transform:none}.project-glyph{translate:none!important}}
+/* AI practice: one shared lift, with lighter paper and link feedback inside. */
+.home-ai{transition:transform .3s cubic-bezier(.22,.7,.2,1),box-shadow .3s}
+.home-ai::before{transition:transform .6s cubic-bezier(.22,.7,.2,1)}
+.home-ai .ai-notes article{transition:transform .28s,box-shadow .28s}
+.home-ai .soft-link span{display:inline-block;transition:transform .25s}
+@media(hover:hover) and (pointer:fine){
+ .home-ai:hover{transform:translateY(-4px);box-shadow:0 20px 36px #4e45691a}
+ .home-ai:hover::before{transform:translate(16px,-12px)}
+ .home-ai .ai-notes article:hover{transform:translateY(-4px);box-shadow:0 15px 26px #4e456918}
+ .home-ai .soft-link:hover span{transform:translate(3px,-3px)}
+}
+.home-ai:focus-within{box-shadow:0 20px 36px #4e45691a}
+@media(prefers-reduced-motion:reduce){
+ .home-ai,.home-ai::before,.home-ai .ai-notes article,.home-ai .soft-link span{transition:none}
+ .home-ai:hover,.home-ai:hover::before,.home-ai .ai-notes article:hover,.home-ai .soft-link:hover span{transform:none}
+}

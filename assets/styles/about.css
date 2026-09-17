@@ -89,3 +89,61 @@
 @media(max-width:1000px){.about-page .method-folders{gap:56px 24px}.about-page .capability-ledger .capability-card{grid-template-columns:30% 1fr;gap:20px}.about-page .capability-ledger .capability-title{gap:14px}.about-page .ai-desk{grid-template-columns:1fr 1fr}.about-page .ai-desk .ai-sheet-3{grid-column:1/-1;margin-top:0}.about-page .ai-sheet-3 .capability-list{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}}
 @media(max-width:700px){.about-page .working-method-section{padding:12px 0}.about-page .method-folders{gap:52px 20px;margin-top:58px}.method-folder{padding:18px 14px}.method-tab{padding:8px 11px;font-size:8px}.method-paper{padding:14px 12px;min-height:115px}.about-page .method-folder strong{font-size:24px}.about-page .capability-ledger .capability-card{grid-template-columns:1fr;gap:18px;padding:24px 0}.capability-index{font-size:30px}.about-page .capability-ledger h3{font-size:18px}.about-page .capability-ledger .capability-list{padding:20px;gap:12px;grid-template-columns:1fr}.about-page .ai-desk{grid-template-columns:1fr;gap:32px}.about-page .ai-desk .ai-sheet-2,.about-page .ai-desk .ai-sheet-3{margin-top:0}.about-page .ai-sheet-3 .capability-list{display:block}}
 @media(max-width:360px){.about-page .method-folders{grid-template-columns:1fr}.method-paper{min-height:0}}
+/* Subtle feedback on existing interactive surfaces. */
+.method-folder{transition:box-shadow .25s,transform .25s}
+.method-folder::before{transition:transform .3s}
+.profile-links a span,.experience-project span{display:inline-block;transition:transform .2s}
+.about-page .about-index a,.about-next-links a{transition:background .2s,border-color .2s}
+@media(hover:hover) and (pointer:fine){
+ .method-folder:hover{transform:translateY(-3px);box-shadow:0 17px 28px #354b661a}
+ .method-folder:hover::before{transform:rotate(3deg) translateY(2px)}
+ .profile-links a:hover span,.experience-project:hover span{transform:translate(3px,-3px)}
+ .about-page .about-index a:hover{background:#ffffffa0;border-color:#8fa99c}
+}
+.method-folder:focus-within{box-shadow:0 17px 28px #354b661a}
+@media(prefers-reduced-motion:reduce){
+ .method-folder,.method-folder::before,.profile-links a span,.experience-project span,.about-page .about-index a,.about-next-links a{transition:none}
+ .method-folder:hover,.profile-links a:hover span,.experience-project:hover span{transform:none}
+ .method-folder:hover::before{transform:rotate(2deg)}
+}
+/* Opening profile materials use the same folder covers and paper as project pages. */
+.about-page .profile-path{--profile-cover:#dceae5;--profile-accent:#526e60;margin-top:28px;padding:28px;border:1px solid #fff;border-radius:0 26px 26px 26px;background:var(--profile-cover);box-shadow:0 15px 32px #354b660d}
+.profile-path>.eyebrow,.profile-notes section>.eyebrow{position:absolute;left:-1px;bottom:calc(100% - 1px);margin:0;padding:8px 18px 7px;border:1px solid #fff;border-bottom:0;border-radius:13px 16px 0 0;background:var(--profile-cover);color:var(--profile-accent);font-size:9px;letter-spacing:.08em;white-space:nowrap}
+.about-page .profile-path h2{margin:0 0 24px;font-size:27px}
+.profile-path ol{padding:24px 22px;margin:0 0 20px;background:#fcfdfd;border:1px solid #fff;border-radius:4px 17px 17px 17px;box-shadow:0 9px 20px #3654470a}
+.profile-path li{padding-left:19px;border-color:#d3ded8}
+.profile-path li::before{background:var(--profile-accent);box-shadow:0 0 0 4px #fcfdfd}
+.profile-path li>span,.profile-path small{color:var(--profile-accent)}
+.profile-path>a{display:inline-block;padding:5px 0;border-top:0;border-bottom:1px solid #9cafA4;color:var(--profile-accent)}
+.about-page .profile-notes{gap:32px;padding:30px 0 28px;margin-top:12px}
+.profile-notes section{--profile-cover:#e3e9f1;--profile-accent:#536881;position:relative;display:flex;flex-direction:column;background:var(--profile-cover);border:1px solid #fff;border-radius:0 22px 22px 22px;padding:24px;box-shadow:0 12px 25px #354b660d}
+.profile-notes section:nth-child(2){--profile-cover:#e6e3ed;--profile-accent:#71617e}
+.profile-notes h2{font-size:21px;line-height:1.6;margin:0 0 18px;letter-spacing:-.025em}
+.profile-notes section>p:last-child{flex:1;background:#fcfdfd;border:1px solid #fff;border-radius:4px 15px 15px 15px;padding:20px 22px;color:#53616b;box-shadow:0 8px 18px #354b6608}
+@media(max-width:1050px){.about-page .profile-path{padding:24px}.profile-path ol{padding:21px 19px}.about-page .profile-path h2{font-size:25px}.profile-notes section{padding:22px}.profile-notes section>p:last-child{padding:18px}}
+@media(max-width:700px){.about-page .profile-path{margin-top:20px;padding:24px}.about-page .profile-notes{gap:48px;padding-top:34px;margin-top:0}.profile-notes section{padding:23px}.profile-path li{grid-template-columns:1fr}.profile-path li>span{grid-column:1;grid-row:auto}.profile-notes section>p:last-child{padding:20px}.profile-path ol{padding:24px}}
+/* Shared hover feedback for every card family; content cards retain their normal cursor. */
+.about-page :is(.profile-path,.profile-notes>section,.method-folder,.experience-description,.ai-sheet,.education-item,.about-next),
+.about-page .capability-ledger .capability-list,
+.about-page .ai-section>div:last-child:not(.capability-grid){
+ transition:transform .28s cubic-bezier(.22,.7,.2,1),box-shadow .28s;
+}
+@media(hover:hover) and (pointer:fine){
+ .about-page :is(.profile-path,.profile-notes>section,.method-folder,.experience-description,.ai-sheet,.education-item,.about-next):hover,
+ .about-page .capability-ledger .capability-card:hover .capability-list,
+ .about-page .ai-section>div:last-child:not(.capability-grid):hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 30px #354b661c;
+ }
+}
+.about-page :is(.profile-path,.profile-notes>section,.method-folder,.experience-description,.ai-sheet,.education-item,.about-next):focus-within{
+ box-shadow:0 18px 30px #354b661c;
+}
+@media(prefers-reduced-motion:reduce){
+ .about-page :is(.profile-path,.profile-notes>section,.method-folder,.experience-description,.ai-sheet,.education-item,.about-next),
+ .about-page .capability-ledger .capability-list,
+ .about-page .ai-section>div:last-child:not(.capability-grid){transition:none}
+ .about-page :is(.profile-path,.profile-notes>section,.method-folder,.experience-description,.ai-sheet,.education-item,.about-next):hover,
+ .about-page .capability-ledger .capability-card:hover .capability-list,
+ .about-page .ai-section>div:last-child:not(.capability-grid):hover{transform:none}
+}

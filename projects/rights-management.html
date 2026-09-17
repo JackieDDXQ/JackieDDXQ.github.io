@@ -2,13 +2,63 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>一张权益背后的系统 · Jackie Hou</title><meta name="description" content="运营商权益平台的项目收藏。沿用户旅程、业务差异和团队工作，阅读结构、决策、实践与思考。"><meta name="theme-color" content="#edf0f4"><meta property="og:title" content="一张权益背后的系统 · Jackie Hou"><meta property="og:description" content="从供给到领取，探索产品里的结构、决策、实践与思考。"><meta property="og:type" content="article">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles/cases/rights-collection.css"><link rel="stylesheet" href="../assets/styles/collection.css"><link rel="stylesheet" href="../assets/styles/cases/rights-collection-shell.css">
-<script src="../assets/scripts/collection.js" defer></script><script src="../assets/scripts/cases/rights-collection.js?v=20260916-folder-left-4" defer></script><link rel="stylesheet" href="../assets/styles/cases/materials-view.css"><script src="../assets/scripts/cases/materials-view.js" defer></script></head>
+<script src="../assets/scripts/collection.js" defer></script><script src="../assets/scripts/cases/rights-collection.js?v=20260916-supply-5" defer></script><link rel="stylesheet" href="../assets/styles/cases/materials-view.css?v=20260917-links-1"><script src="../assets/scripts/cases/materials-view.js?v=20260916-story-2" defer></script></head>
 <body class="case-collection"><a href="#main-content" class="skip-link">跳转到主要内容</a>
 <header class="collection-header"><a class="collection-brand" href="../index.html" aria-label="Jackie Hou 首页"><b>J<i>·</i>H</b><span>Jackie Hou / 工作与思考</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="collection-navigation">菜单 ＋</button><nav class="collection-nav" id="collection-navigation" aria-label="主导航"><a href="../index.html">首页</a><a href="../projects.html" aria-current="page">项目</a><a href="../about.html">关于</a><a href="../contact.html" class="contact-link">联系我 ↗</a></nav></header>
 <main id="main-content">
-<div class="case-tools"><a href="../index.html#collections">← 回到工作与思考</a><span>PROJECT COLLECTION / 01</span><a href="./prototypes/rights-management/index.html">浏览项目原型 ↗</a></div>
+<div class="case-tools"><a href="../index.html#collections">← 回到工作与思考</a><span>PROJECT COLLECTION / 01</span><a href="./prototypes/rights-management/index.html">浏览项目原型 ↗</a><a class="article-entry" href="#article">阅读全文 ↗</a></div>
 <section class="intro"><div><p class="eyebrow" id="eyebrow">PROJECT COLLECTION / 01</p><h1 id="title">一张权益背后的系统</h1><p id="description" class="description">从供给到领取，探索这项产品里的结构、决策、实践与思考。打开一份材料，继续查看与它相关的内容。</p></div><aside id="aside">运营商权益平台<br>产品经理<span class="project-fact">平台已接入 28 个二级单位<small>支撑权益业务开展</small></span></aside></section>
 <div class="collection-bar"><span id="count">12 份内容</span><span>结构 · 决策 · 实践 · 思考</span></div><section id="grid" class="grid" aria-label="集合内容"></section>
+<article id="project-article" class="project-article" aria-labelledby="article-title">
+<header id="article"><p class="eyebrow">PROJECT STORY / 项目完整阅读</p><h2 id="article-title">从一份供应商产品，到用户手中的权益</h2><p class="article-introduction">运营商销售的一个权益包，背后可能同时涉及多个供应商、不同规格、组合领取规则和周期发放。这个项目围绕这条交付链，把供给接入、权益组织与运营配置串起来，让每一次业务变化都有对应的处理位置。</p></header>
+<nav class="article-contents" aria-label="文章章节">
+<a href="#article-section-1"><span>01</span>业务从“接入新品”开始</a>
+<a href="#article-section-2"><span>02</span>先把供给整理成可复用的商品规格</a>
+<a href="#article-section-3"><span>03</span>再从库存组织成用户可领取的权益</a>
+<a href="#article-section-4"><span>04</span>把后台规则翻译成用户看得懂的领取过程</a>
+<a href="#article-section-5"><span>05</span>让运营能沿记录找到问题</a>
+</nav>
+<section id="article-section-1" aria-labelledby="article-heading-1">
+
+<p class="article-chapter">第 01 章</p><h3 id="article-heading-1">业务从“接入新品”开始</h3>
+<p>假设运营要增加一种会员权益。供应商给出的产品名称和编码，还不能直接成为用户购买的权益包：同类产品可能有不同供给，销售时又可能被组合、赠送，或者按月发放。采购关心接什么、用谁的供给，运营关心怎样组合和发放，用户关心自己能领什么、有没有到账。</p>
+<p>工作流操作指南将这段业务分给不同系统：云仓整理供应商产品与商品规格，万象承接库存、权益配置和发放；面向运营活动的配置再组织对外服务。这些对象之间的关系，是理解整个平台的起点。供应商变化不应要求重新解释整个销售组合，领取方式变化也不等于更换底层商品。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/rights-management/index.html" target="_blank" rel="noopener noreferrer">三个系统的原型目录（新窗口） ↗</a></p>
+</section>
+<section id="article-section-2" aria-labelledby="article-heading-2">
+
+<p class="article-chapter">第 02 章</p><h3 id="article-heading-2">先把供给整理成可复用的商品规格</h3>
+<p>接入从供应商基础信息、结算信息和产品编码开始。产品编码需要与供应商及对接人员确认，随后建立品牌、商品和规格，并把供应商产品关联到规格。商品说明卖的是什么，规格承接具体的供给关系；同一规格可以关联多个供应商产品。</p>
+<p>这里有两种不同的判断。选择合作供给、比较商务条件，由业务人员完成；配置状态与优先级后，系统按约定规则执行供给调用。操作指南描述了多供应商优先级和备用供给，但这不能推导为系统会自动作出最优采购决策。人的经营判断与系统的执行规则，需要分别表达。</p>
+<p>沿这条路径回看页面，供应商管理、商品管理和规格管理就不再是三个孤立列表。它们共同回答：这项对外能力来自哪里，发生供给变化时应该改哪一层。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/rights-management/depot/dist/index.html#/product" target="_blank" rel="noopener noreferrer">供应商产品原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/rights-management/depot/dist/index.html#/spec" target="_blank" rel="noopener noreferrer">商品规格与供给关联原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-3" aria-labelledby="article-heading-3">
+
+<p class="article-chapter">第 03 章</p><h3 id="article-heading-3">再从库存组织成用户可领取的权益</h3>
+<p>供给规格准备好后，运营在万象建立库存，将库存明细关联到云仓规格，并设置数量与调用规则。指南提供优先级调用、交叉调用等配置方式：前者决定先用哪份库存，后者组织不同库存的分配。这里的“库存”连接供给与发放，不宜简单理解为商品页面上的一个剩余数字。</p>
+<p>在库存之上，原子权益关联一份库存；组合权益关联多个权益配置，可以全部领取，也可以 N 选 M。赠送关系同样关联权益配置。这样，销售组合可以变化，而不必每次重新录入底层供应商产品。</p>
+<p>例如，把两项权益组成一个可选包，需要先确认各自供给和库存，再配置可选数量及领取方式。若直接从活动名称开始建页面，容易把库存、组合规则与用户选择混在一起；顺着依赖关系配置，才能知道缺少哪一步。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/rights-management/omni/dist/index.html#/equity/inventory" target="_blank" rel="noopener noreferrer">权益库存原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/rights-management/omni/dist/index.html#/equity/config" target="_blank" rel="noopener noreferrer">原子与组合权益配置原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-4" aria-labelledby="article-heading-4">
+
+<p class="article-chapter">第 04 章</p><h3 id="article-heading-4">把后台规则翻译成用户看得懂的领取过程</h3>
+<p>后台能表达组合，并不意味着前台应完整展示配置树。领取页面需求只展开一层关系：全部领取的组合展示子项，N 选 M 的组合先展示整体，再到详情完成选择。读者先知道“我获得了什么”，随后才处理“具体选哪一项”。</p>
+<p>自动发放的权益标明无需领取；手动领取区分未领取、已领取、已过期和已作废。进入详情后，还需要说明处理成功或失败。是否需要用户操作，与系统有没有完成处理，是两件不同的事，不能用一个“已领取”覆盖全部过程。</p>
+<p>周期发放还要明确触发来自外部运营方还是系统自身。用户看到的只是下一次权益到账，后台却需要清楚是谁在什么条件下发起这次动作。配置与前台提示因此必须使用一致的业务含义。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/rights-management/omni/dist/index.html#/equity/config" target="_blank" rel="noopener noreferrer">领取方式配置原型（新窗口） ↗</a></p>
+</section>
+<section id="article-section-5" aria-labelledby="article-heading-5">
+<span id="article-section-6" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-7" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-8" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-9" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-10" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-11" class="article-legacy-anchor" aria-hidden="true"></span><span id="article-section-12" class="article-legacy-anchor" aria-hidden="true"></span>
+<p class="article-chapter">第 05 章</p><h3 id="article-heading-5">让运营能沿记录找到问题</h3>
+<p>一条权益链路能跑通，还需要配置之后的检查。操作指南保留了编码规范、短信模板准备、导入要求，以及任务导出和订单排查步骤。某些编码创建后不能修改，更说明前置确认和测试规范是操作流程的一部分。</p>
+<p>当用户反馈没有收到权益，排查应沿发放任务、权益配置、库存和供给关系逐步定位，而不是在几个后台之间凭记忆搜索。这也是本项目值得继续验证的地方：分层帮助系统承接变化之后，是否让运营更容易找到正确入口。</p>
+<p>本文依据需求与操作说明解释设计关系，不将文档中的规则等同于已验证的运行效果。另有库存管理新方案和 AI 探索材料，属于不同范围，未合并为本项目既有能力。</p>
+<p class="reader-evidence article-prototype-links"><a class="evidence-link" href="./prototypes/rights-management/omni/dist/index.html#/order/list" target="_blank" rel="noopener noreferrer">订单查询原型（新窗口） ↗</a> <a class="evidence-link" href="./prototypes/rights-management/omni/dist/index.html#/sms/template" target="_blank" rel="noopener noreferrer">短信模板原型（新窗口） ↗</a></p>
+</section>
+<footer class="article-end"><p class="source-note"><strong>本文依据</strong> 权益业务工作流操作指南；云仓、万象后台需求及使用说明；权益领取页面需求文档。库存管理需求说明作为独立方案核对。</p><p class="source-note">需求与手册用于说明设计规则；原型用于体验方案，不作为上线效果或个人贡献的证明。</p><a class="evidence-link" href="./prototypes/rights-management/depot/dist/index.html" target="_blank" rel="noopener">查看供给管理原型（新窗口） ↗</a><a href="#project" data-article-return>返回文件夹浏览 ↑</a></footer>
+</article>
 <section class="static-materials" id="materials" aria-labelledby="materials-title"><h2 id="materials-title">文字目录</h2><p>可以逐篇阅读，也可以在上方选择视角。关系图与状态演示用于说明方案；每份材料单独标注来源与适用边界。</p><details id="project/journey"><summary>跟随一张权益到达用户</summary><span id="experience"></span><p>用户关心自己获得了什么、是否需要操作，以及权益是否已经到账。这里用三个状态说明同一份权益如何被用户理解。</p><p>等待领取、处理中、已到账用于说明不同阶段，不代表全部业务状态。</p><p class="source-note">为本次呈现制作的状态示意，非线上系统。</p></details>
 <details id="project/supply"><summary>优酷月会员：供给选择的实际条件</summary><span id="supply"></span><p>同一种优酷视频月会员，同时接入官方和第三方供应商产品。第三方有时价格更低，部分支持后付款；官方补货可能需要时间，但达到一定销量后可能获得返点。</p><h3>选择要考虑一段时间</h3><p>当前报价之外，还需要考虑销量政策、补货情况和付款条件。官方补货来不及时，可以由第三方接续供给。</p><h3>目前怎样执行</h3><p>这些判断由人工完成，再手动调整供给选择。具体配置步骤，以及切换对上层对象的影响，还需要补充实际记录。</p><p class="reader-evidence"><a href="./prototypes/rights-management/depot/dist/index.html" target="_blank" rel="noopener">查看云仓供给原型 ↗</a></p><p class="source-note">来源：Jackie 在本次共创中确认的业务实践。</p></details>
 <details id="project/map"><summary>从供给到业务表达</summary><span id="architecture"></span><p>供应商产品保留外部来源信息，标准商品规格提供内部引用对象。权益库存与配置进一步组织资源、组合关系和领取方式，套餐与渠道承接具体办理场景。</p><h3>边界的作用</h3><p>通过明确对象关系，供给变化可以在相应位置处理。但是否能够互相替代，仍需核对会员类型、适用账号、有效期和履约条件。</p><p>云仓、万象、灵霄分别承接供给、权益服务和渠道办理相关工作。</p><p class="reader-evidence"><a href="../projects/prototypes/rights-management/index.html" target="_blank" rel="noopener">查看三个系统的原型目录 ↗</a></p><p class="source-note">依据现有权益案例整理；图为简化关系示意，不是完整调用时序。</p></details>

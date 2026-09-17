@@ -4,11 +4,12 @@ const {chromium} = require(process.env.PLAYWRIGHT_PATH || 'playwright');
 (async () => {
   const browser = await chromium.launch({channel: 'msedge', headless: true});
   try {
+    for (const project of ['rights-management', 'chuxing-equity', 'multi-tenant-mall', 'physical-mall', 'zhishu-platform']) {
     for (const width of [1440, 1024, 768, 390]) {
       const page = await browser.newPage({viewport: {width, height: 950}});
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
-      await page.goto('http://localhost:8080/projects/rights-management.html#project');
+      await page.goto(`http://localhost:8080/projects/${project}.html#project`);
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(600);
       const returnPositions = new Map();
@@ -34,8 +35,9 @@ const {chromium} = require(process.env.PLAYWRIGHT_PATH || 'playwright');
         assert.ok(await cover.evaluate(element => element === document.activeElement));
       }
       assert.deepEqual(errors, []);
-      console.log(`PASS ${width}px: left docking, return position and keyboard focus`);
+      console.log(`PASS ${project} ${width}px: left docking, return position and keyboard focus`);
       await page.close();
+    }
     }
   } finally {
     await browser.close();

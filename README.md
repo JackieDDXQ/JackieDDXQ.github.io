@@ -73,6 +73,11 @@ See `AGENTS.md` for repository rules and `docs/REFACTOR_PLAN.md` for the redesig
 
 章节式阅读实验：`/lab/project-reading.html`，也可从 `/lab/` 进入。以权益项目为样本，尝试连续正文、固定章节目录、条件对照表与来源旁注。移动端使用顶部目录；正文、原型链接和原生折叠材料无需 JavaScript 即可使用。
 
+五个文件夹项目页现提供“文章式阅读”入口，可用 `#article` 直接访问。文章模式复用已有材料并生成章节目录；无 JavaScript 时仍可阅读原生文字材料。权益项目的供给选择详情增加了条件对照、实际步骤和来源边界。
+
 文件夹论证图实验：`/lab/argument-folders.html`。点击卡片聚焦直接联系，点击“查看材料”打开来源摘录；虚线入口可跨文件夹并返回，浏览器前进后退与深链接保留聚焦状态。手机将关系转换为卡片旁的文字线索。此页为独立实验，正式项目页不受影响。
 
 可选交互验证：预览服务运行于 8080 后，在已有 Playwright 与 Microsoft Edge 的环境中运行 `node lab/tests/argument-folders-check.cjs`。Playwright 非本地依赖时用 `PLAYWRIGHT_PATH` 指定模块路径；截图默认写入系统临时目录，也可用 `SNAPSHOT_DIR` 指定现有目录。
+### 项目文章阅读
+
+五个主项目页顶部的“阅读全文”入口可直接打开完整案例，也可用阅读方式切换按钮进入。`#article` 支持直接分享，文内目录定位到具体章节，文末可返回文件夹浏览。文章正文保存在各项目 HTML 中，关闭 JavaScript 仍可阅读；它不再由卡片详情自动拼接。资料选用与版本边界见 [项目文章来源记录](docs/PROJECT_ARTICLE_SOURCES.md)。

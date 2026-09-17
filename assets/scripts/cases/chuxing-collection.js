@@ -137,6 +137,8 @@ document.querySelector('.collection-bar').remove();
 const folderCaption=document.createElement('p');folderCaption.className='folder-caption';folderCaption.setAttribute('aria-live','polite');world.append(folderCaption);
 function fitFolderWorld(){
  const mobile=matchMedia('(max-width:700px)').matches;
+ // Reset temporary space before measuring the natural folder layout.
+ world.style.width='';grid.style.transform='';
  const contentTop=Math.max(535,overview.offsetTop+overview.offsetHeight+100,intro.offsetTop+intro.offsetHeight+100);
  folderCaption.style.top=mobile?'':(contentTop-75)+'px';
  // Pack folders against the actual canvas width, then center each row.
@@ -202,13 +204,48 @@ function renderFolders(animate=false){
  });
  fitFolderWorld();syncRoute();
 }
+const folderReturnPositions=new WeakMap();
+let folderPanAnimation;
 function setFolderOpen(index,open){
- if(open)expandedFolders.add(index);else expandedFolders.delete(index);
  const folder=grid.querySelector('[data-folder="'+index+'"]');if(!folder)return;
+ if(expandedFolders.has(index)===open)return;
+ // Capture the visual position before repacking, including an interrupted pan.
+ const anchor=folder.querySelector('.folder-cover h2');
+ const before=anchor.getBoundingClientRect();
+ folderPanAnimation?.cancel();
+ if(open)folderReturnPositions.set(folder,{left:before.left,top:before.top});
+ if(open)expandedFolders.add(index);else expandedFolders.delete(index);
  const body=folder.querySelector('.folder-body');body.hidden=!open;
  folder.querySelector('.folder-cover').setAttribute('aria-expanded',String(open));
  folder.querySelector('.folder-open-label').textContent=open?'收起 −':'展开 ↗';
  fitFolderWorld();
+ const after=anchor.getBoundingClientRect();
+ if(matchMedia('(max-width:700px)').matches){
+  window.scrollBy({left:after.left-before.left,top:after.top-before.top,behavior:'instant'});
+ }else{
+  const bounds=viewport.getBoundingClientRect();
+  const previous=folderReturnPositions.get(folder);
+  const cover=folder.querySelector('.folder-cover');
+  const titleInset=after.left-cover.getBoundingClientRect().left;
+  const targetX=open?bounds.left+32+titleInset:(previous?.left??before.left);
+  const targetY=open?before.top:(previous?.top??before.top);
+  const desiredX=viewport.scrollLeft+after.left-targetX;
+  const desiredY=viewport.scrollTop+after.top-targetY;
+  const insetX=Math.max(0,-desiredX),insetY=Math.max(0,-desiredY);
+  const left=desiredX+insetX,top=desiredY+insetY;
+  const width=world.offsetWidth,height=world.offsetHeight;
+  grid.style.transform=`translate(${insetX}px,${insetY}px)`;
+  world.style.width=Math.max(width+insetX,left+viewport.clientWidth+1)+'px';
+  world.style.height=Math.max(height+insetY,top+viewport.clientHeight+1)+'px';
+  viewport.scrollTo({left,top,behavior:'instant'});
+  if(!reduced()){
+   const final=anchor.getBoundingClientRect();
+   folderPanAnimation=grid.animate([
+    {transform:`translate(${insetX+before.left-final.left}px,${insetY+before.top-final.top}px)`},
+    {transform:`translate(${insetX}px,${insetY}px)`}
+   ],{duration:380,easing:'cubic-bezier(.22,.7,.2,1)'});
+  }
+ }
  if(open&&!reduced())body.querySelectorAll('.card').forEach((card,n)=>card.animate([{opacity:0,transform:'translate(-25px, 12px) scale(.94)'},{opacity:1,transform:'translate(0, 0) scale(1)'}],{duration:420,delay:n*45,fill:'backwards',easing:'cubic-bezier(.2,.7,.2,1)'}));
 }
 window.revealFolderCard=card=>{const f=card.closest('.topic-folder');if(f&&!expandedFolders.has(Number(f.dataset.folder)))setFolderOpen(Number(f.dataset.folder),true)};

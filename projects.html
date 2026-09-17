@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="assets/styles/collection.css">
 <link rel="stylesheet" href="assets/styles/portfolio-theme.css">
+<link rel="stylesheet" href="assets/styles/project-questions.css?v=20260917-9">
 </head>
 <body class="portfolio-page interior-page projects-page-index">
 
@@ -33,16 +34,63 @@
       </div>
     </div>
     <div id="question-collections" data-home-panel="questions">
-      <div class="question-grid">
-        <a class="question-card" href="projects/rights-management.html#project/map"><small>结构 · 系统边界</small><h3>变化的业务，<br>如何被系统承接？</h3><p>从供给来源、内部规格到对外权益，沿着对象之间的关系阅读。</p><span>权益项目 / 进入关系图 ↗</span></a>
-        <a class="question-card" href="projects/rights-management.html#project/manual"><small>决策 · 人工与自动化</small><h3>哪些判断，<br>还需要人来完成？</h3><p>看一次真实的供给选择，以及尚未解释清楚的决策边界。</p><span>权益项目 / 进入判断记录 ↗</span></a>
-        <a class="question-card" href="projects/rights-management.html#project/complexity"><small>思考 · 产品的使用成本</small><h3>系统清晰了，<br>使用也更简单了吗？</h3><p>回到日常配置与理解成本，检验分层和抽象的另一面。</p><span>权益项目 / 进入开放思考 ↗</span></a>
-      </div><p class="questions-caption">从权益项目开始积累，让一个问题连接多份材料。</p>
+      <div class="question-intro"><div><p class="eyebrow">QUESTIONS / 跨项目阅读</p><h3>一个问题，几种具体的回答。</h3></div><p>从四个问题出发，对照五个项目中的做法。<br>先看业务情境与处理方式，再进入完整案例。</p></div>
+      <div class="question-workspace">
+        <nav class="question-index" aria-label="选择一个问题">
+          <a id="question-tab-boundaries" href="#question-boundaries" data-question="boundaries"><small>01 / 系统边界</small><span>业务变化，系统改哪里？</span><i aria-hidden="true">↗</i></a>
+          <a id="question-tab-states" href="#question-states" data-question="states"><small>02 / 状态与体验</small><span>用户该继续，还是等待？</span><i aria-hidden="true">↗</i></a>
+          <a id="question-tab-operations" href="#question-operations" data-question="operations"><small>03 / 协作与运营</small><span>复杂流程，怎样真正用起来？</span><i aria-hidden="true">↗</i></a>
+          <a id="question-tab-judgment" href="#question-judgment" data-question="judgment"><small>04 / 判断与价值</small><span>哪些判断，需要人来完成？</span><i aria-hidden="true">↗</i></a>
+        </nav>
+        <div class="question-reading">
+          <section class="question-dossier tone-mint" id="question-boundaries" aria-labelledby="question-title-boundaries" tabindex="0">
+            <div class="question-dossier-head"><p class="eyebrow">QUESTION 01 / 系统边界</p><span>3 个项目 · 对照阅读</span></div>
+            <h3 id="question-title-boundaries">业务一直在变，<br>系统应该改哪一层？</h3><p class="question-lead">换一个供应商、增一个销售渠道、加一种交付方式，看似都是“加功能”，影响的对象却不同。先识别变化发生在哪里，再看系统如何承接。</p>
+            <figure class="question-figure"><div class="question-model"><span>外部供给<small>供应商产品</small></span><i aria-hidden="true">→</i><span>内部资源<small>商品规格 · 库存</small></span><i aria-hidden="true">→</i><span>业务表达<small>权益 · 套餐</small></span></div><figcaption>权益项目中的简化关系：供给关联与销售组合，在不同位置维护。</figcaption></figure>
+            <div class="question-route-head"><h4>把问题放进具体业务里</h4><span>三个项目实例 · 按已有材料展开</span></div>
+            <div class="question-examples"><article class="question-example"><div class="example-meta"><small>实例 01 / 运营商权益平台</small><span>需求与操作指南</span></div><h4>同一种月会员，接入两个供给来源</h4><dl><div><dt>业务情境</dt><dd>官方与第三方都能提供同类月会员，运营需要决定使用哪份供给。</dd></div><div><dt>怎样处理</dt><dd>先核对会员类型、账号与履约条件，再将符合条件的供应商产品关联到商品规格。供给状态和优先级在关联层维护，权益组合在配置层维护。</dd></div></dl><p class="example-point">把“来源变了”和“用户获得的内容变了”分开判断。</p><a href="projects/rights-management.html#article-section-2">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 02 / 会员订阅商城</small><span>后台操作手册</span></div><h4>只暂停一个渠道的套餐销售</h4><dl><div><dt>业务情境</dt><dd>同一套餐通过多个入口销售，需要暂停其中一个渠道。</dd></div><div><dt>怎样处理</dt><dd>全局上架时，渠道可以独立控制销售；全局下架会关闭所有渠道。因此，局部停售与整体停售需要使用不同层级的开关。</dd></div></dl><p class="example-point">操作范围要与业务影响范围一致。</p><a href="projects/multi-tenant-mall.html#article-section-2">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 03 / 实物商城</small><span>需求与操作说明</span></div><h4>同一件商品，用户可以寄送或自提</h4><dl><div><dt>业务情境</dt><dd>首期用户通过权益码兑换商品，确认订单时选择配送或到店领取。</dd></div><div><dt>怎样处理</dt><dd>配送路径收集地址并记录发货信息；自提路径选择可用门店，生成领取凭证，交给店员核销。</dd></div></dl><p class="example-point">共享商品信息，在交付环节分开处理。</p><a href="projects/physical-mall.html#article-section-3">展开项目细节 <span aria-hidden="true">↗</span></a></article></div>
+            <aside class="question-note"><span>放在一起看</span><p>三个实例分别处理供给来源、销售渠道和交付方式的变化。共同点是找到变化对应的对象；差别在于需要维护的是关联关系、开关范围，还是后续履约路径。</p></aside>
+          </section>
+          <section class="question-dossier tone-blue" id="question-states" aria-labelledby="question-title-states" tabindex="0">
+            <div class="question-dossier-head"><p class="eyebrow">QUESTION 02 / 状态与体验</p><span>3 个项目 · 对照阅读</span></div>
+            <h3 id="question-title-states">后台有很多状态，<br>用户下一步该做什么？</h3><p class="question-lead">付款、履约和资金处理各自推进。页面要把这些差异翻译成具体行动，让用户知道什么时候可以继续，什么时候需要等待确认。</p>
+            <figure class="question-figure"><div class="question-state-list"><div><b>付款已确认</b><span>等待设备启动</span><small>资金到账 ≠ 开始充电</small></div><div><b>设备已启动</b><span>查看充电进度</span><small>设备确认后展示充电中</small></div><div><b>最终账单已出</b><span>查看退款或补缴</span><small>金额结清 ≠ 资金处理完成</small></div></div><figcaption>出行方案中的三个时刻：每个状态都对应不同的业务事实和页面提示。</figcaption></figure>
+            <div class="question-route-head"><h4>把问题放进具体业务里</h4><span>三个项目实例 · 按已有材料展开</span></div>
+            <div class="question-examples"><article class="question-example"><div class="example-meta"><small>实例 01 / 和包出行权益</small><span>当前方案</span></div><h4>钱付了，充电枪却还没有确认启动</h4><dl><div><dt>业务情境</dt><dd>用户预付成功，启动请求发出后暂时没有得到明确结果。</dd></div><div><dt>怎样处理</dt><dd>页面区分付款确认、正在启动和充电中。结果未知时查询原启动流水，暂不开放重试、换枪或退款；确认失败后再提供对应处理动作。</dd></div></dl><p class="example-point">等待、失败和成功，需要不同的操作权限。</p><a href="projects/chuxing-equity.html#article-section-3">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 02 / 会员订阅商城</small><span>后台操作手册</span></div><h4>本期已经扣费，权益是否也到账了？</h4><dl><div><dt>业务情境</dt><dd>客服接到领取问题，需要确认用户本期到底完成到了哪一步。</dd></div><div><dt>怎样处理</dt><dd>从订阅详情关联到本期支付和权益发放记录：先确认合约状态，再查是否收款，最后确认是否发放与领取。</dd></div></dl><p class="example-point">订阅有效、付款成功、权益到账分别表达。</p><a href="projects/multi-tenant-mall.html#article-section-3">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 03 / 运营商权益平台</small><span>领取页面需求</span></div><h4>拿到一个权益包，还需要点领取吗？</h4><dl><div><dt>业务情境</dt><dd>权益包可能自动发放、需要用户主动领取，或者要求先从候选项中选择。</dd></div><div><dt>怎样处理</dt><dd>自动发放标明无需领取；手动领取展示状态与有效期；N 选 M 先展示组合，再到详情完成选择。</dd></div></dl><p class="example-point">页面先解释用户是否需要行动，再说明处理结果。</p><a href="projects/rights-management.html#article-section-4">展开项目细节 <span aria-hidden="true">↗</span></a></article></div>
+            <aside class="question-note"><span>放在一起看</span><p>出行项目重点防止未知结果下的重复操作；订阅商城重点让客服查清服务进度；权益平台重点告诉用户是否需要领取。同样是状态设计，服务的是不同的判断。</p></aside>
+          </section>
+          <section class="question-dossier tone-sand" id="question-operations" aria-labelledby="question-title-operations" tabindex="0">
+            <div class="question-dossier-head"><p class="eyebrow">QUESTION 03 / 协作与运营</p><span>3 个项目 · 对照阅读</span></div>
+            <h3 id="question-title-operations">流程设计完整了，<br>人能顺利把它做完吗？</h3><p class="question-lead">业务系统最终由具体的人使用。接入新品、处理一批题目、完成到店核销，都需要清楚的前置条件、工作位置与结果反馈。</p>
+            <figure class="question-figure"><ol class="question-workflow"><li><small>准备</small><b>知道从哪里开始</b><span>编码、模板、对象关联</span></li><li><small>执行</small><b>保留正在做的事</b><span>筛选、排序、阅读位置</span></li><li><small>核对</small><b>找到未完成的部分</b><span>逐条结果、失败原因、记录</span></li></ol><figcaption>跨项目的阅读线索：从准备、执行到核对，观察系统如何支持一次真实任务。</figcaption></figure>
+            <div class="question-route-head"><h4>把问题放进具体业务里</h4><span>三个项目实例 · 按已有材料展开</span></div>
+            <div class="question-examples"><article class="question-example"><div class="example-meta"><small>实例 01 / 命题智能协同平台</small><span>知枢 v1.1 需求</span></div><h4>审核完一道题，返回列表继续下一道</h4><dl><div><dt>业务情境</dt><dd>审核人员按条件筛选题目，进入详情处理后需要继续原来的队列。</dd></div><div><dt>怎样处理</dt><dd>需求要求返回时保留滚动位置、排序和筛选，支持连续处理下一题。批量操作则保留逐条失败原因，便于找到未完成项。</dd></div></dl><p class="example-point">保留工作位置，也保留异常的定位线索。</p><a href="projects/zhishu-platform.html#article-section-3">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 02 / 运营商权益平台</small><span>业务工作流指南</span></div><h4>新品接入，运营应该先建哪个对象？</h4><dl><div><dt>业务情境</dt><dd>新增一项权益，要经过供应商产品、商品规格、库存与权益配置。</dd></div><div><dt>怎样处理</dt><dd>操作指南按依赖顺序说明创建与关联步骤，并补充编码确认、短信模板、导入要求和订单排查。部分编码不可修改，需要在创建前确认。</dd></div></dl><p class="example-point">把前置条件写进操作流程，减少依赖个人记忆。</p><a href="projects/rights-management.html#article-section-5">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 03 / 实物商城</small><span>操作使用说明</span></div><h4>用户到店，谁来确认这件商品已领取？</h4><dl><div><dt>业务情境</dt><dd>用户出示自提凭证，由店员完成现场交付，店长需要回查门店记录。</dd></div><div><dt>怎样处理</dt><dd>店员通过凭证或手动订单号定位订单，核销记录保留操作人与门店。手册规定店员查看自己核销的订单，店长查看本店记录。</dd></div></dl><p class="example-point">用同一笔订单连接交付动作与角色可见范围。</p><a href="projects/physical-mall.html#article-section-4">展开项目细节 <span aria-hidden="true">↗</span></a></article></div>
+            <aside class="question-note"><span>放在一起看</span><p>命题平台保留队列位置，权益平台明确配置依赖，实物商城连接现场交付角色。它们分别处理工作的连续性、先后顺序和交接责任。</p></aside>
+          </section>
+          <section class="question-dossier tone-lilac" id="question-judgment" aria-labelledby="question-title-judgment" tabindex="0">
+            <div class="question-dossier-head"><p class="eyebrow">QUESTION 04 / 判断与价值</p><span>3 个项目 · 对照阅读</span></div>
+            <h3 id="question-title-judgment">规则可以配置，<br>判断应该由谁作出？</h3><p class="question-lead">系统可以执行优先级、保存审核结果、汇总收益，但商务选择与内容价值并不会因此自动得到答案。沿具体案例，区分规则执行和业务判断。</p>
+            <figure class="question-figure"><div class="question-comparison"><div><small>人需要判断</small><h4>条件是否合适</h4><p>供给的商务条件、替代范围，以及题目是否满足实际需求。</p></div><div><small>系统承接执行</small><h4>规则如何落实</h4><p>配置状态与优先级，记录审核结果，关联收益与处理过程。</p></div></div><figcaption>基于两个项目的对照整理，不代表系统已经具备自动决策能力。</figcaption></figure>
+            <div class="question-route-head"><h4>把问题放进具体业务里</h4><span>三个项目实例 · 按已有材料展开</span></div>
+            <div class="question-examples"><article class="question-example"><div class="example-meta"><small>实例 01 / 运营商权益平台</small><span>已确认实践与操作指南</span></div><h4>更低的报价，就一定是更好的供给吗？</h4><dl><div><dt>业务情境</dt><dd>同类月会员的来源可能有不同报价，也可能存在补货、后付款和销量返点条件。</dd></div><div><dt>怎样处理</dt><dd>业务人员综合比较这些条件并选择供给，再配置关联、状态与优先级。系统按配置执行，商务选择仍由人作出。</dd></div></dl><p class="example-point">一次报价不足以代表完整的经营条件。</p><a href="projects/rights-management.html#article-section-2">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 02 / 命题智能协同平台</small><span>项目复盘与后续探索</span></div><h4>题目审核通过，是否就能得到采购认可？</h4><dl><div><dt>业务情境</dt><dd>生产与审核流程可以完成，但题目的需求价值还取决于采购与使用方。</dd></div><div><dt>怎样处理</dt><dd>后续质量定价原型将审核通过费和采购奖金分开，尝试对应投入认可与需求确认。这是优化探索，不能写成已经实施的酬金政策。</dd></div></dl><p class="example-point">流程完成与商业价值，需要不同的证据。</p><a href="projects/zhishu-platform.html#article-section-5">展开项目细节 <span aria-hidden="true">↗</span></a></article>
+<article class="question-example"><div class="example-meta"><small>实例 03 / 会员订阅商城</small><span>客诉处理手册</span></div><h4>用户说“不要了”，应该退订还是退款？</h4><dl><div><dt>业务情境</dt><dd>处理请求前，需要确认后续扣费、已付费用及已领取权益分别是什么状态。</dd></div><div><dt>怎样处理</dt><dd>退订处理后续订阅关系；退款针对具体支付记录，并结合权益使用情况判断。客服先查询，再选择适用动作。</dd></div></dl><p class="example-point">先识别用户要结束哪段关系，再操作对应记录。</p><a href="projects/multi-tenant-mall.html#article-section-4">展开项目细节 <span aria-hidden="true">↗</span></a></article></div>
+            <aside class="question-note"><span>放在一起看</span><p>供给选择依靠商务条件，题目价值需要需求方认可，客诉处理依据实际交易记录。系统可以组织信息和执行规则，但这些判断各自需要不同的业务依据。</p></aside>
+          </section>
+        </div>
+      </div>
     </div>
   </section></main>
 
     <footer class="collection-footer"><span>© 2026 Jackie Hou</span><span>在业务、系统与人之间，整理关系。</span><a href="#main-content">回到顶部 ↑</a></footer>
 
 <script src="assets/scripts/collection.js" defer></script>
+<script src="assets/scripts/project-questions.js?v=20260917-4" defer></script>
 </body>
 </html>
