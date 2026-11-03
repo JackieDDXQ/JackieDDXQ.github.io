@@ -147,3 +147,6 @@
  .about-page .capability-ledger .capability-card:hover .capability-list,
  .about-page .ai-section>div:last-child:not(.capability-grid):hover{transform:none}
 }
+
+.about-page .capability-list li a{color:#2f5c4a;border-bottom:1px solid #a9c6b6;font-weight:500;transition:border-color .18s,color .18s}
+.about-page .capability-list li a:hover{color:#1d4433;border-bottom-color:#5d8b74}
