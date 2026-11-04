@@ -15,6 +15,10 @@
 .home-shell .section-bar h2 small{font-size:9px;letter-spacing:.1em}
 .home-shell .featured-folder{background:linear-gradient(115deg,#e0ece6,#d6e8e2);border-radius:0 30px 30px 30px;min-height:405px;box-shadow:0 22px 50px #39574709}
 .home-shell .featured-folder:before{background:#e0ece6;width:245px;letter-spacing:.1em}
+.home-shell .featured-folder-alt{background:linear-gradient(115deg,#dfe9f5,#d3e0f0)}
+.home-shell .featured-folder-alt:before{background:#dfe9f5}
+.home-shell .featured-folder-alt .featured-meta span{border-color:#c5d5e5}
+.home-shell .featured-folder-alt .preview-sheet{box-shadow:0 13px 27px #2f426010}
 .home-shell .featured-copy{padding:42px}
 .home-shell .featured-copy h3{font-size:clamp(28px,2.7vw,37px);letter-spacing:-.055em;line-height:1.45;margin-bottom:20px}
 .home-shell .featured-copy>p:not(.eyebrow){font-size:13px;line-height:2}
@@ -117,17 +121,4 @@
 @media(prefers-reduced-motion:reduce){
  .home-ai,.home-ai::before,.home-ai .ai-notes article,.home-ai .soft-link span{transition:none}
  .home-ai:hover,.home-ai:hover::before,.home-ai .ai-notes article:hover,.home-ai .soft-link:hover span{transform:none}
-}
-
-/* 06 公司官网：通栏项目卡，避免网格末行只剩一张 */
-.home-shell .project-folder-wide{padding:28px 32px;min-height:206px}
-.home-shell .project-folder-wide h3{font-size:24px;line-height:1.45;margin:18px 0 0}
-.home-shell .project-folder-wide p{max-width:430px;font-size:12px;line-height:1.95;margin:14px 0 0}
-.home-shell .project-folder-wide .project-glyph{display:none}
-@media(max-width:700px){
- .home-shell .project-folder-wide{padding:22px;min-height:0;grid-template-columns:1fr;column-gap:0}
- .home-shell .project-folder-wide small,.home-shell .project-folder-wide h3,.home-shell .project-folder-wide p,.home-shell .project-folder-wide>span{grid-column:1;grid-row:auto}
- .home-shell .project-folder-wide h3{font-size:21px;margin:14px 0 0}
- .home-shell .project-folder-wide p{margin:12px 0 0}
- .home-shell .project-folder-wide>span{margin-top:18px}
 }

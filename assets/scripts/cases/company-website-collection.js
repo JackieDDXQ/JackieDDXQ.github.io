@@ -38,7 +38,7 @@ const items = [
     "title": "把正版内容运营成生意",
     "type": "业务理解",
     "category": "understanding",
-    "caption": "数字内容是独立于权益的第二条线，从引入上架到会员产品化有自己的完整路径。",
+    "caption": "数字内容是独立于权益的第二条线，从引入上架到会员产品化有完整路径。",
     "tags": [
       "数字内容",
       "第二业务线",
@@ -157,7 +157,7 @@ const items = [
     "title": "从判断到可运行产品",
     "type": "实现方式",
     "category": "practice",
-    "caption": "整站由我一人用 Vibe Coding 完成：结构设计、页面实现与内容组织全部自己推进。",
+    "caption": "独立用 Vibe Coding 完成：结构设计、页面实现与内容组织全部由我推进。",
     "tags": [
       "Vibe Coding",
       "独立实现",
@@ -174,7 +174,7 @@ const items = [
 const categories={understanding:{name:'业务理解'},expression:{name:'表达设计'},practice:{name:'实现方式'}};
 const previews=Object.fromEntries(items.map(i=>[i.id,{category:i.category}]));
 const visuals={};
-const collections={project:{title:'把业务判断，做成一个能上线的产品',en:'PROJECT COLLECTION / 06',description:`这是我为觉观科技做的官网。我先把公司的业务结构看懂，再决定访客该按什么顺序理解它，最后用 Vibe Coding 自己把它实现出来——从信息架构到部署上线，整站由我一人完成，同事只提过少量建议。`,aside:`觉观科技官网 · 我一人完成设计与实现<br>Astro 静态站点 · 8 个页面<span class="project-fact">首页 + 6 个二级页 + 1 个转化页<small>同事只提过少量建议，其余由我完成</small></span><a href="https://www.senins.cn/" target="_blank" rel="noopener">当前线上官网 ↗</a>`}};
+const collections={project:{title:'把业务判断，做成一个能上线的产品',en:'PROJECT COLLECTION / 06',description:`为觉观科技独立完成的官网。先把公司的业务结构看懂，再决定访客该按什么顺序理解它，最后用 Vibe Coding 从信息架构推进到部署上线。`,aside:`觉观科技官网 · 独立完成设计与实现<br>Astro 静态站点 · 8 个页面<span class="project-fact">首页 + 6 个二级页 + 1 个转化页<small>同事仅提供少量建议</small></span><a href="https://www.senins.cn/" target="_blank" rel="noopener">当前线上官网 ↗</a>`}};
 function preview(i){return '<div class="surface uniform '+i.category+'"><div class="preview-label"><span class="category-tag">'+categories[i.category].name+'</span>'+i.tags.map(t=>'<span class="facet-tag">'+t+'</span>').join('')+'</div><div class="site-preview">'+i.visual+'</div><small class="preview-foot">'+i.type+' · 方案材料</small></div>';}
 function detailTags(i){return '<div class="tag-dimension"><small>主题与材料</small><div>'+i.tags.map(t=>'<span class="topic-chip">'+t+'</span>').join('')+'</div></div>';}
 for(const item of items){
@@ -228,13 +228,13 @@ viewport.addEventListener('keydown',e=>{if(e.target!==viewport)return;const d={A
 let canvasCollection=location.hash.split('/')[0];window.addEventListener('hashchange',()=>{const next=location.hash.split('/')[0];if(next!==canvasCollection){viewport.scrollTo(0,0);canvasCollection=next;}});
 
 // Reference layer: narratives.js
-const narratives={"understanding":{"name":"按业务理解读","steps":[["home","先看首页怎样交代公司的业务全貌。"],["benefits","再看权益这条主线如何展开。"],["content","然后是数字内容这条第二业务线。"],["ai","最后是 AI 能力的状态分层。"]]},"expression":{"name":"按表达设计读","steps":[["routes","先看两类访客如何被分流。"],["cases","用案例台账建立信任。"],["tech","用技术保障回答可靠性。"],["about","最后落到主体与资质。"]]},"build":{"name":"按实现方式读","steps":[["build","这个站点我怎么自己把它做出来的。"],["home","回到首页看这些判断的落点。"],["tech","看组件与页面语言如何共享。"],["cases","看内容与视觉如何配合。"]]}};
+const narratives={"understanding":{"name":"按业务理解读","steps":[["home","先看首页怎样交代公司的业务全貌。"],["benefits","再看权益这条主线如何展开。"],["content","然后是数字内容这条第二业务线。"],["ai","最后是 AI 能力的状态分层。"]]},"expression":{"name":"按表达设计读","steps":[["routes","先看两类访客如何被分流。"],["cases","用案例台账建立信任。"],["tech","用技术保障回答可靠性。"],["about","最后落到主体与资质。"]]},"build":{"name":"按实现方式读","steps":[["build","这个站点如何独立完成。"],["home","回到首页看这些判断的落点。"],["tech","看组件与页面语言如何共享。"],["cases","看内容与视觉如何配合。"]]}};
 let activeRoute=null,routeStep=0;
 const overview=document.createElement('section');
 overview.className='project-overview';
 overview.setAttribute('aria-label','项目总览');
 world.insertBefore(overview,grid);
-const overviewModes={"understanding":{"label":"业务理解","title":"做官网之前，先得看懂这家公司。","description":"我先把觉观科技的权益运营、数字内容与 AI 能力三条线读成一张业务全貌，再判断哪些信息该先说、哪些该后说。这一步决定后面所有的页面结构。","flow":["读懂业务","判断先后","形成结构"],"cta":"从业务理解开始"},"expression":{"label":"表达设计","title":"同一套业务，该让谁先看到什么。","description":"我按访客身份重新组织入口：机构方看到能力与保障，品牌方看到渠道价值与接入方式。信任分层交付——案例在中期，资质在后期。","flow":["识别身份","分层信任","推动行动"],"cta":"从表达设计开始"},"build":{"label":"实现方式","title":"判断做完之后，我把它做出来了。","description":"这个官网由我用 Vibe Coding 独立完成：信息架构、组件设计、页面实现与内容组织，从零写成一个可部署的 Astro 静态站点。同事只提过少量建议，其余全部由我完成。","flow":["结构设计","对话式实现","部署上线"],"cta":"从实现方式开始"}};
+const overviewModes={"understanding":{"label":"业务理解","title":"做官网之前，先得看懂这家公司。","description":"我先把觉观科技的权益运营、数字内容与 AI 能力三条线读成一张业务全貌，再判断哪些信息该先说、哪些该后说。这一步决定后面所有的页面结构。","flow":["读懂业务","判断先后","形成结构"],"cta":"从业务理解开始"},"expression":{"label":"表达设计","title":"同一套业务，该让谁先看到什么。","description":"我按访客身份重新组织入口：机构方看到能力与保障，品牌方看到渠道价值与接入方式。信任分层交付——案例在中期，资质在后期。","flow":["识别身份","分层信任","推动行动"],"cta":"从表达设计开始"},"build":{"label":"实现方式","title":"判断做完之后，独立完成落地。","description":"这个官网用 Vibe Coding 独立完成：信息架构、组件设计、页面实现与内容组织，从零写成一个可部署的 Astro 静态站点。同事仅提供少量建议。","flow":["结构设计","对话式实现","部署上线"],"cta":"从实现方式开始"}};
 function renderOverview(key,animate=false){
  const mode=overviewModes[key];
  overview.dataset.view=key;
